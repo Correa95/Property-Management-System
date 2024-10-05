@@ -1,0 +1,11 @@
+.statsContainer {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+}
+.stats {
+  width: 30%;
+  height: 150px;
+  border: 2px solid red;
+}
