@@ -1,5 +1,6 @@
 const router = require("express").Router();
 module.exports = router;
+const prisma = require("../prisma");
 
 // get all units Route
 router.get("/api/v1/units", async (req, res, next) => {

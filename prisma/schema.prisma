@@ -41,8 +41,6 @@ model Property {
   city       String
   state      String
   zipCode    String
-  // createdAt  DateTime @default(now())
-  // building
   units      Unit[]   // Each user can have multiple units
   leases Lease[]  // Each property can have multiple leases
 }

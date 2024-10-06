@@ -1,6 +1,12 @@
+require("dotenv").config();
 const express = require("express");
+
 const app = express();
 const PORT = 3000;
+const apiRoutes = require("./Controller/index");
+
+//API routes
+app.use("/api", apiRoutes);
 
 // middleware
 app.use(express.json());
