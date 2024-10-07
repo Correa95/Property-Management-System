@@ -1,0 +1,15 @@
+.navBar {
+  width: 100%;
+  height: 100px;
+  background-color: #1b1b1b;
+  border: 2px solid #fff;
+}
+.navBar ul {
+  display: flex;
+  justify-content: center;
+}
+.navBar ul li {
+  margin: 20px;
+  list-style: none;
+  color: #fff;
+}

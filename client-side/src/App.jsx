@@ -1,4 +1,4 @@
-import { Router, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Overview from "./Components/Overview";
 import Calender from "./Components/Calender";
 import Tasks from "./Components/Tasks";
@@ -9,13 +9,18 @@ import ExtendLease from "./Components/ExtendLease";
 import Maintenance from "./Components/Maintenance";
 import TenantScreening from "./Components/TenantScreening";
 import Reports from "./Components/Reports";
+import SideBar from "./Components/SideBar";
+import NavBar from "./Components/NavBar";
 import "./App.css";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Router>
-        <Route path="/" element={<Overview />} />
+    <>
+      <NavBar />
+      <SideBar />
+
+      <Routes>
+        <Route path="/overview" element={<Overview />} />
         <Route path="/calender" element={<Calender />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="todo" element={<Todo />} />
@@ -25,8 +30,8 @@ function App() {
         <Route path="maintenance" element={<Maintenance />} />
         <Route path="tenantScreening" element={<TenantScreening />} />
         <Route path="reports" element={<Reports />} />
-      </Router>
-    </BrowserRouter>
+      </Routes>
+    </>
   );
 }
 

@@ -1,10 +1,16 @@
+import styles from "./NavBar.module.css";
 function NavBar() {
   return (
-    <nav>
+    <nav className={styles.navBar}>
       <ul>
-        <li>
-          <button>NOTIFICATION</button>
-        </li>
+        <li>NOTIFICATION</li>
+        <li>NOTIFICATION</li>
+        <li>NOTIFICATION</li>
+        <li>NOTIFICATION</li>
+        <li>NOTIFICATION</li>
+        <li>NOTIFICATION</li>
+        <li>NOTIFICATION</li>
+        <li>NOTIFICATION</li>
       </ul>
     </nav>
   );

@@ -1,12 +1,12 @@
 .sideBar {
   position: fixed;
-  width: 250px;
+  width: 15%;
   height: 100%;
   top: 0;
   left: 0;
   background: #1b1b1b;
 }
-.sideBar .text {
+.sideBar .logo {
   color: #fff;
   font-size: 25px;
   font-weight: 600;
