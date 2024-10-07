@@ -1,11 +1,21 @@
 .statsContainer {
-  width: 100%;
+  width: 85%;
   height: 300px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  /* background: #333; */
+  margin-left: auto;
+  border: 2px solid red;
 }
 .stats {
   width: 30%;
-  height: 150px;
+  height: 60%;
+  margin: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.table {
+  width: 70%;
+  height: 60vh;
   border: 2px solid red;
 }

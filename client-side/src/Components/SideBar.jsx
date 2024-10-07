@@ -1,17 +1,21 @@
-// import { useState } from "react";
+import { useState } from "react";
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 />;
-import Link from "react-router-dom";
+// import Link from "react-router-dom";
 import styles from "./SideBar.module.css";
+import { Link } from "react-router-dom";
 
 function SideNavBar() {
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  function handleClose() {
+    setIsOpen(!isOpen);
+  }
   return (
     <nav className={styles.sideBar}>
       <header>
-        <h1 className={styles.text}>LUWOUSE</h1>
+        <h1 className={styles.logo}>LUWOUSE</h1>
       </header>
 
       <ul>
@@ -25,27 +29,35 @@ function SideNavBar() {
           <Link to="calender">CALENDER</Link>
         </li>
         <li>
-          <Link to="tasks">TASKS </Link>
-          <ul>
-            <li>
-              <Link to="todo">TODO</Link>
-            </li>
-            <li>
-              <Link to="element">ELEMENT</Link>
-            </li>
-          </ul>
+          <Link to="tasks" onClick={handleClose}>
+            TASKS
+          </Link>
+          {isOpen && (
+            <ul>
+              <li>
+                <Link to="todo">TODO</Link>
+              </li>
+              <li>
+                <Link to="element">ELEMENT</Link>
+              </li>
+            </ul>
+          )}
         </li>
 
         <li>
-          <Link to="leaseManagement">LEASE MANAGEMENT</Link>
-          <ul>
-            <li>
-              <Link to="newTenant">NEW TENANT</Link>
-            </li>
-            <li>
-              <Link to="extendLease">EXTEND LEASE</Link>
-            </li>
-          </ul>
+          <Link to="leaseManagement" onClick={handleClose}>
+            LEASE MANAGEMENT
+          </Link>
+          {isOpen && (
+            <ul>
+              <li>
+                <Link to="newTenant">NEW TENANT</Link>
+              </li>
+              <li>
+                <Link to="extendLease">EXTEND LEASE</Link>
+              </li>
+            </ul>
+          )}
         </li>
         <li>
           <Link to="maintenance">MAINTENANCE</Link>
@@ -54,7 +66,7 @@ function SideNavBar() {
           <Link to="tenantScreening">TENANT SCREENING </Link>
         </li>
         <li>
-          <a to="reporting">REPORTING</a>
+          <Link to="reporting">FINANCIAL REPORT</Link>
         </li>
       </ul>
     </nav>
