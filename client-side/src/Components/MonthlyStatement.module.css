@@ -1,0 +1,7 @@
+.monthlyStatementContainer {
+  width: 85%;
+  height: 100vh;
+  background: #333;
+  float: right;
+  border: 2px solid red;
+}

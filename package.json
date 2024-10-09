@@ -11,5 +11,8 @@
   },
   "scripts": {
     "start:dev": "nodemon server.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }
