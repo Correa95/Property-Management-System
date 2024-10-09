@@ -29,7 +29,7 @@ function App() {
         <Route path="extendLease" element={<ExtendLease />} />
         <Route path="maintenance" element={<Maintenance />} />
         <Route path="tenantScreening" element={<TenantScreening />} />
-        <Route path="reports" element={<MonthlyStatement />} />
+        <Route path="monthlyStatement" element={<MonthlyStatement />} />
       </Routes>
     </>
   );

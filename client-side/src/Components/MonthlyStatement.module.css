@@ -1,7 +1,100 @@
-.monthlyStatementContainer {
+.transactionStatementContainer {
+  width: 85%;
+  height: 50vh;
+  float: right;
+  border: 2px solid red;
+}
+
+.transactionStatementContainer h1 {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+.statement h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  height: 30px;
+  color: #fff;
+  background: #333;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.transactionStatementContainer .propertyDetail {
+  width: 400px;
+  height: 250px;
+  margin-left: 60px;
+  border: 2px solid red;
+}
+
+.propertyDetail h3 {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+.statement .transaction {
+  margin: 60px;
+}
+p {
+  padding: 15px;
+}
+
+/* ////////////////CAsh Flow Statement Style/////////////////////// */
+.CashFlowStatementContainer {
   width: 85%;
   height: 100vh;
-  background: #333;
   float: right;
+  border: 2px solid red;
+}
+.CashFlowStatementContainer h1 {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+.cashFlow h2 {
+  width: 80%;
+  height: 30px;
+  color: #fff;
+  background: #333;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.CashFlowStatementContainer .propertyCashFlowStatement {
+  width: 400px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid red;
+}
+.propertyCashFlowStatement h3 {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.CashFlowStatementContainer .tableContainer {
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid red;
+  width: 80%;
+  height: auto;
+}
+
+.CashFlowStatementContainer .tableContainer .table th {
+  width: 400px;
+  height: 20px;
+  border: 2px solid red;
+}
+.CashFlowStatementContainer .tableContainer .table td {
+  width: 200px;
+  height: 20px;
   border: 2px solid red;
 }
