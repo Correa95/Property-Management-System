@@ -13,6 +13,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Property {
+  id         Int      @id @default(autoincrement())
+  name       String
+  address    String
+  city       String
+  state      String
+  zipCode    String
+  unit      Unit[]   // Each user can have multiple units
+  lease Lease[]  // Each property can have multiple leases
+}
 
 model User {
   id        Int      @id @default(autoincrement())
@@ -21,29 +31,16 @@ model User {
   email     String   @unique
   phone     String?
   role String
-  createdAt DateTime @default(now())
- 
-
-  
+  // createdAt DateTime @default(now())
   // leases    Lease[]  // A user (tenant) can have many leases
   // payments  Payment[]
   // requests  MaintenanceRequest[]
-
   // Landlords and managers can own properties
   // properties Property[] @relation("OwnerProperties")
 }
 
 
-model Property {
-  id         Int      @id @default(autoincrement())
-  name       String
-  address    String
-  city       String
-  state      String
-  zipCode    String
-  units      Unit[]   // Each user can have multiple units
-  leases Lease[]  // Each property can have multiple leases
-}
+
 // model Building{
 //   id Int @id @default(autoincrement())
 //   property Int
@@ -57,7 +54,7 @@ model Tenant{
   lastName String
   email String @unique
   phone Float
-  roleName String
+  role String
 maintenanceRequest MaintenanceRequest[]
   lease Lease[]
   payment Payment[]
@@ -69,8 +66,7 @@ model Unit {
   rent        Float
   description String?
   available   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-building Int
+buildingNumber Int
   propertyId  Int
   property    Property @relation(fields: [propertyId], references: [id])
 maintenanceRequest MaintenanceRequest[]
@@ -87,25 +83,20 @@ model Lease {
 property Property @relation(fields: [propertyId],references: [id])
   tenantId       Int
   tenant         Tenant     @relation(fields: [tenantId], references: [id])
-
   unitId         Int
   unit           Unit     @relation(fields: [unitId], references: [id])
-
   leaseStatus    LeaseStatus @default(ACTIVE)
-
-  payments       Payment[]
+  payment       Payment[]
 }
 
 model Payment {
   id          Int      @id @default(autoincrement())
-  paymentDate DateTime @default(now())
+  paymentDate DateTime
   amount      Float
   status      PaymentStatus @default(PENDING)
   method      String // e.g., Credit Card, Bank Transfer
-
   tenantId    Int
   tenant      Tenant     @relation(fields: [tenantId], references: [id])
-
   leaseId     Int
   lease       Lease    @relation(fields: [leaseId], references: [id])
 }
@@ -116,12 +107,10 @@ model MaintenanceRequest {
   description  String
   status       MaintenanceStatus @default(PENDING)
   completedAt  DateTime?
-
   tenantId     Int
   tenant       Tenant     @relation(fields: [tenantId], references: [id])
-
   unitId       Int
-  unit         Unit     @relation(fields: [unitId], references: [id])
+  unit         Unit    @relation(fields: [unitId], references: [id])
 }
 
 // model Invoice {

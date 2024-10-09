@@ -1,35 +1,34 @@
-const prisma = require(".");
+const prisma = require("../prisma");
 const seed = async () => {
   // TODO: Create Users, Places and Vacations
 
-  const createUsers = async () => {
-    const users = [
-      {
-        firstName: Mario,
-        lastName: Correa,
-        email: "mcorrea29@gmail.com",
-        role: ADMIN,
-        phone: 555 - 358 - 7672,
-      },
-    ];
-    await prisma.user.createMany({ data: users });
-  };
-  const createProperty = async () => {
+  const createProperties = async () => {
     const property = [
       {
         // propertyCode: 7255,
-        name: "Nayekeh Churr LLC",
+        name: "Nayekah Churr LLC",
         address: "240715 Fullstack Academy Graduate",
-        city: Atlanta,
-        state: Georgia,
-        zipCode: 30349,
-        createdAt: "2020-01-01",
-        units: [],
+        city: "Atlanta",
+        state: "Georgia",
+        zipCode: "30349",
+        unit: [],
         leases: [],
       },
     ];
 
-    await prisma.place.createMany({ data: property });
+    await prisma.property.createMany({ data: property });
+  };
+  const createUsers = async () => {
+    const users = [
+      {
+        firstName: "Mario",
+        lastName: "Correa",
+        email: "mariocorrea29@gmail.com",
+        role: "ADMIN",
+        phone: "555 - 358 - 7672",
+      },
+    ];
+    await prisma.user.createMany({ data: users });
   };
 
   const createUnits = async () => {
@@ -40,7 +39,7 @@ const seed = async () => {
         description:
           "Open-plan living, kitchen with a small bar, bathroom, and a balcony",
         available: false,
-        building: 100,
+        buildingNumber: 100,
       },
       {
         unitNumber: 102,
@@ -48,7 +47,7 @@ const seed = async () => {
         description:
           "Compact one-bedroom with open living and kitchen space. Small balcony. Ideal for efficient use of space.",
         available: false,
-        building: 100,
+        buildingNumber: 100,
       },
       {
         unitNumber: 103,
@@ -56,7 +55,7 @@ const seed = async () => {
         description:
           " Two bedrooms, two bathrooms. Large open-concept kitchen and living room with a full-sized dining area. Spacious balcony.",
         available: false,
-        building: 100,
+        buildingNumber: 100,
       },
       {
         unitNumber: 104,
@@ -64,7 +63,7 @@ const seed = async () => {
         description:
           " Two bedrooms, one designed as a bedroom and the other as an office with built-in desk space. One large bathroom. Compact kitchen with an island.",
         available: false,
-        building: 100,
+        buildingNumber: 100,
       },
       {
         unitNumber: 105,
@@ -72,7 +71,7 @@ const seed = async () => {
         description:
           "  Three small bedrooms with one shared bathroom, open living area with a minimalist kitchen, designed for efficiency. Small balcony.",
         available: false,
-        building: 100,
+        buildingNumber: 100,
       },
       {
         unitNumber: 201,
@@ -80,7 +79,7 @@ const seed = async () => {
         description:
           " Ground-level apartment with a private garden patio, two bedrooms, open kitchen-living concept, and one bathroom",
         available: false,
-        building: 200,
+        buildingNumber: 200,
       },
       {
         unitNumber: 202,
@@ -88,11 +87,11 @@ const seed = async () => {
         description:
           "Two floors, two bedrooms, and a bathroom on the top floor, open kitchen, dining, and living room on the ground floor. Private outdoor space on both levels",
         available: false,
-        building: 200,
+        buildingNumber: 200,
       },
       {
         unitNumber: 203,
-        rent: 2500,
+        rent: 2500.0,
         description:
           "High ceilings, bedroom located on a mezzanine level, with an open-plan lower level combining living, kitchen, and dining. Large windows to enhance vertical space",
         available: false,
@@ -100,7 +99,7 @@ const seed = async () => {
       },
       {
         unitNumber: 204,
-        rent: 2500,
+        rent: 2500.0,
         description:
           "High ceilings, bedroom located on a mezzanine level, with an open-plan lower level combining living, kitchen, and dining. Large windows to enhance vertical space",
         available: false,
@@ -108,7 +107,7 @@ const seed = async () => {
       },
       {
         unitNumber: 205,
-        rent: 2100,
+        rent: 2100.0,
         description:
           " Two small bedrooms with one shared bathroom. Open kitchen and living area with a small dining nook. Balcony off the living area.",
         available: false,
@@ -120,19 +119,19 @@ const seed = async () => {
         description:
           "One-bedroom unit designed around maximizing corner views with large windows. Open kitchen with dining bar, a spacious bathroom, and a balcony.",
         available: false,
-        building: 300,
+        buildingNumber: 300,
       },
       {
         unitNumber: 302,
         rent: 2500.0,
         description: "3-bedroom condo with private garden",
         available: false,
-        building: 300,
+        buildingNumber: 300,
       },
 
       {
         unitNumber: 303,
-        rent: 1750,
+        rent: 1750.0,
         description:
           " Open-plan living, kitchen with a small bar, bathroom, and a balcony",
         available: false,
@@ -140,7 +139,7 @@ const seed = async () => {
       },
       {
         unitNumber: 304,
-        rent: 2300,
+        rent: 2300.0,
         description:
           " A distinct bedroom with a sliding door separating the living space. Compact kitchen with a breakfast bar and outdoor terrace.",
         available: false,
@@ -157,8 +156,9 @@ const seed = async () => {
     ];
     await prisma.unit.createMany({ data: unit });
   };
+
   const createTenants = async () => {
-    const tenant = [
+    const tenants = [
       {
         firstName: "Alice",
         lastName: "johnson",
@@ -226,7 +226,7 @@ const seed = async () => {
       {
         firstName: "Eva",
         lastName: "Martinez",
-        email: "eva.martinez@gmail.com",
+        email: "evamartinez@gmail.com",
         phone: 123 - 456 - 7894,
         role: "tenant",
       },
@@ -267,10 +267,10 @@ const seed = async () => {
         role: "tenant",
       },
     ];
-    await prisma.tenant.createMany({ data: tenant });
+    await prisma.tenant.createMany({ data: tenants });
   };
   const createLeases = async () => {
-    const lease = [
+    const leases = [
       {
         unitNumber: 101,
         unitId: 1,
@@ -422,10 +422,10 @@ const seed = async () => {
         leaseStatus: Active,
       },
     ];
-    await prisma.lease.createMany({ data: lease });
+    await prisma.lease.createMany({ data: leases });
   };
   const createPayments = async () => {
-    const payment = [
+    const payments = [
       {
         leaseId: 1,
         tenantId: 1,
@@ -1387,16 +1387,16 @@ const seed = async () => {
         status: "Paid",
       },
     ];
-    await prisma.payment.createMany({ data: payment });
+    await prisma.payment.createMany({ data: payments });
   };
   const createMaintenanceRequests = async () => {
     const MaintenanceRequest = [];
     await prisma.MaintenanceRequest.createMany({ data: MaintenanceRequest });
   };
-  await createProperty();
   await createUsers();
-  await createTenants();
   await createUnits();
+  await createProperties();
+  await createTenants();
   await createLeases();
   await createPayments();
   await createMaintenanceRequests();

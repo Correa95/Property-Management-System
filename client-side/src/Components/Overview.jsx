@@ -21,22 +21,36 @@ function Overview() {
           </div>
         </div>
       </section>
-      <section>
-        <table className={styles.table}>
-          <th>mathew</th>
-          <tr>correa</tr>
-          <th>mathew</th>
-          <tr>correa</tr>
-          <th>mathew</th>
-          <tr>correa</tr>
-          <th>mathew</th>
-          <tr>correa</tr>
-          <th>mathew</th>
-          <tr>correa</tr>
-          <th>mathew</th>
-          <tr>correa</tr>
-        </table>
+      <section className={styles.tableCharts}>
+        <div className={styles.table}>
+          <table>
+            <h1>TABLE DATA</h1>
+            <th>mathew</th>
+            <tr>correa</tr>
+            <th>mathew</th>
+            <tr>correa</tr>
+            <th>mathew</th>
+            <tr>correa</tr>
+            <th>mathew</th>
+            <tr>correa</tr>
+            <th>mathew</th>
+            <tr>correa</tr>
+            <th>mathew</th>
+            <tr>correa</tr>
+            {/* <div className={styles.charts}>
+              <h1>REACT MONTHLY CHARTS</h1>
+            </div> */}
+          </table>
+        </div>
+        <div className={styles.chart}>
+          <h1>REACT MONTHLY CHARTS</h1>
+        </div>
       </section>
+      {/* <section>
+        <div className={styles.charts}>
+          <h1>REACT MONTHLY CHARTS</h1>
+        </div>
+      </section> */}
     </>
   );
 }

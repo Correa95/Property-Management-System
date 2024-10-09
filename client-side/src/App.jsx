@@ -8,9 +8,9 @@ import NewTenant from "./Components/NewTenant";
 import ExtendLease from "./Components/ExtendLease";
 import Maintenance from "./Components/Maintenance";
 import TenantScreening from "./Components/TenantScreening";
-import Reports from "./Components/Reports";
 import SideBar from "./Components/SideBar";
 import NavBar from "./Components/NavBar";
+import MonthlyStatement from "./Components/MonthlyStatement";
 import "./App.css";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         <Route path="extendLease" element={<ExtendLease />} />
         <Route path="maintenance" element={<Maintenance />} />
         <Route path="tenantScreening" element={<TenantScreening />} />
-        <Route path="reports" element={<Reports />} />
+        <Route path="reports" element={<MonthlyStatement />} />
       </Routes>
     </>
   );
