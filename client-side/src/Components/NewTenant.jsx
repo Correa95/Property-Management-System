@@ -5,6 +5,8 @@
 // export default NewTenant;
 import styles from "./NewTenant.module.css";
 
+import styles from "./NewTenant.module.css";
+
 function NewTenant() {
   return (
     <div className={styles.newTenantContainer}>

@@ -66,7 +66,16 @@ function SideNavBar() {
           <Link to="tenantScreening">TENANT SCREENING </Link>
         </li>
         <li>
-          <Link to="reporting">FINANCIAL REPORT</Link>
+          <Link to="reporting" onClick={handleClose}>
+            FINANCIAL REPORT
+          </Link>
+          {isOpen && (
+            <ul>
+              <li>
+                <Link to="monthlyStatement">MONTHLY STATEMENT</Link>
+              </li>
+            </ul>
+          )}
         </li>
       </ul>
     </nav>
