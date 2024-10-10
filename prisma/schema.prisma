@@ -31,29 +31,14 @@ model User {
   email     String   @unique
   phone     String?
   role String
-  // createdAt DateTime @default(now())
-  // leases    Lease[]  // A user (tenant) can have many leases
-  // payments  Payment[]
-  // requests  MaintenanceRequest[]
-  // Landlords and managers can own properties
-  // properties Property[] @relation("OwnerProperties")
 }
 
-
-
-// model Building{
-//   id Int @id @default(autoincrement())
-//   property Int
-//   property Property @relation(fields: [buildingId]references: [id])
-// unit Int
-//   unit unit @relation(fields: [unitId]references: [id])
-//   }
 model Tenant{
   id Int @id @default(autoincrement())
   firstName String
   lastName String
   email String @unique
-  phone Float
+  phone String?
   role String
 maintenanceRequest MaintenanceRequest[]
   lease Lease[]
@@ -62,7 +47,7 @@ maintenanceRequest MaintenanceRequest[]
 
 model Unit {
   id          Int      @id @default(autoincrement())
-  unitNumber  String
+  unitNumber  Int
   rent        Float
   description String?
   available   Boolean  @default(true)
@@ -79,6 +64,7 @@ model Lease {
   leaseEndDate        DateTime
   monthlyRent    Float
   securityDeposit Float
+  unitNumber Int
   propertyId Int
 property Property @relation(fields: [propertyId],references: [id])
   tenantId       Int

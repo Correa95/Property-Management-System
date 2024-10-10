@@ -1,4 +1,8 @@
 const prisma = require("../prisma");
+// import { faker } from "@faker-js/faker";
+// const randomEmail = faker.internet.email();
+const { faker } = require("@faker-js/faker");
+
 const seed = async () => {
   // TODO: Create Users, Places and Vacations
 
@@ -12,18 +16,20 @@ const seed = async () => {
         state: "Georgia",
         zipCode: "30349",
         unit: [],
-        leases: [],
+        lease: [],
       },
     ];
 
     await prisma.property.createMany({ data: property });
   };
   const createUsers = async () => {
+    const randomEmail = faker.internet.email();
+    console.log(randomEmail);
     const users = [
       {
         firstName: "Mario",
         lastName: "Correa",
-        email: "mariocorrea29@gmail.com",
+        email: randomEmail,
         role: "ADMIN",
         phone: "555 - 358 - 7672",
       },
@@ -34,6 +40,7 @@ const seed = async () => {
   const createUnits = async () => {
     const unit = [
       {
+        propertyId: 1,
         unitNumber: 101,
         rent: 1200.0,
         description:
@@ -42,6 +49,7 @@ const seed = async () => {
         buildingNumber: 100,
       },
       {
+        propertyId: 1,
         unitNumber: 102,
         rent: 1500.0,
         description:
@@ -50,6 +58,7 @@ const seed = async () => {
         buildingNumber: 100,
       },
       {
+        propertyId: 1,
         unitNumber: 103,
         rent: 1900.0,
         description:
@@ -58,6 +67,7 @@ const seed = async () => {
         buildingNumber: 100,
       },
       {
+        propertyId: 1,
         unitNumber: 104,
         rent: 1900.0,
         description:
@@ -66,6 +76,7 @@ const seed = async () => {
         buildingNumber: 100,
       },
       {
+        propertyId: 1,
         unitNumber: 105,
         rent: 2400.0,
         description:
@@ -74,6 +85,7 @@ const seed = async () => {
         buildingNumber: 100,
       },
       {
+        propertyId: 1,
         unitNumber: 201,
         rent: 2200.0,
         description:
@@ -82,6 +94,7 @@ const seed = async () => {
         buildingNumber: 200,
       },
       {
+        propertyId: 1,
         unitNumber: 202,
         rent: 1800.0,
         description:
@@ -90,6 +103,7 @@ const seed = async () => {
         buildingNumber: 200,
       },
       {
+        propertyId: 1,
         unitNumber: 203,
         rent: 2500.0,
         description:
@@ -98,6 +112,7 @@ const seed = async () => {
         buildingNumber: 200,
       },
       {
+        propertyId: 1,
         unitNumber: 204,
         rent: 2500.0,
         description:
@@ -106,6 +121,7 @@ const seed = async () => {
         buildingNumber: 200,
       },
       {
+        propertyId: 1,
         unitNumber: 205,
         rent: 2100.0,
         description:
@@ -114,6 +130,7 @@ const seed = async () => {
         buildingNumber: 200,
       },
       {
+        propertyId: 1,
         unitNumber: 301,
         rent: 1250.0,
         description:
@@ -122,6 +139,7 @@ const seed = async () => {
         buildingNumber: 300,
       },
       {
+        propertyId: 1,
         unitNumber: 302,
         rent: 2500.0,
         description: "3-bedroom condo with private garden",
@@ -130,6 +148,7 @@ const seed = async () => {
       },
 
       {
+        propertyId: 1,
         unitNumber: 303,
         rent: 1750.0,
         description:
@@ -138,6 +157,7 @@ const seed = async () => {
         buildingNumber: 300,
       },
       {
+        propertyId: 1,
         unitNumber: 304,
         rent: 2300.0,
         description:
@@ -146,6 +166,7 @@ const seed = async () => {
         buildingNumber: 300,
       },
       {
+        propertyId: 1,
         unitNumber: 305,
         rent: 2300,
         description:
@@ -158,271 +179,305 @@ const seed = async () => {
   };
 
   const createTenants = async () => {
+    const randomEmail = faker.internet.email();
+    console.log(randomEmail);
     const tenants = [
       {
         firstName: "Alice",
         lastName: "johnson",
-        email: "alicejohnson@gmail.com",
-        phone: 555 - 2345 - 4532,
+        email: randomEmail,
+        // email: "alicejohnson@gmail.com",
+        phone: "555 - 2345 - 4532",
         role: "tenant",
       },
       {
         firstName: "Mark",
         lastName: "Lee",
-        email: "marklee@gmail.com",
-        phone: 5552 - 555 - 9877,
+        email: randomEmail,
+        // email: "marklee@gmail.com",
+        phone: "5552 - 555 - 9877",
         role: "tenant",
       },
       {
         firstName: "Sarah",
         lastName: "Adams",
-        email: "sarahadams@gmail.com",
-        phone: 555 - 7654 - 2345,
+        email: randomEmail,
+        // email: "sarahadams@gmail.com",
+        phone: "555 - 7654 - 2345",
         role: "tenant",
       },
       {
         firstName: "James",
         lastName: "White",
-        email: "jameswhite@gmail.com",
-        phone: 555 - 4567 - 4532,
+        email: randomEmail,
+        // email: "jameswhite@gmail.com",
+        phone: "555 - 4567 - 4532",
         role: "tenant",
       },
       {
         firstName: "Emily",
         lastName: "Baker",
-        email: "emilybaker@gmail.com",
-        phone: 555 - 6789 - 2345,
+        email: randomEmail,
+        // email: "emilybaker@gmail.com",
+        phone: "555 - 6789 - 2345",
         role: "tenant",
       },
       {
         firstName: "Victor",
         lastName: "Chang",
-        email: "victorchang@gmail.com",
-        phone: 555 - 9012 - 7765,
+        email: randomEmail,
+        // email: "victorchang@gmail.com",
+        phone: "555 - 9012 - 7765",
         role: "tenant",
       },
 
       {
         firstName: "Bob",
         lastName: "Smith",
-        email: "bobsmith@gmail.com",
-        phone: 123 - 4567 - 1891,
+        email: randomEmail,
+        // email: "bobsmith@gmail.com",
+        phone: "123 - 4567 - 1891",
         role: "tenant",
       },
       {
         firstName: "Carol",
         lastName: "Davis",
-        email: "caroldavis@gmail.com",
-        phone: 123 - 456 - 7892,
+        email: randomEmail,
+        // email: "caroldavis@gmail.com",
+        phone: "123 - 456 - 7892",
         role: "tenant",
       },
       {
         firstName: "David",
         lastName: "Wilson",
-        email: "davidwilson@gmail.com",
-        phone_number: 123 - 456 - 7893,
+        email: randomEmail,
+        // email: "davidwilson@gmail.com",
+        phone: "123 - 456 - 7893",
         role: "tenant",
       },
       {
         firstName: "Eva",
         lastName: "Martinez",
-        email: "evamartinez@gmail.com",
-        phone: 123 - 456 - 7894,
+        email: randomEmail,
+        // email: "evamartinez@gmail.com",
+        phone: "123 - 456 - 7894",
         role: "tenant",
       },
       {
         firstName: "Frank",
         lastName: "Thompson",
-        email: "frankthompson@gmail.com",
-        phone: 123 - 456 - 7895,
+        email: randomEmail,
+        // email: "frankthompson@gmail.com",
+        phone: "123 - 456 - 7895",
         role: "tenant",
       },
       {
-        FirstName: "Grace ",
+        firstName: "Grace ",
         lastName: "Lee",
-        email: "gracelee@gmail.com",
-        phone: 123 - 456 - 7896,
+        email: randomEmail,
+        // email: "gracelee@gmail.com",
+        phone: "123 - 456 - 7896",
         role: "tenant",
       },
       {
-        id: 8,
         firstName: "Henry",
         lastName: "Clark",
-        email: "henryclark@gmail.com",
-        phone: 123 - 456 - 7897,
+        email: randomEmail,
+        // email: "henryclark@gmail.com",
+        phone: "123 - 456 - 7897",
         role: "tenant",
       },
       {
         firstName: "Ivy ",
         lastName: "Turner",
-        email: "ivyturner@gmail.com",
-        phone: 123 - 456 - 7898,
+        email: randomEmail,
+        // email: "ivyturner@gmail.com",
+        phone: "123 - 456 - 7898",
         role: "tenant",
       },
       {
         firstName: "Jack ",
         lastName: "Wilson",
-        email: "jackwilson@gmail.com",
-        phone: 123 - 456 - 7899,
+        email: randomEmail,
+        // email: "jackwilson@gmail.com",
+        phone: "123 - 456 - 7899",
         role: "tenant",
       },
     ];
     await prisma.tenant.createMany({ data: tenants });
   };
   const createLeases = async () => {
-    const leases = [
+    const twoYearsLater = new Date(
+      new Date().setFullYear(new Date().getFullYear() + 2)
+    );
+    const lease = [
       {
         unitNumber: 101,
         unitId: 1,
         tenantId: 1,
-        leaseStartDate: "2024 - 01 - 10",
-        leaseEndDate: "2025 - 06 - 01",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 1200,
         securityDeposit: 1200,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 102,
         unitId: 2,
         tenantId: 2,
-        leaseStartDate: "2024 - 01 - 15",
-        leaseEndDate: "2025 - 06 - 14",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 1500,
         securityDeposit: 1500,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 103,
         unitId: 3,
         tenantId: 3,
-        leaseStartDate: "2024 - 01 - 15",
-        leaseEndDate: "2025 - 06 - 14",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 1900,
         securityDeposit: 1500,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 104,
         unitId: 4,
         tenantId: 4,
-        leaseStartDate: "2024 - 01 - 15",
-        leaseEndDate: "2025 - 06 - 14",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 1900,
         securityDeposit: 1500,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 105,
         unitId: 5,
         tenantId: 5,
-        leaseStartDate: "2024 - 01 - 15",
-        leaseEndDate: "2025 - 06 - 14",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 2400,
         securityDeposit: 1500,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 201,
         unitId: 6,
         tenantId: 6,
-        leaseStartDate: "2024 - 01 - 15",
-        leaseEndDate: "2025 - 07 - 31",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 2200,
         securityDeposit: 1200,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 202,
         unitId: 7,
         tenantId: 7,
-        leaseStartDate: "2024 - 01 - 18",
-        leaseEndDate: "2025 - 07 - 31",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 1800,
         securityDeposit: 1800,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 203,
         unitId: 8,
         tenantId: 8,
-        leaseStartDate: "2024 - 01 - 18",
-        leaseEndDate: "2025 - 07 - 31",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 2500,
         securityDeposit: 1800,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 204,
         unitId: 9,
         tenantId: 9,
-        leaseStartDate: "2024 - 01 - 18",
-        leaseEndDate: "2025 - 07 - 31",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 2500,
         securityDeposit: 1800,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 205,
         unitId: 10,
         tenantId: 10,
-        leaseStartDate: "2024 - 01 - 18",
-        leaseEndDate: "2025 - 07 - 31",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 2100,
         securityDeposit: 1800,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 301,
         tenantId: 11,
         unitId: 11,
-        leaseStartDate: "2024 - 01 - 15",
-        leaseEndDate: "2025 - 08 - 05",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 1250,
         securityDeposit: 1000,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 302,
         tenantId: 12,
         unitId: 12,
-        leaseStartDate: "2024 - 01 - 15",
-        leaseEndDate: "2025 - 06 - 30",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 2500,
         securityDeposit: 1600,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 303,
         unitId: 13,
         tenantId: 13,
-        leaseStartDate: "2024 - 01 - 15",
-        leaseEndDate: "2025 - 06 - 30",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 1750,
         securityDeposit: 1600,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 304,
         unitId: 14,
         tenantId: 14,
-        leaseStartDate: "2024 - 01 - 15",
-        leaseEndDate: "2025 - 06 - 30",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 2300,
         securityDeposit: 1600,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
       {
         unitNumber: 305,
         unitId: 15,
         tenantId: 15,
-        leaseStartDate: "2024 - 01 - 15",
-        leaseEndDate: "2025 - 06 - 30",
+        propertyId: 1,
+        leaseStartDate: new Date(),
+        leaseEndDate: twoYearsLater,
         monthlyRent: 2300,
         securityDeposit: 1600,
-        leaseStatus: Active,
+        leaseStatus: "ACTIVE",
       },
     ];
-    await prisma.lease.createMany({ data: leases });
+    await prisma.lease.createMany({ data: lease });
   };
   const createPayments = async () => {
     const payments = [
@@ -1393,10 +1448,10 @@ const seed = async () => {
     const MaintenanceRequest = [];
     await prisma.MaintenanceRequest.createMany({ data: MaintenanceRequest });
   };
+  await createTenants();
+  await createProperties();
   await createUsers();
   await createUnits();
-  await createProperties();
-  await createTenants();
   await createLeases();
   await createPayments();
   await createMaintenanceRequests();
