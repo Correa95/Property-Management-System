@@ -1,0 +1,30 @@
+.charts {
+  width: 85%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  float: right;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px;
+}
+.charts .revenue {
+  color: #fff;
+  background-color: #0b1c3e;
+  width: 45%;
+  height: 90%;
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.charts .expense {
+  color: #fff;
+  background-color: #0b1c3e;
+  width: 45%;
+  height: 90%;
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
