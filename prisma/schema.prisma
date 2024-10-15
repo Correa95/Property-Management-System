@@ -4,139 +4,152 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "postgresql" // You can change to "mysql" or "sqlite"
   url      = env("DATABASE_URL")
 }
 
-model Property {
-  id         Int      @id @default(autoincrement())
-  name       String
-  address    String
-  city       String
-  state      String
-  zipCode    String
-  unit      Unit[]   // Each user can have multiple units
-  lease Lease[]  // Each property can have multiple leases
-}
-
-model User {
+model Admin {
   id        Int      @id @default(autoincrement())
-  firstName String
-  lastName  String
+  name      String
   email     String   @unique
-  phone     String?
-  role String
+  password  String
+  role      String   // e.g., 'admin', 'manager'
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  properties          Property[]
+  maintenanceRequests MaintenanceRequest[]
 }
 
-model Tenant{
-  id Int @id @default(autoincrement())
-  firstName String
-  lastName String
-  email String @unique
-  phone String?
-  role String
-maintenanceRequest MaintenanceRequest[]
-  lease Lease[]
-  payment Payment[]
-  }
+model Property {
+  id        Int      @id @default(autoincrement())
+  name      String
+  address   String
+  units     Unit[]   // A property can have multiple units
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  adminId   Int
+  admin     Admin @relation(fields: [adminId], references: [id])
+}
 
 model Unit {
   id          Int      @id @default(autoincrement())
-  unitNumber  Int
-  rent        Float
-  description String?
-  available   Boolean  @default(true)
-buildingNumber Int
+  unitNumber  String   @unique
+  description String
+  rentAmount  Float
+
+  status      UnitStatus @default(AVAILABLE) // Unit availability status
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
   propertyId  Int
   property    Property @relation(fields: [propertyId], references: [id])
-maintenanceRequest MaintenanceRequest[]
-  lease     Lease[]  // A unit can have multiple leases over time (active/inactive)
+
+  lease       Lease?
+  payments    Payment[]
+  maintenanceRequests MaintenanceRequest[]
 }
 
 model Lease {
-  id             Int      @id @default(autoincrement())
-  leaseStartDate      DateTime
-  leaseEndDate        DateTime
-  monthlyRent    Float
+  id            Int      @id @default(autoincrement())
+  startDate     DateTime
+  endDate       DateTime
+  rentAmount    Float
   securityDeposit Float
-  unitNumber Int
-  propertyId Int
-property Property @relation(fields: [propertyId],references: [id])
-  tenantId       Int
-  tenant         Tenant     @relation(fields: [tenantId], references: [id])
-  unitId         Int
-  unit           Unit     @relation(fields: [unitId], references: [id])
-  leaseStatus    LeaseStatus @default(ACTIVE)
-  payment       Payment[]
+  isActive      Boolean  @default(true)
+
+  // Relations
+  unitId        Int @unique
+  unit          Unit @relation(fields: [unitId], references: [id])
+  tenantId      Int  @unique
+  tenant        Tenant @relation(fields: [tenantId], references: [id])
+
+  payments      Payment[]
 }
 
 model Payment {
-  id          Int      @id @default(autoincrement())
-  paymentDate DateTime
-  amount      Float
-  status      PaymentStatus @default(PENDING)
-  method      String // e.g., Credit Card, Bank Transfer
-  tenantId    Int
-  tenant      Tenant     @relation(fields: [tenantId], references: [id])
-  leaseId     Int
-  lease       Lease    @relation(fields: [leaseId], references: [id])
+  id            Int      @id @default(autoincrement())
+  amount        Float
+  paymentDate   DateTime @default(now())
+  paymentType   PaymentType
+  paymentStatus PaymentStatus @default(PAID)
+
+  // Relations
+  leaseId       Int
+  lease         Lease @relation(fields: [leaseId], references: [id])
+
+  unitId        Int
+  unit          Unit @relation(fields: [unitId], references: [id])
+
+  tenantId      Int
+  tenant        Tenant @relation(fields: [tenantId], references: [id])
+}
+
+model Tenant {
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String   @unique
+  phone         String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  lease         Lease?
+  payments      Payment[]
+  maintenanceRequests MaintenanceRequest[]
 }
 
 model MaintenanceRequest {
-  id           Int      @id @default(autoincrement())
-  requestDate  DateTime @default(now())
-  description  String
-  status       MaintenanceStatus @default(PENDING)
-  completedAt  DateTime?
-  tenantId     Int
-  tenant       Tenant     @relation(fields: [tenantId], references: [id])
-  unitId       Int
-  unit         Unit    @relation(fields: [unitId], references: [id])
+  id            Int      @id @default(autoincrement())
+  description   String
+  status        MaintenanceStatus @default(PENDING)
+  requestDate   DateTime @default(now())
+  resolutionDate DateTime?
+
+  // Relations
+  unitId        Int
+  unit          Unit @relation(fields: [unitId], references: [id])
+
+  tenantId      Int?
+  tenant        Tenant? @relation(fields: [tenantId], references: [id])
+
+  adminId       Int
+  admin         Admin @relation(fields: [adminId], references: [id])
 }
 
-// model Invoice {
-//   id          Int      @id @default(autoincrement())
-//   invoiceDate DateTime @default(now())
-//   dueDate     DateTime
-//   amount      Float
-//   status      InvoiceStatus @default(UNPAID)
-
-//   tenantId    Int
-//   tenant      Tenant     @relation(fields: [tenantId], references: [id])
-
-//   leaseId     Int
-//   lease       Lease    @relation(fields: [leaseId], references: [id])
-// }
-enum Role {
-  TENANT
- ADMIN
-}
-
-enum LeaseStatus {
-  ACTIVE
-  TERMINATED
+enum PaymentType {
+  CREDIT_CARD
+  BANK_TRANSFER
+  CASH
+  CHECK
 }
 
 enum PaymentStatus {
   PENDING
-  COMPLETED
+  PAID
   FAILED
 }
 
 enum MaintenanceStatus {
   PENDING
   IN_PROGRESS
-  COMPLETED
+  RESOLVED
+  REJECTED
 }
 
-enum InvoiceStatus {
-  PAID
-  UNPAID
-  OVERDUE
+enum UnitStatus {
+  AVAILABLE
+  LEASED
+  UNDER_MAINTENANCE
 }
 

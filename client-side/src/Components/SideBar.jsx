@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 />;
-// import Link from "react-router-dom";
+
 import styles from "./SideBar.module.css";
-import { Link } from "react-router-dom";
 
 function SideNavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +14,7 @@ function SideNavBar() {
   }
   return (
     <nav className={styles.sideBar}>
-      <header>
+      <header className={styles.header}>
         <h1 className={styles.logo}>LUWOUSE</h1>
       </header>
 
@@ -23,10 +23,16 @@ function SideNavBar() {
           <Link to="/overview">OVERVIEW</Link>
         </li>
         <li>
-          <Link to="property">PROPERTY</Link>
-        </li>
-        <li>
-          <Link to="calender">CALENDER</Link>
+          <Link to="property" onClick={handleClose}>
+            PROPERTY
+          </Link>
+          {isOpen && (
+            <ul>
+              <li>
+                <Link to="availableUnit">AVAILABLE UNITS</Link>
+              </li>
+            </ul>
+          )}
         </li>
         <li>
           <Link to="tasks" onClick={handleClose}>
@@ -38,7 +44,7 @@ function SideNavBar() {
                 <Link to="todo">TODO</Link>
               </li>
               <li>
-                <Link to="element">ELEMENT</Link>
+                <Link to="calender">CALENDER</Link>
               </li>
             </ul>
           )}
@@ -66,7 +72,7 @@ function SideNavBar() {
           <Link to="tenantScreening">TENANT SCREENING </Link>
         </li>
         <li>
-          <Link to="reporting" onClick={handleClose}>
+          <Link to="financialReport" onClick={handleClose}>
             FINANCIAL REPORT
           </Link>
           {isOpen && (

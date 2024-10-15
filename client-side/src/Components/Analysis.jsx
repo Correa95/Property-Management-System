@@ -1,8 +1,12 @@
 import styles from "./Analysis.module.css";
+import property from "../apartmentBuilding/property.js";
 function Analysis() {
+  // console.log(property.units);
+
   return (
     <section className={styles.statsContainer}>
       <div className={styles.stats}>
+        {property.units.map((unit) => console.log(unit.length))}
         <h1>Vacancy Rate</h1>
         <amount>100%</amount>
         <small>As of Last Month</small>
