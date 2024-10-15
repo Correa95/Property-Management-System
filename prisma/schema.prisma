@@ -20,8 +20,7 @@ model Admin {
   email     String   @unique
   password  String
   role      String   // e.g., 'admin', 'manager'
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  
 
   // Relations
   properties          Property[]
@@ -33,9 +32,7 @@ model Property {
   name      String
   address   String
   units     Unit[]   // A property can have multiple units
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  
   // Relations
   adminId   Int
   admin     Admin @relation(fields: [adminId], references: [id])
@@ -48,8 +45,7 @@ model Unit {
   rentAmount  Float
 
   status      UnitStatus @default(AVAILABLE) // Unit availability status
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+ 
 
   // Relations
   propertyId  Int
@@ -100,8 +96,7 @@ model Tenant {
   name          String
   email         String   @unique
   phone         String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  
 
   // Relations
   lease         Lease?

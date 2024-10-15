@@ -6,7 +6,7 @@ exports.payments = [
     amount: 1200,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 2,
@@ -15,7 +15,7 @@ exports.payments = [
     amount: 1500,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 3,
@@ -24,7 +24,7 @@ exports.payments = [
     amount: 1900,
     paymentDate: new Date("2024 - 02 - 10"),
     paymentType: "	Check",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     laseId: 4,
@@ -33,7 +33,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 02 - 19"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 5,
@@ -42,7 +42,7 @@ exports.payments = [
     amount: 2400,
     paymentDate: new Date("2024 - 02 - 14"),
     paymentType: "	Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 6,
@@ -51,7 +51,7 @@ exports.payments = [
     amount: 2200,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 7,
@@ -60,7 +60,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 8,
@@ -69,7 +69,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 9,
@@ -78,7 +78,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 10,
@@ -87,7 +87,7 @@ exports.payments = [
     amount: 2100,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 11,
@@ -96,7 +96,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 12,
@@ -105,7 +105,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 13,
@@ -114,7 +114,7 @@ exports.payments = [
     amount: 1750,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 14,
@@ -123,7 +123,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 15,
@@ -132,7 +132,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 02 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   //////////////////////////////////////
   {
@@ -142,7 +142,7 @@ exports.payments = [
     amount: 1200,
     paymentDate: new Date("2024 - 03 - 15"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 2,
@@ -151,7 +151,7 @@ exports.payments = [
     amount: 1500,
     paymentDate: new Date("2024 - 03 - 15"),
     paymentType: "Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 3,
@@ -160,7 +160,7 @@ exports.payments = [
     amount: 1900,
     paymentDate: new Date("2024 - 03 - 10"),
     paymentType: "	Check",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     laseId: 4,
@@ -169,7 +169,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 03 - 19"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 5,
@@ -178,7 +178,7 @@ exports.payments = [
     amount: 2400,
     paymentDate: new Date("2024 - 03 - 14"),
     paymentType: "	Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 6,
@@ -187,7 +187,7 @@ exports.payments = [
     amount: 2200,
     paymentDate: new Date("2024 - 03 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 7,
@@ -196,7 +196,7 @@ exports.payments = [
     amount: 1800.0,
     paymentDate: new Date("2024 - 03 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 8,
@@ -205,7 +205,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 03 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 9,
@@ -214,7 +214,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 03 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 10,
@@ -223,7 +223,7 @@ exports.payments = [
     amount: 2100,
     paymentDate: new Date("2024 - 03 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 11,
@@ -233,7 +233,7 @@ exports.payments = [
     paymentDate: new Date("2024 - 03 - 15"),
     // paymentDate: "2024 - 03 - 15",
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 12,
@@ -243,7 +243,7 @@ exports.payments = [
     paymentDate: new Date("2024 - 03 - 15"),
     // paymentDate: "2024 - 03 - 15",
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 13,
@@ -252,7 +252,7 @@ exports.payments = [
     amount: 1750,
     paymentDate: new Date("2024 - 03 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 14,
@@ -261,7 +261,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 03 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 15,
@@ -270,7 +270,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 03 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   ///////////////////////////////
   {
@@ -280,7 +280,7 @@ exports.payments = [
     amount: 1200,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 2,
@@ -289,7 +289,7 @@ exports.payments = [
     amount: 1500,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 3,
@@ -298,7 +298,7 @@ exports.payments = [
     amount: 1900,
     paymentDate: new Date("2024 - 04 - 10"),
     paymentType: "	Check",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     laseId: 4,
@@ -307,7 +307,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 04 - 19"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 5,
@@ -316,7 +316,7 @@ exports.payments = [
     amount: 2400,
     paymentDate: new Date("2024 - 04 - 14"),
     paymentType: "	Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 6,
@@ -325,7 +325,7 @@ exports.payments = [
     amount: 2200,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 7,
@@ -334,7 +334,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 8,
@@ -343,7 +343,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 9,
@@ -352,7 +352,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 10,
@@ -361,7 +361,7 @@ exports.payments = [
     amount: 2100,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 11,
@@ -370,7 +370,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 12,
@@ -379,7 +379,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 13,
@@ -388,7 +388,7 @@ exports.payments = [
     amount: 1750,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 14,
@@ -397,7 +397,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 15,
@@ -407,7 +407,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 04 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   /////////////////////////////////
   {
@@ -416,7 +416,7 @@ exports.payments = [
     amount: 1200,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 2,
@@ -425,7 +425,7 @@ exports.payments = [
     amount: 1500,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 3,
@@ -434,7 +434,7 @@ exports.payments = [
     amount: 1900,
     paymentDate: new Date("2024 - 05 - 10"),
     paymentType: "	Check",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     laseId: 4,
@@ -443,7 +443,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 05 - 19"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 5,
@@ -452,7 +452,7 @@ exports.payments = [
     amount: 2400,
     paymentDate: new Date("2024 - 05 - 14"),
     paymentType: "	Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 6,
@@ -461,7 +461,7 @@ exports.payments = [
     amount: 2200,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 7,
@@ -470,7 +470,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 8,
@@ -479,7 +479,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 9,
@@ -488,7 +488,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 10,
@@ -497,7 +497,7 @@ exports.payments = [
     amount: 2100,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 11,
@@ -506,7 +506,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 12,
@@ -515,7 +515,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 13,
@@ -524,7 +524,7 @@ exports.payments = [
     amount: 1750,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 14,
@@ -533,7 +533,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 15,
@@ -543,7 +543,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 05 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   /////////////////////////////////////
   {
@@ -552,7 +552,7 @@ exports.payments = [
     amount: 1200,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 2,
@@ -561,7 +561,7 @@ exports.payments = [
     amount: 1500,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 3,
@@ -570,7 +570,7 @@ exports.payments = [
     amount: 1900,
     paymentDate: new Date("2024 - 06 - 10"),
     paymentType: "	Check",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     laseId: 4,
@@ -579,7 +579,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 06 - 19"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 5,
@@ -588,7 +588,7 @@ exports.payments = [
     amount: 2400,
     paymentDate: new Date("2024 - 06 - 14"),
     paymentType: "	Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 6,
@@ -597,7 +597,7 @@ exports.payments = [
     amount: 2200,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 7,
@@ -606,7 +606,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 8,
@@ -615,7 +615,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 9,
@@ -624,7 +624,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 10,
@@ -633,7 +633,7 @@ exports.payments = [
     amount: 2100,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 11,
@@ -642,7 +642,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 12,
@@ -651,7 +651,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 13,
@@ -660,7 +660,7 @@ exports.payments = [
     amount: 1750,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 14,
@@ -669,7 +669,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 15,
@@ -678,7 +678,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 06 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   ///////////////////////////////////
   {
@@ -688,7 +688,7 @@ exports.payments = [
     amount: 1200,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 2,
@@ -697,7 +697,7 @@ exports.payments = [
     amount: 1500,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 3,
@@ -706,7 +706,7 @@ exports.payments = [
     amount: 1900,
     paymentDate: new Date("2024 - 07 - 10"),
     paymentType: "	Check",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     laseId: 4,
@@ -715,7 +715,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 07 - 19"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 5,
@@ -724,7 +724,7 @@ exports.payments = [
     amount: 2400,
     paymentDate: new Date("2024 - 07 - 14"),
     paymentType: "	Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 6,
@@ -733,7 +733,7 @@ exports.payments = [
     amount: 2200,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 7,
@@ -742,7 +742,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 8,
@@ -751,7 +751,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 9,
@@ -760,7 +760,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 10,
@@ -769,7 +769,7 @@ exports.payments = [
     amount: 2100,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 11,
@@ -778,7 +778,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 12,
@@ -787,7 +787,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 13,
@@ -796,7 +796,7 @@ exports.payments = [
     amount: 1750,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 14,
@@ -805,7 +805,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 15,
@@ -814,7 +814,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 07 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   /////////////////////////////////////
   {
@@ -824,7 +824,7 @@ exports.payments = [
     amount: 1200,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 2,
@@ -833,7 +833,7 @@ exports.payments = [
     amount: 1500,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 3,
@@ -842,7 +842,7 @@ exports.payments = [
     amount: 1900,
     paymentDate: new Date("2024 - 08 - 10"),
     paymentType: "	Check",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     laseId: 4,
@@ -851,7 +851,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 08 - 19"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 5,
@@ -860,7 +860,7 @@ exports.payments = [
     amount: 2400,
     paymentDate: new Date("2024 - 08 - 14"),
     paymentType: "	Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 6,
@@ -869,7 +869,7 @@ exports.payments = [
     amount: 2200,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 7,
@@ -878,7 +878,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 8,
@@ -887,7 +887,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 9,
@@ -896,7 +896,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 10,
@@ -905,7 +905,7 @@ exports.payments = [
     amount: 2100,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 11,
@@ -914,7 +914,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 12,
@@ -923,7 +923,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 13,
@@ -932,7 +932,7 @@ exports.payments = [
     amount: 1750,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 14,
@@ -941,7 +941,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 15,
@@ -950,7 +950,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 08 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   ///////////////////////////////////////
   {
@@ -960,7 +960,7 @@ exports.payments = [
     amount: 1200,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 2,
@@ -969,7 +969,7 @@ exports.payments = [
     amount: 1500,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 3,
@@ -978,7 +978,7 @@ exports.payments = [
     amount: 1900,
     paymentDate: new Date("2024 - 09 - 10"),
     paymentType: "	Check",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     laseId: 4,
@@ -987,7 +987,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 09 - 19"),
     paymentType: "Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 5,
@@ -996,7 +996,7 @@ exports.payments = [
     amount: 2400,
     paymentDate: new Date("2024 - 09 - 14"),
     paymentType: "	Bank Transfer",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 6,
@@ -1004,7 +1004,7 @@ exports.payments = [
     amount: 2200,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 7,
@@ -1014,7 +1014,7 @@ exports.payments = [
     amount: 1800,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 8,
@@ -1023,7 +1023,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 9,
@@ -1032,7 +1032,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 10,
@@ -1041,7 +1041,7 @@ exports.payments = [
     amount: 2100,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 11,
@@ -1050,7 +1050,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 12,
@@ -1059,7 +1059,7 @@ exports.payments = [
     amount: 2500,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 13,
@@ -1068,7 +1068,7 @@ exports.payments = [
     amount: 1750,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 14,
@@ -1077,7 +1077,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
   {
     leaseId: 15,
@@ -1087,7 +1087,7 @@ exports.payments = [
     amount: 2300,
     paymentDate: new Date("2024 - 09 - 15"),
     paymentType: "	Credit Card",
-    paymentStatus: PAID,
+    paymentStatus: "PAID",
   },
 ];
 // export default payments;
