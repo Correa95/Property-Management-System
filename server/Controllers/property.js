@@ -1,6 +1,6 @@
 const router = require("express").Router();
 module.exports = router;
-const prisma = require("../prisma");
+const prisma = require("../server/prisma");
 
 // get all property Route
 router.get("/api/v1/property", async (req, res, next) => {

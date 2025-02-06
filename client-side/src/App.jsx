@@ -16,21 +16,28 @@ import "./App.css";
 function App() {
   return (
     <>
-      <NavBar />
-      <SideBar />
-
-      <Routes>
-        <Route path="/overview" element={<Overview />} />
-        <Route path="/calender" element={<Calender />} />
-        <Route path="/tasks" element={<Tasks />} />
-        <Route path="todo" element={<Todo />} />
-        <Route path="leaseManagement" element={<LeaseManagement />} />
-        <Route path="newTenant" element={<NewTenant />} />
-        <Route path="extendLease" element={<ExtendLease />} />
-        <Route path="maintenance" element={<Maintenance />} />
-        <Route path="tenantScreening" element={<TenantScreening />} />
-        <Route path="monthlyStatement" element={<MonthlyStatement />} />
-      </Routes>
+      <div className="app">
+        <div className="side">
+          <SideBar />
+        </div>
+        <div className="header">
+          <NavBar />
+        </div>
+        <div className="main">
+          <Routes>
+            <Route path="/overview" element={<Overview />} />
+            <Route path="/calender" element={<Calender />} />
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="todo" element={<Todo />} />
+            <Route path="leaseManagement" element={<LeaseManagement />} />
+            <Route path="newTenant" element={<NewTenant />} />
+            <Route path="extendLease" element={<ExtendLease />} />
+            <Route path="maintenance" element={<Maintenance />} />
+            <Route path="tenantScreening" element={<TenantScreening />} />
+            <Route path="monthlyStatement" element={<MonthlyStatement />} />
+          </Routes>
+        </div>
+      </div>
     </>
   );
 }

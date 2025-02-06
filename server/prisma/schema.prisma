@@ -18,6 +18,8 @@ model Admin {
   id        Int      @id @default(autoincrement())
   name      String
   email     String   @unique
+  phone String
+  userName String
   password  String
   role      String   // e.g., 'admin', 'manager'
   
@@ -78,7 +80,7 @@ model Payment {
   amount        Float
   paymentDate   DateTime @default(now())
   paymentType   PaymentType
-  paymentStatus PaymentStatus @default(PAID)
+  paymentStatus String
 
   // Relations
   leaseId       Int

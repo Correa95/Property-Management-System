@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 />;
 
-import styles from "./SideBar.module.css";
+import "./SideBar.css";
 
 function SideNavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,9 +13,9 @@ function SideNavBar() {
     setIsOpen(!isOpen);
   }
   return (
-    <nav className={styles.sideBar}>
-      <header className={styles.header}>
-        <h1 className={styles.logo}>LUWOUSE</h1>
+    <nav className="sideBar">
+      <header className="header">
+        <h1 className="logo">LUWOUSE</h1>
       </header>
 
       <ul>

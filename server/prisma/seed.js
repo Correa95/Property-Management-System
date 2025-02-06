@@ -3,14 +3,14 @@
 // import { units } from "../date/unit";
 // import { lease } from "../date/lease";
 // import { payments } from "../date/payment";
-const { admin } = require("../data/admin");
-const { properties } = require("../data/property");
-const { tenants } = require("../data/tenant");
-const { units } = require("../data/unit");
-const { lease } = require("../data/lease");
-const { payments } = require("../data/payment");
+const { admin } = require("../../data/admin.js");
+const { properties } = require("../../data/property.js");
+const { tenants } = require("../../data/tenant.js");
+const { units } = require("../../data/unit.js");
+const { lease } = require("../../data/lease.js");
+const { payments } = require("../../data/payment.js");
 
-const prisma = require("../prisma");
+const prisma = require("./index.js");
 
 const seed = async () => {
   // TODO: Create Users, Places and Vacations

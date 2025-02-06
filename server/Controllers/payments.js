@@ -1,6 +1,6 @@
 const router = require("express").Router();
 module.exports = router;
-const prisma = require("../prisma");
+const prisma = require("../server/prisma");
 // Route to get tenants payments
 router.get("/payments/:unitId/tenants/:tenantId/payments", async (req, res) => {
   const { payments, tenantId } = req.params;
