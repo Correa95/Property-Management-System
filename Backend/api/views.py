@@ -1,14 +1,16 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from api.models import Tenant, Lease, Payment, Todo
-from .serializers import TenantSerializer
+from rest_framework import status
+from rest_framework.views import APIView
+from api.models import Tenant, Lease, Payment, Todo, AdminUser
+from .serializers import TenantSerializer, TodoSerializer, AdminUserSerializer, PaymentSerializer 
 
 # Create your views here.
 
 # Get All Tenants Routes
 @api_view(["GET"])
 def getTenants(request0):
-    tenants = tenant.object.all()
+    tenants = Tenant.object.all()
     serializer = TenantSerializer(tenants, many = True)
     return Response(serializer.data)
 
@@ -27,6 +29,11 @@ def createTenant(response):
         serializer.save()
         return Response(serializer.data)
     
+# Creating Lease Route
+
+@api_view(["POST"])
+def 
+
 # Todo Routes
 @api_view(["GET"])
 def getTodo(request):
@@ -37,7 +44,7 @@ def getTodo(request):
 
 @api_view(["POST"])
 def createTodo(response):
-    serializer = TodosSerializer(data = request.data)
+    serializer = TodoSerializer(data = request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
@@ -58,4 +65,16 @@ def createPayment(request):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-
+# Admin Serializer
+class AdminUserListView(APIView):
+    def get(self, request):
+        users = AdminUser.objects.all()
+        serializer = AdminUserSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def post(self, request):
+        serializer = AdminUserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

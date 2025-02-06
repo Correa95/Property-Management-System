@@ -1,7 +1,21 @@
 # from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
-from django.db.models import Count
-from api.models import  Apartment, Tenant, Lease, Payment
+from django.contrib.auth.hashers import make_password
+from api.models import  Apartment, Tenant, Lease, Payment, AdminUser
+
+
+
+class AdminUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdminUser
+        fields = ['id', 'first_name', 'last_name', 'email', 'user_name', 'user_password']
+        extra_kwargs = {
+            'user_password': {'write_only': True}  # Hide password in response
+        }
+
+    def create(self, validated_data):
+        validated_data['user_password'] = make_password(validated_data['user_password'])
+        return super().create(validated_data)
 
 
 class ApartmentSerializer(serializers.ModelSerializer):
@@ -9,7 +23,6 @@ class ApartmentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Apartment
-        # fields = "__all__"
         fields = ['id', 'name', 'address', 'num_units', 'total_units']
         read_on_fields = ["id"]
     
@@ -22,7 +35,6 @@ class TenantSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
     class Meta:
         model = Tenant
-        # fields = "__all__"
         fields = ['id', 'first_name', 'last_name', 'email', 'phone_number', 'full_name']
         read_only_fields = ['id']
 
@@ -37,8 +49,7 @@ class LeaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lease
-        # fields = "__all__"
-        fields = ['id', 'apartment', 'tenant', 'tenant_name', 'start_date', 'end_date', 'monthly_rent']
+        fields = ['id', 'apartment', 'tenant', 'tenant_name', 'start_date', 'end_date','security_deposit','is_active' 'monthly_rent']
         read_only_fields = ['id', "tenant_name"]
 
     def get_tenant_name(self, obj):

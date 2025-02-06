@@ -1,8 +1,24 @@
 
 from django.db import models
 from django.utils.timezone import now 
+from django.contrib.auth.hashers import make_password
 
 # Create your models here.
+class AdminUser(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField(unique= True, max_length=254)
+    user_name = models.CharField(max_length=20)
+    user_password = models.CharField(max_length=100,unique=True)
+
+    def save(self, *args, **kwargs):
+        # Hash the password before saving
+        if not self.pk or 'user_password' in self.get_dirty_fields():
+            self.user_password = make_password(self.user_password)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 class Apartment(models.Model):
     name = models.CharField(max_length=100)
@@ -92,7 +108,7 @@ class Todo(models.Model):
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    assigned_to = models.ForeignKey(User, related_name='todos', on_delete=models.SET_NULL, null=True, blank=True)
+    assigned_to = models.ForeignKey(AdminUser, related_name='todos', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
             return self.title

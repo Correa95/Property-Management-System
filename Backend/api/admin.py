@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Todo
+# from django.contrib.auth.admin import AdminUser
+from .models import AdminUser
 # Register your models here.
 
-class TodoAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'priority', 'due_date', 'assigned_to')
-    list_filter = ('status', 'priority', 'assigned_to')
-    search_fields = ('title', 'description')
+class AdminUserAdmin(admin.ModelAdmin):  # Rename this class to avoid conflicts
+    list_display = ('first_name', 'last_name', 'email', 'user_name')
+    search_fields = ('first_name', 'last_name', 'email', 'user_name')
 
-admin.site.register(Todo, TodoAdmin)
+admin.site.register(AdminUser, AdminUserAdmin)
