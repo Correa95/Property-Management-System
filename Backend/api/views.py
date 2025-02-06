@@ -2,21 +2,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from api.models import Tenant, Lease, Payment, Todo, AdminUser
-from .serializers import TenantSerializer, TodoSerializer, AdminUserSerializer, PaymentSerializer 
+from api.models import Tenant, Leases, Payment, AdminUser
+from .serializers import TenantSerializer, LeaseSerializer, AdminUserSerializer, PaymentSerializer 
 
 # Create your views here.
 
 # Get All Tenants Routes
-
-# @api_view(["GET"])
-# def apiOverView(request):
-#     api_url = {
-
-#     }
-
-
-
 @api_view(["GET"])
 def getTenants(request):
     tenants = Tenant.object.all()
@@ -32,17 +23,26 @@ def getTenant(request, pk):
 
 # Create Tenant Route
 @api_view(["POST"])
-def createTenant(response):
-    serializer = TenantSerializer(data = request.data)
+def createTenant(request):
+    if request.method == 'POST':
+        serializer = TenantSerializer(data = request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status = status.HTTP_201_CREATED)
     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
 # Creating Lease Route
+@api_view(["GET"])
+def getLeases(request):
+    leases = Leases.object.all()
+    serializer = LeaseSerializer(leases, many = True)
+    return Response(serializer.data)
 
-
-
+@api_view(["GET"])
+def getLease(request, pk):
+    lease = lease.object.get(id = pk)
+    serializer = LeaseSerializer(lease, many = False)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -62,13 +62,15 @@ def createPayment(request):
 
 # Admin Serializer
 class AdminUserListView(APIView):
+    @api_view(['POST'])
     def get(self, request):
         users = AdminUser.objects.all()
         serializer = AdminUserSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def post(self, request):
-        serializer = AdminUserSerializer(data=request.data)
+        if request.method == 'POST':
+            serializer = AdminUserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -83,9 +85,11 @@ class AdminUserListView(APIView):
 
 
 # @api_view(["POST"])
-# def createTodo(response):
-#     serializer = TodoSerializer(data = request.data)
+# def createTodo(request):
+#     if request.method == 'POST':
+#       serializer = TodoSerializer(data = request.data)
 #     if serializer.is_valid():
 #         serializer.save()
-#         return Response(serializer.data)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+#    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     

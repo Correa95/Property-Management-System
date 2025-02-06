@@ -1,7 +1,7 @@
 # from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
-from api.models import  Apartment, Tenant, Lease, Payment, AdminUser
+from api.models import  Apartment, Tenant, Leases, Payment, AdminUser
 
 
 
@@ -48,7 +48,7 @@ class LeaseSerializer(serializers.ModelSerializer):
     tenant_name = serializers.SerializerMethodField()
 
     class Meta:
-        model = Lease
+        model = Leases
         fields = ['id', 'apartment', 'tenant', 'tenant_name', 'start_date', 'end_date','security_deposit','is_active' 'monthly_rent']
         read_only_fields = ['id', "tenant_name"]
 
