@@ -25,7 +25,6 @@ class Apartment(models.Model):
     address = models.TextField()
     unit_number = models.CharField(max_length=10)
     num_bedrooms = models.PositiveBigIntegerField()
-    num_bathrooms = models.PositiveBigIntegerField()
     square_footage = models.PositiveIntegerField()
     is_available = models.BooleanField(default=True)
 
