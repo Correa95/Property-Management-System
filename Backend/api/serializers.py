@@ -8,14 +8,19 @@ from api.models import  Apartment, Tenant, Leases, Payment, AdminUser
 class AdminUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = AdminUser
-        fields = ['id', 'first_name', 'last_name', 'email', 'user_name', 'user_password']
+        fields = ['id', 'first_name', 'last_name', 'user_email', 'user_name', 'user_password']
         extra_kwargs = {
             'user_password': {'write_only': True}  # Hide password in response
         }
 
     def create(self, validated_data):
-        validated_data['user_password'] = make_password(validated_data['user_password'])
-        return super().create(validated_data)
+        user = AdminUser.objects.create(username= validated_data["user_name"], email=validated_data["email"]) 
+        user.set_password(validated_data["user_password"])
+        user.save()
+        return user
+        
+        # validated_data['user_password'] = make_password(validated_data['user_password'])
+        # return super().create(validated_data)
 
 
 class ApartmentSerializer(serializers.ModelSerializer):

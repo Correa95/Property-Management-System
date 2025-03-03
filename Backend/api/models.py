@@ -7,7 +7,7 @@ from django.contrib.auth.hashers import make_password
 class AdminUser(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    email = models.EmailField(unique= True, max_length=254)
+    user_email = models.EmailField(unique= True, max_length=254)
     user_name = models.CharField(max_length=20)
     user_password = models.CharField(max_length=100,unique=True)
 
