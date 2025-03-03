@@ -54,7 +54,7 @@ class Leases(models.Model):
         return f"Lease for {self.apartment} with {self.tenant}"
 
 class Payment(models.Model):
-    leases = models.ForeignKey(Leases, on_delete=models.CASCADE)
+    lease = models.ForeignKey(Leases, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     payment_date = models.DateField(default=now)
     CREDIT_CARD = 'Credit Card'
