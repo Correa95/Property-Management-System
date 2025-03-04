@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import AdminUser, Apartment, Tenant, Lease, Payment
 
 # Customize the admin interface for AdminUser
-class AdminUserAdmin(admin.ModelAdmin):
+class UserAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'user_email', 'user_name')
     # search_fields = ('first_name', 'last_name', 'user_email', 'user_name')
 
