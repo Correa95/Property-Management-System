@@ -1,7 +1,7 @@
 # from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from django.db.models import Sum
-from api.models import  Apartment, Tenant, Leases, Payment, AdminUser
+from api.models import  Apartment, Tenant, Lease, Payment, AdminUser
 
 
 
@@ -54,7 +54,7 @@ class TenantSerializer(serializers.ModelSerializer):
 class LeaseSerializer(serializers.ModelSerializer):
     tenant_name = serializers.SerializerMethodField()
     class Meta:
-        model = Leases
+        model = Lease
         fields = ['id', 'apartment', 'tenant', 'tenant_name', 'start_date', 'end_date','security_deposit','is_active' 'monthly_rent']
         read_only_fields = ['id', "tenant_name"]
 

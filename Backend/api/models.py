@@ -41,7 +41,7 @@ class Tenant(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-class Leases(models.Model):
+class Lease(models.Model):
     apartment = models.OneToOneField(Apartment, on_delete=models.CASCADE)
     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
     start_date = models.DateField()
@@ -54,7 +54,7 @@ class Leases(models.Model):
         return f"Lease for {self.apartment} with {self.tenant}"
 
 class Payment(models.Model):
-    lease = models.ForeignKey(Leases, on_delete=models.CASCADE)
+    lease = models.ForeignKey(Lease, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     payment_date = models.DateField(default=now)
     CREDIT_CARD = 'Credit Card'

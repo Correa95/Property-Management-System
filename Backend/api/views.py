@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import redirect
-from api.models import Tenant, Leases, Payment, AdminUser
+from api.models import Tenant, Lease, Payment, AdminUser
 from .serializers import TenantSerializer, LeaseSerializer, AdminUserSerializer, PaymentSerializer 
 
 # Create your views here.
@@ -89,7 +89,7 @@ def createTenant(request):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getLeases(request):
-    leases = Leases.object.all()
+    leases = Lease.object.all()
     serializer = LeaseSerializer(leases, many = True)
     return Response(serializer.data)
 
