@@ -88,8 +88,8 @@ DATABASES = {
         'NAME': DB_NAME,
         'USER': DB_USERNAME,
         'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,  # Change to your DB host if remote
-        'PORT': DB_PORT,  # Default PostgreSQL port
+        'HOST': DB_HOST,  
+        'PORT': DB_PORT,  
         "OPTIONS": {
             "connect_timeout": 5
         }

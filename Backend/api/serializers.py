@@ -26,7 +26,6 @@ class AdminUserSerializer(serializers.ModelSerializer):
 
 class ApartmentSerializer(serializers.ModelSerializer):
     total_units = serializers.SerializerMethodField()
-
     class Meta:
         model = Apartment
         fields = ['id', 'name', 'address', 'num_units', 'total_units']
@@ -54,7 +53,6 @@ class TenantSerializer(serializers.ModelSerializer):
 
 class LeaseSerializer(serializers.ModelSerializer):
     tenant_name = serializers.SerializerMethodField()
-
     class Meta:
         model = Leases
         fields = ['id', 'apartment', 'tenant', 'tenant_name', 'start_date', 'end_date','security_deposit','is_active' 'monthly_rent']
@@ -79,7 +77,7 @@ class LeaseSerializer(serializers.ModelSerializer):
 
         if end_date <= start_date:
             raise serializers.ValidationError("End date must be after the start date.")
-
+        
         return data
 
 
