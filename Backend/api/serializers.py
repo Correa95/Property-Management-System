@@ -1,7 +1,7 @@
 # from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from django.db.models import Sum
-from api.models import  Apartment, Tenant, Lease, Payment, AdminUser
+from api.models import  Apartment, Tenant, Lease, Payment, AdminUser, MaintenanceRequest
 
 
 
@@ -101,6 +101,16 @@ class PaymentSerializer(serializers.ModelSerializer):
         if value <= 0:
             raise serializers.ValidationError("Payment amount must be positive.")
         return value
+    
+
+class MaintenanceRequestSerializer(serializers.ModelSerializer):
+    tenant_name = serializers.CharField(source='tenant.full_name', read_only=True)  # Display tenant's full name
+
+    class Meta:
+        model = MaintenanceRequest
+        fields = ['id', 'tenant', 'tenant_name', 'description', 'request_date', 'status']
+        read_only_fields = ['request_date', 'tenant_name']  # Ensure these fields can't be modified
+
     
 
 

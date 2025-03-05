@@ -2,9 +2,10 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+
 from django.shortcuts import redirect
 from api.models import Tenant, Lease, Payment, AdminUser
-from .serializers import TenantSerializer, LeaseSerializer, AdminUserSerializer, PaymentSerializer 
+from .serializers import TenantSerializer, LeaseSerializer, MaintenanceRequest, AdminUserSerializer, PaymentSerializer 
 
 # Create your views here.
 
@@ -117,4 +118,24 @@ def createPayment(request):
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def tenant_profile(request):
+    tenant = Tenant.objects.get(user=request.user)
+    # Render tenant details and options to request maintenance or pay rent
+    return Response(request, 'tenant_profile.html', {'tenant': tenant})
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def maintenance_request(request):
+    if request.method == 'POST':
+        description = request.POST['description']
+        tenant = Tenant.objects.get(user=request.user)
+        MaintenanceRequest.objects.create(tenant=tenant, description=description)
+        return redirect('tenant_profile')
+
+    return Response(request, 'maintenance_request.html')
 

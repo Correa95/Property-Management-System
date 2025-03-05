@@ -2,8 +2,28 @@
 from django.db import models
 from django.utils.timezone import now 
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+
+
+# Define the roles for the users
+class UserRole(models.TextChoices):
+    PROPERTY_MANAGER = 'PM', 'Property Manager'
+    TENANT = 'T', 'Tenant'
+
+# Extend the AbstractUser model to add a role
+class CustomUser(AbstractUser):
+    role = models.CharField(
+        max_length=2,
+        choices=UserRole.choices,
+        default=UserRole.TENANT
+    )
+
+    def __str__(self):
+        return self.username
+
+
 class AdminUser(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -71,19 +91,18 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"Payment of {self.amount} for {self.lease}"
-
+    
 class MaintenanceRequest(models.Model):
-    STATUS_CHOICES = [
-        ('Pending', 'Pending'),
-        ('In Progress', 'In Progress'),
-        ('Completed', 'Completed'),
-    ]
-    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
-    tenant = models.ForeignKey(Tenant, on_delete=models.SET_NULL, null=True, blank=True)
-    request_date = models.DateField(default=now)
-    description = models.TextField()
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
+    tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
+    description = models.TextField()  # Issue description
+    request_date = models.DateTimeField(auto_now_add=True)  # Date of request
+    status = models.CharField(
+        max_length=20,
+        choices=[('Pending', 'Pending'), ('In Progress', 'In Progress'), ('Completed', 'Completed')],
+        default='Pending'
+    )
 
     def __str__(self):
-        return f"Request for {self.apartment} - {self.status}"
+        return f"Request by {self.tenant.first_name} {self.tenant.last_name} - {self.status}"
+
     
