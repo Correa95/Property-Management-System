@@ -16,7 +16,7 @@ urlpatterns = [
 
     path('api/v1/maintenance/', views.maintenance, name='maintenanceRequests'),
     # path('api/v1/maintenance-requests/<int:pk>/', views.MaintenanceRequestDetailView, name='maintenance_request_detail')
-    path('tenant/maintenance-request/', views.maintenance_request, name='maintenance_request'),
+#     path('tenant/maintenance-request/', views.maintenance_request, name='maintenance_request'),
 ]
     
 

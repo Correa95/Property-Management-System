@@ -2,29 +2,12 @@
 from django.db import models
 from django.utils.timezone import now 
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import AbstractUser
+# from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
 
-# Define the roles for the users
-class UserRole(models.TextChoices):
-    PROPERTY_MANAGER = 'PM', 'Property Manager'
-    TENANT = 'T', 'Tenant'
-
-# Extend the AbstractUser model to add a role
-class CustomUser(AbstractUser):
-    role = models.CharField(
-        max_length=2,
-        choices=UserRole.choices,
-        default=UserRole.TENANT
-    )
-
-    def __str__(self):
-        return self.username
-
-
-class AdminUser(models.Model):
+class User(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     user_email = models.EmailField(unique= True, max_length=254)

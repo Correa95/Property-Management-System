@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AdminUser, Apartment, Tenant, Lease, Payment
+from .models import User, Apartment, Tenant, Lease, Payment
 
 # Register your models here.
 
