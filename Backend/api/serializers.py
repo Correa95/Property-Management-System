@@ -1,20 +1,20 @@
 # from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from django.db.models import Sum
-from api.models import  Apartment, Tenant, Lease, Payment, AdminUser, MaintenanceRequest
+from api.models import  Apartment, Tenant, Lease, Payment, User, MaintenanceRequest, ApartmentComplex
 
 
 
-class AdminUserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AdminUser
+        model = User
         fields = ['id', 'first_name', 'last_name', 'user_email', 'user_name', 'user_password']
         extra_kwargs = {
             'user_password': {'write_only': True}  # Hide password in response
         }
 
     def create(self, validated_data):
-        user = AdminUser.objects.create_user(
+        user = User.objects.create_user(
             username=validated_data["user_name"], 
             email=validated_data["email"],
             first_name=validated_data["first_name"],
@@ -23,16 +23,25 @@ class AdminUserSerializer(serializers.ModelSerializer):
         )
         return user
 
+class ApartmentComplexSerializer(serializers.ModelSerializer):
+    total_units = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ApartmentComplex
+        fields = ['id', 'name', 'address', 'total_units']
+        read_only_fields = ["id"]
+
+    def get_total_units(self, obj):
+        return obj.apartments.count()  # Counts all units in this complex
 
 class ApartmentSerializer(serializers.ModelSerializer):
-    total_units = serializers.SerializerMethodField()
+    complex_name = serializers.CharField(source="complex.name", read_only=True)  # Show complex name
+    complex_id = serializers.PrimaryKeyRelatedField(queryset=ApartmentComplex.objects.all(), source="complex")
+    
     class Meta:
         model = Apartment
-        fields = ['id', 'name', 'address', 'num_units', 'total_units']
+        fields = ['id', 'complex_id', 'complex_name', 'unit_number', 'num_bedrooms', 'square_footage', 'is_available']
         read_only_fields = ["id"]
-    
-    def get_total_units(self, obj):
-        return Apartment.objects.filter(name=obj.name).aggregate(total=Sum('num_units'))['total'] or 0
 
 
 class TenantSerializer(serializers.ModelSerializer):

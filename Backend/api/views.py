@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 from django.shortcuts import redirect
-from api.models import Tenant, Lease, Payment, AdminUser
-from .serializers import TenantSerializer, LeaseSerializer, MaintenanceRequest, AdminUserSerializer, PaymentSerializer 
+from api.models import Tenant, Lease, Payment
+from .serializers import TenantSerializer, LeaseSerializer, MaintenanceRequest, PaymentSerializer 
 
 # Create your views here.
 
@@ -47,14 +47,14 @@ def editTenant(request, pk):
             tenant.monthly_rent = monthly_rent
         tenant.save()
 
-    # # Update the lease if it exists and the fields are provided
-    # lease = Leases.objects.filter(tenant=tenant).first()
-    # if lease:
-    #     if end_date:
-    #         lease.end_date = parse_date(end_date)  # Ensure correct date format
-    #     if monthly_rent:
-    #         lease.monthly_rent = Decimal(monthly_rent)  # Ensure correct number format
-    #     lease.save()
+    # Update the lease if it exists and the fields are provided
+    lease = Lease.objects.filter(tenant=tenant).first()
+    if lease:
+        if end_date:
+            lease.end_date = parse_date(end_date)  # Ensure correct date format
+        if monthly_rent:
+            lease.monthly_rent = Decimal(monthly_rent)  # Ensure correct number format
+        lease.save()
 
         
 # Create Tenant Route

@@ -2,10 +2,8 @@
 from django.db import models
 from django.utils.timezone import now 
 from django.contrib.auth.hashers import make_password
-# from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-
 
 class User(models.Model):
     first_name = models.CharField(max_length=50)
@@ -22,17 +20,31 @@ class User(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-
-class Apartment(models.Model):
-    name = models.CharField(max_length=100)
+    
+class ApartmentComplex(models.Model):
+    name = models.CharField(max_length=100, unique=True)
     address = models.TextField()
-    unit_number = models.CharField(max_length=10)
-    num_bedrooms = models.PositiveBigIntegerField()
+
+    def unit_count(self):
+        return self.apartments.count()
+
+    def __str__(self):
+        return f"{self.name} ({self.unit_count()} units)"
+    
+class Apartment(models.Model):
+    complex = models.ForeignKey(ApartmentComplex, related_name="apartments", on_delete=models.CASCADE)
+    unit_number = models.CharField(max_length=10)  # Unique within a complex
+    num_bedrooms = models.PositiveIntegerField()
     square_footage = models.PositiveIntegerField()
     is_available = models.BooleanField(default=True)
 
+    class Meta:
+        unique_together = ("complex", "unit_number")  # Ensure unique unit numbers per complex
+
     def __str__(self):
-        return f"{self.name} - Unit {self.unit_number}"
+        return f"{self.complex.name} - Unit {self.unit_number}"
+    
+
 
 class Tenant(models.Model):
     first_name = models.CharField(max_length=100)

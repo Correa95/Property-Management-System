@@ -17,18 +17,18 @@ class ApartmentAdmin(admin.ModelAdmin):
 
 class TenantAdmin(admin.ModelAdmin):
     read_only_fields = ('full_name', 'email', 'phone_number')  # Add appropriate fields
-    search_fields = ('full_name',)
+    search_fields = ('full_name',"phone_number")
 
 class LeaseAdmin(admin.ModelAdmin):
     read_only_fields = ('tenant', 'apartment', 'start_date', 'end_date')  # Add appropriate fields
-    search_fields = ('tenant__full_name', 'apartment__address')
+    search_fields = ('tenant__full_name', 'unit_number')
 
 class PaymentAdmin(admin.ModelAdmin):
     read_only_fields = ('tenant', 'lease', 'payment_date', 'amount_paid')  # Add appropriate fields
     search_fields = ('tenant__full_name', 'lease__apartment__address')
 
 # Register models with their corresponding admin classes
-admin.site.register(AdminUser, UserAdmin)
+admin.site.register(User, UserAdmin)
 admin.site.register(Apartment, ApartmentAdmin)
 admin.site.register(Tenant, TenantAdmin)
 admin.site.register(Lease, LeaseAdmin)
