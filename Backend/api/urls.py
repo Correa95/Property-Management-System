@@ -14,9 +14,9 @@ urlpatterns = [
     path('api/v1/payments', views.getPayments, name='get_payments'),
     path('api/v1/payment', views.createPayment, name='create_payment'),
 
-    # path('api/v1/maintenance-requests/', views.MaintenanceRequestListCreateView, name='maintenance_requests'),
-    # # path('api/v1/maintenance-requests/<int:pk>/', views.MaintenanceRequestDetailView, name='maintenance_request_detail')
-    # path('tenant/maintenance-request/', views.maintenance_request, name='maintenance_request'),
+    path('api/v1/maintenance-requests/', views.MaintenanceRequestListCreateView, name='maintenance_requests'),
+    # path('api/v1/maintenance-requests/<int:pk>/', views.MaintenanceRequestDetailView, name='maintenance_request_detail')
+    path('tenant/maintenance-request/', views.maintenance_request, name='maintenance_request'),
 ]
     
 
