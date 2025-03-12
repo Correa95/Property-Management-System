@@ -10,12 +10,12 @@ from .serializers import TenantSerializer, LeaseSerializer, MaintenanceRequest, 
 # Create your views here.
 
 # Get All Tenants Routes
-@api_view(["GET"])
-@permission_classes([IsAuthenticated])
-def getTenants(request):
-    tenants = Tenant.object.all()
-    serializer = TenantSerializer(tenants, many = True)
-    return Response(serializer.data)
+# @api_view(["GET"])
+# @permission_classes([IsAuthenticated])
+# def getTenants(request):
+#     tenants = Tenant.object.all()
+#     serializer = TenantSerializer(tenants, many = True)
+#     return Response(serializer.data)
 
 # Get Single Tenants Routes
 @api_view(["GET"])
