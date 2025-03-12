@@ -112,7 +112,7 @@ def tenant_profile(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def maintenanceRequest(request):
+def maintenance(request):
     if request.method == 'POST':
         description = request.POST['description']
         tenant = Tenant.objects.get(user=request.user)
