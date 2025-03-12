@@ -28,51 +28,33 @@ def getTenant(request, pk):
 # Update Tenant
 @api_view(["PATCH"])
 @permission_classes([IsAuthenticated])
-def editTenant(request, pk = id):
-    first_name =  request.POST.get("first_name")
-    last_name =  request.POST.get("last_name")
-    end_date = request.POST.get("end_date")
-    monthly_rent = request.POST.get("monthly_rent")
-    data = Tenant.objects.get(pk = id)
-    print(first_name, last_name, data)
-
-    if data:
-        if first_name:
-            data.first_name = first_name
-        if last_name:
-            data.last_name = last_name
-        if end_date:
-            data.end_date = end_date
-        if monthly_rent:
-            data.monthly_rent = monthly_rent
-        data.save()
-        return redirect(Tenant)
-    else:
-        return redirect(Tenant)
-        
-        
 def editTenant(request, pk):
     tenant = Tenant.objects.get(Tenant, pk=pk)
     first_name = request.POST.get("first_name")
     last_name = request.POST.get("last_name")
     end_date = request.POST.get("end_date")
     monthly_rent = request.POST.get("monthly_rent")
-
+    
     # Update tenant info if provided
-    if first_name:
-        tenant.first_name = first_name
-    if last_name:
-        tenant.last_name = last_name
-    tenant.save()
-
-    # Update the lease if it exists and the fields are provided
-    lease = Leases.objects.filter(tenant=tenant).first()
-    if lease:
+    if tenant:
+        if first_name:
+            tenant.first_name = first_name
+        if last_name:
+            tenant.last_name = last_name
         if end_date:
-            lease.end_date = parse_date(end_date)  # Ensure correct date format
+            tenant.end_date = end_date
         if monthly_rent:
-            lease.monthly_rent = Decimal(monthly_rent)  # Ensure correct number format
-        lease.save()
+            tenant.monthly_rent = monthly_rent
+        tenant.save()
+
+    # # Update the lease if it exists and the fields are provided
+    # lease = Leases.objects.filter(tenant=tenant).first()
+    # if lease:
+    #     if end_date:
+    #         lease.end_date = parse_date(end_date)  # Ensure correct date format
+    #     if monthly_rent:
+    #         lease.monthly_rent = Decimal(monthly_rent)  # Ensure correct number format
+    #     lease.save()
 
         
 # Create Tenant Route
