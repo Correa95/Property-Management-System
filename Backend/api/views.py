@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from django.shortcuts import redirect
 from api.models import Apartment, ApartmentComplex, Tenant, Lease, Payment
-from .serializers import TenantSerializer, LeaseSerializer, MaintenanceRequest, PaymentSerializer 
+from .serializers import ApartmentSerializer, ApartmentComplexSerializer, TenantSerializer, LeaseSerializer, MaintenanceRequest, PaymentSerializer 
 
 # Create your views here.
 
@@ -21,7 +21,7 @@ def ApartmentComplex(request):
 @permission_classes([IsAuthenticated])
 def getApartments(request):
     apartments = Apartment.object.all()
-    serializer = TenantSerializer(apartments, many = True)
+    serializer = ApartmentSerializer(apartments, many = True)
     return Response(serializer.data)
 
 @api_view(["GET"])
