@@ -4,12 +4,33 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 from django.shortcuts import redirect
-from api.models import Tenant, Lease, Payment
+from api.models import Apartment, ApartmentComplex, Tenant, Lease, Payment
 from .serializers import TenantSerializer, LeaseSerializer, MaintenanceRequest, PaymentSerializer 
 
 # Create your views here.
 
 # Get All Tenants Routes
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def ApartmentComplex(request):
+    apartmentComplex = ApartmentComplex.object.all()
+    serializer = TenantSerializer(apartmentComplex, many = True)
+    return Response(serializer.data)
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def getApartments(request):
+    apartments = Apartment.object.all()
+    serializer = TenantSerializer(apartments, many = True)
+    return Response(serializer.data)
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def getApartment(request, pk):
+    apartment = Apartment.object.all(pk = id)
+    serializer = TenantSerializer(apartment, many = False)
+    return Response(serializer.data)
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getTenants(request):

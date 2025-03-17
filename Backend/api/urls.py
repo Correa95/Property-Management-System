@@ -4,6 +4,9 @@ from . import views
 urlpatterns = [
     path('tenant/profile/', views.tenant_profile, name='tenant_profile'),
 
+    path("api/v1/apartments/", views.getApartments, name = "get_apartments"),
+    path("api/v1/apartment/<str:pk>/", views.getApartment, name = "get_apartment"),
+
     path("api/v1/tenants/", views.getTenants, name = "get_tenants"),
     path("api/v1/tenant/<str:pk>/", views.getTenant, name = "get_tenant"),
     path("api/v1/tenant/", views.createTenant, name = "create_tenant"),
