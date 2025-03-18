@@ -1,7 +1,7 @@
 # from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from django.db.models import Sum
-from api.models import  Apartment, Tenant, Lease, Payment, User, MaintenanceRequest, ApartmentComplex
+from api.models import  Apartment, ApartmentComplex, Tenant, Lease, Payment, User, MaintenanceRequest, ApartmentComplex
 
 
 
