@@ -9,7 +9,18 @@ from .serializers import ApartmentSerializer, ApartmentComplexSerializer, Tenant
 
 # Create your views here.
 
-# Get All Apartment Complex Routes
+# Create Apartment Complex Route
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def createApartmentComplex(request):
+    if request.method == 'POST':
+        serializer = ApartmentComplexSerializer(data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
+    return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+# Get  Apartment Complex Routes
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getApartmentComplex(request):
@@ -103,16 +114,7 @@ def createApartment(request):
         return Response(serializer.data, status = status.HTTP_201_CREATED)
     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-# Create Apartment Complex Route
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def createApartmentComplex(request):
-    if request.method == 'POST':
-        serializer = ApartmentComplexSerializer(data = request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status = status.HTTP_201_CREATED)
-    return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
     
 # Lease Route
 @api_view(["GET"])
