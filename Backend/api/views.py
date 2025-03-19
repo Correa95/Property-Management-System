@@ -120,9 +120,6 @@ def editTenant(request, pk):
 
 
 
-
-
-    
 # Lease Route
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
