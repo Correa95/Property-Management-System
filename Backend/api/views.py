@@ -28,6 +28,18 @@ def getApartmentComplex(request):
     serializer = TenantSerializer(apartmentComplex, many = True)
     return Response(serializer.data)
 
+# /////////////////APARTMENT COMPLEX///////////////////////
+# Create Apartment Route
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def createApartment(request):
+    if request.method == 'POST':
+        serializer = ApartmentSerializer(data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
+    return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
 # Get All apartments Routes
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -36,13 +48,25 @@ def getApartments(request):
     serializer = ApartmentSerializer(apartments, many = True)
     return Response(serializer.data)
 
-# Get  apartment Routes
+# Get  single apartment Routes
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getApartment(request, pk):
     apartment = Apartment.object.all(pk = id)
     serializer = TenantSerializer(apartment, many = False)
     return Response(serializer.data)
+
+# //////////////////APARTMENT ROUTES//////////////////////////
+# Create Tenant Route
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def createTenant(request):
+    if request.method == 'POST':
+        serializer = TenantSerializer(data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
+    return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 # Get All Tenants Routes
 @api_view(["GET"])
@@ -59,6 +83,7 @@ def getTenant(request, pk):
     tenant = tenant.object.get(id = pk)
     serializer = TenantSerializer(tenant, many = False)
     return Response(serializer.data)
+
 
 # Update Tenant
 @api_view(["PATCH"])
@@ -92,27 +117,9 @@ def editTenant(request, pk):
         lease.save()
 
         
-# Create Tenant Route
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def createTenant(request):
-    if request.method == 'POST':
-        serializer = TenantSerializer(data = request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status = status.HTTP_201_CREATED)
-    return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-# Create Apartment Route
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def createApartment(request):
-    if request.method == 'POST':
-        serializer = ApartmentSerializer(data = request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status = status.HTTP_201_CREATED)
-    return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+
 
 
     
