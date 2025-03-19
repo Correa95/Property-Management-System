@@ -138,14 +138,7 @@ def getLease(request, pk):
     serializer = LeaseSerializer(lease, many = False)
     return Response(serializer.data)
 
-# Payments Route
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def getPayments(request):
-    payments = Payment.objects.all()
-    serializer = PaymentSerializer(payments, many=True)
-    return Response(serializer.data)
-
+# create payments routes
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def createPayment(request):
@@ -157,14 +150,25 @@ def createPayment(request):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
 
-
+# Payments Route
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def tenant_profile(request):
-    tenant = Tenant.objects.get(user=request.user)
-    # Render tenant details and options to request maintenance or pay rent
-    return Response(request, 'tenant_profile.html', {'tenant': tenant})
+def getPayments(request):
+    payments = Payment.objects.all()
+    serializer = PaymentSerializer(payments, many=True)
+    return Response(serializer.data)
 
+
+
+
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def tenant_profile(request):
+#     tenant = Tenant.objects.get(user=request.user)
+#     # Render tenant details and options to request maintenance or pay rent
+#     return Response(request, 'tenant_profile.html', {'tenant': tenant})
+
+# create maintenance Request
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def maintenance(request):
