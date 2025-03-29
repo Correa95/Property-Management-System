@@ -17,7 +17,6 @@ urlpatterns = [
     path("api/v1/editTenant/", views.editTenant, name="edit_tenant"),
 
     
-
     path('api/v1/createPayment', views.createPayment, name='create_payment'),
     path('api/v1/getPayments', views.getPayments, name='get_payments'),
 
