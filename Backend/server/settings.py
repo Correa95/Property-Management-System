@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # Connecting database string
-DB_NAME = os.environ.get("RDS_DB_NAME")
+DB_NAME = os.environ.get("RDS_NAME")
 DB_USERNAME = os.environ.get("RDS_USERNAME")
 DB_PASSWORD = os.environ.get("RDS_PASSWORD")
 DB_HOST = os.environ.get("RDS_HOST")
