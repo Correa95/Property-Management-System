@@ -33,7 +33,7 @@ class ApartmentComplex(models.Model):
     
 class Apartment(models.Model):
     complex = models.ForeignKey(ApartmentComplex, related_name="apartments", on_delete=models.CASCADE)
-    unit_number = models.CharField(max_length=10)  # Unique within a complex
+    unit_number = models.CharField(max_length=10, unique=True)  # Unique within a complex
     num_bedrooms = models.PositiveIntegerField()
     square_footage = models.PositiveIntegerField()
     is_available = models.BooleanField(default=True)
