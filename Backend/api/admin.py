@@ -9,9 +9,9 @@ class UserAdmin(admin.ModelAdmin):
     # search_fields = ('first_name', 'last_name', 'user_email', 'user_name')
     # readonly_fields = ("id", "upload_timestamp")
 
-# class ApartmentComplexAdmin(admin.ModelAdmin):
-#     read_only_fields = ("name", "address")
-#     search_fields = ("address", "name")
+class ApartmentComplexAdmin(admin.ModelAdmin):
+    read_only_fields = ("name", "address")
+    search_fields = ("address", "name")
 
 # Customize the admin interface for other models if needed
 class ApartmentAdmin(admin.ModelAdmin):
