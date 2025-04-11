@@ -33,18 +33,18 @@ class ApartmentComplex(models.Model):
     
 class Apartment(models.Model):
     complex = models.ForeignKey(ApartmentComplex, related_name="apartments", on_delete=models.CASCADE)
-    unit_number = models.CharField(max_length=10, unique=True)  # Unique within a complex
+    unit_number = models.CharField(max_length=10, unique=True)  # Unique within a complex2
     description = models.TextField()
     num_bedrooms = models.PositiveIntegerField()
     square_footage = models.PositiveIntegerField()
-    buildingNumber = models.CharField(max_length=10, unique=True)
+    building_number = models.PositiveIntegerField()
     is_available = models.BooleanField(default=True)
 
-    class Meta:
-        unique_together = ("complex", "unit_number")  # Ensure unique unit numbers per complex
+    class Meta:unique_together = (("complex", "unit_number"),  # Ensure unique unit numbers per complex
+     ("complex", "building_number"))  # Optional but helpful if needed
 
     def __str__(self):
-        return f"{self.complex.name} - Unit {self.unit_number}"
+         return f"{self.complex.name} - Bldg {self.building_number}, Unit {self.unit_number}"
     
 
 
