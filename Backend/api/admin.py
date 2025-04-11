@@ -15,8 +15,8 @@ class ApartmentComplexAdmin(admin.ModelAdmin):
 
 # Customize the admin interface for other models if needed
 class ApartmentAdmin(admin.ModelAdmin):
-    read_only_fields = ('address', 'monthly_rent', 'available')  # Add appropriate fields
-    search_fields = ('address',)
+    read_only_fields = ('address', 'monthly_rent' "buildingNumber", 'available')  # Add appropriate fields
+    search_fields = ('address',"buildingNumber")
 
 class TenantAdmin(admin.ModelAdmin):
     read_only_fields = ('full_name', 'email', 'phone_number')  # Add appropriate fields
