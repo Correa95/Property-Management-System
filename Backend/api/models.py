@@ -2,8 +2,15 @@
 from django.db import models
 from django.utils.timezone import now 
 from django.contrib.auth.hashers import make_password
+from django.core.exceptions import ValidationError
 
 # Create your models here.
+
+VALID_BUILDINGS = [100, 200, 300, 400]
+
+def validate_building(value):
+    if value not in VALID_BUILDINGS:
+        raise ValidationError(f"Building number must be one of {VALID_BUILDINGS}")
 
 class User(models.Model):
     first_name = models.CharField(max_length=50)
@@ -27,20 +34,31 @@ class ApartmentComplex(models.Model):
 
     def unit_count(self):
         return self.apartments.count()
+    
+    def occupied_unit_count(self):
+        return self.apartments.filter(is_available=False).count()
+    
+    def occupancy_rate(self):
+        total = self.unit_count()
+        return (self.occupied_unit_count() / total * 100) if total > 0 else 0
 
     def __str__(self):
         return f"{self.name} ({self.unit_count()} units)"
     
 class Apartment(models.Model):
     complex = models.ForeignKey(ApartmentComplex, related_name="apartments", on_delete=models.CASCADE)
-    unit_number = models.CharField(max_length=10, unique=True)  # Unique within a complex2
+    unit_number = models.CharField(max_length=10)  
+    # building_number = models.PositiveIntegerField()
+    building_number = models.PositiveIntegerField(validators=[validate_building])
+
     num_bedrooms = models.PositiveIntegerField()
     square_footage = models.PositiveIntegerField()
-    building_number = models.PositiveIntegerField()
     is_available = models.BooleanField(default=True)
 
     class Meta:unique_together = (("complex", "unit_number"),  # Ensure unique unit numbers per complex
      ("complex", "building_number"))  # Optional but helpful if needed
+        
+   
 
     def __str__(self):
          return f"{self.complex.name} - Bldg {self.building_number}, Unit {self.unit_number}"
