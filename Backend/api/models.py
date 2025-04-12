@@ -47,6 +47,8 @@ class ApartmentComplex(models.Model):
     
 class Apartment(models.Model):
     complex = models.ForeignKey(ApartmentComplex, related_name="apartments", on_delete=models.CASCADE)
+    rent_amount = models.DecimalField(max_digits=8, decimal_places=2)
+
     unit_number = models.CharField(max_length=10)  
     # building_number = models.PositiveIntegerField()
     building_number = models.PositiveIntegerField(validators=[validate_building])
@@ -89,7 +91,7 @@ class Lease(models.Model):
 
 class Payment(models.Model):
     lease = models.ForeignKey(Lease, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=8, decimal_places=2)
+    Payment_amount = models.DecimalField(max_digits=8, decimal_places=2)
     payment_date = models.DateField(default=now)
     CREDIT_CARD = 'Credit Card'
     BANK_TRANSFER = 'Bank Transfer'
