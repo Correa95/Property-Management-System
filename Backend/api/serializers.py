@@ -1,7 +1,7 @@
 # from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from django.db.models import Sum
-from api.models import  Apartment, ApartmentComplex, Tenant, Lease, Payment, User, MaintenanceRequest, ApartmentComplex
+from api.models import  Apartment, ApartmentComplex, Tenant, Lease, Payment, User, MaintenanceRequest, Building
 
 
 
@@ -22,26 +22,40 @@ class UserSerializer(serializers.ModelSerializer):
             password=validated_data["user_password"]  # Hashes password automatically
         )
         return user
-
-class ApartmentComplexSerializer(serializers.ModelSerializer):
-    total_units = serializers.SerializerMethodField()
-
-    class Meta:
-        model = ApartmentComplex
-        fields = ['id', 'name', 'address', 'total_units']
-        read_only_fields = ["id"]
-
-    def get_total_units(self, obj):
-        return obj.apartments.count()  # Counts all units in this complex
-
+    
 class ApartmentSerializer(serializers.ModelSerializer):
     complex_name = serializers.CharField(source="complex.name", read_only=True)  # Show complex name
     complex_id = serializers.PrimaryKeyRelatedField(queryset=ApartmentComplex.objects.all(), source="complex")
     
     class Meta:
         model = Apartment
-        fields = ['id', 'complex_id', 'complex_name', 'unit_number', 'num_bedrooms', 'square_footage', 'is_available']
+        fields = ['id', 'complex_id', 'complex_name', 'unit_number',  "rent_amount",'num_bedrooms', 'square_footage', 'is_available']
         read_only_fields = ["id"]
+
+
+class BuildingSerializer(serializers.ModelSerializer):
+    apartments = ApartmentSerializer(many=True, read_only=True)
+    complex_name = serializers.CharField(source="complex.name", read_only=True)
+
+    class Meta:
+        model = Building
+        fields = [
+            "id", "complex", "complex_name", "building_number", "apartments"
+        ]
+
+
+class ApartmentComplexSerializer(serializers.ModelSerializer):
+    buildings = BuildingSerializer(many=True, read_only=True)
+    unit_count = serializers.IntegerField(read_only=True)
+    occupied_unit_count = serializers.IntegerField(read_only=True)
+    occupancy_rate = serializers.FloatField(read_only=True)
+
+    class Meta:
+        model = ApartmentComplex
+        fields = [
+            "id", "name", "address", "unit_count",
+            "occupied_unit_count", "occupancy_rate", "buildings"
+        ]
 
 
 class TenantSerializer(serializers.ModelSerializer):
