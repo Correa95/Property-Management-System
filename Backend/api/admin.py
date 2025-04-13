@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Apartment, Tenant, Lease, Payment, ApartmentComplex
+from .models import User, Apartment, Tenant, Lease, Payment, ApartmentComplex, Building
 
 # Register your models here.
 
@@ -11,7 +11,13 @@ class UserAdmin(admin.ModelAdmin):
 
 class ApartmentComplexAdmin(admin.ModelAdmin):
     read_only_fields = ("name", "address")
+        # list_display = ("name", "address", "unit_count", "occupied_unit_count", "occupancy_rate")
     search_fields = ("address", "name")
+
+class BuildingAdmin(admin.ModelAdmin):
+    list_display = ("building_number", "complex")
+    list_filter = ("complex",)
+    search_fields = ("building_number", "complex__name")
 
 # Customize the admin interface for other models if needed
 class ApartmentAdmin(admin.ModelAdmin):

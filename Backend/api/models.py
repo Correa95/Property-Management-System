@@ -8,9 +8,12 @@ from django.core.exceptions import ValidationError
 
 VALID_BUILDINGS = [100, 200, 300, 400]
 
+# def validate_building(value):
+#     if value not in VALID_BUILDINGS:
+#         raise ValidationError(f"Building number must be one of {VALID_BUILDINGS}")
 def validate_building(value):
-    if value not in VALID_BUILDINGS:
-        raise ValidationError(f"Building number must be one of {VALID_BUILDINGS}")
+    if value <= 0:
+        raise ValidationError("Building number must be a positive integer.")
 
 class User(models.Model):
     first_name = models.CharField(max_length=50)
@@ -32,8 +35,10 @@ class ApartmentComplex(models.Model):
     name = models.CharField(max_length=100, unique=True)
     address = models.TextField()
 
+    # def unit_count(self):
+    #     return self.apartments.count()
     def unit_count(self):
-        return self.apartments.count()
+        return Apartment.objects.filter(building__complex=self).count()
     
     def occupied_unit_count(self):
         return self.apartments.filter(is_available=False).count()
@@ -45,8 +50,20 @@ class ApartmentComplex(models.Model):
     def __str__(self):
         return f"{self.name} ({self.unit_count()} units)"
     
+class Building(models.Model):
+    complex = models.ForeignKey(ApartmentComplex, related_name="buildings", on_delete=models.CASCADE)
+    building_number = models.PositiveIntegerField(validators=[validate_building])
+
+    class Meta:
+        unique_together = ("complex", "building_number")
+
+    def __str__(self):
+        return f"Building {self.building_number} - {self.complex.name}"
+    
 class Apartment(models.Model):
-    complex = models.ForeignKey(ApartmentComplex, related_name="apartments", on_delete=models.CASCADE)
+    # complex = models.ForeignKey(ApartmentComplex, related_name="apartments", on_delete=models.CASCADE)
+    building = models.ForeignKey(Building, related_name="apartments", on_delete=models.CASCADE)
+    unit_number = models.CharField(max_length=10)
     rent_amount = models.DecimalField(max_digits=8, decimal_places=2)
 
     unit_number = models.CharField(max_length=10)  
@@ -57,11 +74,9 @@ class Apartment(models.Model):
     square_footage = models.PositiveIntegerField()
     is_available = models.BooleanField(default=True)
 
-    class Meta:unique_together = (("complex", "unit_number"),  # Ensure unique unit numbers per complex
-     ("complex", "building_number"))  # Optional but helpful if needed
+    class Meta:
+        unique_together = ("building", "unit_number")  # Each unit number is unique within its building
         
-   
-
     def __str__(self):
          return f"{self.complex.name} - Bldg {self.building_number}, Unit {self.unit_number}"
     
