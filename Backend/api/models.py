@@ -23,10 +23,10 @@ class User(models.Model):
     user_password = models.CharField(max_length=100,unique=True)
 
     def save(self, *args, **kwargs):
-        # Hash the password before saving
-        if not self.pk or 'user_password' in self.get_dirty_fields():
+        if not self.pk or not self.user_password.startswith('pbkdf2_'):
             self.user_password = make_password(self.user_password)
         super().save(*args, **kwargs)
+
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -35,8 +35,6 @@ class ApartmentComplex(models.Model):
     name = models.CharField(max_length=100, unique=True)
     address = models.TextField()
 
-    # def unit_count(self):
-    #     return self.apartments.count()
     def unit_count(self):
         return Apartment.objects.filter(building__complex=self).count()
     
@@ -63,13 +61,9 @@ class Building(models.Model):
 class Apartment(models.Model):
     # complex = models.ForeignKey(ApartmentComplex, related_name="apartments", on_delete=models.CASCADE)
     building = models.ForeignKey(Building, related_name="apartments", on_delete=models.CASCADE)
+    building_number = models.PositiveIntegerField(validators=[validate_building])
     unit_number = models.CharField(max_length=10)
     rent_amount = models.DecimalField(max_digits=8, decimal_places=2)
-
-    unit_number = models.CharField(max_length=10)  
-    # building_number = models.PositiveIntegerField()
-    building_number = models.PositiveIntegerField(validators=[validate_building])
-
     num_bedrooms = models.PositiveIntegerField()
     square_footage = models.PositiveIntegerField()
     is_available = models.BooleanField(default=True)
@@ -78,7 +72,8 @@ class Apartment(models.Model):
         unique_together = ("building", "unit_number")  # Each unit number is unique within its building
         
     def __str__(self):
-         return f"{self.complex.name} - Bldg {self.building_number}, Unit {self.unit_number}"
+        return f"{self.building.complex.name} - Bldg {self.building.building_number}, Unit {self.unit_number}"
+
     
 
 
@@ -103,25 +98,26 @@ class Lease(models.Model):
 
     def __str__(self):
         return f"Lease for {self.apartment} with {self.tenant}"
-
+    
 class Payment(models.Model):
-    lease = models.ForeignKey(Lease, on_delete=models.CASCADE)
-    Payment_amount = models.DecimalField(max_digits=8, decimal_places=2)
+    lease = models.ForeignKey(Lease, on_delete=models.CASCADE, related_name="payments")
+    payment_amount = models.DecimalField(max_digits=8, decimal_places=2)
     payment_date = models.DateField(default=now)
+
     CREDIT_CARD = 'Credit Card'
     BANK_TRANSFER = 'Bank Transfer'
     PAYMENT_METHOD_CHOICES = [
-    (CREDIT_CARD, 'Credit Card'),
-    (BANK_TRANSFER, 'Bank Transfer'),
-]
-    payment_method = models.CharField(max_length=50, choices=[
-        ('Credit Card', 'Credit Card'),
-        ('Bank Transfer', 'Bank Transfer'),\
-    ])
+        (CREDIT_CARD, 'Credit Card'),
+        (BANK_TRANSFER, 'Bank Transfer'),
+    ]
+
+    payment_method = models.CharField(max_length=50, choices=PAYMENT_METHOD_CHOICES)
     is_late_payment = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Payment of {self.amount} for {self.lease}"
+        return f"Payment of {self.payment_amount} for {self.lease}"
+
+
     
 class MaintenanceRequest(models.Model):
     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
