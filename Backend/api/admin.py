@@ -15,8 +15,8 @@ class ApartmentComplexAdmin(admin.ModelAdmin):
     search_fields = ("address", "name")
 
 class BuildingAdmin(admin.ModelAdmin):
-    list_display = ("building_number", "complex")
-    list_filter = ("complex",)
+    read_only_fields = ("building_number", "complex")
+    # list_filter = ("complex",)
     search_fields = ("building_number", "complex__name")
 
 # Customize the admin interface for other models if needed
