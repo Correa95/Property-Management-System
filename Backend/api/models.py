@@ -22,6 +22,7 @@ class User(models.Model):
     user_name = models.CharField(max_length=20)
     user_password = models.CharField(max_length=100,unique=True)
 
+
     def save(self, *args, **kwargs):
         if not self.pk or not self.user_password.startswith('pbkdf2_'):
             self.user_password = make_password(self.user_password)

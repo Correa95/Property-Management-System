@@ -38,6 +38,7 @@ class PaymentAdmin(admin.ModelAdmin):
 
 # Register models with their corresponding admin classes
 admin.site.register(ApartmentComplex, ApartmentComplexAdmin),
+admin.site.register(Building, BuildingAdmin),
 admin.site.register(User, UserAdmin)
 admin.site.register(Apartment, ApartmentAdmin)
 admin.site.register(Tenant, TenantAdmin)
