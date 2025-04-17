@@ -8,9 +8,7 @@ from django.core.exceptions import ValidationError
 
 VALID_BUILDINGS = [100, 200, 300, 400]
 
-# def validate_building(value):
-#     if value not in VALID_BUILDINGS:
-#         raise ValidationError(f"Building number must be one of {VALID_BUILDINGS}")
+
 def validate_building(value):
     if value <= 0:
         raise ValidationError("Building number must be a positive integer.")
@@ -60,7 +58,6 @@ class Building(models.Model):
         return f"Building {self.building_number} - {self.complex.name}"
     
 class Apartment(models.Model):
-    # complex = models.ForeignKey(ApartmentComplex, related_name="apartments", on_delete=models.CASCADE)
     building = models.ForeignKey(Building, related_name="apartments", on_delete=models.CASCADE)
     building_number = models.PositiveIntegerField(validators=[validate_building])
     unit_number = models.CharField(max_length=10)
@@ -70,7 +67,7 @@ class Apartment(models.Model):
     is_available = models.BooleanField(default=True)
 
     class Meta:
-        unique_together = ("building", "unit_number")  # Each unit number is unique within its building
+        unique_together = ("building", "unit_number")  
         
     def __str__(self):
         return f"{self.building.complex.name} - Bldg {self.building.building_number}, Unit {self.unit_number}"
@@ -104,7 +101,6 @@ class Payment(models.Model):
     lease = models.ForeignKey(Lease, on_delete=models.CASCADE, related_name="payments")
     payment_amount = models.DecimalField(max_digits=8, decimal_places=2)
     payment_date = models.DateField(default=now)
-
     CREDIT_CARD = 'Credit Card'
     BANK_TRANSFER = 'Bank Transfer'
     PAYMENT_METHOD_CHOICES = [
@@ -122,8 +118,8 @@ class Payment(models.Model):
     
 class MaintenanceRequest(models.Model):
     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
-    description = models.TextField()  # Issue description
-    request_date = models.DateTimeField(auto_now_add=True)  # Date of request
+    description = models.TextField() 
+    request_date = models.DateTimeField(auto_now_add=True) 
     status = models.CharField(
         max_length=20,
         choices=[('Pending', 'Pending'), ('In Progress', 'In Progress'), ('Completed', 'Completed')],
