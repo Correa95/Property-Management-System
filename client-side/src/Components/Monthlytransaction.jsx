@@ -1,29 +1,29 @@
 import { useState } from "react";
-import styles from "./Monthlytransaction.module.css";
+import "./MonthlyTransaction.css";
 
-function Monthlytransaction() {
+function MonthlyTransaction() {
   const [isOpen, setIsOpen] = useState(false);
   function handleClose() {
     setIsOpen(!isOpen);
   }
   return (
-    <section className={styles.transactionStatementContainer}>
+    <section className="transactionStatementContainer">
       <h1>monthly Transaction</h1>
-      <div className={styles.statement} onClick={handleClose}>
+      <div className="statement" onClick={handleClose}>
         <h2>
           January Statement <span>+</span>
         </h2>
 
         {isOpen && (
           <>
-            <article className={styles.propertyDetail}>
+            <article className="propertyDetail">
               <h1>Nayekah Churr LLC</h1>
               <h3> Street: 240715 Fullstack Academy Graduate</h3>
               <h3>City: Atlanta</h3>
               <h3>State: Georgia</h3>
               <h3>ZipCode: 30349</h3>
             </article>
-            <div className={styles.transaction}>
+            <div className="transaction">
               <p>mathew unitX paid rent on x date</p>
               <p>mathew unitX paid rent on x date</p>
               <p>mathew unitX paid rent on x date</p>
@@ -47,4 +47,4 @@ function Monthlytransaction() {
   );
 }
 
-export default Monthlytransaction;
+export default MonthlyTransaction;

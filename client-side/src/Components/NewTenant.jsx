@@ -1,10 +1,10 @@
-import styles from "./NewTenant.module.css";
+import "./NewTenant.css";
 
 function NewTenant() {
   return (
-    <div className={styles.newTenantContainer}>
-      <h1 className={styles.addTenantHeader}>ADD NEW TENANT</h1>
-      <form className={styles.tenantDetail}>
+    <div className="newTenantContainer">
+      <h1 className="addTenantHeader">ADD NEW TENANT</h1>
+      <form className="tenantDetail">
         <h1>Tenant Detail</h1>
         <label>
           First Name:
@@ -32,7 +32,7 @@ function NewTenant() {
         </label>
       </form>
 
-      <form className={styles.tenantPayment}>
+      <form className="tenantPayment">
         <h1>Payment Details</h1>
         <label>
           <label>

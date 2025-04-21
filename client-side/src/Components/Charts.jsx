@@ -1,9 +1,9 @@
-import styles from "./Charts.module.css";
+import "./Charts.css";
 function Charts() {
   return (
-    <section className={styles.charts}>
-      <div className={styles.revenue}>MATHEW</div>
-      <div className={styles.expense}>CORREA</div>
+    <section className="charts">
+      <div className="revenue">MATHEW</div>
+      <div className="expense">CORREA</div>
     </section>
   );
 }

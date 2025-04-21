@@ -1,5 +1,5 @@
 import MonthlyCashFlowStatement from "./MonthlyCashFlowStatement";
-import Monthlytransaction from "./Monthlytransaction";
+import Monthlytransaction from "./MonthlyTransaction";
 
 function MonthlyStatement() {
   return (
