@@ -54,7 +54,6 @@ nav ul li a:hover {
 
 nav ul ul {
   position: static;
-  /* display: none; */
 }
 nav ul ul li {
   line-height: 42px;
