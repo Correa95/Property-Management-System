@@ -18,10 +18,15 @@
   margin: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+.titleHeader {
+  margin-top: 60px;
+}
 .dollarAmount {
+  margin-top: 10px;
   font-size: 16px;
 }
-.timeUpdate {
+small .timeUpdate {
+  margin-top: 40px;
   font: 14px;
   color: #212121;
 }
