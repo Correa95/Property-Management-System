@@ -22,11 +22,11 @@
   margin-top: 60px;
 }
 .dollarAmount {
-  margin-top: 10px;
+  margin-top: 10px 0px 20px 0px;
   font-size: 16px;
 }
-small .timeUpdate {
-  margin-top: 40px;
+/* .timeStamp {
+  margin-top: 100px;
   font: 14px;
   color: #212121;
-}
+} */
