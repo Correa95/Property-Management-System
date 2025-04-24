@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-left: auto; */
+  background-color: ;
   /* box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px; */
 }
 .stats {
@@ -15,5 +15,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.dollarAmount {
+  font-size: 16px;
+}
+.timeUpdate {
+  font: 14px;
+  color: #212121;
 }

@@ -16,9 +16,9 @@ function App() {
   return (
     <>
       <div className="app">
-        <div className="side">
+        {/* <div className="side">
           <SideBar />
-        </div>
+        </div> */}
         <div className="main">
           <Routes>
             <Route path="/overview" element={<Overview />} />
