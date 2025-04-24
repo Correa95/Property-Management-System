@@ -4,17 +4,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ;
+  /* background-color: #fffafa; */
+  background-color: #f8f8ff;
   /* box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px; */
 }
 .stats {
-  color: #fff;
-  background-color: #061831;
+  color: #212121;
+  background-color: #f8f8ff;
+  border: 2px solid #212121;
   width: 30%;
   height: 60%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
   margin: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
