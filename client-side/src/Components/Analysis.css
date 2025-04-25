@@ -12,6 +12,7 @@
   color: #212121;
   background-color: #f8f8ff;
   border: 2px solid #212121;
+  border-radius: 15px;
   width: 30%;
   height: 60%;
   text-align: center;
@@ -25,8 +26,8 @@
   margin-top: 10px 0px 20px 0px;
   font-size: 16px;
 }
-/* .timeStamp {
+.timeStamp {
   margin-top: 100px;
   font: 14px;
   color: #212121;
-} */
+}
