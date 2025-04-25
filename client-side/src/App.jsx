@@ -16,12 +16,12 @@ function App() {
   return (
     <>
       <div className="app">
-        {/* <div className="side">
-          <SideBar />
-        </div> */}
+        {/* <div className="side"> */}
+        <SideBar />
+        {/* </div> */}
         <div className="main">
           <Routes>
-            <Route path="/overview" element={<Overview />} />
+            <Route path="/" element={<Overview />} />
             <Route path="/calender" element={<Calender />} />
             <Route path="/tasks" element={<Tasks />} />
             <Route path="todo" element={<Todo />} />
