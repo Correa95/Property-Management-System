@@ -33,17 +33,13 @@ class User(models.Model):
 class ApartmentComplex(models.Model):
     name = models.CharField(max_length=100, unique=True)
     address = models.TextField()
-
     def unit_count(self):
         return Apartment.objects.filter(building__complex=self).count()
-    
     def occupied_unit_count(self):
         return self.apartments.filter(is_available=False).count()
-    
     def occupancy_rate(self):
         total = self.unit_count()
         return (self.occupied_unit_count() / total * 100) if total > 0 else 0
-
     def __str__(self):
         return f"{self.name} ({self.unit_count()} units)"
     
@@ -61,7 +57,7 @@ class Apartment(models.Model):
     building = models.ForeignKey(Building, related_name="apartments", on_delete=models.CASCADE)
     building_number = models.PositiveIntegerField(validators=[validate_building])
     unit_number = models.CharField(max_length=10)
-    rent_amount = models.DecimalField(max_digits=8, decimal_places=2)
+    monthly_rent = models.DecimalField(max_digits=8, decimal_places=2)
     num_bedrooms = models.PositiveIntegerField()
     square_footage = models.PositiveIntegerField()
     is_available = models.BooleanField(default=True)

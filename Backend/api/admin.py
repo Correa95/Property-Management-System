@@ -6,8 +6,6 @@ from .models import User, Apartment, Tenant, Lease, Payment, ApartmentComplex, B
 # Customize the admin interface for AdminUser
 class UserAdmin(admin.ModelAdmin):
     read_only_fields = ('first_name', 'last_name', 'user_email', 'user_name')
-    # search_fields = ('first_name', 'last_name', 'user_email', 'user_name')
-    # readonly_fields = ("id", "upload_timestamp")
 
 class ApartmentComplexAdmin(admin.ModelAdmin):
     read_only_fields = ("name", "address")
@@ -19,11 +17,11 @@ class BuildingAdmin(admin.ModelAdmin):
 
 # Customize the admin interface for other models if needed
 class ApartmentAdmin(admin.ModelAdmin):
-    read_only_fields = ('address', 'monthly_rent', "building_Number", 'available')  
-    search_fields = ('address',"building_Number")
+    read_only_fields = ('address', 'monthly_rent', "unit_number" "building_Number", 'available')  
+    search_fields = ('address',"building_Number","unit_number")
 
 class TenantAdmin(admin.ModelAdmin):
-    read_only_fields = ('full_name', 'email', 'phone_number')  # Add 
+    read_only_fields = ('full_name', 'email', 'phone_number',"last_name")  # Add 
     search_fields = ('full_name',"phone_number")
 
 class LeaseAdmin(admin.ModelAdmin):
