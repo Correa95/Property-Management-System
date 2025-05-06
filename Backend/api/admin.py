@@ -33,7 +33,7 @@ class LeaseAdmin(admin.ModelAdmin):
     search_fields = ('tenant__full_name', 'unit_number')
 
 class PaymentAdmin(admin.ModelAdmin):
-    read_only_fields = ('tenant', 'lease', 'payment_date', 'amount_paid')  # Add appropriate fields
+    read_only_fields = ('tenant', 'lease', 'payment_date', 'payment_amount')  # Add appropriate fields
     search_fields = ('tenant__full_name', 'lease__apartment__address')
 
 # Register models with their corresponding admin classes
