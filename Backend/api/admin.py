@@ -11,29 +11,27 @@ class UserAdmin(admin.ModelAdmin):
 
 class ApartmentComplexAdmin(admin.ModelAdmin):
     read_only_fields = ("name", "address")
-        # list_display = ("name", "address", "unit_count", "occupied_unit_count", "occupancy_rate")
     search_fields = ("address", "name")
 
 class BuildingAdmin(admin.ModelAdmin):
     read_only_fields = ("building_number", "complex")
-    # list_filter = ("complex",)
     search_fields = ("building_number", "complex__name")
 
 # Customize the admin interface for other models if needed
 class ApartmentAdmin(admin.ModelAdmin):
-    read_only_fields = ('address', 'monthly_rent', "building_Number", 'available')  # Add appropriate fields
+    read_only_fields = ('address', 'monthly_rent', "building_Number", 'available')  
     search_fields = ('address',"building_Number")
 
 class TenantAdmin(admin.ModelAdmin):
-    read_only_fields = ('full_name', 'email', 'phone_number')  # Add appropriate fields
+    read_only_fields = ('full_name', 'email', 'phone_number')  # Add 
     search_fields = ('full_name',"phone_number")
 
 class LeaseAdmin(admin.ModelAdmin):
-    read_only_fields = ('tenant', 'apartment', 'start_date', 'end_date')  # Add appropriate fields
+    read_only_fields = ('tenant', 'apartment', 'start_date', 'end_date')  # 
     search_fields = ('tenant__full_name', 'unit_number')
 
 class PaymentAdmin(admin.ModelAdmin):
-    read_only_fields = ('tenant', 'lease', 'payment_date', 'payment_amount')  # Add appropriate fields
+    read_only_fields = ('tenant', 'lease', 'payment_date', 'payment_amount')  
     search_fields = ('tenant__full_name', 'lease__apartment__address')
 
 # Register models with their corresponding admin classes
