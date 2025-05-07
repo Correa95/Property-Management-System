@@ -15,13 +15,12 @@ class BuildingAdmin(admin.ModelAdmin):
     read_only_fields = ("building_number", "complex")
     search_fields = ("building_number", "complex__name")
 
-# Customize the admin interface for other models if needed
 class ApartmentAdmin(admin.ModelAdmin):
     read_only_fields = ('address', 'monthly_rent', "unit_number" "building_Number", 'available')  
     search_fields = ('address',"building_Number","unit_number")
 
 class TenantAdmin(admin.ModelAdmin):
-    read_only_fields = ('full_name', 'email', 'phone_number',"last_name","date_of_birth")  # Add 
+    read_only_fields = ('full_name', 'email', 'phone_number',"last_name","date_of_birth")  
     search_fields = ('full_name',"phone_number","date_of_birth","last_name")
 
 class LeaseAdmin(admin.ModelAdmin):
