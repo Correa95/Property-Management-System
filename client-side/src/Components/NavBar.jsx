@@ -1,7 +1,7 @@
-import styles from "./NavBar.module.css";
+import "./NavBar.module.css";
 function NavBar() {
   return (
-    <nav className={styles.navBar}>
+    <nav className="navBar">
       <ul>
         <li>NOTIFICATION</li>
         <li>NOTIFICATION</li>

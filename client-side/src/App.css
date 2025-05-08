@@ -7,14 +7,14 @@
 }
 .app {
   height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* width: 100vw; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 
-.side {
+/* .side {
   width: 20vw;
   border: 2px solid red;
   background-color: #1c1f23;
@@ -26,4 +26,4 @@
   width: 100vw;
   border: 2px solid red;
   background-color: blue;
-}
+} */
