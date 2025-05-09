@@ -86,6 +86,11 @@ function SideNavBar() {
           )}
         </li>
       </ul>
+      <div className="help">
+        <h1>Help</h1>
+        <h1>Setting</h1>
+        <button>Sign Out</button>
+      </div>
     </nav>
   );
 }
