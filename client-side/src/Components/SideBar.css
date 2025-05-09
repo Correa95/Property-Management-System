@@ -77,3 +77,21 @@ nav ul ul li a span {
 nav ul ul li a:hover span {
   transform: translateY(-50%) rotate(-180deg);
 }
+
+.submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  padding-left: 1rem;
+}
+
+.submenu.open {
+  max-height: 500px; /* or whatever is large enough to contain all items */
+  opacity: 1;
+}
+
+.submenu.closed {
+  max-height: 0;
+  opacity: 0;
+}

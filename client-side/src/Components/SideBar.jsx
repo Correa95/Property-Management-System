@@ -4,8 +4,9 @@ import "./SideBar.css";
 
 function SideNavBar() {
   const [isOpen, setIsOpen] = useState(false);
-  function handleClose() {
-    setIsOpen(!isOpen);
+
+  function handleToggle(item) {
+    setIsOpen((prev) => (prev === item ? false : item));
   }
   return (
     <nav className="sideBar">
@@ -15,13 +16,13 @@ function SideNavBar() {
 
       <ul>
         <li>
-          <Link to="/overview">OVERVIEW</Link>
+          <Link to="/overView">OVERVIEW</Link>
         </li>
         <li>
-          <Link to="property" onClick={handleClose}>
+          <Link to="property" onClick={() => handleToggle("property")}>
             PROPERTY
           </Link>
-          {isOpen && (
+          {isOpen === "property" && (
             <ul>
               <li>
                 <Link to="availableUnit">AVAILABLE UNITS</Link>
@@ -30,10 +31,10 @@ function SideNavBar() {
           )}
         </li>
         <li>
-          <Link to="tasks" onClick={handleClose}>
+          <Link to="tasks" onClick={() => handleToggle("tasks")}>
             TASKS
           </Link>
-          {isOpen && (
+          {isOpen === "tasks" && (
             <ul>
               <li>
                 <Link to="todo">TODO</Link>
@@ -46,10 +47,13 @@ function SideNavBar() {
         </li>
 
         <li>
-          <Link to="leaseManagement" onClick={handleClose}>
+          <Link
+            to="leaseManagement"
+            onClick={() => handleToggle("leaseManagement")}
+          >
             LEASE MANAGEMENT
           </Link>
-          {isOpen && (
+          {isOpen === "leaseManagement" && (
             <ul>
               <li>
                 <Link to="newTenant">NEW TENANT</Link>
@@ -67,10 +71,13 @@ function SideNavBar() {
           <Link to="tenantScreening">TENANT SCREENING </Link>
         </li>
         <li>
-          <Link to="financialReport" onClick={handleClose}>
+          <Link
+            to="financialReport"
+            onClick={() => handleToggle("financialReport")}
+          >
             FINANCIAL REPORT
           </Link>
-          {isOpen && (
+          {isOpen === "financialReport" && (
             <ul>
               <li>
                 <Link to="monthlyStatement">MONTHLY STATEMENT</Link>
