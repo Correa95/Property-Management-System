@@ -14,16 +14,16 @@
   /* align-items: center; */
 }
 
-/* .side {
-  width: 20vw;
+.side {
+  /* width: 20vw; */
   border: 2px solid red;
   background-color: #1c1f23;
 }
 
 .main {
-  width: 80vw;
+  /* width: 80vw; */
   height: 100vh;
-  width: 100vw;
+  /* width: 100vw; */
   border: 2px solid red;
-  background-color: blue;
-} */
+  /* background-color: blue; */
+}

@@ -11,7 +11,6 @@ function SideNavBar() {
   return (
     <nav className="sideBar">
       <header className="header">
-        <img src="mathew" alt="Profile" className="profile" />
         <h1 className="logo">LUWOUSE</h1>
       </header>
 

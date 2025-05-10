@@ -1,11 +1,11 @@
 .charts {
-  width: 85%;
+  /* width: 85%; */
   height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 40px;
-  float: right;
+  /* float: right; */
   border-radius: 10px;
   padding: 20px;
   box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px;
