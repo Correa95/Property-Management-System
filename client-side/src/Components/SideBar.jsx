@@ -19,8 +19,8 @@ function SideNavBar() {
           <Link to="/overView">OVERVIEW</Link>
         </li>
         <li>
-          <Link to="property" onClick={() => handleToggle("property")}>
-            PROPERTY
+          <Link to="units" onClick={() => handleToggle("units")}>
+            UNITS
           </Link>
           {isOpen === "property" && (
             <ul>
