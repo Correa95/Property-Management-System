@@ -1,98 +1,147 @@
 .sideBar {
-  position: fixed;
-  width: 15%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   background: #1b1b1b;
-}
-
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid red;
-}
-
-.logo {
-  border-bottom: 1px solid rgb(255, 255, 255, 0.1);
+  width: 300px;
   color: #fff;
+  padding: 0;
+  overflow-y: auto;
+}
+
+/* .header {
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 65px;
+  background: #1e1e1e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+} */
+
+/* .logo {
   font-size: 25px;
   font-weight: 600;
-  padding: 20px;
-  line-height: 65px;
-  text-align: center;
-  background: #1e1e1e;
   letter-spacing: 1px;
-}
-nav ul {
-  border: 2px solid red;
-
-  /* margin-top: 20px; */
-  background: #1b1b1b;
-  /* height: 100%; */
-  width: 100%;
-  list-style: none;
-}
-nav ul li {
-  line-height: 60px;
-  border-bottom: 1px solid rgb(255, 255, 255, 0.1);
-}
-nav ul li a {
   color: #fff;
-  position: relative;
+} */
+
+/* From Uiverse.io by adamgiebl */
+.logo {
+  --green: #1bfd9c;
+  font-size: 25px;
+  padding: 0.7em 2.7em;
+  /* letter-spacing: 0.06em; */
+  /* position: relative; */
+  /* font-family: inherit; */
+  border-radius: 0.6em;
+  /* overflow: hidden; */
+  transition: all 0.3s;
+  line-height: 1.4em;
+  border: 2px solid var(--green);
+  background: linear-gradient(
+    to right,
+    rgba(27, 253, 156, 0.1) 1%,
+    transparent 40%,
+    transparent 60%,
+    rgba(27, 253, 156, 0.1) 100%
+  );
+  color: var(--green);
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4),
+    0 0 9px 3px rgba(27, 253, 156, 0.1);
+}
+
+.logo:hover {
+  color: #82ffc9;
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6),
+    0 0 9px 3px rgba(27, 253, 156, 0.2);
+}
+
+.logo:before {
+  content: "";
+  position: absolute;
+  left: -4em;
+  width: 4em;
+  height: 100%;
+  top: 0;
+  transition: transform 0.4s ease-in-out;
+  background: linear-gradient(
+    to right,
+    transparent 1%,
+    rgba(27, 253, 156, 0.1) 40%,
+    rgba(27, 253, 156, 0.1) 60%,
+    transparent 100%
+  );
+}
+
+.logo:hover:before {
+  transform: translateX(15em);
+}
+
+.navContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.listItems {
+  list-style: none;
+  width: 100%;
+}
+
+.listItems > li {
+  line-height: 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 20px;
+}
+
+.listItems a {
+  color: #fff;
   text-decoration: none;
   font-size: 18px;
-  padding-left: 40px;
-  font-weight: 500;
   display: block;
   width: 100%;
-  border-left: 3px solid transparent;
 }
 
-nav ul li a:hover {
-  color: cyan;
+.listItems a:hover {
+  color: #82ffc9;
   background: #1e1e1e;
-  border-left: cyan;
-}
-
-nav ul ul {
-  position: static;
-}
-nav ul ul li {
-  line-height: 42px;
-  border-bottom: none;
-}
-nav ul ul li a {
-  font-size: 17px;
-  color: #e6e6e6;
-  padding-left: 80px;
-}
-
-nav ul ul li a span {
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  font-size: 22px;
-  transition: transform 0.4s;
-}
-
-nav ul ul li a:hover span {
-  transform: translateY(-50%) rotate(-180deg);
+  /* background-color: #3a3a3a; */
+  border-color: #82ffc9;
+  color: #82ffc9;
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6);
+  /* 0 0 9px 3px rgba(27, 253, 156, 0.2); */
 }
 
 .help {
-  border: 2px solid red;
-  color: #fff;
+  margin-top: auto;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 10px;
   align-items: center;
+  transform: translateY(-20px);
+}
+
+.help button {
+  padding: 10px 16px;
+  background-color: #2e2e2e;
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 15px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.help button:hover {
+  background-color: #3a3a3a;
+  border-color: #82ffc9;
+  color: #82ffc9;
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6),
+    0 0 9px 3px rgba(27, 253, 156, 0.2);
 }

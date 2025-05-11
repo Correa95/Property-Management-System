@@ -1,9 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import SideBar from "./Components/SideBar";
-import Overview from "./Components/Overview";
+import OverView from "./Components/OverView";
 import Calender from "./Components/Calender";
-// import Tasks from "./Components/Tasks";
-// import Todo from "./Components/Todo";
 import LeaseManagement from "./Components/LeaseManagement";
 import NewTenant from "./Components/NewTenant";
 import ExtendLease from "./Components/ExtendLease";
@@ -22,10 +20,8 @@ function App() {
         </aside>
         <div className="mainContent">
           <Routes>
-            <Route path="/" element={<Overview />} />
+            <Route path="/" element={<OverView />} />
             <Route path="/calender" element={<Calender />} />
-            {/* <Route path="/tasks" element={<Tasks />} />
-            <Route path="/todo" element={<Todo />} /> */}
             <Route path="/leaseManagement" element={<LeaseManagement />} />
             <Route path="/newTenant" element={<NewTenant />} />
             <Route path="/extendLease" element={<ExtendLease />} />
