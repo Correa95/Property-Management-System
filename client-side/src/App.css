@@ -13,12 +13,9 @@
 .side {
   height: 100vh;
   border: 2px solid red;
-  background-color: #1c1f23;
 }
 
-.main {
+.mainContent {
   height: 100vh;
-  /* flex-grow: 1; */
-  /* padding: 20px; */
   border: 2px solid red;
 }

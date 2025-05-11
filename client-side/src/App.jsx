@@ -19,7 +19,7 @@ function App() {
         <aside className="side">
           <SideBar />
         </aside>
-        <div className="main">
+        <div className="mainContent">
           <Routes>
             <Route path="/" element={<Overview />} />
             <Route path="/calender" element={<Calender />} />
