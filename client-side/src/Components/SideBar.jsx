@@ -13,7 +13,6 @@ function SideNavBar() {
       <header className="header">
         <h1 className="logo">LUWOUSE</h1>
       </header>
-
       <ul>
         <li>
           <Link to="/overView">OVERVIEW</Link>
@@ -31,19 +30,7 @@ function SideNavBar() {
           )}
         </li>
         <li>
-          <Link to="tasks" onClick={() => handleToggle("tasks")}>
-            TASKS
-          </Link>
-          {isOpen === "tasks" && (
-            <ul>
-              <li>
-                <Link to="todo">TODO</Link>
-              </li>
-              <li>
-                <Link to="calender">CALENDER</Link>
-              </li>
-            </ul>
-          )}
+          <Link to="calender">CALENDER</Link>
         </li>
 
         <li>

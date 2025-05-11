@@ -1,13 +1,13 @@
 import Analysis from "./Analysis";
 import Charts from "./Charts";
-import RecentTransaction from "./RecentTransaction";
+import RecentTransactions from "./RecentTransactions";
 import "./OverView.css";
 function Overview() {
   return (
     <div className="overViewContainer">
       <Analysis />
       <Charts />
-      <RecentTransaction />
+      <RecentTransactions />
     </div>
   );
 }
