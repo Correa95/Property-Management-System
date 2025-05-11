@@ -67,9 +67,7 @@ function SideNavBar() {
         <li>
           <Link to="maintenance">MAINTENANCE</Link>
         </li>
-        <li>
-          <Link to="documents">DOCUMENTS</Link>
-        </li>
+
         <li>
           <Link to="tenantScreening">TENANT SCREENING </Link>
         </li>
@@ -87,6 +85,9 @@ function SideNavBar() {
               </li>
             </ul>
           )}
+        </li>
+        <li>
+          <Link to="documents">DOCUMENTS</Link>
         </li>
       </ul>
       <div className="help">
