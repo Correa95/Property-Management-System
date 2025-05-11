@@ -68,6 +68,9 @@ function SideNavBar() {
           <Link to="maintenance">MAINTENANCE</Link>
         </li>
         <li>
+          <Link to="documents">DOCUMENTS</Link>
+        </li>
+        <li>
           <Link to="tenantScreening">TENANT SCREENING </Link>
         </li>
         <li>

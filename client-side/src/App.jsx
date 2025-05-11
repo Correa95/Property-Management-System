@@ -10,6 +10,7 @@ import ExtendLease from "./Components/ExtendLease";
 import Maintenance from "./Components/Maintenance";
 import TenantScreening from "./Components/TenantScreening";
 import MonthlyStatement from "./Components/MonthlyStatement";
+import Documents from "./Components/Documents";
 import "./App.css";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/maintenance" element={<Maintenance />} />
             <Route path="/tenantScreening" element={<TenantScreening />} />
             <Route path="/monthlyStatement" element={<MonthlyStatement />} />
+            <Route path="/documents" element={<Documents />} />
           </Routes>
         </div>
       </div>
