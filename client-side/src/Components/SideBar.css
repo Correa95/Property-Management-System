@@ -10,12 +10,14 @@
 }
 
 .logo {
+  height: 150px;
+  align-items: center;
   --green: #1bfd9c;
   font-size: 25px;
   padding: 0.7em 2.7em;
-  border-radius: 0.6em;
+  border-radius: 15px;
   transition: all 0.3s;
-  line-height: 1.4em;
+  line-height: 20px;
   border: 2px solid var(--green);
   background: linear-gradient(
     to right,
