@@ -20,16 +20,9 @@ function SideNavBar() {
             <Link to="/">OVERVIEW</Link>
           </li>
           <li>
-            <Link to="units" onClick={() => handleToggle("units")}>
-              UNITS
-            </Link>
-            {isOpen === "units" && (
-              <ul>
-                <li>
-                  <Link to="availableUnit">AVAILABLE UNITS</Link>
-                </li>
-              </ul>
-            )}
+            <li>
+              <Link to="units">UNITS</Link>
+            </li>
           </li>
           <li>
             <Link to="calender">CALENDER</Link>

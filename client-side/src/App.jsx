@@ -9,6 +9,7 @@ import Maintenance from "./Components/Maintenance";
 import TenantScreening from "./Components/TenantScreening";
 import MonthlyStatement from "./Components/MonthlyStatement";
 import Documents from "./Components/Documents";
+import Units from "./Components/Units";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
         <div className="mainContent">
           <Routes>
             <Route path="/" element={<OverView />} />
+
+            <Route path="/units" element={<Units />} />
             <Route path="/calender" element={<Calender />} />
             <Route path="/leaseManagement" element={<LeaseManagement />} />
             <Route path="/newTenant" element={<NewTenant />} />

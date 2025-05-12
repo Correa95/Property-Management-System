@@ -1,6 +1,6 @@
 import Analysis from "./Analysis";
-import Charts from "./Charts";
-import RecentTransaction from "./RecentTransaction";
+// import Charts from "./Charts";
+// import RecentTransaction from "./RecentTransaction";
 import NaveBar from "./NavBar";
 import "./OverView.css";
 function OverView() {
@@ -9,11 +9,11 @@ function OverView() {
       <NaveBar />
       <div className="container">
         <Analysis />
-        <Charts />
-        <RecentTransaction />
+        {/* <Charts />
+        <RecentTransaction /> */}
       </div>
 
-      <h1>MATHEW</h1>
+      {/* <h1>MATHEW</h1> */}
     </div>
   );
 }
