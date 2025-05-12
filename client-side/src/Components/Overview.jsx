@@ -1,13 +1,18 @@
 import Analysis from "./Analysis";
 import Charts from "./Charts";
-import RecentTransactions from "./RecentTransactions";
+import RecentTransaction from "./RecentTransaction";
+import NaveBar from "./NavBar";
 import "./OverView.css";
 function OverView() {
   return (
     <div className="overViewContainer">
-      <Analysis />
-      <Charts />
-      <RecentTransactions />
+      <NaveBar />
+      <div className="container">
+        <Analysis />
+        <Charts />
+        <RecentTransaction />
+        <RecentTransaction />
+      </div>
 
       <h1>MATHEW</h1>
     </div>

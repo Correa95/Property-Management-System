@@ -1,6 +1,18 @@
 .overViewContainer {
-  /* width: 100%; */
-  /* height: 100vh; */
+  width: 100%;
+  height: 100vh;
   align-items: center;
-  background-color: #212121;
 }
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* .box {
+  background-color: #f0f0f0;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
