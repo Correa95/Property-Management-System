@@ -17,7 +17,7 @@ function SideNavBar() {
       <div className="navContent">
         <ul>
           <li>
-            <Link to="/overView">OVERVIEW</Link>
+            <Link to="/">OVERVIEW</Link>
           </li>
           <li>
             <Link to="units" onClick={() => handleToggle("units")}>
