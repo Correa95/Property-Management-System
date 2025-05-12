@@ -15,7 +15,7 @@ function SideNavBar() {
       </header>
 
       <div className="navContent">
-        <ul className="listItems">
+        <ul>
           <li>
             <Link to="/overView">OVERVIEW</Link>
           </li>
