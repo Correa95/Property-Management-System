@@ -1,20 +1,24 @@
 .newTenantContainer {
   border: 2px solid red;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .addTenantHeader {
   font-size: 26px;
+  float: left;
 }
 .formContainer {
   width: 80%;
   height: 80%;
+  border-radius: 15px;
+  box-shadow: rgba(100, 100, 111, 0.8) 0px 7px 29px 0px;
+}
+.names {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  align-items: center;
-  border: 2px solid red;
 }
 /* .tenantDetail {
   height: 50%;
