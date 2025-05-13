@@ -1,8 +1,8 @@
 import "./Analysis.css";
-import { MdPeopleAlt } from "react-icons/md";
-import { BsThreeDots } from "react-icons/bs";
-import { MdAttachMoney } from "react-icons/md";
-import { GiExpense } from "react-icons/gi";
+// import { MdPeopleAlt } from "react-icons/md";
+// import { BsThreeDots } from "react-icons/bs";
+// import { MdAttachMoney } from "react-icons/md";
+// import { GiExpense } from "react-icons/gi";
 function Analysis() {
   return (
     <section className="statsContainer">
@@ -18,8 +18,8 @@ function Analysis() {
 
       <div className="stats">
         <div className="icons">
-          <MdPeopleAlt />
-          <BsThreeDots />
+          {/* <MdPeopleAlt />
+          <BsThreeDots /> */}
         </div>
 
         <div className="figure">
@@ -31,8 +31,8 @@ function Analysis() {
 
       <div className="stats">
         <div className="icons">
-          <MdAttachMoney />
-          <BsThreeDots />
+          {/* <MdAttachMoney />
+          <BsThreeDots /> */}
         </div>
 
         <div className="figure">
@@ -44,8 +44,8 @@ function Analysis() {
 
       <div className="stats">
         <div className="icons">
-          <GiExpense />
-          <BsThreeDots />
+          {/* <GiExpense />
+          <BsThreeDots /> */}
         </div>
         <div className="figure">
           <h1 className="titleHeader">Total Expenses</h1>
