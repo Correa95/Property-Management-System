@@ -13,10 +13,11 @@
   font-size: 36px;
   font-weight: 700;
   color: #212121;
-  padding: 30px 0px 10px 50px;
+  padding: 30px 0px 15px 50px;
 }
 
 .box {
+  border: 2px solid red;
   background-color: #f0f0f0;
   padding: 2rem;
   text-align: center;
