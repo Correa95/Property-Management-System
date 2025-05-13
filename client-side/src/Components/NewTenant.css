@@ -10,38 +10,3 @@
   font-size: 26px;
   float: left;
 }
-.formContainer {
-  width: 80%;
-  height: 80%;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  box-shadow: rgba(100, 100, 111, 0.8) 0px 7px 29px 0px;
-}
-
-.names {
-  padding: 20px;
-  border: 2px solid red;
-}
-.contacts {
-  padding: 20px;
-  border: 2px solid red;
-}
-.unitInfo {
-  padding: 20px;
-  border: 2px solid red;
-}
-label {
-  padding: 20px;
-}
-/* input {
-  width: 150px;
-} */
-
-/* .newTenantForm {
-  width: 80%;
-  height: 60%;
-  display: flex;
-  justify-content: center;
-  border: 2px solid red;
-} */

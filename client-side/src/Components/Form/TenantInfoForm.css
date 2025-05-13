@@ -1,0 +1,32 @@
+.formContainer {
+  width: 60%;
+  height: 70%;
+  margin-top: 20px;
+  border-radius: 15px;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  box-shadow: rgba(100, 100, 111, 0.8) 0px 7px 29px 0px;
+}
+
+.names {
+  padding: 20px;
+  border: 2px solid red;
+}
+.contacts {
+  padding: 20px;
+  border: 2px solid red;
+}
+.unitInfo {
+  padding: 20px;
+  border: 2px solid red;
+}
+label {
+  font-size: 23px;
+  padding: 20px;
+}
+input {
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+}
