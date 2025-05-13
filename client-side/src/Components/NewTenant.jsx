@@ -7,7 +7,7 @@ function NewTenant() {
 
       <div className="formContainer">
         <form className="newTenantForm">
-          <h1 className="">Tenant Detail</h1>
+          {/* <h1 className="">Tenant Detail</h1> */}
           <div className="names">
             <label>
               First Name:
