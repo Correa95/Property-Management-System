@@ -1,7 +1,7 @@
 import "./TenantInfoForm.css";
 function TenantInfoForm() {
   return (
-    <div>
+    <div className="tenantInfoFormContainer">
       <form className="newTenantForm">
         <div className="names">
           <label>

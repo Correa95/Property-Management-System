@@ -8,6 +8,11 @@
   /* justify-content: center; */
   box-shadow: rgba(100, 100, 111, 0.8) 0px 7px 29px 0px;
 }
+.tenantInfoFormContainer {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
 
 .names {
   padding: 20px;
