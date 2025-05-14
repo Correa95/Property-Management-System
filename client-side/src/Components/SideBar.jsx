@@ -28,22 +28,7 @@ function SideNavBar() {
             <Link to="calender">CALENDER</Link>
           </li>
           <li>
-            <Link
-              to="leaseManagement"
-              onClick={() => handleToggle("leaseManagement")}
-            >
-              LEASE MANAGEMENT
-            </Link>
-            {isOpen === "leaseManagement" && (
-              <ul>
-                <li>
-                  <Link to="newTenant">NEW TENANT</Link>
-                </li>
-                <li>
-                  <Link to="extendLease">EXTEND LEASE</Link>
-                </li>
-              </ul>
-            )}
+            <Link to="newTenant">NEW TENANT</Link>
           </li>
           <li>
             <Link to="maintenance">MAINTENANCE</Link>
