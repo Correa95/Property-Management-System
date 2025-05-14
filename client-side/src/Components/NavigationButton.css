@@ -1,16 +1,34 @@
+.NavigationWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 .NavigationButtonContainer {
-  width: 800px;
+  width: 80%;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 2px solid red;
   border-radius: 10px;
+  gap: 10px;
 }
+
 .btn {
   font-size: 18px;
   width: 100%;
   height: 100%;
   background: #ffffff;
   color: #212121;
+  border: none;
+  cursor: pointer;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 400px;
 }

@@ -1,5 +1,5 @@
 function Lease() {
-  return <div></div>;
+  return <div>CREATE A LEASE FORM</div>;
 }
 
 export default Lease;
