@@ -12,8 +12,8 @@ function NavigationButton() {
   };
 
   return (
-    <div className="NavigationWrapper">
-      <div className="NavigationButtonContainer">
+    <div className="NavigationButtonContainer">
+      <div className="NavigationButton">
         <button className="btn" onClick={() => handleClick("tenant")}>
           Add Tenant
         </button>
@@ -23,11 +23,11 @@ function NavigationButton() {
         <button className="btn" onClick={() => handleClick("deposit")}>
           Initial Deposit
         </button>
-      </div>
 
-      {activeForm === "tenant" && <TenantInfoForm />}
-      {activeForm === "lease" && <LeaseForm />}
-      {activeForm === "deposit" && <InitialDepositForm />}
+        {activeForm === "tenant" && <TenantInfoForm />}
+        {activeForm === "lease" && <LeaseForm />}
+        {activeForm === "deposit" && <InitialDepositForm />}
+      </div>
     </div>
   );
 }

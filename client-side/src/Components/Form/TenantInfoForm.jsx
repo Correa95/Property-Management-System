@@ -28,7 +28,7 @@ function TenantInfoForm() {
             Date Of Birth:
             <input type="date" />
           </label>
-          <button>Submit</button>
+          <button className="btnSubmit">Submit</button>
         </div>
       </form>
     </div>
