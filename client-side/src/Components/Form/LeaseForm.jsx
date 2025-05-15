@@ -35,7 +35,7 @@ function Lease() {
         </div>
       </form>
       <div className="btnLease">
-        <button className="btnLease">Submit</button>
+        <button className="btnLeaseSubmit">Submit</button>
       </div>
     </div>
   );
