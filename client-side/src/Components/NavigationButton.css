@@ -4,8 +4,6 @@
   align-items: center;
   padding: 16px;
   gap: 23px;
-  /* width: 100%; */
-  /* background-color: #212121; */
 }
 
 .NavigationButton {
@@ -15,7 +13,6 @@
   align-items: center;
   gap: 16px;
   width: 50%;
-  /* max-width: 600px; */
   padding: 16px;
   background-color: #f9f9f9;
   border: 2px solid #ddd;
@@ -25,6 +22,7 @@
 
 .btn {
   flex: 1 1 30%;
+  height: 50px;
   min-width: 120px;
   padding: 10 16px;
   font-size: 1rem;
