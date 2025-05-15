@@ -1,0 +1,13 @@
+.leaseFormContainer {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.leaseForm {
+  align-items: center;
+  border-radius: 15px;
+  padding: 80px;
+}
