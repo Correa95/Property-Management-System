@@ -1,4 +1,4 @@
-import "./Form/LeaseForm.css";
+import "./LeaseForm.css";
 function Lease() {
   return (
     <div className="leaseFormContainer">
@@ -25,11 +25,18 @@ function Lease() {
         </div>
         <div className="amounts">
           <label>
-            MOnthly Rent
+            Monthly Rent
+            <input type="number" />
+          </label>
+          <label>
+            Security Deposit
             <input type="number" />
           </label>
         </div>
       </form>
+      <div className="btnLease">
+        <button className="btnLease">Submit</button>
+      </div>
     </div>
   );
 }

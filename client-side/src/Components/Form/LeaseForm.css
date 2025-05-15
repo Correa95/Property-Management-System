@@ -3,11 +3,65 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 15px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .leaseForm {
   align-items: center;
   border-radius: 15px;
-  padding: 80px;
+  padding: 80px 80px 10px 80px;
+}
+
+/* ////////////////// */
+.apartmentInfo,
+.dates,
+.amounts {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  flex: 1 1 45%;
+}
+input {
+  font-size: 16px;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: border 0.3s ease;
+}
+
+input:focus {
+  border-color: #1bfd9c;
+  outline: none;
+}
+
+.btnLease {
+  width: 200px;
+
+  border: 2px solid red;
+}
+.btnSubmit {
+  font-size: 16px;
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #1bfd9c;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btnSubmit:hover {
+  background-color: #1bfd9c;
 }
