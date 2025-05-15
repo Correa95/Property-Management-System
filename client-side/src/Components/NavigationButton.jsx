@@ -23,11 +23,10 @@ function NavigationButton() {
         <button className="btn" onClick={() => handleClick("deposit")}>
           Initial Deposit
         </button>
-
-        {activeForm === "tenant" && <TenantInfoForm />}
-        {activeForm === "lease" && <LeaseForm />}
-        {activeForm === "deposit" && <InitialDepositForm />}
       </div>
+      {activeForm === "tenant" && <TenantInfoForm />}
+      {activeForm === "lease" && <LeaseForm />}
+      {activeForm === "deposit" && <InitialDepositForm />}
     </div>
   );
 }
