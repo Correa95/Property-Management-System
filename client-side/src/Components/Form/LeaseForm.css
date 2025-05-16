@@ -45,19 +45,18 @@ input:focus {
 }
 
 .btnLease {
-  width: 200px;
-
-  border: 2px solid red;
+  width: 150px;
+  margin-bottom: 50px;
 }
 .btnLeaseSubmit {
+  width: 100%;
   font-size: 16px;
   margin-top: 10px;
   padding: 12px;
-  border: none;
+  border: 1px solid #ccc;
   align-items: center;
   border-radius: 8px;
-  background-color: #1bfd9c;
-  color: white;
+  color: #212121;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
