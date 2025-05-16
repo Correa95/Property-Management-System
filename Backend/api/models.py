@@ -57,7 +57,7 @@ class Apartment(models.Model):
     building = models.ForeignKey(Building, related_name="apartments", on_delete=models.CASCADE)
     building_number = models.PositiveIntegerField(validators=[validate_building])
     unit_number = models.CharField(max_length=10)
-    monthly_rent = models.DecimalField(max_digits=8, decimal_places=2)
+    rent_amount = models.DecimalField(max_digits=10, decimal_places=2)
     num_bedrooms = models.PositiveIntegerField()
     square_footage = models.PositiveIntegerField()
     is_available = models.BooleanField(default=True)
