@@ -6,8 +6,19 @@
 .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 300px auto;
   gap: 15px;
+  padding: 0 20px;
 }
+
+.box:nth-child(3) {
+  grid-column: 1 / -1; /* This makes the third box span both columns */
+}
+.box:nth-child(1),
+.box:nth-child(2) {
+  height: 100%; /* fill the first grid row */
+}
+
 .overViewHeader {
   font-family: "Times New Roman", Times, serif;
   font-size: 36px;
