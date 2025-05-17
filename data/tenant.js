@@ -129,11 +129,11 @@ exports.tenants = [
     email: "davidoconnor@example.com",
     phone: "555456-7890",
   },
-  {
-    id: 5,
-    first_name: "Ella",
-    last_name: "Patel",
-    email: "ellapatel@example.com",
-    phone: "5555678901",
-  },
-];
+//   {
+//     id: 5,
+//     first_name: "Ella",
+//     last_name: "Patel",
+//     email: "ellapatel@example.com",
+//     phone: "5555678901",
+//   },
+// ];
