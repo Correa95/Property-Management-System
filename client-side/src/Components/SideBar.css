@@ -8,16 +8,22 @@
   padding: 0;
   overflow-y: auto;
 }
-
-.logo {
+.header {
+  width: 100%;
   height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  width: 80%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
   align-items: center;
   --green: #1bfd9c;
-  font-size: 25px;
-  padding: 0.7em 2.7em;
+  font-size: 40px;
   border-radius: 15px;
-  transition: all 0.3s;
-  line-height: 20px;
   border: 2px solid var(--green);
   background: linear-gradient(
     to right,
