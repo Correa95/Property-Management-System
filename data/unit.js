@@ -15,7 +15,7 @@ exports.units = [
     rentAmount: 1500.0,
     description:
       "Compact one-bedroom with open living and kitchen space. Small balcony. Ideal for efficient use of space.",
-    UnitStatus: "LEASED",
+    UnitStatu2500s: "LEASED",
     buildingNumber: 100,
   },
   {

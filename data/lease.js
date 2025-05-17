@@ -2,10 +2,10 @@ exports.lease = [
   {
     unitNumber: 101,
     unitId: 1,
-    tenantId: 1,
+    tenantId: sarah,
     propertyId: 1,
-    leaseStartDate: new Date("2024-01-15"),
-    leaseEndDate: new Date("2025-01-15"),
+    leaseStartDate: new Date("2025-01-15"),
+    leaseEndDate: new Date("2026-01-15"),
     rentAmount: 1200,
     securityDeposit: 1200,
     isActive: true,
@@ -13,7 +13,7 @@ exports.lease = [
   {
     unitNumber: 102,
     unitId: 2,
-    tenantId: 2,
+    tenantId: emily,
     propertyId: 1,
     leaseStartDate: new Date("2024-01-15"),
     leaseEndDate: new Date("2025-01-15"),
@@ -24,7 +24,7 @@ exports.lease = [
   {
     unitNumber: 103,
     unitId: 3,
-    tenantId: 3,
+    tenantId: bob,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 10"),
     leaseEndDate: new Date("2025 - 01 -10"),
@@ -35,7 +35,7 @@ exports.lease = [
   {
     unitNumber: 104,
     unitId: 4,
-    tenantId: 4,
+    tenantId: Ivy,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 19"),
     leaseEndDate: new Date("2025 - 01 -19"),
@@ -46,7 +46,7 @@ exports.lease = [
   {
     unitNumber: 105,
     unitId: 5,
-    tenantId: 5,
+    tenantId: Jack,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 14"),
     leaseEndDate: new Date("2025 - 01 -14"),
@@ -57,7 +57,7 @@ exports.lease = [
   {
     unitNumber: 201,
     unitId: 6,
-    tenantId: 6,
+    tenantId: carol,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 15"),
     leaseEndDate: new Date("2025 - 01 -15"),
@@ -68,7 +68,7 @@ exports.lease = [
   {
     unitNumber: 202,
     unitId: 7,
-    tenantId: 7,
+    tenantId: David,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 15"),
     leaseEndDate: new Date("2025 - 01 -15"),
@@ -79,7 +79,7 @@ exports.lease = [
   {
     unitNumber: 203,
     unitId: 8,
-    tenantId: 8,
+    tenantId: eva,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 15"),
     leaseEndDate: new Date("2025 - 01 -15"),
@@ -90,7 +90,7 @@ exports.lease = [
   {
     unitNumber: 204,
     unitId: 9,
-    tenantId: 9,
+    tenantId: alice,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 15"),
     leaseEndDate: new Date("2025 - 01 -15"),
@@ -101,7 +101,7 @@ exports.lease = [
   {
     unitNumber: 205,
     unitId: 10,
-    tenantId: 10,
+    tenantId: James,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 15"),
     leaseEndDate: new Date("2025 - 01 -15"),
@@ -113,7 +113,7 @@ exports.lease = [
     unitNumber: 301,
     tenantId: 11,
     unitId: 11,
-    propertyId: 1,
+    propertyId: frank,
     leaseStartDate: new Date("2024 - 01 - 15"),
     leaseEndDate: new Date("2025 - 01 -15"),
     rentAmount: 1250,
@@ -123,7 +123,7 @@ exports.lease = [
   {
     unitNumber: 302,
     tenantId: 12,
-    unitId: 12,
+    unitId: grace,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 15"),
     leaseEndDate: new Date("2025 - 01 -15"),
@@ -134,7 +134,7 @@ exports.lease = [
   {
     unitNumber: 303,
     unitId: 13,
-    tenantId: 13,
+    tenantId: henry,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 15"),
     leaseEndDate: new Date("2025 - 01 -15"),
@@ -145,7 +145,7 @@ exports.lease = [
   {
     unitNumber: 304,
     unitId: 14,
-    tenantId: 14,
+    tenantId: victor,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 15"),
     leaseEndDate: new Date("2025 - 01 -15"),
@@ -156,7 +156,7 @@ exports.lease = [
   {
     unitNumber: 305,
     unitId: 15,
-    tenantId: 15,
+    tenantId: mark,
     propertyId: 1,
     leaseStartDate: new Date("2024 - 01 - 15"),
     leaseEndDate: new Date("2025 - 01 -15"),
