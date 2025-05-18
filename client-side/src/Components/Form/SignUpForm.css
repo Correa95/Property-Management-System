@@ -1,0 +1,16 @@
+.signUpFromContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signUpFrom {
+  width: 50%;
+  height: 50%;
+  border: 2px solid red;
+}
+.nameCredential,
+.passwordCredential {
+  display: flex;
+}
