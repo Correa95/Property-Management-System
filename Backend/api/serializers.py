@@ -1,27 +1,26 @@
 # from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from django.db.models import Sum
+from django.contrib.auth.hashers import make_password
 from api.models import  Apartment, ApartmentComplex, Tenant, Lease, Payment, User, MaintenanceRequest, Building
-
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'user_email', 'user_name', 'user_password']
-        extra_kwargs = {
-            'user_password': {'write_only': True}  # Hide password in response
-        }
+        fields = ["id", "first_name", "last_name", "user_email",
+                  "user_name", "user_password"]
+        extra_kwargs = {"user_password": {"write_only": True}}
 
     def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data["user_name"], 
-            email=validated_data["email"],
-            first_name=validated_data["first_name"],
-            last_name=validated_data["last_name"],
-            password=validated_data["user_password"]  # Hashes password automatically
-        )
+        # Hashes the password explicitly using Django helpers;
+        # avoids relying on model.save side-effects.
+        password = validated_data.pop("user_password")
+        user = User(**validated_data)
+        user.user_password = make_password(password)
+        user.save()
         return user
+
     
 class ApartmentSerializer(serializers.ModelSerializer):
     complex_name = serializers.CharField(source="complex.name", read_only=True)  # Show complex name

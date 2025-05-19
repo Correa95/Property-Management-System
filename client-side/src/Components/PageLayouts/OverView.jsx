@@ -1,4 +1,4 @@
-import Analysis from "./Analysis";
+import Analysis from "../Analysis";
 // import Charts from "./Charts";
 // import RecentTransaction from "./RecentTransaction";
 import NavBar from "./NavBar";

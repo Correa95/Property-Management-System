@@ -1,7 +1,7 @@
 import { useState } from "react";
-import TenantInfoForm from "./Form/TenantInfoForm";
-import LeaseForm from "./Form/LeaseForm";
-import InitialDepositForm from "./Form/InitialDepositForm";
+import TenantInfoForm from "../Form/TenantInfoForm";
+import LeaseForm from "../Form/LeaseForm";
+import InitialDepositForm from "../Form/InitialDepositForm";
 import "./NavigationButton.css";
 
 function NavigationButton() {

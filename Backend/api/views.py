@@ -4,12 +4,31 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 from django.shortcuts import redirect
-from api.models import Apartment, ApartmentComplex, Tenant, Lease, Payment
-from .serializers import ApartmentSerializer, ApartmentComplexSerializer, TenantSerializer, LeaseSerializer, MaintenanceRequest, PaymentSerializer 
+from api.models import Apartment, ApartmentComplex, Tenant, Lease, Payment, User
+from .serializers import UserSerializer, ApartmentSerializer, ApartmentComplexSerializer, TenantSerializer, LeaseSerializer, MaintenanceRequest, PaymentSerializer 
 
 # Create your views here.
 
 # Create Apartment Complex Route
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def getUsers(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def create_user(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.save()           
+        return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def createApartmentComplex(request):

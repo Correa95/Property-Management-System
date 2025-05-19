@@ -4,7 +4,15 @@ function SignUpForm() {
       <form className="signUpFrom">
         <div className="nameCredential">
           <label>
-            User Name
+            First Name
+            <input type="text" />
+          </label>
+          <label>
+            Last Name
+            <input type="text" />
+          </label>
+          <label>
+            Username
             <input type="text" />
           </label>
           <label>
@@ -16,10 +24,6 @@ function SignUpForm() {
           <label>
             Password
             <input type="password1" />
-          </label>
-          <label>
-            Confirm Password
-            <input type="password2" />
           </label>
         </div>
       </form>
