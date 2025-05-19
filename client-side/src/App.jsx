@@ -9,9 +9,16 @@ import TenantScreening from "./Components/TenantScreening";
 import MonthlyStatement from "./Components/MonthlyStatement";
 import Documents from "./Components/Documents";
 import Units from "./Components/Units";
+import SignUpForm from "./Components/Form/SignUpForm";
+import { useAuth } from "./context/AuthContext";
 import "./App.css";
 
+import LoginForm from "./Components/Form/LogInForm";
+
 function App() {
+  const { isAuthenticated } = useAuth();
+  // Show only the login page until we’re authenticated
+  if (!isAuthenticated) return <LoginForm />;
   return (
     <>
       <div className="app">
@@ -21,6 +28,8 @@ function App() {
         <div className="mainContent">
           <Routes>
             <Route path="/" element={<OverView />} />
+            <Route path="/signUp" element={<SignUpForm />} />
+            <Route path="/login" element={<LoginForm />} />
 
             <Route path="/units" element={<Units />} />
             <Route path="/calender" element={<Calender />} />
@@ -36,5 +45,4 @@ function App() {
     </>
   );
 }
-
 export default App;

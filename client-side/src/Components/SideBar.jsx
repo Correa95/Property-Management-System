@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import "./SideBar.css";
 
 function SideNavBar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(null);
 
   function handleToggle(item) {
-    setIsOpen((prev) => (prev === item ? false : item));
+    setIsOpen((prev) => (prev === item ? null : item));
   }
   return (
     <nav className="sideBar">
