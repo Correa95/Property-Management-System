@@ -11,15 +11,16 @@ import MonthlyStatement from "./Components/MonthlyStatement";
 import Documents from "./Components/PageLayouts/Documents";
 import Units from "./Components/PageLayouts/Units";
 import SignUpForm from "./Components/Form/SignUpForm";
-
 import LoginForm from "./Components/Form/LogInForm";
 
 function App() {
   const { isAuthenticated } = useAuth();
   // Show only the login page until we’re authenticated
-  if (!isAuthenticated) return <LoginForm />;
+  // if (!isAuthenticated) return <LoginForm />;
   return (
     <Routes>
+      <Route path="/login" element={<LoginForm />} />
+      <Route path="/signUp" element={<SignUpForm />} />
       <Route
         path="/login"
         element={!isAuthenticated ? <LoginForm /> : <Navigate to="/" />}

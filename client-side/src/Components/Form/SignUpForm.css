@@ -6,11 +6,15 @@
   align-items: center;
 }
 .signUpFrom {
-  width: 50%;
+  width: 35vw;
   height: 50%;
   border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.nameCredential,
+/* .nameCredential,
 .passwordCredential {
   display: flex;
-}
+} */
