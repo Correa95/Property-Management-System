@@ -12,7 +12,7 @@ from .serializers import UserSerializer, ApartmentSerializer, ApartmentComplexSe
 # Create Apartment Complex Route
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def getUsers(request):
+def getUser(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
@@ -20,7 +20,7 @@ def getUsers(request):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-def create_user(request):
+def createUser(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()           
