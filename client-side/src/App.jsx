@@ -1,17 +1,16 @@
-import { Routes, Route } from "react-router-dom";
-import SideBar from "./Components/SideBar";
-import OverView from "./Components/OverView";
-import Calender from "./Components/Calender";
-import NewTenant from "./Components/NewTenant";
-import ExtendLease from "./Components/ExtendLease";
-import Maintenance from "./Components/Maintenance";
-import TenantScreening from "./Components/TenantScreening";
-import MonthlyStatement from "./Components/MonthlyStatement";
-import Documents from "./Components/Documents";
-import Units from "./Components/Units";
-import SignUpForm from "./Components/Form/SignUpForm";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
-import "./App.css";
+import AppLayout from "./AppLayout";
+import OverView from "./Components/PageLayouts/OverView";
+import Calender from "./Components/PageLayouts/Calender";
+import NewTenant from "./Components/PageLayouts/NewTenant";
+// import ExtendLease from "./Components/ExtendLease";
+import Maintenance from "./Components/Maintenance";
+import TenantScreening from "./Components/PageLayouts/TenantScreening";
+import MonthlyStatement from "./Components/MonthlyStatement";
+import Documents from "./Components/PageLayouts/Documents";
+import Units from "./Components/PageLayouts/Units";
+import SignUpForm from "./Components/Form/SignUpForm";
 
 import LoginForm from "./Components/Form/LogInForm";
 
@@ -20,29 +19,34 @@ function App() {
   // Show only the login page until we’re authenticated
   if (!isAuthenticated) return <LoginForm />;
   return (
-    <>
-      <div className="app">
-        <aside className="side">
-          <SideBar />
-        </aside>
-        <div className="mainContent">
-          <Routes>
-            <Route path="/" element={<OverView />} />
-            <Route path="/signUp" element={<SignUpForm />} />
-            <Route path="/login" element={<LoginForm />} />
+    <Routes>
+      <Route
+        path="/login"
+        element={!isAuthenticated ? <LoginForm /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/signUp"
+        element={!isAuthenticated ? <SignUpForm /> : <Navigate to="/" />}
+      />
 
-            <Route path="/units" element={<Units />} />
-            <Route path="/calender" element={<Calender />} />
-            <Route path="/newTenant" element={<NewTenant />} />
-            <Route path="/extendLease" element={<ExtendLease />} />
-            <Route path="/maintenance" element={<Maintenance />} />
-            <Route path="/tenantScreening" element={<TenantScreening />} />
-            <Route path="/monthlyStatement" element={<MonthlyStatement />} />
-            <Route path="/documents" element={<Documents />} />
-          </Routes>
-        </div>
-      </div>
-    </>
+      {isAuthenticated && (
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<OverView />} />
+          <Route path="/units" element={<Units />} />
+          <Route path="/calender" element={<Calender />} />
+          <Route path="/newTenant" element={<NewTenant />} />
+          {/* <Route path="extendLease" element={<ExtendLease />} /> */}
+          <Route path="/maintenance" element={<Maintenance />} />
+          <Route path="/tenantScreening" element={<TenantScreening />} />
+          <Route path="/monthlyStatement" element={<MonthlyStatement />} />
+          <Route path="/documents" element={<Documents />} />
+        </Route>
+      )}
+      <Route
+        path="*"
+        element={<Navigate to={isAuthenticated ? "/" : "/login"} />}
+      />
+    </Routes>
   );
 }
 export default App;

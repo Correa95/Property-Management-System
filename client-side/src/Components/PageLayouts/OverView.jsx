@@ -1,7 +1,7 @@
 import Analysis from "../Analysis";
 // import Charts from "./Charts";
 // import RecentTransaction from "./RecentTransaction";
-import NavBar from "./NavBar";
+import NavBar from "../NavigationBars/NavBar";
 import "./OverView.css";
 function OverView() {
   return (

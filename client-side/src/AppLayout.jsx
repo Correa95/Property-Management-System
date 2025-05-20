@@ -1,0 +1,16 @@
+import { Outlet } from "react-router-dom";
+import SideBar from "./Components/NavigationBars/SideBar";
+import "./App.css";
+
+export default function AppLayout() {
+  return (
+    <div className="app">
+      <aside className="side">
+        <SideBar />
+      </aside>
+      <div className="mainContent">
+        <Outlet />
+      </div>
+    </div>
+  );
+}

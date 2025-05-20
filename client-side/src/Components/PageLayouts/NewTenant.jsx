@@ -1,4 +1,4 @@
-import NavigationButton from "./NavigationButton";
+import NavigationButton from "../NavigationBars/NavigationButton";
 import "./NewTenant.css";
 
 function NewTenant() {
