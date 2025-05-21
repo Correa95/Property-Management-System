@@ -1,4 +1,6 @@
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes,authentication_classes
+from rest_framework.permissions import AllowAny
+
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -10,6 +12,18 @@ from .serializers import UserSerializer, ApartmentSerializer, ApartmentComplexSe
 # Create your views here.
 
 # Create Apartment Complex Route
+
+                   # Skip CSRF check
+@api_view(["POST"])
+@permission_classes([AllowAny])  # Allow unauthenticated users
+@authentication_classes([])  # Disables all auth, including Session
+def create_user(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.save()           
+        return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getUser(request):
@@ -17,15 +31,6 @@ def getUser(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
-
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def createUser(request):
-    serializer = UserSerializer(data=request.data)
-    if serializer.is_valid():
-        user = serializer.save()           
-        return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -71,7 +76,7 @@ def getApartments(request):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getApartment(request, pk):
-    apartment = Apartment.object.all(pk = id)
+    apartment = Apartment.objects.all(pk = id)
     serializer = TenantSerializer(apartment, many = False)
     return Response(serializer.data)
 
@@ -99,7 +104,7 @@ def getTenants(request):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getTenant(request, pk):
-    tenant = tenant.object.get(id = pk)
+    tenant = tenant.objects.get(id = pk)
     serializer = TenantSerializer(tenant, many = False)
     return Response(serializer.data)
 
@@ -108,7 +113,7 @@ def getTenant(request, pk):
 @api_view(["PATCH"])
 @permission_classes([IsAuthenticated])
 def editTenant(request, pk):
-    tenant = Tenant.objects.get(Tenant, pk=pk)
+    tenant = Tenant.objects.get(pk=pk)
     first_name = request.POST.get("first_name")
     last_name = request.POST.get("last_name")
     end_date = request.POST.get("end_date")
@@ -150,7 +155,7 @@ def getLeases(request):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getLease(request, pk):
-    lease = lease.object.get(id = pk)
+    lease = lease.objects.get(id = pk)
     serializer = LeaseSerializer(lease, many = False)
     return Response(serializer.data)
 
