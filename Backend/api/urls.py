@@ -1,7 +1,10 @@
 from django.urls import path
 from . import views
+from .views import csrf
+
 
 urlpatterns = [
+    path("api/csrf/", views.csrf, name="csrf"),
     path("api/v1/createUser", views.create_user, name="create_user"),
     path("api/v1/getUser", views.getUser, name="get_user"),
 

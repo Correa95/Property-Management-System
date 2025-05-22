@@ -42,12 +42,16 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
+CSRF_COOKIE_HTTPONLY = False  # Allow JS to read it
+CSRF_COOKIE_SAMESITE = 'Lax'  # 'None' if you're using cross-site cookies with HTTPS
+CSRF_COOKIE_SECURE = False    # True if using HTTPS
+
 
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -120,6 +124,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
+]
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # ✅ correct if Vite frontend runs here
 ]
 
 
