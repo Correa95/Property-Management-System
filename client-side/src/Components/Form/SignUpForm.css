@@ -1,82 +1,87 @@
-.signUpFromContainer {
+.signUpForm {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.signUpFrom {
-  width: 35vw;
-  height: 50%;
-  border: 2px solid red;
+
+.form {
+  max-width: 400px;
+  height: 600px;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 32px 24px 24px;
+  gap: 16px;
+  border: 2px solid red;
+  text-align: center;
 }
-/* .nameCredential,
-.passwordCredential {
-  display: flex;
-} */
-/* .btnSignUp {
-  width: 210px;
-  height: 125px;
-  margin-top: 20px;
-} */
-/* From Uiverse.io by cssbuttons-io */
-.btnSignUp {
-  width: 210px;
-  height: 200px;
-  font-size: 17px;
-  /* padding: 1em 2.7em; */
-  font-weight: 500;
-  background: #1f2937;
-  color: white;
-  border: none;
-  position: relative;
+
+.title {
+  color: #58bc82;
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.subtitle {
+  color: #58bc82;
+  font-size: 1rem;
+  color: #666;
+}
+
+/*Inputs box*/
+.form-container {
   overflow: hidden;
-  border-radius: 0.6em;
-  cursor: pointer;
-}
-
-.gradient {
-  position: absolute;
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 1rem 0 0.5rem;
   width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  border-radius: 0.6em;
-  margin-top: -0.25em;
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.3)
-  );
 }
 
-.label {
-  position: relative;
-  top: -1px;
+.input {
+  background: none;
+  border: 0;
+  outline: 0;
+  height: 40px;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+  padding: 8px 15px;
 }
 
-.transition {
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  transition-duration: 500ms;
-  background-color: rgba(16, 185, 129, 0.6);
-  border-radius: 9999px;
-  width: 0;
-  height: 0;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+/* .form-section {
+  padding: 16px;
+  font-size: 0.85rem;
+  background-color: #e0ecfb;
+  box-shadow: rgb(0 0 0 / 8%) 0 -1px;
+  }
+  
+  .form-section a {
+    font-weight: bold;
+    color: #0066ff;
+  transition: color 0.3s ease;
 }
 
-.btnSignUp:hover .transition {
-  width: 14em;
-  height: 14em;
+.form-section a:hover {
+  color: #005ce6;
+  text-decoration: underline;
+  } */
+
+/*Button*/
+.form button {
+  background-color: #58bc82;
+  color: #fff;
+  border: 0;
+  border-radius: 24px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  /* color: #58bc82; */
+  transition: background-color 0.3s ease;
 }
 
-.btnSignUp:active {
-  transform: scale(0.97);
+.form button:hover {
+  background-color: #005ce6;
 }

@@ -1,6 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SignUpForm.css";
+// function getCookie(name) {
+//   let cookieValue = null;
+//   if (document.cookie && document.cookie !== "") {
+//     const cookies = document.cookie.split(";");
+//     for (let i = 0; i < cookies.length; i++) {
+//       const cookie = cookies[i].trim();
+//       if (cookie.substring(0, name.length + 1) === name + "=") {
+//         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//         break;
+//       }
+//     }
+//   }
+//   return cookieValue;
+// }
 function SignUpForm() {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
@@ -16,18 +30,23 @@ function SignUpForm() {
     setError(null);
     setSuccess(null);
 
+    // ✅ Get the real CSRF token from cookies
+    // const csrftoken = getCookie("csrftoken");
+
     try {
       const response = await fetch("http://localhost:8000/api/v1/createUser", {
         method: "POST",
+        // credentials: "include", // ✅ required
         headers: {
           "Content-Type": "application/json",
+          // "X-CSRFToken": getCookie("csrftoken"),
         },
         body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          userName,
-          password,
+          first_name: firstName,
+          last_name: lastName,
+          user_email: email,
+          user_name: userName,
+          user_password: password,
         }),
       });
 
@@ -41,6 +60,7 @@ function SignUpForm() {
       setUserName("");
       setEmail("");
       setPassword("");
+
       setTimeout(() => {
         navigate("/login");
       }, 2000);
@@ -48,60 +68,57 @@ function SignUpForm() {
       setError(error.message);
     }
   };
+  // useEffect(() => {
+  //   fetch("http://localhost:8000/api/csrf/", {
+  //     credentials: "include",
+  //   });
+  // }, []);
+
   return (
-    <div className="signUpFromContainer">
-      <form className="signUpFrom" onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
+    <div className="signUpForm">
+      <form className="form" onSubmit={handleSubmit}>
         <p>{success}</p>
-        <label>
-          First Name
+        <span className="title">Sign up</span>
+        <span className="subtitle">Create a free account with your email.</span>
+        <div className="form-container">
           <input
             type="text"
+            className="input"
+            placeholder="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
-        </label>
-        <label>
-          Last Name
           <input
             type="text"
+            className="input"
+            placeholder="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
-        </label>
-        <label>
-          Email
           <input
             type="email"
+            className="input"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </label>
-        <label>
-          Username
           <input
             type="text"
+            className="input"
+            placeholder="user name"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
-        </label>
-
-        <label>
-          Password
           <input
             type="password"
+            className="input"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </label>
-
-        <button type="submit" className="btnSignUp">
-          <span className="transition"></span>
-          <span className="gradient"></span>
-          <span className="label">Submit</span>
-        </button>
-
+        </div>
         <p>{error}</p>
+        <button type="submit">Sign up</button>
       </form>
     </div>
   );

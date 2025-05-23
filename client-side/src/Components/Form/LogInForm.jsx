@@ -17,6 +17,7 @@ function LoginForm() {
   return (
     <div className="loginFormContainer">
       <form className="loginForm" onSubmit={handleSubmit}>
+        <h1>Log in</h1>
         <span className="input-span">
           <label className="label">Username</label>
           <input
@@ -35,9 +36,7 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </span>
-        <span className="span">
-          <a href="#">Forgot password?</a>
-        </span>
+        <span className="span"></span>
         <input className="submit" type="submit" value="Log in" />
         <span className="span">
           Don't have an account? <Link to="/signUp">Sign up</Link>
