@@ -1,11 +1,11 @@
 from rest_framework.decorators import api_view, permission_classes,authentication_classes
 from rest_framework.permissions import AllowAny
-from django.views.decorators.csrf import csrf_exempt 
+# from django.views.decorators.csrf import csrf_exempt 
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.http import JsonResponse
+# from django.views.decorators.csrf import ensure_csrf_cookie
+# from django.http import JsonResponse
 from django.shortcuts import redirect
 from api.models import Apartment, ApartmentComplex, Tenant, Lease, Payment, User
 from .serializers import UserSerializer, ApartmentSerializer, ApartmentComplexSerializer, TenantSerializer, LeaseSerializer, MaintenanceRequest, PaymentSerializer 
@@ -13,11 +13,11 @@ from .serializers import UserSerializer, ApartmentSerializer, ApartmentComplexSe
 # Create your views here.
 
 # Create Apartment Complex Route
-@ensure_csrf_cookie
-def csrf(request):
-    return JsonResponse({'detail': 'CSRF cookie set'})
+# @ensure_csrf_cookie
+# def csrf(request):
+#     return JsonResponse({'detail': 'CSRF cookie set'})
 
-@csrf_exempt  # ✅ add this decorator
+# @csrf_exempt  # ✅ add this decorator
 @api_view(["POST"])
 @permission_classes([AllowAny])  # Allow unauthenticated users
 @authentication_classes([])  # Disables all auth, including Session
