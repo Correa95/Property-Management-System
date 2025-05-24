@@ -9,13 +9,12 @@
 .title {
   font-size: 26px;
 }
-.btnNav {
+ul {
   width: 600px;
-  height: 150px;
-  display: flex;
+  height: 80px;
+  /* display: flex; */
   border: 2px solid red;
 }
-/* .btnNav button {
-  justify-content: space-between;
-
-} */
+ol {
+  justify-content: space-evenly;
+}

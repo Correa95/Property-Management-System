@@ -5,13 +5,13 @@ function Documents() {
     <div className="documentsContainer">
       <div className="type">
         <h1 className="title">Documents</h1>
-        <div className="btnNav">
-          <button>All Documents</button>
-          <button>Receipts</button>
-          <button>Contracts</button>
-          <button>Other</button>
-          <button>Other</button>
-        </div>
+        <ul className="btnNav">
+          <ol>All Documents</ol>
+          <ol>Receipts</ol>
+          <ol>Contracts</ol>
+          <ol>Other</ol>
+          <ol>Other</ol>
+        </ul>
       </div>
       <div className="upload"></div>
       <h1>All Receipts</h1>
