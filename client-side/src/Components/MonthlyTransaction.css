@@ -1,44 +1,73 @@
-.transactionStatementContainer {
-  width: 85%;
-  height: 50vh;
+.statementContainer {
+  width: 100%;
+  height: 100%;
+  background: #fff;
   display: flex;
   flex-direction: column;
-  border: 2px solid red;
-}
-
-.transactionStatementContainer h1 {
-  display: flex;
   justify-content: center;
-  margin: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.statement h2 {
+.statement {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  /* width: 80%; */
-  /* height: 30px; */
-  /* color: #fff; */
-  /* background: #333; */
-  /* border-radius: 5px; */
-  /* margin-bottom: 15px; */
+}
+.statementTitle {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 10px;
 }
 
-/* .transactionStatementContainer .propertyDetail {
-  width: 400px;
-  height: 250px;
-  margin-left: 60px;
-  border: 2px solid red;
+.sectionInfo {
+  margin-bottom: 30px;
+}
+
+.sectionInfo h2 {
+  font-size: 18px;
+  color: #2c3e50;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.sectionInfo p {
+  margin: 4px 0;
+}
+
+/* table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+} */
+/* 
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ccc;
 } */
 
-/* .propertyDetail h3 {
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
+/* th {
+  background-color: #3498db;
+  color: white;
 } */
-/* .statement .transaction {
-  margin: 60px;
+
+/* tfoot td {
+  font-weight: bold;
+  background-color: #f0f0f0;
 } */
-/* p {
-  padding: 15px;
+
+/* .notes {
+  font-size: 14px;
+  color: #555;
+} */
+/* 
+.notes ul {
+  padding-left: 20px;
+} */
+/* 
+.footer {
+  text-align: center;
+  font-size: 13px;
+  color: #888;
 } */
