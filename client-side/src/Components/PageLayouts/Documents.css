@@ -1,20 +1,27 @@
 .documentsContainer {
-  /* width: 100vw; */
-  /* height: 100vh; */
+  border: 2px solid red;
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
-.title {
+.documentsTitle {
   font-size: 26px;
 }
-ul {
-  width: 600px;
-  height: 80px;
-  /* display: flex; */
-  border: 2px solid red;
+.btnNav {
+  /* width: 600px; */
+  /* height: 80px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 2px solid red; */
 }
-ol {
-  justify-content: space-evenly;
+.btnNav button {
+  font-size: 18px;
+  color: #212121;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  margin: 30px;
 }
