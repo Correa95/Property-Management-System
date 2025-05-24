@@ -12,81 +12,81 @@ function Analysis() {
   const [error, setError] = useState(null);
   const [tenant, setTenant] = useState(null);
   const [totalUnit, setTotalUnits] = useState(null);
-  const fetchMonthlyRevenue = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/api/v1/getPayments"); // Replace with your endpoint
-      if (!response.ok) {
-        throw new Error("Failed to fetch transactions");
-      }
-      const revenue = await response.json();
+  // const fetchMonthlyRevenue = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:8000/api/v1/getPayments"); // Replace with your endpoint
+  //     if (!response.ok) {
+  //       throw new Error("Failed to fetch transactions");
+  //     }
+  //     const revenue = await response.json();
 
-      const revenueByMonth = {};
-      revenue.forEach((payment) => {
-        const monthKey = formatMonthYear(payment.date);
-        const amount = Number(payment.amount);
+  //     const revenueByMonth = {};
+  //     revenue.forEach((payment) => {
+  //       const monthKey = formatMonthYear(payment.date);
+  //       const amount = Number(payment.amount);
 
-        if (!revenueByMonth[monthKey]) {
-          revenueByMonth[monthKey] = 0;
-        }
+  //       if (!revenueByMonth[monthKey]) {
+  //         revenueByMonth[monthKey] = 0;
+  //       }
 
-        revenueByMonth[monthKey] += amount;
-      });
+  //       revenueByMonth[monthKey] += amount;
+  //     });
 
-      setMonthlyRevenue(revenueByMonth);
-    } catch (err) {
-      console.error(err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     setMonthlyRevenue(revenueByMonth);
+  //   } catch (err) {
+  //     console.error(err);
+  //     setError(err.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchMonthlyRevenue();
-  }, []);
+  // useEffect(() => {
+  //   fetchMonthlyRevenue();
+  // }, []);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    async function getTenants() {
-      try {
-        const res = await fetch("http://localhost:8000/api/v1/getTenants", {
-          signal,
-        });
-        const data = await res.json();
-        console.log("Payments response ↴", data);
-        setTenant(data);
-      } catch (err) {
-        if (err.name !== "AbortError") setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    getTenants();
-    return () => controller.abort();
-  }, []);
+  // useEffect(() => {
+  //   const controller = new AbortController();
+  //   const { signal } = controller;
+  //   async function getTenants() {
+  //     try {
+  //       const res = await fetch("http://localhost:8000/api/v1/getTenants", {
+  //         signal,
+  //       });
+  //       const data = await res.json();
+  //       console.log("Payments response ↴", data);
+  //       setTenant(data);
+  //     } catch (err) {
+  //       if (err.name !== "AbortError") setError(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+  //   getTenants();
+  //   return () => controller.abort();
+  // }, []);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    async function getUnits() {
-      try {
-        const res = await fetch("http://localhost:8000/api/v1/getUnits", {
-          signal,
-        });
-        const data = await res.json();
-        console.log("Payments response ↴", data);
-        setTotalUnits(data);
-      } catch (err) {
-        if (err.name !== "AbortError") setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    getUnits();
-    return () => controller.abort();
-  }, []);
-  const occupancyRate = (totalUnit / tenant) * 100;
+  // useEffect(() => {
+  //   const controller = new AbortController();
+  //   const { signal } = controller;
+  //   async function getUnits() {
+  //     try {
+  //       const res = await fetch("http://localhost:8000/api/v1/getUnits", {
+  //         signal,
+  //       });
+  //       const data = await res.json();
+  //       console.log("Payments response ↴", data);
+  //       setTotalUnits(data);
+  //     } catch (err) {
+  //       if (err.name !== "AbortError") setError(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+  //   getUnits();
+  //   return () => controller.abort();
+  // }, []);
+  // const occupancyRate = (totalUnit / tenant) * 100;
 
   if (loading) return <p>Loading revenue...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
