@@ -12,8 +12,38 @@ function Documents() {
         <button>Other</button>
       </div>
 
-      <div className="upload"></div>
-      {/* <h1>All Receipts</h1> */}
+      <div className="upload">
+        <form>
+          <label>
+            <input
+              type="file"
+              // multiple
+              // accept="*/*"
+              // placeholder="Choose a file or drag and drop here"
+            />
+          </label>
+        </form>
+      </div>
+      <div className="documents">
+        <h3>All Receipts</h3>
+        <div className="docList">
+          <ul className="list">
+            <ol>
+              <input type="checkbox" />
+            </ol>
+            <ol>DocName</ol>
+            <ol>Type</ol>
+            <ol>Size</ol>
+            <ol>Owner name</ol>
+            <ol>
+              <button>Download</button>
+            </ol>
+            <ol>
+              <button>Delete</button>
+            </ol>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
