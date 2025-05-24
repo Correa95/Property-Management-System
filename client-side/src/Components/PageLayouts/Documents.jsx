@@ -1,4 +1,4 @@
-import "./documents.css";
+import "./Documents.css";
 
 function Documents() {
   return (
