@@ -1,13 +1,13 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SideBar.css";
 
 function SideNavBar() {
-  const [isOpen, setIsOpen] = useState(null);
+  // const [isOpen, setIsOpen] = useState(null);
 
-  function handleToggle(item) {
-    setIsOpen((prev) => (prev === item ? null : item));
-  }
+  // function handleToggle(item) {
+  //   setIsOpen((prev) => (prev === item ? null : item));
+  // }
   return (
     <nav className="sideBar">
       <header className="header">
@@ -37,19 +37,7 @@ function SideNavBar() {
             <Link to="tenantScreening">TENANT SCREENING</Link>
           </li>
           <li>
-            <Link
-              to="financialReport"
-              onClick={() => handleToggle("financialReport")}
-            >
-              FINANCIAL REPORT
-            </Link>
-            {isOpen === "financialReport" && (
-              <ul>
-                <li>
-                  <Link to="monthlyStatement">MONTHLY STATEMENT</Link>
-                </li>
-              </ul>
-            )}
+            <Link to="monthlyStatement">MONTHLY STATEMENT</Link>
           </li>
           <li>
             <Link to="documents">DOCUMENTS</Link>

@@ -4,7 +4,6 @@ import AppLayout from "./AppLayout";
 import OverView from "./Components/PageLayouts/OverView";
 import Calender from "./Components/PageLayouts/Calender";
 import NewTenant from "./Components/PageLayouts/NewTenant";
-// import ExtendLease from "./Components/ExtendLease";
 import Maintenance from "./Components/Maintenance";
 import TenantScreening from "./Components/PageLayouts/TenantScreening";
 import MonthlyStatement from "./Components/MonthlyStatement";
@@ -36,10 +35,10 @@ function App() {
         <Route path="/units" element={<Units />} />
         <Route path="/calender" element={<Calender />} />
         <Route path="/newTenant" element={<NewTenant />} />
-        {/* <Route path="extendLease" element={<ExtendLease />} /> */}
+
         <Route path="/maintenance" element={<Maintenance />} />
         <Route path="/tenantScreening" element={<TenantScreening />} />
-        <Route path="/" element={<MonthlyStatement />} />
+        <Route path="/monthlyStatement" element={<MonthlyStatement />} />
         <Route path="/documents" element={<Documents />} />
       </Route>
       {/* )} */}

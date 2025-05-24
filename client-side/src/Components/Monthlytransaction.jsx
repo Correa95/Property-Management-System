@@ -25,23 +25,9 @@ function MonthlyTransaction() {
             </article>
             <div className="transaction">
               <p>mathew unitX paid rent on x date</p>
-              <p>mathew unitX paid rent on x date</p>
-              <p>mathew unitX paid rent on x date</p>
-              <p>mathew unitX paid rent on x date</p>
-              <p>mathew unitX paid rent on x date</p>
-              <p>mathew unitX paid rent on x date</p>
-              <p>mathew unitX paid rent on x date</p>
-              <p>mathew unitX paid rent on x date</p>
-              <p>mathew unitX paid rent on x date</p>
-              <p>mathew unitX paid rent on x date</p>
-              <p>mathew unitX paid rent on x date</p>
-              <p>mathew unitX paid rent on x date</p>
             </div>
           </>
         )}
-        <h2>
-          January Statement <span>+</span>
-        </h2>
       </div>
     </section>
   );

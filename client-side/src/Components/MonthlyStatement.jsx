@@ -1,10 +1,10 @@
-import Monthlytransaction from "./MonthlyTransaction";
-
+import MonthlyTransaction from "./MonthlyTransaction";
+import "./MonthlyStatement.css";
 function MonthlyStatement() {
   return (
-    <>
-      <Monthlytransaction />
-    </>
+    <div className="monthlyStatementContainer">
+      <MonthlyTransaction />
+    </div>
   );
 }
 
