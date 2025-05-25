@@ -28,8 +28,8 @@
 }
 
 .recentTransactionBtn button {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--primary-color);
+  color: #ffffff;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
@@ -38,7 +38,11 @@
 }
 
 .recentTransactionBtn button:hover {
-  background-color: #0056b3;
+  background-color: var(--secondary-color);
+}
+.recentTransactionBtn button .icon {
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
 .recentTransactionTableContainer {
@@ -60,13 +64,7 @@
 }
 
 .recentTransactionTable thead {
-  background-color: #f8f8f8;
+  background-color: var(--primary-color);
   text-transform: uppercase;
-  color: #555;
-}
-
-.empty-row {
-  text-align: center;
-  color: #888;
-  font-style: italic;
+  color: var(--secondary-color);
 }

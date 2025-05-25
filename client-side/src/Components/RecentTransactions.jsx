@@ -1,13 +1,17 @@
 import "./RecentTransactions.css";
-
+import { FaPlus, FaFileExport } from "react-icons/fa";
 function RecentTransaction() {
   return (
     <div className="recentTransactionContainer">
       <div className="recentTransaction">
         <h1>Recent Transactions</h1>
         <div className="recentTransactionBtn">
-          <button>Record Bill</button>
-          <button>Export</button>
+          <button>
+            <FaPlus className="icon" /> Record Bill
+          </button>
+          <button>
+            <FaFileExport className="icon" /> Export
+          </button>
         </div>
       </div>
 

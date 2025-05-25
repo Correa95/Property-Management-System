@@ -21,7 +21,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  --green: #1bfd9c;
+  color: var(--secondary-color);
   font-size: 40px;
   border-radius: 15px;
   border: 2px solid var(--green);
@@ -56,7 +56,8 @@ ul > li {
 }
 
 ul a {
-  color: #fff;
+  color: var(--secondary-color);
+
   text-decoration: none;
   font-size: 18px;
   display: block;
@@ -85,7 +86,7 @@ ul a:hover {
 .help button {
   padding: 10px 16px;
   background-color: #2e2e2e;
-  color: white;
+  color: #ffffff;
   border: 1px solid transparent;
   border-radius: 6px;
   font-size: 15px;
