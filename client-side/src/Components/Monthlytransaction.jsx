@@ -29,21 +29,21 @@ function MonthlyTransaction() {
                 <strong>Period:</strong> May 1 – May 30, 2025
               </p>
               <p>
-                <strong>Prepared For:</strong>Software Developer Job, 123 Main
-                Street
+                <strong>Prepared For:</strong>Software Developer Job, 123
+                Corporate America
               </p>
               <p>
-                <strong>Managed By:</strong> Luwouse
+                <strong>Managed By:</strong> Caleb Curry
               </p>
             </div>
 
             <div className="sectionInfo">
               <h2>Property Information</h2>
               <p>
-                <strong>Address:</strong> Code Breakthrough Mentorship
+                <strong>Address:</strong> Code Breakthrough Mentorship Program
               </p>
               <p>
-                <strong>Tenant:</strong> Caleb
+                <strong>Tenant:</strong> Mathew M Correa
               </p>
               <p>
                 <strong>Lease:</strong> March 28 – Dec 31, 2025

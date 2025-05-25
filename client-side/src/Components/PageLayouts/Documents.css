@@ -1,65 +1,133 @@
+/* Container styles */
 .documentsContainer {
-  border: 2px solid red;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
 }
+
+/* Title */
 .documentsTitle {
-  font-size: 26px;
+  font-size: 28px;
+  font-weight: 600;
+  margin-right: 20px;
 }
+
+/* Navigation buttons */
 .btnNav {
   display: flex;
   align-items: center;
-  margin-left: 200px;
-  /* justify-content: center; */
-  /* justify-content: space-between; */
-  /* border: 2px solid red; */
+  gap: 16px;
+  margin-bottom: 30px;
 }
+
 .btnNav button {
-  font-size: 18px;
-  color: #212121;
-  border-radius: 10px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #2c3e50;
   border: none;
-  padding: 10px;
-  margin: 30px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
+
+.btnNav button:hover {
+  background-color: #0056b3;
+}
+
+/* Upload box */
 .upload {
   width: 90%;
-  /* max-width: 900px; */
+  max-width: 1300px;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 40px;
   border: 2px dashed #ccc;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-
+  background-color: #f0f0f0;
+  margin-bottom: 30px;
   font-size: 16px;
   color: #555;
-}
-.documents {
-  width: 90%;
-  margin-top: 30px;
-  border: 2px solid red;
-  padding: 20px;
-}
-h3 {
-  font: 23px;
-  margin-bottom: 20px;
-}
-.docList {
-  border-style: none;
-  /* padding: 10px; */
-}
-.list {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  border: 2px solid red;
+  cursor: pointer;
 }
 
-ol {
-  border: 2px solid red;
+/* Document section */
+.documents {
+  width: 90%;
+  max-width: 1300px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.documents h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* List layout */
+.docList {
+  width: 100%;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr 1fr 1fr 100px 100px;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+  font-size: 14px;
+  background-color: #fafafa;
+}
+
+.list:hover {
+  background-color: #f0f0f0;
+}
+.downloadBtn,
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Individual cells */
+.list input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.list button {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.list button:nth-child(6) {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.list button:nth-child(6):hover {
+  background-color: #218838;
+}
+
+.list button:nth-child(7) {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.list button:nth-child(7):hover {
+  background-color: #c82333;
 }
