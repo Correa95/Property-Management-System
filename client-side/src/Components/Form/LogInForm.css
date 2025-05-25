@@ -1,82 +1,89 @@
 .loginFormContainer {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #2c3e50, #4ca1af);
+  padding: 16px;
 }
 
 .loginForm {
+  background-color: #fff;
+  padding: 35px 32px;
+  border-radius: 1rem;
   width: 100%;
-  max-width: 300px;
-  --bg-light: #efefef;
-  --bg-dark: #707070;
-  --clr: #58bc82;
-  --clr-alpha: #9c9c9c60;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+  gap: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.loginForm .input-span {
-  width: 100%;
+.loginForm h1 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2rem;
+}
+
+.input-span {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-
-.loginForm input[type="email"],
-.loginForm input[type="password"] {
-  border-radius: 0.5rem;
-  padding: 1rem 0.75rem;
-  width: 100%;
-  border: none;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: var(--clr-alpha);
-  outline: 2px solid var(--bg-dark);
-}
-
-.loginForm input[type="email"]:focus,
-.loginForm input[type="password"]:focus {
-  outline: 2px solid var(--clr);
 }
 
 .label {
-  align-self: flex-start;
-  color: var(--clr);
   font-weight: 600;
+  margin-bottom: 8px;
+  color: #2c3e50;
 }
 
-.loginForm .submit {
-  padding: 1rem 0.75rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 3rem;
-  background-color: var(--bg-dark);
-  color: var(--bg-light);
+input[type="text"],
+input[type="password"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 15;
+  font-size: 18px;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #4ca1af;
+}
+
+.submit {
+  background-color: #4ca1af;
+  color: white;
   border: none;
+  padding: 9px;
+  border-radius: 10px;
+  font-size: 16px;
   cursor: pointer;
-  transition: all 300ms;
-  font-weight: 600;
-  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
 }
 
-.loginForm .submit:hover {
-  background-color: var(--clr);
-  color: var(--bg-dark);
+.submit:hover {
+  background-color: #3b8d99;
 }
 
 .span {
-  text-decoration: none;
-  color: var(--bg-dark);
+  text-align: center;
+  color: #444;
 }
 
-.span a {
-  color: var(--clr);
+a {
+  color: #4ca1af;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  color: red;
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
 }
