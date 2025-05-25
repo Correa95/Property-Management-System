@@ -11,6 +11,7 @@ import Documents from "./Components/PageLayouts/Documents";
 import Units from "./Components/PageLayouts/Units";
 import SignUpForm from "./Components/Form/SignUpForm";
 import LoginForm from "./Components/Form/LogInForm";
+import RecentTransaction from "./Components/RecentTransactions";
 
 function App() {
   // const { isAuthenticated } = useAuth();
@@ -34,6 +35,7 @@ function App() {
         <Route index element={<OverView />} />
         <Route path="/units" element={<Units />} />
         <Route path="/calender" element={<Calender />} />
+        <Route path="/recentTransaction" element={<RecentTransaction />} />
         <Route path="/newTenant" element={<NewTenant />} />
 
         <Route path="/maintenance" element={<Maintenance />} />

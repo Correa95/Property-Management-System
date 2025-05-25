@@ -31,6 +31,9 @@ function SideNavBar() {
             <Link to="newTenant">NEW TENANT</Link>
           </li>
           <li>
+            <Link to="recentTransaction">NEW TENANT</Link>
+          </li>
+          <li>
             <Link to="maintenance">MAINTENANCE</Link>
           </li>
           <li>

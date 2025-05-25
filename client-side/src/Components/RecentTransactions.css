@@ -1,3 +1,68 @@
-.recentTransaction {
-  border: 2px solid red;
+.recent-transaction {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.recent-transaction__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.recent-transaction__top h1 {
+  font-size: 24px;
+  margin: 0;
+  color: #333;
+}
+
+.recent-transaction__actions button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin-left: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.recent-transaction__actions button:hover {
+  background-color: #0056b3;
+}
+
+.recent-transaction__table-wrapper {
+  overflow-x: auto;
+}
+
+.recent-transaction__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 700px;
+}
+
+.recent-transaction__table thead {
+  background-color: #f8f8f8;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.recent-transaction__table th,
+.recent-transaction__table td {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.empty-row {
+  text-align: center;
+  color: #888;
+  font-style: italic;
 }

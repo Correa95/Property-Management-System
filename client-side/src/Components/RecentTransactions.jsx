@@ -1,15 +1,17 @@
+import "./RecentTransaction.css";
+
 function RecentTransaction() {
   return (
-    <>
-      <div className="recentTransaction">
-        <div className="top">
-          <h1>Recent Transaction</h1>
-          <h2>Record bill</h2>
-          <h3>export</h3>
+    <div className="recent-transaction">
+      <div className="recent-transaction__top">
+        <h1>Recent Transactions</h1>
+        <div className="recent-transaction__actions">
+          <button>Record Bill</button>
+          <button>Export</button>
         </div>
       </div>
-      <div className="table">
-        <table>
+      <div className="recent-transaction__table-wrapper">
+        <table className="recent-transaction__table">
           <thead>
             <tr>
               <th>Ref No</th>
@@ -24,19 +26,14 @@ function RecentTransaction() {
           </thead>
           <tbody>
             <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
+              <td colSpan="8" className="empty-row">
+                No transactions available
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }
 
