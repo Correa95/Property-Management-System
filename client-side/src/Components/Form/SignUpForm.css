@@ -1,87 +1,90 @@
 .signUpForm {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #2c3e50, #4ca1af);
+  padding: 16px;
 }
 
 .form {
+  background-color: white;
+  padding: 26px 30px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
   max-width: 400px;
-  height: 600px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: 32px 24px 24px;
-  gap: 16px;
-  border: 2px solid red;
-  text-align: center;
+  box-sizing: border-box;
 }
 
 .title {
-  color: #58bc82;
-  font-weight: bold;
-  font-size: 1.6rem;
+  display: block;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #222831;
+  text-align: center;
 }
 
 .subtitle {
-  color: #58bc82;
-  font-size: 1rem;
+  display: block;
+  font-size: 10px;
+  margin-bottom: 20px;
   color: #666;
+  text-align: center;
 }
 
-/*Inputs box*/
 .form-container {
-  overflow: hidden;
-  border-radius: 8px;
-  background-color: #fff;
-  margin: 1rem 0 0.5rem;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 23px;
 }
 
 .input {
-  background: none;
-  border: 0;
-  outline: 0;
-  height: 40px;
-  width: 100%;
-  border-bottom: 1px solid #eee;
-  font-size: 0.9rem;
-  padding: 8px 15px;
-}
-
-/* .form-section {
-  padding: 16px;
-  font-size: 0.85rem;
-  background-color: #e0ecfb;
-  box-shadow: rgb(0 0 0 / 8%) 0 -1px;
-  }
-  
-  .form-section a {
-    font-weight: bold;
-    color: #0066ff;
-  transition: color 0.3s ease;
-}
-
-.form-section a:hover {
-  color: #005ce6;
-  text-decoration: underline;
-  } */
-
-/*Button*/
-.form button {
-  background-color: #58bc82;
-  color: #fff;
-  border: 0;
-  border-radius: 24px;
   padding: 10px 16px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  /* color: #58bc82; */
-  transition: background-color 0.3s ease;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f0f4f8;
+  font-size: 16px;
+  color: #222831;
+  transition: border 0.2s ease;
 }
 
-.form button:hover {
-  background-color: #005ce6;
+.input:focus {
+  border-color: #2a4d69;
+  outline: none;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 16px;
+  background-color: #2a4d69;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #214360; /* darker shade */
+}
+
+p {
+  margin: 10px 0px;
+  text-align: center;
+}
+
+p:empty {
+  display: none;
+}
+
+p.error {
+  color: var(--error-color);
+}
+
+p.success {
+  color: var(--success-color);
 }

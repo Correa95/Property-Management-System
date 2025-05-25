@@ -11,8 +11,8 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const ok = await login(userName, password);
-    if (!ok) setError("Invalid credentials");
+    const signIn = await login(userName, password);
+    if (!signIn) setError("Invalid credentials");
   };
   return (
     <div className="loginFormContainer">
@@ -39,7 +39,7 @@ function LoginForm() {
         <span className="span"></span>
         <input className="submit" type="submit" value="Log in" />
         <span className="span">
-          Don't have an account? <Link to="/signUp">Sign up</Link>
+          Don't have an account? <Link to="signUp">Sign up</Link>
         </span>
         {error && <p>{error}</p>}
       </form>

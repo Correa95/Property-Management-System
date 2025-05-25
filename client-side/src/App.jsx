@@ -15,7 +15,7 @@ import RecentTransaction from "./Components/RecentTransactions";
 
 function App() {
   const { isAuthenticated } = useAuth();
-  // Show only the login page until we’re authenticated
+
   if (!isAuthenticated) return <LoginForm />;
   return (
     <Routes>
