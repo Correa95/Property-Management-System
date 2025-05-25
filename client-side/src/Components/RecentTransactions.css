@@ -1,64 +1,68 @@
-.recent-transaction {
+.recentTransactionContainer {
   background-color: #fff;
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  font-family: Arial, sans-serif;
-  margin: 20px;
+  margin: 40px auto;
+  max-width: 1000px;
 }
 
-.recent-transaction__top {
+.recentTransaction {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
   border-bottom: 2px solid #eee;
   padding-bottom: 12px;
-  margin-bottom: 20px;
 }
 
-.recent-transaction__top h1 {
+.recentTransactionBtn h1 {
   font-size: 24px;
-  margin: 0;
   color: #333;
+  margin: 0;
 }
 
-.recent-transaction__actions button {
+.recentTransactionBtn {
+  display: flex;
+  gap: 12px;
+}
+
+.recentTransactionBtn button {
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 8px 14px;
-  margin-left: 10px;
+  padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
 }
 
-.recent-transaction__actions button:hover {
+.recentTransactionBtn button:hover {
   background-color: #0056b3;
 }
 
-.recent-transaction__table-wrapper {
+.recentTransactionTableContainer {
   overflow-x: auto;
 }
 
-.recent-transaction__table {
+.recentTransactionTable {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
-  min-width: 700px;
+  margin-top: 10px;
 }
 
-.recent-transaction__table thead {
+.recentTransactionTable th,
+.recentTransactionTable td {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.recentTransactionTable thead {
   background-color: #f8f8f8;
   text-transform: uppercase;
   color: #555;
-}
-
-.recent-transaction__table th,
-.recent-transaction__table td {
-  padding: 12px 16px;
-  border: 1px solid #ddd;
-  text-align: left;
 }
 
 .empty-row {
