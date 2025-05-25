@@ -7,43 +7,46 @@ const formatMonthYear = (dateString) => {
 };
 
 function Analysis() {
-  const [monthlyRevenue, setMonthlyRevenue] = useState({});
+  const [monthlyPayments, setMonthlyPayments] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [tenant, setTenant] = useState(null);
-  const [totalUnit, setTotalUnits] = useState(null);
-  // const fetchMonthlyRevenue = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:8000/api/v1/getPayments"); // Replace with your endpoint
-  //     if (!response.ok) {
-  //       throw new Error("Failed to fetch transactions");
-  //     }
-  //     const revenue = await response.json();
+  // const [tenant, setTenant] = useState(null);
+  // const [totalUnit, setTotalUnits] = useState(null);
 
-  //     const revenueByMonth = {};
-  //     revenue.forEach((payment) => {
-  //       const monthKey = formatMonthYear(payment.date);
-  //       const amount = Number(payment.amount);
+  useEffect(() => {
+    const fetchMonthlyPayments = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8000/api/v1/getPayments"
+        ); // Replace with your endpoint
+        if (!response.ok) {
+          throw new Error("Failed to fetch Payments");
+        }
+        const payments = await response.json();
+        console.log(payments);
 
-  //       if (!revenueByMonth[monthKey]) {
-  //         revenueByMonth[monthKey] = 0;
-  //       }
+        const paymentsByMonth = {};
+        payments.forEach((payment) => {
+          const monthKey = formatMonthYear(payment.date);
+          const amount = Number(payment.amount);
 
-  //       revenueByMonth[monthKey] += amount;
-  //     });
+          if (!paymentsByMonth[monthKey]) {
+            paymentsByMonth[monthKey] = 0;
+          }
 
-  //     setMonthlyRevenue(revenueByMonth);
-  //   } catch (err) {
-  //     console.error(err);
-  //     setError(err.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+          paymentsByMonth[monthKey] += amount;
+        });
 
-  // useEffect(() => {
-  //   fetchMonthlyRevenue();
-  // }, []);
+        setMonthlyPayments(paymentsByMonth);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchMonthlyPayments();
+  }, []);
 
   // useEffect(() => {
   //   const controller = new AbortController();
@@ -103,7 +106,7 @@ function Analysis() {
       <div className="stats">
         <h1 className="titleHeader">Total Tenants</h1>
         <div className="figure">
-          <amount className="dollarAmount">{occupancyRate}%</amount>
+          <amount className="dollarAmount">Mario</amount>
           <small className="timeStamp">As of Last Month</small>
         </div>
       </div>
