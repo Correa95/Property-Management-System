@@ -7,8 +7,8 @@
 :root {
   --primary-color: #2c3e50;
   --secondary-color: #1bfd9c;
-  --error-color: #d72631; /* bright red */
-  --success-color: #1b998b; /* teal green */
+  --error-color: #d72631;
+  --success-color: #1b998b;
 }
 
 .app {
@@ -24,7 +24,6 @@
 
 .mainContent {
   width: 100%;
-  /* background-color: #212121; */
   height: 100vh;
   border: 2px solid red;
 }
