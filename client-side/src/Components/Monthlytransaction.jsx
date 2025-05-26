@@ -110,11 +110,6 @@ function MonthlyTransaction() {
               </tr>
             </tfoot>
           </table>
-
-          <div className="footer">
-            © 2025 Code Breakthrough Mentorship Program – Property Management
-            Services
-          </div>
         </div>
       </div>
     </section>
