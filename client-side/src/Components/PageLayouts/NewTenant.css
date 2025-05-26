@@ -1,25 +1,16 @@
 .newTenantContainer {
-  max-width: 600px;
-  margin: 60px auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.addTenantHeader {
-  text-align: center;
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 1.5rem;
-  letter-spacing: 1px;
-  font-weight: 600;
-}
-
-.formContainer {
+  border: 2px solid red;
+  width: 100%;
+  height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  padding: 1rem;
+}
+.addTenantHeader {
+  font-size: 26px;
+}
+.formContainer {
+  border: 2px solid red;
+  width: 100%;
+  height: 100vh;
 }
