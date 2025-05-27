@@ -5,8 +5,8 @@ import "./MonthlyTransaction.css";
 function MonthlyTransaction() {
   const [isOpen, setIsOpen] = useState(false);
   const contentRef = useRef(null);
-
   const handleToggle = () => setIsOpen(!isOpen);
+
   const handlePrint = () => {
     if (contentRef.current) {
       const printContent = contentRef.current.innerHTML;
@@ -53,11 +53,11 @@ function MonthlyTransaction() {
             Property Management Transaction Statement
           </h1>
 
-          <div className="buttonGroup">
-            <button className="actionButton" onClick={handleDownload}>
+          <div className="btnActions">
+            <button className="btnDownLoad" onClick={handleDownload}>
               <FiDownload /> Download
             </button>
-            <button className="actionButton" onClick={handlePrint}>
+            <button className="btnPrint" onClick={handlePrint}>
               <FiPrinter /> Print
             </button>
           </div>
