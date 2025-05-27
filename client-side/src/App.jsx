@@ -16,11 +16,8 @@ import RecentTransaction from "./Components/InnerComponents/RecentTransactions";
 function App() {
   const { isAuthenticated } = useAuth();
 
-  if (!isAuthenticated) return <LoginForm />;
   return (
     <Routes>
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/signUp" element={<SignUpForm />} />
       <Route
         path="/login"
         element={!isAuthenticated ? <LoginForm /> : <Navigate to="/" />}
