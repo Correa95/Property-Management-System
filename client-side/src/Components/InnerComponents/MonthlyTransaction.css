@@ -45,6 +45,10 @@
 }
 
 .statementContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s ease, padding 0.3s ease;
@@ -75,7 +79,6 @@
   width: 48%;
   margin-bottom: 20px;
 }
-
 .sectionInfo h2 {
   font-size: 18px;
   border-bottom: 2px solid #2c3e50;
@@ -85,7 +88,16 @@
 }
 
 .sectionInfo p {
-  margin: 5px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px; /* space between label and text */
+  margin: 4px 0;
+  line-height: 1.5;
+}
+
+.sectionInfo p strong {
+  min-width: 120px; /* Adjust as needed */
+  display: inline-block;
 }
 
 .statementTable {

@@ -1,4 +1,4 @@
-import MonthlyTransaction from "./MonthlyTransaction";
+import MonthlyTransaction from "../InnerComponents/MonthlyTransaction";
 import "./MonthlyStatement.css";
 function MonthlyStatement() {
   return (

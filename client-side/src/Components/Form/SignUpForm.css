@@ -72,7 +72,7 @@ button[type="submit"]:hover {
   background-color: #214360; /* darker shade */
 }
 
-p {
+.error {
   margin: 10px 0px;
   text-align: center;
 }

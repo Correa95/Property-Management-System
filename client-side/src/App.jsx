@@ -4,14 +4,14 @@ import AppLayout from "./AppLayout";
 import OverView from "./Components/PageLayouts/OverView";
 import Calender from "./Components/PageLayouts/Calender";
 import NewTenant from "./Components/PageLayouts/NewTenant";
-import Maintenance from "./Components/Maintenance";
+import Maintenance from "./Components/PageLayouts/Maintenance";
 import TenantScreening from "./Components/PageLayouts/TenantScreening";
-import MonthlyStatement from "./Components/MonthlyStatement";
+import MonthlyStatement from "./Components/PageLayouts/MonthlyStatement";
 import Documents from "./Components/PageLayouts/Documents";
 import Units from "./Components/PageLayouts/Units";
 import SignUpForm from "./Components/Form/SignUpForm";
 import LoginForm from "./Components/Form/LogInForm";
-import RecentTransaction from "./Components/RecentTransactions";
+import RecentTransaction from "./Components/InnerComponents/RecentTransactions";
 
 function App() {
   // const { isAuthenticated } = useAuth();
