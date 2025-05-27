@@ -7,7 +7,7 @@ function MonthlyTransaction() {
   const contentRef = useRef(null);
   const handleToggle = () => setIsOpen(!isOpen);
 
-  const handlePrint = () => {
+  function handlePrint() {
     if (contentRef.current) {
       const printContent = contentRef.current.innerHTML;
       const newWindow = window.open("", "_blank");
@@ -20,8 +20,8 @@ function MonthlyTransaction() {
       newWindow.document.close();
       newWindow.print();
     }
-  };
-  const handleDownload = () => {
+  }
+  function handleDownload() {
     if (contentRef.current) {
       const element = document.createElement("a");
       const file = new Blob([contentRef.current.innerText], {
@@ -32,7 +32,7 @@ function MonthlyTransaction() {
       document.body.appendChild(element);
       element.click();
     }
-  };
+  }
   return (
     <section className="monthlyStatementContainer">
       <div className="monthlyStatement">

@@ -1,5 +1,5 @@
 // AuthContext.jsx
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -16,12 +16,10 @@ export function AuthProvider({ children }) {
         body: JSON.stringify({ email, password }),
       });
 
-      if (!response.ok) throw new Error("Login failed");
-
-      const { token } = await response.json();
-      // const data = await response.json();
+      const data = await response.json();
+      const token = data?.token;
+      if (!token) throw new Error("Token not received");
       localStorage.setItem("token", token);
-
       setIsAuthenticated(true);
       return true;
     } catch (err) {
@@ -30,8 +28,13 @@ export function AuthProvider({ children }) {
       return false;
     }
   }
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) setIsAuthenticated(true);
+  }, []);
 
   function logout() {
+    localStorage.removeItem("token");
     setIsAuthenticated(false);
   }
 
