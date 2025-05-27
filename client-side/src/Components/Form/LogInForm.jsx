@@ -39,7 +39,7 @@ function LoginForm() {
         <span className="span"></span>
         <input className="submit" type="submit" value="Log in" />
         <span className="span">
-          Don't have an account? <Link to="signUp">Sign up</Link>
+          Don't have an account? <Link to="/signUp">Sign up</Link>
         </span>
         {error && <p className="error">{error}</p>}
       </form>

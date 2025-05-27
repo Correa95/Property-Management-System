@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SignUpForm.css";
-// function getCookie(name) {
-//   let cookieValue = null;
-//   if (document.cookie && document.cookie !== "") {
-//     const cookies = document.cookie.split(";");
-//     for (let i = 0; i < cookies.length; i++) {
-//       const cookie = cookies[i].trim();
-//       if (cookie.substring(0, name.length + 1) === name + "=") {
-//         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//         break;
-//       }
-//     }
-//   }
-//   return cookieValue;
-// }
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== "") {
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === name + "=") {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
 function SignUpForm() {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
@@ -24,22 +26,33 @@ function SignUpForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/csrf/", {
+      credentials: "include",
+    });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setSuccess(null);
 
-    // ✅ Get the real CSRF token from cookies
-    // const csrftoken = getCookie("csrftoken");
+    if (!firstName || !lastName || !email || !userName || !password) {
+      setError("All fields are required");
+      return;
+    }
+
+    setIsLoading(true);
 
     try {
       const response = await fetch("http://localhost:8000/api/v1/createUser", {
         method: "POST",
-        // credentials: "include", // ✅ required
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          // "X-CSRFToken": getCookie("csrftoken"),
+          "X-CSRFToken": getCookie("csrftoken"),
         },
         body: JSON.stringify({
           first_name: firstName,
@@ -66,18 +79,15 @@ function SignUpForm() {
       }, 2000);
     } catch (error) {
       setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
-  // useEffect(() => {
-  //   fetch("http://localhost:8000/api/csrf/", {
-  //     credentials: "include",
-  //   });
-  // }, []);
 
   return (
     <div className="signUpForm">
       <form className="form" onSubmit={handleSubmit}>
-        <p>{success}</p>
+        {success && <p className="success">{success}</p>}
         <span className="title">Sign up</span>
         <span className="subtitle">Create a free account with your email.</span>
         <div className="form-container">
@@ -105,7 +115,7 @@ function SignUpForm() {
           <input
             type="text"
             className="input"
-            placeholder="user name"
+            placeholder="Username"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
@@ -117,8 +127,10 @@ function SignUpForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <p className="error">{error}</p>
-        <button type="submit">Sign up</button>
+        {error && <p className="error">{error}</p>}
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Signing up..." : "Sign up"}
+        </button>
       </form>
     </div>
   );
