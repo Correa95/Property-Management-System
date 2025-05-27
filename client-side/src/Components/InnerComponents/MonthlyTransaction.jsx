@@ -1,11 +1,38 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { FiDownload, FiPrinter } from "react-icons/fi";
 import "./MonthlyTransaction.css";
 
 function MonthlyTransaction() {
   const [isOpen, setIsOpen] = useState(false);
+  const contentRef = useRef(null);
 
   const handleToggle = () => setIsOpen(!isOpen);
-
+  const handlePrint = () => {
+    if (contentRef.current) {
+      const printContent = contentRef.current.innerHTML;
+      const newWindow = window.open("", "_blank");
+      newWindow.document.write(`
+        <html>
+          <head><title>Print Statement</title></head>
+          <body>${printContent}</body>
+        </html>
+      `);
+      newWindow.document.close();
+      newWindow.print();
+    }
+  };
+  const handleDownload = () => {
+    if (contentRef.current) {
+      const element = document.createElement("a");
+      const file = new Blob([contentRef.current.innerText], {
+        type: "text/plain",
+      });
+      element.href = URL.createObjectURL(file);
+      element.download = "Monthly_Transaction_Statement.txt";
+      document.body.appendChild(element);
+      element.click();
+    }
+  };
   return (
     <section className="monthlyStatementContainer">
       <div className="monthlyStatement">
@@ -18,10 +45,22 @@ function MonthlyTransaction() {
           </h2>
         </div>
 
-        <div className={`statementContent ${isOpen ? "show" : ""}`}>
+        <div
+          className={`statementContent ${isOpen ? "show" : ""}`}
+          ref={contentRef}
+        >
           <h1 className="statementTitle">
             Property Management Transaction Statement
           </h1>
+
+          <div className="buttonGroup">
+            <button className="actionButton" onClick={handleDownload}>
+              <FiDownload /> Download
+            </button>
+            <button className="actionButton" onClick={handlePrint}>
+              <FiPrinter /> Print
+            </button>
+          </div>
           <div className="statement">
             <div className="sectionInfo">
               <h2>Statement Details</h2>
