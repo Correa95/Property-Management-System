@@ -77,7 +77,7 @@ class LeaseSerializer(serializers.ModelSerializer):
     tenant_name = serializers.SerializerMethodField()
     class Meta:
         model = Lease
-        fields = ['id', 'apartment', 'tenant', 'tenant_name', 'start_date', 'end_date','security_deposit','is_active' 'monthly_rent']
+        fields = ['id', 'apartment', 'tenant', 'tenant_name', 'start_date', 'end_date','security_deposit','is_active', 'monthly_rent']
         read_only_fields = ['id', "tenant_name"]
 
     def get_tenant_name(self, obj):
@@ -90,7 +90,7 @@ class LeaseSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Monthly rent must be a positive value.")
         return value
     
-    def validate_lease_data(self, data):
+    def validate(self, data):
         start_date = data.get('start_date')
         end_date = data.get('end_date')
 
