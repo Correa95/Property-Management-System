@@ -8,17 +8,11 @@ from api.models import  Apartment, ApartmentComplex, Tenant, Lease, Payment, Use
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "first_name", "last_name", "user_email",
-                  "user_name", "user_password"]
-        extra_kwargs = {"user_password": {"write_only": True}}
+        fields = ['id', 'username', 'email', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        # Hashes the password explicitly using Django helpers;
-        # avoids relying on model.save side-effects.
-        password = validated_data.pop("user_password")
-        user = User(**validated_data)
-        user.user_password = make_password(password)
-        user.save()
+        user = User.objects.create_user(**validated_data)
         return user
 
     
