@@ -100,7 +100,7 @@ function Analysis() {
     <section className="statsContainer">
       <div className="stats">
         <h1 className="titleHeader">Rent Received</h1>
-        <div className="fugure">
+        <div className="figure">
           <amount className="dollarAmount">${monthlyPayments}</amount>
           <small className="timeStamp">As of Last Month</small>
         </div>
