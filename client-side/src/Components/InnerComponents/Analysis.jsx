@@ -24,20 +24,17 @@ function Analysis() {
         }
         const payments = await response.json();
         console.log(payments);
-
-        const paymentsByMonth = {};
+        const paymentMonth = {};
         payments.forEach((payment) => {
           const month = formatMonthYear(payment.date);
           const amount = Number(payment.amount);
-
-          if (!paymentsByMonth[month]) {
-            paymentsByMonth[month] = 0;
+          if (!paymentMonth[month]) {
+            paymentMonth[month] = 0;
           }
-
-          paymentsByMonth[month] += amount;
+          paymentMonth[month] += amount;
         });
 
-        setMonthlyPayments(paymentsByMonth);
+        setMonthlyPayments(paymentMonth);
       } catch (err) {
         console.error(err);
         setError(err.message);
@@ -97,8 +94,8 @@ function Analysis() {
     <section className="statsContainer">
       <div className="stats">
         <h1 className="titleHeader">Rent Received</h1>
-        <div className="figure">
-          <amount className="dollarAmount">${paymentsByMonth}</amount>
+        <div className="fugure">
+          <amount className="dollarAmount">${monthlyPayments}</amount>
           <small className="timeStamp">As of Last Month</small>
         </div>
       </div>
