@@ -17,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     
 class ApartmentSerializer(serializers.ModelSerializer):
-    complex_name = serializers.CharField(source="complex.name", read_only=True)  # Show complex name
+    complex_name = serializers.CharField(source="complex.name", read_only=True) 
     complex_id = serializers.PrimaryKeyRelatedField(queryset=ApartmentComplex.objects.all(), source="complex")
     
     class Meta:
