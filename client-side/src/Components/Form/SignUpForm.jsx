@@ -30,12 +30,13 @@ function SignUpForm() {
 
   useEffect(() => {
     fetch("http://localhost:8000/api/csrf/", {
-      credentials: "include",
+      credentials: "include", // ensures cookies are sent
     });
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form submit triggered");
     setError(null);
     setSuccess(null);
 
@@ -55,11 +56,11 @@ function SignUpForm() {
           "X-CSRFToken": getCookie("csrftoken"),
         },
         body: JSON.stringify({
+          username: userName,
+          email: email,
           first_name: firstName,
           last_name: lastName,
-          user_email: email,
-          user_name: userName,
-          user_password: password,
+          password: password,
         }),
       });
 

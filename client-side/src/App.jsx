@@ -9,41 +9,41 @@ import TenantScreening from "./Components/PageLayouts/TenantScreening";
 import MonthlyStatement from "./Components/PageLayouts/MonthlyStatement";
 import Documents from "./Components/PageLayouts/Documents";
 import Units from "./Components/PageLayouts/Units";
-import SignUpForm from "./Components/Form/SignUpForm";
-import LoginForm from "./Components/Form/LogInForm";
+// import SignUpForm from "./Components/Form/SignUpForm";
+// import LoginForm from "./Components/Form/LogInForm";
 import RecentTransaction from "./Components/InnerComponents/RecentTransactions";
 
 function App() {
-  const { isAuthenticated } = useAuth();
+  // const { isAuthenticated } = useAuth();
 
   return (
     <Routes>
-      <Route
+      {/* <Route
         path="/login"
         element={!isAuthenticated ? <LoginForm /> : <Navigate to="/" />}
       />
       <Route
         path="/signUp"
         element={!isAuthenticated ? <SignUpForm /> : <Navigate to="/" />}
-      />
+      /> */}
 
-      {isAuthenticated && (
-        <Route path="/" element={<AppLayout />}>
-          <Route index element={<OverView />} />
-          <Route path="/units" element={<Units />} />
-          <Route path="/calender" element={<Calender />} />
-          <Route path="/recentTransaction" element={<RecentTransaction />} />
-          <Route path="/newTenant" element={<NewTenant />} />
-          <Route path="/maintenance" element={<Maintenance />} />
-          <Route path="/tenantScreening" element={<TenantScreening />} />
-          <Route path="/monthlyStatement" element={<MonthlyStatement />} />
-          <Route path="/documents" element={<Documents />} />
-        </Route>
-      )}
-      <Route
+      {/* {isAuthenticated && ( */}
+      <Route path="/" element={<AppLayout />}>
+        <Route index element={<OverView />} />
+        <Route path="/units" element={<Units />} />
+        <Route path="/calender" element={<Calender />} />
+        <Route path="/recentTransaction" element={<RecentTransaction />} />
+        <Route path="/newTenant" element={<NewTenant />} />
+        <Route path="/maintenance" element={<Maintenance />} />
+        <Route path="/tenantScreening" element={<TenantScreening />} />
+        <Route path="/monthlyStatement" element={<MonthlyStatement />} />
+        <Route path="/documents" element={<Documents />} />
+      </Route>
+      {/* )} */}
+      {/* <Route
         path="*"
         element={<Navigate to={isAuthenticated ? "/" : "/login"} />}
-      />
+      /> */}
     </Routes>
   );
 }
