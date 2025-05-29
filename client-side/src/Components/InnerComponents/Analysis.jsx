@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./Analysis.css";
-// Utility to format dates as "Month Year" (e.g., "May 2025")
 const formatMonthYear = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleString("default", { month: "long", year: "numeric" });
@@ -10,8 +9,6 @@ function Analysis() {
   const [monthlyPayments, setMonthlyPayments] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [tenant, setTenant] = useState(null);
-  // const [totalUnit, setTotalUnits] = useState(null);
 
   useEffect(() => {
     const fetchMonthlyPayments = async () => {
