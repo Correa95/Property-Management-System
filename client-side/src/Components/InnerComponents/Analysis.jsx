@@ -51,49 +51,6 @@ function Analysis() {
     fetchMonthlyPayments();
   }, []);
 
-  // useEffect(() => {
-  //   const controller = new AbortController();
-  //   const { signal } = controller;
-  //   async function getTenants() {
-  //     try {
-  //       const res = await fetch("http://localhost:8000/api/v1/getTenants", {
-  //         signal,
-  //       });
-  //       const data = await res.json();
-  //       console.log("Payments response ↴", data);
-  //       setTenant(data);
-  //     } catch (err) {
-  //       if (err.name !== "AbortError") setError(err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-  //   getTenants();
-  //   return () => controller.abort();
-  // }, []);
-
-  // useEffect(() => {
-  //   const controller = new AbortController();
-  //   const { signal } = controller;
-  //   async function getUnits() {
-  //     try {
-  //       const res = await fetch("http://localhost:8000/api/v1/getUnits", {
-  //         signal,
-  //       });
-  //       const data = await res.json();
-  //       console.log("Payments response ↴", data);
-  //       setTotalUnits(data);
-  //     } catch (err) {
-  //       if (err.name !== "AbortError") setError(err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-  //   getUnits();
-  //   return () => controller.abort();
-  // }, []);
-  // const occupancyRate = (totalUnit / tenant) * 100;
-
   if (loading) return <p>Loading revenue...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
   return (
