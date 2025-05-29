@@ -18,7 +18,7 @@ function Analysis() {
       try {
         const response = await fetch(
           "http://localhost:8000/api/v1/getPayments"
-        ); // Replace with your endpoint
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch Payments");
         }
@@ -27,14 +27,14 @@ function Analysis() {
 
         const paymentsByMonth = {};
         payments.forEach((payment) => {
-          const monthKey = formatMonthYear(payment.date);
+          const month = formatMonthYear(payment.date);
           const amount = Number(payment.amount);
 
-          if (!paymentsByMonth[monthKey]) {
-            paymentsByMonth[monthKey] = 0;
+          if (!paymentsByMonth[month]) {
+            paymentsByMonth[month] = 0;
           }
 
-          paymentsByMonth[monthKey] += amount;
+          paymentsByMonth[month] += amount;
         });
 
         setMonthlyPayments(paymentsByMonth);
@@ -97,8 +97,8 @@ function Analysis() {
     <section className="statsContainer">
       <div className="stats">
         <h1 className="titleHeader">Rent Received</h1>
-        <div className="fugure">
-          <amount className="dollarAmount">${monthlyRevenue}</amount>
+        <div className="figure">
+          <amount className="dollarAmount">${paymentsByMonth}</amount>
           <small className="timeStamp">As of Last Month</small>
         </div>
       </div>
