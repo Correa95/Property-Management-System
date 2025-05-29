@@ -22,8 +22,14 @@ function Analysis() {
         if (!response.ok) {
           throw new Error("Failed to fetch Payments");
         }
+
         const payments = await response.json();
         console.log(payments);
+
+        if (!Array.isArray(payments)) {
+          throw new Error("Unexpected data format");
+        }
+
         const paymentMonth = {};
         payments.forEach((payment) => {
           const month = formatMonthYear(payment.date);
