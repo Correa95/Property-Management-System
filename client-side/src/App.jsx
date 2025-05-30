@@ -12,7 +12,7 @@ import Units from "./Components/PageLayouts/Units";
 import SignUpForm from "./Components/Form/SignUpForm";
 import LoginForm from "./Components/Form/LogInForm";
 import ClientLayout from "./ClientsRoutes/ClientLayout";
-import ClientDashboard from "./ClientsRoutes/ClientDashBoard";
+import ClientDashboard from "./ClientsRoutes/ClientDashboard";
 import ClientProfile from "./ClientsRoutes/ClientProfile";
 
 function App() {
