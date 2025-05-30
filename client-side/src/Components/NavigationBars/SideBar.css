@@ -65,10 +65,23 @@ ul a {
 }
 
 ul a:hover {
+  text-decoration: none;
   color: #82ffc9;
   background: #1e1e1e;
   border-color: #82ffc9;
   color: #82ffc9;
+}
+
+.icon {
+  margin-right: 10px;
+  vertical-align: middle;
+  font-size: 20px;
+}
+ul a,
+.help button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .help {

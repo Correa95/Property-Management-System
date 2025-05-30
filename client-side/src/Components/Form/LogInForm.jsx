@@ -1,9 +1,10 @@
 // Components/Form/LoginForm.jsx
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 function LoginForm() {
+  const navigate = useNavigate();
   const { login } = useAuth();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -11,8 +12,18 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const signIn = await login(userName, password);
-    if (!signIn) setError("Invalid credentials");
+    if (!signIn) {
+      setError("Invalid credentials");
+    } else {
+      const role = localStorage.getItem("role");
+      if (role === "client") {
+        navigate("/clientLayout");
+      } else {
+        navigate("/");
+      }
+    }
   };
   return (
     <div className="loginFormContainer">

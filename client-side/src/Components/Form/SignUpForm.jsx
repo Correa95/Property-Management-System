@@ -23,6 +23,7 @@ function SignUpForm() {
   const [lastName, setLastName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -40,8 +41,8 @@ function SignUpForm() {
     setError(null);
     setSuccess(null);
 
-    if (!firstName || !lastName || !email || !userName || !password) {
-      setError("All fields are required");
+    if (!firstName || !lastName || !email || !userName || !password || !role) {
+      setError("All fields including role are required");
       return;
     }
 
@@ -61,6 +62,7 @@ function SignUpForm() {
           first_name: firstName,
           last_name: lastName,
           password: password,
+          role: role,
         }),
       });
 
@@ -113,6 +115,15 @@ function SignUpForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <select
+            className="input"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+          >
+            <option value="">Select role</option>
+            <option value="client">Client</option>
+            <option value="admin">Admin</option>
+          </select>
           <input
             type="text"
             className="input"

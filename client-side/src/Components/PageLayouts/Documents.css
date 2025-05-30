@@ -40,7 +40,6 @@
   background-color: #0056b3;
 }
 
-/* Upload box */
 .upload {
   width: 90%;
   max-width: 1300px;
@@ -56,8 +55,79 @@
   color: #555;
   cursor: pointer;
 }
+.formUpload {
+  width: 100%;
+  max-width: 1300px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
 
-/* Document section */
+.docNameInput,
+.select {
+  flex: 1 1 200px;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: border-color 0.3s;
+}
+
+.docNameInput:focus,
+.select:focus {
+  border-color: #2c3e50;
+  outline: none;
+  background-color: #fff;
+}
+
+.docLabel {
+  padding: 10px 16px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #555;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.docLabel:hover {
+  background-color: #e0e0e0;
+  border-color: #2c3e50;
+}
+
+.fileInput {
+  display: none;
+}
+
+.btnDoc {
+  flex-basis: 100%;
+  padding: 12px 20px;
+  margin-top: 10px;
+  background-color: #2c3e50;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.btnDoc:hover {
+  background-color: #0056b3;
+}
+
 .documents {
   width: 90%;
   max-width: 1300px;
@@ -76,6 +146,7 @@
 /* List layout */
 .docList {
   width: 100%;
+  justify-content: center;
 }
 
 .list {
@@ -99,7 +170,6 @@
   gap: 6px;
 }
 
-/* Individual cells */
 .list input[type="checkbox"] {
   width: 16px;
   height: 16px;

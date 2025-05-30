@@ -5,10 +5,11 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState(null);
 
   async function login(email, password) {
     try {
-      const response = await fetch("/api/v1/auth/login/", {
+      const response = await fetch("http://localhost:8000/api/v1/auth/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -18,9 +19,15 @@ export function AuthProvider({ children }) {
 
       const data = await response.json();
       const token = data?.token;
-      if (!token) throw new Error("Token not received");
+      const role = data?.role;
+
+      if (!token || !role) throw new Error("Token or role not received");
       localStorage.setItem("token", token);
+      localStorage.setItem("role", role);
+
       setIsAuthenticated(true);
+      setUserRole(role);
+
       return true;
     } catch (err) {
       console.error(err);
@@ -30,16 +37,24 @@ export function AuthProvider({ children }) {
   }
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) setIsAuthenticated(true);
+    const role = localStorage.getItem("role");
+    if (token && role) {
+      setIsAuthenticated(true);
+    }
   }, []);
 
   function logout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     setIsAuthenticated(false);
+    setUserRole(null);
+  }
+  function hasRole(...allowedRoles) {
+    return allowedRoles.includes(userRole);
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, hasRole }}>
       {children}
     </AuthContext.Provider>
   );

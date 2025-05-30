@@ -1,54 +1,90 @@
-// import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  MdDashboard,
+  MdCalendarToday,
+  MdBuild,
+  MdInsertDriveFile,
+  MdHelpOutline,
+  MdSettings,
+  MdLogout,
+} from "react-icons/md";
+import { FaBuilding, FaUserPlus, FaUserCheck } from "react-icons/fa";
+import { HiOutlineDocumentReport } from "react-icons/hi";
 import "./SideBar.css";
 
 function SideNavBar() {
-  // const [isOpen, setIsOpen] = useState(null);
-
-  // function handleToggle(item) {
-  //   setIsOpen((prev) => (prev === item ? null : item));
-  // }
   return (
     <nav className="sideBar">
       <header className="header">
-        <h1 className="logo">LUWOUSE</h1>
+        <div className="logo">LUWOUSE</div>
       </header>
 
       <div className="navContent">
         <ul>
           <li>
-            <Link to="/">OVERVIEW</Link>
+            <Link to="/">
+              <MdDashboard className="icon" />
+              OVERVIEW
+            </Link>
           </li>
           <li>
-            <li>
-              <Link to="units">UNITS</Link>
-            </li>
+            <Link to="units">
+              <FaBuilding className="icon" />
+              UNITS
+            </Link>
           </li>
           <li>
-            <Link to="calender">CALENDER</Link>
+            <Link to="calender">
+              <MdCalendarToday className="icon" />
+              CALENDER
+            </Link>
           </li>
           <li>
-            <Link to="newTenant">NEW TENANT</Link>
+            <Link to="newTenant">
+              <FaUserPlus className="icon" />
+              NEW TENANT
+            </Link>
           </li>
           <li>
-            <Link to="maintenance">MAINTENANCE</Link>
+            <Link to="maintenance">
+              <MdBuild className="icon" />
+              MAINTENANCE
+            </Link>
           </li>
           <li>
-            <Link to="tenantScreening">TENANT SCREENING</Link>
+            <Link to="tenantScreening">
+              <FaUserCheck className="icon" />
+              TENANT SCREENING
+            </Link>
           </li>
           <li>
-            <Link to="monthlyStatement">MONTHLY STATEMENT</Link>
+            <Link to="monthlyStatement">
+              <HiOutlineDocumentReport className="icon" />
+              MONTHLY STATEMENT
+            </Link>
           </li>
           <li>
-            <Link to="documents">DOCUMENTS</Link>
+            <Link to="documents">
+              <MdInsertDriveFile className="icon" />
+              DOCUMENTS
+            </Link>
           </li>
         </ul>
       </div>
 
       <div className="help">
-        <button>Help</button>
-        <button>Setting</button>
-        <button>Sign Out</button>
+        <button>
+          <MdHelpOutline className="icon" />
+          Help
+        </button>
+        <button>
+          <MdSettings className="icon" />
+          Setting
+        </button>
+        <button>
+          <MdLogout className="icon" />
+          Sign Out
+        </button>
       </div>
     </nav>
   );
