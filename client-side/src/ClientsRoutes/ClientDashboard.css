@@ -1,0 +1,16 @@
+.clientDashboardContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 10px;
+  padding: 16px;
+}
+
+.top {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  font-weight: bold;
+}

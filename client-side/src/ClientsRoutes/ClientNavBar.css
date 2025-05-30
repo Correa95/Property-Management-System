@@ -1,0 +1,9 @@
+.clientNavBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.clientNav {
+  display: flex;
+  justify-content: space-between;
+}
