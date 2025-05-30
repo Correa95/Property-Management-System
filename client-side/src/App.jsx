@@ -13,7 +13,6 @@ import SignUpForm from "./Components/Form/SignUpForm";
 import LoginForm from "./Components/Form/LogInForm";
 import ClientLayout from "./ClientsRoutes/ClientLayout";
 import ClientDashboard from "./ClientsRoutes/ClientDashboard";
-import ClientProfile from "./ClientsRoutes/ClientProfile";
 
 function App() {
   const { isAuthenticated, userRole } = useAuth();
@@ -60,7 +59,6 @@ function App() {
       {isAuthenticated && isClient && (
         <Route path="/" element={<ClientLayout />}>
           <Route index element={<ClientDashboard />} />
-          <Route path="profile" element={<ClientProfile />} />
         </Route>
       )}
       <Route
