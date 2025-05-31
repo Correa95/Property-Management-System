@@ -41,7 +41,7 @@ function SignUpForm() {
     setError(null);
     setSuccess(null);
 
-    if (!firstName || !lastName || !email || !userName || !password || !role) {
+    if (!firstName || !lastName || !email || !role || !userName || !password) {
       setError("All fields including role are required");
       return;
     }
@@ -51,7 +51,6 @@ function SignUpForm() {
     try {
       const response = await fetch("http://localhost:8000/api/v1/createUser", {
         method: "POST",
-        credentials: "include",
         headers: {
           "Content-Type": "application/json",
           "X-CSRFToken": getCookie("csrftoken"),
@@ -64,6 +63,7 @@ function SignUpForm() {
           password: password,
           role: role,
         }),
+        credentials: "include",
       });
 
       if (!response.ok) {
