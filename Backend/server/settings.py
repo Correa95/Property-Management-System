@@ -54,8 +54,6 @@ SIMPLE_JWT = {
    
     "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",
 
-   
-
     "JTI_CLAIM": "jti",
 
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
@@ -89,15 +87,6 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
-CSRF_COOKIE_HTTPONLY = False  # Allow JS to read it
-CSRF_COOKIE_SAMESITE = 'Lax'  # 'None' if you're using cross-site cookies with HTTPS
-CSRF_COOKIE_SECURE = False    # True if using HTTPS
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -174,33 +163,26 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-CSRF_TRUSTED_ORIGINS = [
+# CSRF_TRUSTED_ORIGINS = [
+#     "http://localhost:5173",
+# ]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",
+# ]
+CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
 CORS_ALLOW_CREDENTIALS = True
-
-
-# Allow headers that your frontend sends (like Content-Type)
 CORS_ALLOW_HEADERS = [
-    "accept",
-    "accept-encoding",
-    "authorization",
     "content-type",
-    "dnt",
-    "origin",
-    "user-agent",
-    "x-csrftoken",
-    "x-requested-with",
+    "authorization",
 ]
-# Allow these methods
-CORS_ALLOW_METHODS = [
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "PATCH",
-    "POST",
-    "PUT",
-]
+CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+
+
+
+
+
 
 
 # Internationalization
@@ -214,8 +196,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-# settings.py
-# AUTH_USER_MODEL = 'api.CustomUser'
 
 
 
@@ -223,6 +203,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

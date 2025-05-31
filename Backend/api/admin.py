@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Apartment, Tenant, Lease, Payment, ApartmentComplex, Building
+from .models import User, Apartment, Tenant, Lease, Payment, ApartmentComplex, Building, MaintenanceRequest, Document
 
 # Register your models here.
 
@@ -31,6 +31,17 @@ class PaymentAdmin(admin.ModelAdmin):
     read_only_fields = ('tenant', 'lease', 'payment_date', 'payment_amount')  
     search_fields = ("tenant","full_name", "lease","address")
 
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'document_type', 'uploaded_at')
+    list_filter = ('document_type', 'uploaded_at')
+    search_fields = ('name',)
+    
+class MaintenanceRequestAdmin(admin.ModelAdmin):
+    list_display = ('tenant', 'description', 'request_date', 'status')
+    list_filter = ('status', 'request_date')
+    search_fields = ('tenant__first_name', 'tenant__last_name', 'description')
+
+
 # Register models with their corresponding admin classes
 admin.site.register(ApartmentComplex, ApartmentComplexAdmin),
 admin.site.register(Building, BuildingAdmin),
@@ -39,3 +50,5 @@ admin.site.register(Apartment, ApartmentAdmin)
 admin.site.register(Tenant, TenantAdmin)
 admin.site.register(Lease, LeaseAdmin)
 admin.site.register(Payment, PaymentAdmin)
+admin.site.register(MaintenanceRequest, MaintenanceRequestAdmin)
+admin.site.register(Document, DocumentAdmin)

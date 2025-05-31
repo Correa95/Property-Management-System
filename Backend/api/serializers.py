@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from django.db.models import Sum
 from django.contrib.auth.hashers import make_password
-from api.models import  Apartment, ApartmentComplex, Tenant, Lease, Payment, User, MaintenanceRequest, Building
+from api.models import  Apartment, ApartmentComplex, Tenant, Lease, Payment, User, MaintenanceRequest, Building, Document
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -126,6 +126,26 @@ class MaintenanceRequestSerializer(serializers.ModelSerializer):
         model = MaintenanceRequest
         fields = ['id', 'tenant', 'tenant_name', 'description', 'request_date', 'status']
         read_only_fields = ['request_date', 'tenant_name']  # Ensure these fields can't be modified
+
+class DocumentSerializer(serializers.ModelSerializer):
+    lease_id = serializers.PrimaryKeyRelatedField(queryset=Lease.objects.all(), source='lease', allow_null=True, required=False)
+    tenant_id = serializers.PrimaryKeyRelatedField(queryset=Tenant.objects.all(), source='tenant', allow_null=True, required=False)
+    uploaded_file_url = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Document
+        fields = [
+            'id', 'name', 'document_type', 'uploaded_file', 'uploaded_file_url',
+            'uploaded_at', 'lease_id', 'tenant_id'
+        ]
+        read_only_fields = ['id', 'uploaded_at', 'uploaded_file_url']
+
+    def get_uploaded_file_url(self, obj):
+        if obj.uploaded_file and hasattr(obj.uploaded_file, 'url'):
+            return obj.uploaded_file.url
+        return None
+    
+    
 
     
 

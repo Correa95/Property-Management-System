@@ -3,36 +3,59 @@ from django.db import models
 from django.utils.timezone import now 
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 
 # Create your models here.
 
 VALID_BUILDINGS = [100, 200, 300, 400]
+US_STATE_ABBREVIATIONS = {
+    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN',
+    'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV',
+    'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN',
+    'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+}
 
 
 def validate_building(value):
     if value <= 0:
         raise ValidationError("Building number must be a positive integer.")
 
+def validate_us_state(value):
+    if value.upper() not in US_STATE_ABBREVIATIONS:
+        raise ValidationError(f"{value} is not a valid US state abbreviation.")
 class User(models.Model):
+    ADMIN = 'admin'
+    CLIENT = 'client'
+    ROLE_CHOICES = [
+        (ADMIN, 'Admin'),
+        (CLIENT, 'Client'),
+    ]
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    user_email = models.EmailField(unique= True, max_length=254)
-    user_name = models.CharField(max_length=20)
-    user_password = models.CharField(max_length=100,unique=True)
-
+    email = models.EmailField(unique= True, max_length=254)
+    userName = models.CharField(max_length=20)
+    password = models.CharField(max_length=100,unique=True)
 
     def save(self, *args, **kwargs):
-        if not self.pk or not self.user_password.startswith('pbkdf2_'):
-            self.user_password = make_password(self.user_password)
+        if not self.pk or not self.password.startswith('pbkdf2_'):
+            self.password = make_password(self.password)
         super().save(*args, **kwargs)
-
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     
 class ApartmentComplex(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    address = models.TextField()
+    street = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=2, validators=[validate_us_state])
+    zipcode = models.CharField(
+        max_length=10,
+        validators=[RegexValidator(
+            regex=r'^\d{5}(-\d{4})?$',
+            message="Enter a valid US ZIP code (e.g. 12345 or 12345-6789)."
+        )]
+    )
     def unit_count(self):
         return Apartment.objects.filter(building__complex=self).count()
     def occupied_unit_count(self):
@@ -125,4 +148,23 @@ class MaintenanceRequest(models.Model):
     def __str__(self):
         return f"Request by {self.tenant.first_name} {self.tenant.last_name} - {self.status}"
 
+
+class Document(models.Model):
+    name = models.CharField(max_length=255)
+    DOCUMENT_TYPES = [
+        ('invoice', 'Invoice'),
+        ('receipt', 'Receipt'),
+        ('lease_agreement', 'Lease Agreement'),
+        ('other', 'Other'),
+    ]
+
+    document_type = models.CharField(max_length=20, choices=DOCUMENT_TYPES)
+    uploaded_file = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    
+    
+
+    def __str__(self):
+        return f"{self.name} ({self.document_type})"
     

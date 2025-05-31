@@ -6,8 +6,8 @@ from api.views import csrf
 urlpatterns = [
     path("api/csrf/", views.csrf, name="csrf"),
     
-    path("api/v1/createUser", views.create_user, name="create_user"),
-    path("api/v1/getUser", views.getUser, name="get_user"),
+    path("api/v1/createUser", views.createUser, name="createUser"),
+    # path("api/v1/getUser", views.getUser, name="get_user"),
 
     path("api/v1/createApartmentComplex", views.createApartmentComplex, name="create_apartmentComplex"),
     path('api/v1/getApartmentComplex', views.getApartmentComplex, name='get_apartmentComplex'),
@@ -28,7 +28,15 @@ urlpatterns = [
     path('api/v1/createPayment', views.createPayment, name='create_payment'),
     path('api/v1/getPayments', views.getPayments, name='get_payments'),
 
-    path('api/v1/maintenanceRequest', views.maintenance, name='maintenanceRequests'),
+    path('api/v1/maintenanceRequest', views.createMaintenance, name='createMaintenance'),
+
+    path("api/v1/getDocuments", views.getDocuments, name="getDocuments"),
+
+    path('api/v1/getDocument/<int:pk>/', views.getDocument, name='getDocument'),
+
+    path('api/v1/createDocument', views.createDocument, name='createDocument'),
+
+    path('api/v1/deleteDocument/<int:pk>/delete/', views.deleteDocument, name='deleteDocument'),
    
 ]
     
