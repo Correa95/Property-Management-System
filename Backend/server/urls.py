@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 from api.views import csrf  
 urlpatterns = [
     path('', admin.site.urls),
-    #  path("api/csrf", csrf, name="csrf"),
+     path("api/csrf", csrf, name="csrf"),
     path("api/v1/auth/login", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/v1/token/auth/refresh", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/", include("api.urls"))
