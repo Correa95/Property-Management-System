@@ -7,7 +7,7 @@ urlpatterns = [
     path("api/csrf/", views.csrf, name="csrf"),
     
     path("api/v1/createUser", views.createUser, name="createUser"),
-    # path("api/v1/getUser", views.getUser, name="get_user"),
+  
 
     path("api/v1/createApartmentComplex", views.createApartmentComplex, name="create_apartmentComplex"),
     path('api/v1/getApartmentComplex', views.getApartmentComplex, name='get_apartmentComplex'),

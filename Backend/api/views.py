@@ -46,12 +46,7 @@ def createUser(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# @api_view(["GET"])
-# @permission_classes([IsAdmin])
-# def getUser(request):
-#     users = User.objects.all()
-#     serializer = UserSerializer(users, many=True)
-#     return Response(serializer.data)
+
 
 
 @api_view(["POST"])
