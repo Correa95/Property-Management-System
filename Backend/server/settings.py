@@ -4,6 +4,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 from datetime import timedelta
 load_dotenv()
+from corsheaders.defaults import default_headers
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -163,28 +165,16 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-]
-# CORS_ALLOWED_ORIGINS = [
+# CSRF_TRUSTED_ORIGINS = [
 #     "http://localhost:5173",
 # ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
-CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_HEADERS = [
-    "content-type",
-    "authorization",
-]
-CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 
-CSRF_COOKIE_HTTPONLY = False  # frontend JS can read the cookie
-CSRF_COOKIE_SAMESITE = "Lax"  # or "None" if HTTPS with secure cookies
-CSRF_COOKIE_SECURE = False    # True if HTTPS in production
-SESSION_COOKIE_SAMESITE = "Lax"
-SESSION_COOKIE_SECURE = False
+
+
 
 
 
