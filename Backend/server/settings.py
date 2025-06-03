@@ -4,7 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from datetime import timedelta
 load_dotenv()
-from corsheaders.defaults import default_headers
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -15,7 +15,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-&_83t=n!3ey#s^8x78d01d-e0bi*7hl1=vsruuu_l&lj^9adc('
 SECRET_KEY = os.environ.get('SECRET_KEY')
 if not SECRET_KEY:
     raise ValueError("SECRET_KEY not found in environment variables.")
@@ -132,7 +131,7 @@ DB_USERNAME = os.environ.get("RDS_USERNAME")
 DB_PASSWORD = os.environ.get("RDS_PASSWORD")
 DB_HOST = os.environ.get("RDS_HOST")
 DB_PORT = os.environ.get("RDS_PORT")
-SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -171,14 +170,6 @@ AUTH_PASSWORD_VALIDATORS = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
-
-
-
-
-
-
-
-
 
 
 # Internationalization
