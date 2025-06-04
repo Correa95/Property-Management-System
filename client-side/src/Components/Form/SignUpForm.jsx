@@ -29,7 +29,6 @@ function SignUpForm() {
 
     try {
       const response = await fetch("http://localhost:8000/api/v1/createUser", {
-        credentials: "include",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +41,6 @@ function SignUpForm() {
           password: password,
           role: role,
         }),
-        credentials: "include",
       });
 
       if (!response.ok) {
