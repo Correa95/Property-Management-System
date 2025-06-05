@@ -37,7 +37,7 @@ path("api/v1/editLease/<int:pk>/", views.editLease, name="edit_lease"),
 
     path("api/v1/getDocuments", views.getDocuments, name="get_documents"),
 
-    # path('api/v1/getDocument/<int:pk>/', views.getDocument, name='getDocument'),
+  
 
     path('api/v1/createDocument', views.createDocument, name='create_document'),
 
