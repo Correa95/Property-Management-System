@@ -23,9 +23,7 @@ urlpatterns = [
     path("api/v1/createTenant", views.createTenant, name = "create_tenant"),
     path("api/v1/getTenants", views.getTenants, name = "get_tenants"),
     path("api/v1/getTenant/<int:pk>", views.getTenant, name = "get_tenant"),
-    # path("api/v1/editTenant", views.editTenant, name="edit_tenant"),
-
-    # path("api/v1/editLease", views.editTenant, name="edit_tenant"),
+  
     
     path("api/v1/editTenant/<int:pk>/", views.editTenant, name="edit_tenant"),
 path("api/v1/editLease/<int:pk>/", views.editLease, name="edit_lease"),
