@@ -1,4 +1,5 @@
 from rest_framework.decorators import api_view, permission_classes
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import AllowAny, BasePermission
 from rest_framework.response import Response
 from rest_framework import status
@@ -28,16 +29,33 @@ class IsAdminOrIsClient(BasePermission):
 
 
 
+from rest_framework.views import APIView
+from django.http import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.http import require_GET
 
+@require_GET
+@ensure_csrf_cookie
+def get_csrf_token(request):
+    return JsonResponse({'message': 'CSRF cookie set'})
+# @csrf_exempt
+# @api_view(["POST"])
+# @permission_classes([AllowAny])
+# def createUser(request):
+#     serializer = UserSerializer(data=request.data)
+#     if serializer.is_valid():
+#         user = serializer.save()
+#         return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class CreateUserView(APIView):
+    permission_classes = [AllowAny]
 
-@api_view(["POST"])
-@permission_classes([AllowAny])
-def createUser(request):
-    serializer = UserSerializer(data=request.data)
-    if serializer.is_valid():
-        user = serializer.save()
-        return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -217,16 +235,16 @@ def getDocuments(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
-@permission_classes([IsAdmin])
-def getDocument(request, pk):
-    try:
-        document = Document.objects.get(pk=pk)
-    except Document.DoesNotExist:
-        return Response({"error": "Document not found"}, status=status.HTTP_404_NOT_FOUND)
+# @api_view(['GET'])
+# @permission_classes([IsAdmin])
+# def getDocument(request, pk):
+#     try:
+#         document = Document.objects.get(pk=pk)
+#     except Document.DoesNotExist:
+#         return Response({"error": "Document not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    serializer = DocumentSerializer(document)
-    return Response(serializer.data)
+#     serializer = DocumentSerializer(document)
+#     return Response(serializer.data)
 
 
 @api_view(['POST'])
