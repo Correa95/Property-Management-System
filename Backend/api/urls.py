@@ -1,14 +1,14 @@
 from django.urls import path
 from . import views
-from .views import CreateUserView 
+
 from .views import get_csrf_token
 urlpatterns = [
   
     # path('csrf/', get_csrf_token),
      path("api/v1/csrf/", get_csrf_token, name="get_csrf_token"),
      
-    # path("api/v1/createUser", views.createUser, name="createUser"),
-        path("api/v1/createUser", CreateUserView.as_view(), name="create_user"),
+    path("api/v1/createUser", views.createUser, name="createUser"),
+      
   
 
     path("api/v1/createApartmentComplex", views.createApartmentComplex, name="create_apartmentComplex"),
