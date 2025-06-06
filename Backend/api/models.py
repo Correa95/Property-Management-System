@@ -216,7 +216,14 @@ class Payroll(models.Model):
     is_paid = models.BooleanField(default=False)
     paid_on = models.DateField(null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        total_tax = (self.gross_pay * self.state_tax_rate) + (self.gross_pay * self.federal_tax_rate)
+        self.deductions = total_tax
+        self.net_pay = self.gross_pay - total_tax
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.employee.first_name} {self.employee.last_name} - {self.pay_period_end}"
+
     
     
