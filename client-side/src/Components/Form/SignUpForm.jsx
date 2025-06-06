@@ -14,9 +14,16 @@ function SignUpForm() {
   const [success, setSuccess] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const getCookie = (name) => {
+    const cookieValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(name + "="))
+      ?.split("=")[1];
+    return cookieValue;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submit triggered");
     setError(null);
     setSuccess(null);
 
@@ -28,11 +35,23 @@ function SignUpForm() {
     setIsLoading(true);
 
     try {
+      // 1. Get CSRF cookie first
+      await fetch("http://localhost:8000/api/v1/csrf/", {
+        method: "GET",
+        credentials: "include", // ⬅️ important
+      });
+
+      // 2. Get the CSRF token from the cookie
+      const csrftoken = getCookie("csrftoken");
+
+      // 3. Make the POST request with the CSRF token
       const response = await fetch("http://localhost:8000/api/v1/createUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken, // ⬅️ include the token
         },
+        credentials: "include", // ⬅️ this sends cookies like csrftoken
         body: JSON.stringify({
           username: userName,
           email: email,
@@ -44,7 +63,8 @@ function SignUpForm() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create user");
+        const errorData = await response.json();
+        throw new Error(errorData?.detail || "Failed to create user");
       }
 
       setSuccess("User created successfully!");
@@ -53,6 +73,7 @@ function SignUpForm() {
       setUserName("");
       setEmail("");
       setPassword("");
+      setRole("");
 
       setTimeout(() => {
         navigate("/login");
@@ -98,8 +119,9 @@ function SignUpForm() {
             onChange={(e) => setRole(e.target.value)}
           >
             <option value="">Select role</option>
-            <option value="client">Client</option>
+            <option value="manager">Client</option>
             <option value="admin">Admin</option>
+            <option value="client">Client</option>
           </select>
           <input
             type="text"

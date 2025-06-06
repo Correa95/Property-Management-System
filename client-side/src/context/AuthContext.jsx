@@ -7,14 +7,14 @@ export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userRole, setUserRole] = useState(null);
 
-  async function login(email, password) {
+  async function login(userName, password) {
     try {
       const response = await fetch("http://localhost:8000/api/v1/auth/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ userName, password }),
       });
 
       const data = await response.json();
