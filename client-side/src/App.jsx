@@ -13,7 +13,8 @@ import SignUpForm from "./Components/Form/SignUpForm";
 import LoginForm from "./Components/Form/LogInForm";
 import ClientLayout from "./ClientsRoutes/ClientLayout";
 import ClientDashboard from "./ClientRoutes/ClientDashboard";
-
+import Payroll from "./Components/PageLayouts/Payroll";
+import Employees from "./Components/PageLayouts/Employees";
 function App() {
   const { isAuthenticated, userRole } = useAuth();
   const isManager = userRole === "manager";
@@ -69,7 +70,7 @@ function App() {
           />
           <Route
             path="employee"
-            element={isManager ? <Employee /> : <Navigate to="/" />}
+            element={isManager ? <Employees /> : <Navigate to="/" />}
           />
           <Route
             path="payroll"

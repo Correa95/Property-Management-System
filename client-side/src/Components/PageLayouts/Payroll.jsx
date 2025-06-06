@@ -1,5 +1,5 @@
 function Payroll() {
-  return <div></div>;
+  return <div>PAYROLL</div>;
 }
 
 export default Payroll;
