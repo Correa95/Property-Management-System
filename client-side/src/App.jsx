@@ -12,7 +12,7 @@ import Units from "./Components/PageLayouts/Units";
 import SignUpForm from "./Components/Form/SignUpForm";
 import LoginForm from "./Components/Form/LogInForm";
 import ClientLayout from "./ClientsRoutes/ClientLayout";
-import ClientDashboard from "./ClientRoutes/ClientDashboard";
+import ClientDashBoard from "./ClientsRoutes/ClientDashBoard";
 import Payroll from "./Components/PageLayouts/Payroll";
 import Employees from "./Components/PageLayouts/Employees";
 function App() {
@@ -80,7 +80,7 @@ function App() {
       )}
       {isAuthenticated && isClient && (
         <Route path="/" element={<ClientLayout />}>
-          <Route index element={<ClientDashboard />} />
+          <Route index element={<ClientDashBoard />} />
         </Route>
       )}
       <Route
