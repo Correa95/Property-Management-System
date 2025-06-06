@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from django.db.models import Sum
 from django.contrib.auth.hashers import make_password
-from api.models import  Apartment, ApartmentComplex, Tenant, Lease, Payment, User, MaintenanceRequest, Building, Document
+from api.models import  Apartment, ApartmentComplex, Tenant, Lease, Payment, User, MaintenanceRequest, Building, Document, Employee, Payroll
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -144,6 +144,27 @@ class DocumentSerializer(serializers.ModelSerializer):
         if obj.uploaded_file and hasattr(obj.uploaded_file, 'url'):
             return obj.uploaded_file.url
         return None
+    
+class EmployeeSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Employee
+        fields = '__all__'
+
+    def get_full_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}"
+
+class PayrollSerializer(serializers.ModelSerializer):
+    employee_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Payroll
+        fields = '__all__'
+
+    def get_employee_name(self, obj):
+        return f"{obj.employee.first_name} {obj.employee.last_name}"
+
     
     
 

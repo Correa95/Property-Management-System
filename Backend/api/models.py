@@ -24,9 +24,11 @@ def validate_us_state(value):
     if value.upper() not in US_STATE_ABBREVIATIONS:
         raise ValidationError(f"{value} is not a valid US state abbreviation.")
 class User(models.Model):
+    MANAGER = 'manager'
     ADMIN = 'admin'
     CLIENT = 'client'
     ROLE_CHOICES = [
+        (MANAGER, 'Manager'),
         (ADMIN, 'Admin'),
         (CLIENT, 'Client'),
     ]
@@ -167,4 +169,54 @@ class Document(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.document_type})"
+    
+class Employee(models.Model):
+    FULL_TIME = 'FT'
+    PART_TIME = 'PT'
+    CONTRACT = 'CT'
+
+    EMPLOYEE_TYPE_CHOICES = [
+        (FULL_TIME, 'Full-Time'),
+        (PART_TIME, 'Part-Time'),
+        (CONTRACT, 'Contract'),
+    ]
+
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=20)
+    employee_type = models.CharField(max_length=2, choices=EMPLOYEE_TYPE_CHOICES)
+    salary = models.DecimalField(max_digits=10, decimal_places=2)  # monthly or hourly
+    hourly_rate = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    start_date = models.DateField()
+
+    street = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=2, validators=[validate_us_state])
+    zipcode = models.CharField(
+        max_length=10,
+        validators=[RegexValidator(
+            regex=r'^\d{5}(-\d{4})?$',
+            message="Enter a valid US ZIP code (e.g. 12345 or 12345-6789)."
+        )]
+    )
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+class Payroll(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    pay_period_start = models.DateField()
+    pay_period_end = models.DateField()
+    gross_pay = models.DecimalField(max_digits=10, decimal_places=2)
+    state_tax_rate = models.DecimalField(max_digits=5, decimal_places=4, default=0.05)
+    federal_tax_rate = models.DecimalField(max_digits=5, decimal_places=4, default=0.10)
+    deductions = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    net_pay = models.DecimalField(max_digits=10, decimal_places=2)
+    is_paid = models.BooleanField(default=False)
+    paid_on = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.employee.first_name} {self.employee.last_name} - {self.pay_period_end}"
+    
     

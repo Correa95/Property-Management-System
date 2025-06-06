@@ -6,29 +6,39 @@ from rest_framework import status
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET
-from api.models import Apartment, ApartmentComplex, Tenant, Lease, Payment, User, MaintenanceRequest, Document
+from api.models import Apartment, ApartmentComplex, Tenant, Lease, Payment, User, MaintenanceRequest, Document, Employee, Payroll
 from .serializers import (
     UserSerializer, ApartmentSerializer, ApartmentComplexSerializer,
-    TenantSerializer, LeaseSerializer, PaymentSerializer, DocumentSerializer
+    TenantSerializer, LeaseSerializer, PaymentSerializer, DocumentSerializer, EmployeeSerializer, PayrollSerializer
 )
 
+        # return request.user.role is ["Admin", "Client"]
 
-class IsAdmin(BasePermission):
+class IsManagerOrIsAdmin(BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.role == "Admin"
-
-
-class IsClient(BasePermission):
-    def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.role == "Client"
-
-
+        return (
+            request.user.is_authenticated and
+            request.user.role in ["Manager", "Client"]
+        )
 class IsAdminOrIsClient(BasePermission):
     def has_permission(self, request, view):
         return (
             request.user.is_authenticated and
             request.user.role in ["Admin", "Client"]
         )
+
+class IsManager(BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.role == "Manager"
+
+class IsAdmin(BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.role == "Admin"
+    
+class IsClient(BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.role == "Client"
+
 
 
 @require_GET
@@ -130,7 +140,7 @@ def getTenant(request, pk):
 
 @api_view(["PATCH"])
 @permission_classes([IsAdmin])
-def editTenant(request, pk):
+def updateTenant(request, pk):
     try:
         tenant = Tenant.objects.get(pk=pk)
     except Tenant.DoesNotExist:
@@ -145,7 +155,7 @@ def editTenant(request, pk):
 
 @api_view(["PATCH"])
 @permission_classes([IsAdmin])
-def editLease(request, pk):
+def updateLease(request, pk):
     try:
         lease = Lease.objects.get(pk=pk)
     except Lease.DoesNotExist:
@@ -258,3 +268,105 @@ def deleteDocument(request, pk):
 
     document.delete()
     return Response({"message": "Document deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+# EMPLOYEE VIEWS
+
+@api_view(["GET"])
+@permission_classes([IsManager])
+def getEmployees(request):
+    employees = Employee.objects.all()
+    serializer = EmployeeSerializer(employees, many=True)
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
+@permission_classes([IsManager])
+def getEmployee(request, pk):
+    try:
+        employee = Employee.objects.get(pk=pk)
+    except Employee.DoesNotExist:
+        return Response({"error": "Employee not found"}, status=status.HTTP_404_NOT_FOUND)
+    serializer = EmployeeSerializer(employee)
+    return Response(serializer.data)
+
+
+@api_view(["POST"])
+@permission_classes([IsManager])
+def createEmployee(request):  # Renamed from createEmployer for consistency
+    serializer = EmployeeSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(["PATCH"])
+@permission_classes([IsManager])
+def updateEmployee(request, pk):
+    try:
+        employee = Employee.objects.get(pk=pk)
+    except Employee.DoesNotExist:
+        return Response({"error": "Employee not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = EmployeeSerializer(employee, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsManager])
+def deleteEmployee(request, pk):
+    try:
+        employee = Employee.objects.get(pk=pk)
+    except Employee.DoesNotExist:
+        return Response({"error": "Employee not found"}, status=status.HTTP_404_NOT_FOUND)
+    employee.delete()
+    return Response({"message": "Employee deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+
+# PAYROLL VIEWS
+@api_view(["GET"])
+@permission_classes([IsManager])
+def getPayrolls(request):
+    payrolls = Payroll.objects.all()
+    serializer = PayrollSerializer(payrolls, many=True)
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
+@permission_classes([IsManager])
+def getPayroll(request, pk):
+    try:
+        payroll = Payroll.objects.get(pk=pk)
+    except Payroll.DoesNotExist:
+        return Response({"error": "Payroll not found"}, status=status.HTTP_404_NOT_FOUND)
+    serializer = PayrollSerializer(payroll)
+    return Response(serializer.data)
+
+
+@api_view(["POST"])
+@permission_classes([IsManager])
+def createPayroll(request):
+    serializer = PayrollSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(["PUT"])
+@permission_classes([IsManager])
+def updatePayroll(request, pk):
+    try:
+        payroll = Payroll.objects.get(pk=pk)
+    except Payroll.DoesNotExist:
+        return Response({"error": "Payroll not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = PayrollSerializer(payroll, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
