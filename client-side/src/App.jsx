@@ -16,6 +16,7 @@ import ClientDashboard from "./ClientRoutes/ClientDashboard";
 
 function App() {
   const { isAuthenticated, userRole } = useAuth();
+  const isManager = userRole === "manager";
   const isAdmin = userRole === "Admin";
   const isClient = userRole === "Client";
 
@@ -34,26 +35,46 @@ function App() {
           <Route index element={<OverView />} />
           <Route
             path="units"
-            element={isAdmin ? <Units /> : <Navigate to="/" />}
+            element={isAdmin || isManager ? <Units /> : <Navigate to="/" />}
           />
-          <Route path="calender" element={<Calender />} />
+          <Route
+            path="calender"
+            element={isAdmin || isManager ? <Calender /> : <Navigate to="/" />}
+          />
           <Route
             path="newTenant"
-            element={isAdmin ? <NewTenant /> : <Navigate to="/" />}
+            element={isAdmin || isManager ? <NewTenant /> : <Navigate to="/" />}
           />
           <Route
             path="maintenance"
-            element={isAdmin ? <Maintenance /> : <Navigate to="/" />}
+            element={
+              isAdmin || isManager ? <Maintenance /> : <Navigate to="/" />
+            }
           />
           <Route
             path="tenantScreening"
-            element={isAdmin ? <TenantScreening /> : <Navigate to="/" />}
+            element={
+              isAdmin || isManager ? <TenantScreening /> : <Navigate to="/" />
+            }
           />
           <Route
             path="monthlyStatement"
-            element={isAdmin ? <MonthlyStatement /> : <Navigate to="/" />}
+            element={
+              isAdmin || isManager ? <MonthlyStatement /> : <Navigate to="/" />
+            }
           />
-          <Route path="documents" element={<Documents />} />
+          <Route
+            path="documents"
+            element={isAdmin || isManager ? <Documents /> : <Navigate to="/" />}
+          />
+          <Route
+            path="employee"
+            element={isManager ? <Employee /> : <Navigate to="/" />}
+          />
+          <Route
+            path="payroll"
+            element={isManager ? <Payroll /> : <Navigate to="/" />}
+          />
         </Route>
       )}
       {isAuthenticated && isClient && (
