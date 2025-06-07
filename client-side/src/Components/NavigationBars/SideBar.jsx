@@ -69,6 +69,12 @@ function SideNavBar() {
               DOCUMENTS
             </Link>
           </li>
+          <li>
+            <Link to="employees">
+              <MdInsertDriveFile className="icon" />
+              Employees
+            </Link>
+          </li>
         </ul>
       </div>
 
