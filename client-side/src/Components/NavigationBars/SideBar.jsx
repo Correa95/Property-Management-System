@@ -7,6 +7,7 @@ import {
   MdHelpOutline,
   MdSettings,
   MdLogout,
+  MdPerson,
 } from "react-icons/md";
 import { FaBuilding, FaUserPlus, FaUserCheck } from "react-icons/fa";
 import { HiOutlineDocumentReport } from "react-icons/hi";
@@ -71,7 +72,7 @@ function SideNavBar() {
           </li>
           <li>
             <Link to="employees">
-              <MdInsertDriveFile className="icon" />
+              <MdPerson className="icon" />
               Employees
             </Link>
           </li>
