@@ -8,6 +8,7 @@ import {
   MdSettings,
   MdLogout,
   MdPerson,
+  MdAttachMoney,
 } from "react-icons/md";
 import { FaBuilding, FaUserPlus, FaUserCheck } from "react-icons/fa";
 import { HiOutlineDocumentReport } from "react-icons/hi";
@@ -74,6 +75,12 @@ function SideNavBar() {
             <Link to="employees">
               <MdPerson className="icon" />
               Employees
+            </Link>
+          </li>
+          <li>
+            <Link to="payroll">
+              <MdAttachMoney className="icon" />
+              Payroll
             </Link>
           </li>
         </ul>
