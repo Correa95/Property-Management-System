@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-// import { useAuth } from "./context/AuthContext";
+import { useAuth } from "./context/AuthContext";
 import AppLayout from "./AppLayout";
 import OverView from "./Components/PageLayouts/OverView";
 import Calender from "./Components/PageLayouts/Calender";
@@ -16,23 +16,22 @@ import ClientDashBoard from "./ClientsRoutes/ClientDashBoard";
 import Payroll from "./Components/PageLayouts/Payroll";
 import Employees from "./Components/PageLayouts/Employees";
 function App() {
-  // const { isAuthenticated, userRole } = useAuth();
-  // const isManager = userRole === "manager";
-  // const isAdmin = userRole === "Admin";
-  // const isClient = userRole === "Client";
+  const { isAuthenticated, userRole } = useAuth();
+  const isManager = userRole === "manager";
+  const isAdmin = userRole === "Admin";
+  const isClient = userRole === "Client";
 
   return (
-    <>
-      <Routes>
-        <Route
-          path="/login"
-          element={!isAuthenticated ? <LoginForm /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/signUp"
-          element={!isAuthenticated ? <SignUpForm /> : <Navigate to="/" />}
-        />
-        {/* {isAuthenticated && !isClient && ( */}
+    <Routes>
+      <Route
+        path="/login"
+        element={!isAuthenticated ? <LoginForm /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/signUp"
+        element={!isAuthenticated ? <SignUpForm /> : <Navigate to="/" />}
+      />
+      {isAuthenticated && !isClient && (
         <Route path="/" element={<AppLayout />}>
           <Route index element={<OverView />} />
           <Route
@@ -78,19 +77,17 @@ function App() {
             element={isManager ? <Payroll /> : <Navigate to="/" />}
           />
         </Route>
-        {/* // )} */}
-        {/* {isAuthenticated && isClient && ( */}
-        {/* //{" "} */}
+      )}
+      {isAuthenticated && isClient && (
         <Route path="/" element={<ClientLayout />}>
           <Route index element={<ClientDashBoard />} />
         </Route>
-        {/* // )} */}
-        <Route
-          path="*"
-          element={<Navigate to={isAuthenticated ? "/" : "/login"} />}
-        />
-      </Routes>
-    </>
+      )}
+      <Route
+        path="*"
+        element={<Navigate to={isAuthenticated ? "/" : "/login"} />}
+      />
+    </Routes>
   );
 }
 export default App;
