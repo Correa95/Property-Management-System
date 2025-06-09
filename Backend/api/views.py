@@ -44,6 +44,7 @@ class IsClient(BasePermission):
 @require_GET
 @ensure_csrf_cookie
 def get_csrf_token(request):
+    print("Hit CSRF endpoint")
     return JsonResponse({'message': 'CSRF cookie set'})
 
 
