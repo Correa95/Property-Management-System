@@ -20,7 +20,7 @@ if not SECRET_KEY:
     raise ValueError("SECRET_KEY not found in environment variables.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     "api",
     "rest_framework"
 ]

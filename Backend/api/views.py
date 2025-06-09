@@ -48,6 +48,8 @@ def get_csrf_token(request):
     return JsonResponse({'message': 'CSRF cookie set'})
 
 
+
+
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes([AllowAny])
