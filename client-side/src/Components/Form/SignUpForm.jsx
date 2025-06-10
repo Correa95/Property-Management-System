@@ -35,23 +35,23 @@ function SignUpForm() {
     setIsLoading(true);
 
     try {
-      // 1. Get CSRF cookie first
+      console.log("🚀 Fetching CSRF token...");
       await fetch("http://localhost:8000/api/v1/csrf/", {
         method: "GET",
-        credentials: "include", // ⬅️ important
+        credentials: "include",
       });
 
-      // 2. Get the CSRF token from the cookie
       const csrftoken = getCookie("csrftoken");
+      console.log("🔑 CSRF Token:", csrftoken);
 
-      // 3. Make the POST request with the CSRF token
+      console.log("📡 Sending POST request...");
       const response = await fetch("http://localhost:8000/api/v1/createUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRFToken": csrftoken, // ⬅️ include the token
+          "X-CSRFToken": csrftoken,
         },
-        credentials: "include", // ⬅️ this sends cookies like csrftoken
+        credentials: "include",
         body: JSON.stringify({
           username: userName,
           email: email,
@@ -62,19 +62,14 @@ function SignUpForm() {
         }),
       });
 
+      console.log("📡 POST request sent!", response);
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData?.detail || "Failed to create user");
       }
 
       setSuccess("User created successfully!");
-      setFirstName("");
-      setLastName("");
-      setUserName("");
-      setEmail("");
-      setPassword("");
-      setRole("");
-
       setTimeout(() => {
         navigate("/login");
       }, 2000);
