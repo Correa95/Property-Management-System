@@ -2,15 +2,15 @@ from django.urls import path
 from . import views
 
 from .views import get_csrf_token
+from django.http import JsonResponse
 urlpatterns = [
   
-    # path('csrf/', get_csrf_token),
-     path("csrf/", get_csrf_token, name="get_csrf_token"),
-    path("createUser", views.createUser, name="createUser"),
-      
+    # path("csrf/", get_csrf_token, name="get_csrf_token"),
+    path("createUser/", views.createUser, name="createUser"),
+
 # APARTMENT cOMPLEX ROUTES
-    path("createApartmentComplex", views.createApartmentComplex, name="create_apartmentComplex"),
-    path('getApartmentComplex', views.getApartmentComplex, name='get_apartmentComplex'),
+    path("createApartmentComplex/", views.createApartmentComplex, name="create_apartmentComplex"),
+    path('getApartmentComplex/', views.getApartmentComplex, name='get_apartmentComplex'),
 
 # APARTMENT ROUTES
     path("getApartments/", views.getApartments, name = "get_apartments"),

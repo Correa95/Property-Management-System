@@ -13,6 +13,13 @@ from .serializers import (
 )
 
         # return request.user.role is ["Admin", "Client"]
+from django.http import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.http import require_GET,require_http_methods
+
+from django.views.decorators.clickjacking import xframe_options_exempt
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_exempt
 
 class IsManagerOrIsAdmin(BasePermission):
     def has_permission(self, request, view):
@@ -41,11 +48,33 @@ class IsClient(BasePermission):
 
 
 
-@require_GET
+# @require_GET
+# @ensure_csrf_cookie
+# def get_csrf_token(request):
+#     print("Hit CSRF endpoint")
+#     return JsonResponse({'message': 'CSRF cookie set'})
+# @require_GET
+# @ensure_csrf_cookie
+# def get_csrf_token(request):
+#     response = JsonResponse({"message": "CSRF cookie set"})
+#     response["Access-Control-Allow-Origin"] = "http://localhost:5173"
+#     response["Access-Control-Allow-Credentials"] = "true"
+#     response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+#     response["Access-Control-Allow-Headers"] = "Content-Type, X-CSRFToken"
+
+#     return response
+@require_http_methods(["GET", "OPTIONS"])
 @ensure_csrf_cookie
 def get_csrf_token(request):
-    print("Hit CSRF endpoint")
-    return JsonResponse({'message': 'CSRF cookie set'})
+    response = JsonResponse({"message": "CSRF cookie set"})
+    response["Access-Control-Allow-Origin"] = "http://localhost:5173"
+    response["Access-Control-Allow-Credentials"] = "true"
+    response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    response["Access-Control-Allow-Headers"] = "Content-Type, X-CSRFToken"
+
+    return response
+
+
 
 
 
