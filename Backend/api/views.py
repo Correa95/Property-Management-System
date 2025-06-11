@@ -13,7 +13,7 @@ from .serializers import (
 )
 
         # return request.user.role is ["Admin", "Client"]
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET,require_http_methods
 
@@ -54,6 +54,7 @@ class IsClient(BasePermission):
 #     print("Hit CSRF endpoint")
 #     return JsonResponse({'message': 'CSRF cookie set'})
 # @require_GET
+# @require_http_methods(["GET", "OPTIONS"])
 # @ensure_csrf_cookie
 # def get_csrf_token(request):
 #     response = JsonResponse({"message": "CSRF cookie set"})
@@ -61,12 +62,18 @@ class IsClient(BasePermission):
 #     response["Access-Control-Allow-Credentials"] = "true"
 #     response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
 #     response["Access-Control-Allow-Headers"] = "Content-Type, X-CSRFToken"
-
 #     return response
-@require_http_methods(["GET", "OPTIONS"])
+
+
 @ensure_csrf_cookie
+@require_http_methods(["GET", "OPTIONS"])
 def get_csrf_token(request):
-    response = JsonResponse({"message": "CSRF cookie set"})
+    if request.method == "OPTIONS":
+        response = HttpResponse()
+    else:
+        response = JsonResponse({"message": "CSRF cookie set"})
+
+    # Add CORS headers manually
     response["Access-Control-Allow-Origin"] = "http://localhost:5173"
     response["Access-Control-Allow-Credentials"] = "true"
     response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
