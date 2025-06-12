@@ -43,8 +43,13 @@ function SignUpForm() {
 
       const csrftoken = getCookie("csrftoken");
       console.log("🔑 CSRF Token:", csrftoken);
-
+      if (!csrftoken) {
+        setError("CSRF token not found. Make sure the server sets it.");
+        setIsLoading(false);
+        return;
+      }
       console.log("📡 Sending POST request...");
+
       const response = await fetch("http://localhost:8000/api/v1/createUser", {
         method: "POST",
         headers: {
