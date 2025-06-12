@@ -1,23 +1,24 @@
 require("dotenv").config();
 const express = require("express");
+const morgan = require("morgan");
 const app = express();
 const PORT = 3000;
-const mainRouter = require("./routes");
-// const apiRoutes = require("./routes/index");
+const controller = require("./routes");
 
-//API routes // Mount all API routes under /api or root
-app.use("/api", mainRouter);
-
-// middleware
+// middleware first
 app.use(express.json());
-app.use(require("morgan")("dev"));
+app.use(morgan("dev"));
 
-//error handling
+// then your routes
+app.use("/api", controller);
+
+// error handling last
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode || 500;
-  res.status(statusCode).json({ message: "Internal server status" });
+  res.status(statusCode).json({ message: "Internal server error" });
 });
-// Running POrt
+
+// start server
 app.listen(PORT, () => {
-  console.log(`Listening to port on ${PORT}`);
+  console.log(`Listening on port ${PORT}`);
 });
