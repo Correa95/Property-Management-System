@@ -35,7 +35,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField(unique= True, max_length=254)
-    userName = models.CharField(max_length=20)
+    username = models.CharField(max_length=20)
     password = models.CharField(max_length=100,unique=True)
 
     def save(self, *args, **kwargs):

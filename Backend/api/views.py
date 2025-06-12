@@ -1,6 +1,8 @@
+from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import AllowAny, BasePermission
+from django.contrib.auth import authenticate
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import JsonResponse
@@ -20,6 +22,8 @@ from django.views.decorators.http import require_GET,require_http_methods
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.hashers import check_password
 
 class IsManagerOrIsAdmin(BasePermission):
     def has_permission(self, request, view):
@@ -48,6 +52,30 @@ class IsClient(BasePermission):
 
 
 
+
+# from .models import User
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def login_user(request):
+    username = request.data.get("username")
+    password = request.data.get("password")
+
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({"error": "Invalid username or password"}, status=status.HTTP_401_UNAUTHORIZED)
+
+    if not check_password(password, user.password):
+        return Response({"error": "Invalid username or password"}, status=status.HTTP_401_UNAUTHORIZED)
+
+    token, _ = Token.objects.get_or_create(user=user)
+
+    return Response({
+        "token": token.key,
+        "role": user.role
+    })
+
 # @require_GET
 # @ensure_csrf_cookie
 # def get_csrf_token(request):
@@ -63,7 +91,21 @@ class IsClient(BasePermission):
 #     response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
 #     response["Access-Control-Allow-Headers"] = "Content-Type, X-CSRFToken"
 #     return response
-
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def login_user(request):
+    username = request.data.get("username")
+    password = request.data.get("password")
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        # Create or get token
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({
+            "token": token.key,
+            "role": user.role  # assuming your User model has a `role` field
+        })
+    else:
+        return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
 @ensure_csrf_cookie
 @require_http_methods(["GET", "OPTIONS"])
