@@ -1,5 +1,7 @@
 const router = require("express").Router();
 
+router.use("/auth", require("../routes/auth")); // 👈 Add this line
+
 router.use("/user", require("routes/user"));
 router.use("/apartmentComplex", require("routes/apartmentComplex"));
 router.use("/building", require("routes/building"));
