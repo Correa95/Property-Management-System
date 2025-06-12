@@ -4,149 +4,174 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql" // You can change to "mysql" or "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model Admin {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  phone String
-  userName String
+// User model
+model User {
+  id        String  @id @default(uuid())
+  firstName String
+  lastName  String
+  email     String  @unique
+  username  String
   password  String
-  role      String   // e.g., 'admin', 'manager'
-  
-
-  // Relations
-  properties          Property[]
-  maintenanceRequests MaintenanceRequest[]
+  role      Role
 }
 
-model Property {
-  id        Int      @id @default(autoincrement())
-  name      String
-  address   String
-  units     Unit[]   // A property can have multiple units
-  
-  // Relations
-  adminId   Int
-  admin     Admin @relation(fields: [adminId], references: [id])
+enum Role {
+  manager
+  admin
+  client
 }
 
-model Unit {
-  id          Int      @id @default(autoincrement())
-  unitNumber  String   @unique
-  description String
-  rentAmount  Float
-
-  status      UnitStatus @default(AVAILABLE) // Unit availability status
- 
-
-  // Relations
-  propertyId  Int
-  property    Property @relation(fields: [propertyId], references: [id])
-
-  lease       Lease?
-  payments    Payment[]
-  maintenanceRequests MaintenanceRequest[]
+// ApartmentComplex model
+model ApartmentComplex {
+  id       String @id @default(uuid())
+  name     String @unique
+  street   String
+  city     String
+  state    String
+  zipcode  String
+  buildings Building[]
 }
 
-model Lease {
-  id            Int      @id @default(autoincrement())
-  startDate     DateTime
-  endDate       DateTime
-  rentAmount    Float
-  securityDeposit Float
-  isActive      Boolean  @default(true)
-
-  // Relations
-  unitId        Int @unique
-  unit          Unit @relation(fields: [unitId], references: [id])
-  tenantId      Int  @unique
-  tenant        Tenant @relation(fields: [tenantId], references: [id])
-
-  payments      Payment[]
+// Building model
+model Building {
+  id             String @id @default(uuid())
+  complexId      String @unique
+  complex        ApartmentComplex @relation(fields: [complexId], references: [id])
+  buildingNumber Int
+  apartments     Apartment[]
 }
 
-model Payment {
-  id            Int      @id @default(autoincrement())
-  amount        Float
-  paymentDate   DateTime @default(now())
-  paymentType   PaymentType
-  paymentStatus String
-
-  // Relations
-  leaseId       Int
-  lease         Lease @relation(fields: [leaseId], references: [id])
-
-  unitId        Int
-  unit          Unit @relation(fields: [unitId], references: [id])
-
-  tenantId      Int
-  tenant        Tenant @relation(fields: [tenantId], references: [id])
+// Apartment model
+model Apartment {
+  id            String @id @default(uuid())
+  buildingId    String
+  building      Building @relation(fields: [buildingId], references: [id])
+  complex        ApartmentComplex @relation(fields: [complexId], references: [id])
+  unitNumber    String
+  rentAmount    Decimal
+  numBedrooms   Int
+  squareFootage Int
+  isAvailable   Boolean @default(true)
 }
 
+// Tenant model
 model Tenant {
-  id            Int      @id @default(autoincrement())
-  name          String
-  email         String   @unique
-  phone         String
-  
-
-  // Relations
-  lease         Lease?
-  payments      Payment[]
-  maintenanceRequests MaintenanceRequest[]
+  id          String @id @default(uuid())
+  firstName   String
+  lastName    String
+  email       String @unique
+  phoneNumber String
+  dateOfBirth DateTime
 }
 
-model MaintenanceRequest {
-  id            Int      @id @default(autoincrement())
-  description   String
-  status        MaintenanceStatus @default(PENDING)
-  requestDate   DateTime @default(now())
-  resolutionDate DateTime?
-
-  // Relations
-  unitId        Int
-  unit          Unit @relation(fields: [unitId], references: [id])
-
-  tenantId      Int?
-  tenant        Tenant? @relation(fields: [tenantId], references: [id])
-
-  adminId       Int
-  admin         Admin @relation(fields: [adminId], references: [id])
+// Lease model
+model Lease {
+  id             String @id @default(uuid())
+  apartmentId    String @unique
+  apartment      Apartment @relation(fields: [apartmentId], references: [id])
+  tenantId       String
+  tenant         Tenant @relation(fields: [tenantId], references: [id])
+  startDate      DateTime
+  endDate        DateTime
+  monthlyRent    Decimal
+  securityDeposit Decimal
+  isActive       Boolean @default(true)
 }
 
-enum PaymentType {
+// Payment model
+model Payment {
+  id             String @id @default(uuid())
+  leaseId        String
+  lease          Lease @relation(fields: [leaseId], references: [id])
+  paymentAmount  Decimal
+  paymentDate    DateTime @default(now())
+  paymentMethod  PaymentMethod
+  isLatePayment  Boolean @default(false)
+}
+
+enum PaymentMethod {
   CREDIT_CARD
   BANK_TRANSFER
-  CASH
-  CHECK
 }
 
-enum PaymentStatus {
-  PENDING
-  PAID
-  FAILED
+// MaintenanceRequest model
+model MaintenanceRequest {
+  id           String @id @default(uuid())
+  tenantId     String
+  tenant       Tenant @relation(fields: [tenantId], references: [id])
+  description  String
+  requestDate  DateTime @default(now())
+  status       RequestStatus @default(PENDING)
 }
 
-enum MaintenanceStatus {
+enum RequestStatus {
   PENDING
   IN_PROGRESS
-  RESOLVED
-  REJECTED
+  COMPLETED
 }
 
-enum UnitStatus {
-  AVAILABLE
-  LEASED
-  UNDER_MAINTENANCE
+// Employee model
+model Employee {
+  id            String  @id @default(uuid())
+  firstName     String
+  lastName      String
+  email         String  @unique
+  phone         String
+  employeeType  EmployeeType
+  salary        Decimal
+  hourlyRate    Decimal?
+  startDate     DateTime
+  street        String
+  city          String
+  state         String
+  zipcode       String
 }
 
+enum EmployeeType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+}
+
+// Payroll model
+model Payroll {
+  id             String  @id @default(uuid())
+  employeeId     String
+  employee       Employee @relation(fields: [employeeId], references: [id])
+  payPeriodStart DateTime
+  payPeriodEnd   DateTime
+  grossPay       Decimal
+  stateTaxRate   Decimal @default(0.05)
+  federalTaxRate Decimal @default(0.10)
+  deductions     Decimal @default(0.00)
+  netPay         Decimal
+  isPaid         Boolean @default(false)
+  paidOn         DateTime?
+}
+
+
+
+// Document model
+model Document {
+  id           String  @id @default(uuid())
+  name         String
+  documentType DocumentType
+  uploadedFile String
+  uploadedAt   DateTime @default(now())
+}
+
+enum DocumentType {
+  INVOICE
+  RECEIPT
+  LEASE_AGREEMENT
+  OTHER
+}
