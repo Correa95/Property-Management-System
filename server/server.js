@@ -2,22 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const PORT = 3000;
+const mainRouter = require("./routes");
 // const apiRoutes = require("./routes/index");
-const propertyRoute = require("./Controllers/property");
-const unitsRoute = require("./Controllers/units");
-const tenantsRoute = require("./Controllers/tenants");
-const paymentsRoute = require("./Controllers/payments");
 
-//API routes
-app.use("/api/v1/property", propertyRoute);
-app.use("/api/v1/units", unitsRoute);
-app.use("/api/v1/tenants", tenantsRoute);
-app.use("/api/v1/payments", paymentsRoute);
-
-// app.use("/api/v1/property", apiRoutes);
-// app.use("/api/v1/units", apiRoutes);
-// app.use("/api/v1/tenants", apiRoutes);
-// app.use("/api/v1/payments", apiRoutes)
+//API routes // Mount all API routes under /api or root
+app.use("/api", mainRouter);
 
 // middleware
 app.use(express.json());
