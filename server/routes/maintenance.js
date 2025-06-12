@@ -4,7 +4,7 @@ const { PrismaClient, RequestStatus } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create Request
-router.post("/", async (req, res) => {
+router.post("/api/v1/maintenance", async (req, res) => {
   const { tenantId, description, status } = req.body;
   try {
     const request = await prisma.maintenanceRequest.create({
@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
 });
 
 // Get All Requests
-router.get("/", async (req, res) => {
+router.get("/api/v1/maintenance", async (req, res) => {
   const requests = await prisma.maintenanceRequest.findMany({
     include: { tenant: true },
   });
@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Update Request
-router.put("/:id", async (req, res) => {
+router.put("/api/v1/maintenance/:id", async (req, res) => {
   const { tenantId, description, status } = req.body;
   try {
     const updated = await prisma.maintenanceRequest.update({
@@ -50,7 +50,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete Request
-router.delete("/:id", async (req, res) => {
+router.delete("/api/v1/maintenance/:id", async (req, res) => {
   try {
     await prisma.maintenanceRequest.delete({ where: { id: req.params.id } });
     res.json({ message: "Request deleted" });

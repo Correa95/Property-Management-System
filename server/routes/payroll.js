@@ -4,7 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create Payroll
-router.post("/", async (req, res) => {
+router.post("/api/v1/payroll", async (req, res) => {
   const {
     employeeId,
     payPeriodStart,
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
 });
 
 // Get All Payrolls
-router.get("/", async (req, res) => {
+router.get("/api/v1/payroll", async (req, res) => {
   const payrolls = await prisma.payroll.findMany({
     include: { employee: true },
   });
@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
 });
 
 // Get Payroll by ID
-router.get("/:id", async (req, res) => {
+router.get("/api/v1/payroll/:id", async (req, res) => {
   const payroll = await prisma.payroll.findUnique({
     where: { id: req.params.id },
     include: { employee: true },
@@ -59,7 +59,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Update Payroll
-router.put("/:id", async (req, res) => {
+router.put("/api/v1/payroll/:id", async (req, res) => {
   const {
     employeeId,
     payPeriodStart,
@@ -96,7 +96,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete Payroll
-router.delete("/:id", async (req, res) => {
+router.delete("/api/v1/payroll/:id", async (req, res) => {
   try {
     await prisma.payroll.delete({ where: { id: req.params.id } });
     res.json({ message: "Payroll deleted" });

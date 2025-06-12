@@ -4,7 +4,7 @@ const { PrismaClient, EmployeeType } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create Employee
-router.post("/", async (req, res) => {
+router.post("/api/v1/employee", async (req, res) => {
   const {
     firstName,
     lastName,
@@ -44,13 +44,13 @@ router.post("/", async (req, res) => {
 });
 
 // Get All Employees
-router.get("/", async (req, res) => {
+router.get("/api/v1/employee", async (req, res) => {
   const employees = await prisma.employee.findMany();
   res.json(employees);
 });
 
 // Get Employee by ID
-router.get("/:id", async (req, res) => {
+router.get("/api/v1/employee/:id", async (req, res) => {
   const employee = await prisma.employee.findUnique({
     where: { id: req.params.id },
   });
@@ -60,7 +60,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Update Employee
-router.put("/:id", async (req, res) => {
+router.put("/api/v1/employee/:id", async (req, res) => {
   const {
     firstName,
     lastName,
@@ -101,7 +101,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete Employee
-router.delete("/:id", async (req, res) => {
+router.delete("/api/v1/employee/:id", async (req, res) => {
   try {
     await prisma.employee.delete({ where: { id: req.params.id } });
     res.json({ message: "Employee deleted" });

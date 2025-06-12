@@ -4,7 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create
-router.post("/", async (req, res) => {
+router.post("/api/v1/user", async (req, res) => {
   const { firstName, lastName, email, username, password, role } = req.body;
   try {
     const user = await prisma.user.create({
@@ -17,19 +17,19 @@ router.post("/", async (req, res) => {
 });
 
 // Read All
-router.get("/", async (req, res) => {
+router.get("/api/v1/user", async (req, res) => {
   const users = await prisma.user.findMany();
   res.json(users);
 });
 
 // Read One
-router.get("/:id", async (req, res) => {
+router.get("/api/v1/user/:id", async (req, res) => {
   const user = await prisma.user.findUnique({ where: { id: req.params.id } });
   user ? res.json(user) : res.status(404).json({ error: "User not found" });
 });
 
 // Update
-router.put("/:id", async (req, res) => {
+router.put("/api/v1/user/:id", async (req, res) => {
   const { firstName, lastName, email, username, password, role } = req.body;
   try {
     const updated = await prisma.user.update({
@@ -43,7 +43,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete
-router.delete("/:id", async (req, res) => {
+router.delete("/api/v1/user/:id", async (req, res) => {
   try {
     await prisma.user.delete({ where: { id: req.params.id } });
     res.json({ message: "User deleted" });
