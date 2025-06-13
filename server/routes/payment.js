@@ -4,7 +4,7 @@ const { PrismaClient, PaymentMethod } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create Payment
-router.post("/api/v1/payment", async (req, res) => {
+router.post("/payment", async (req, res) => {
   const { leaseId, paymentAmount, paymentMethod, isLatePayment } = req.body;
   try {
     const payment = await prisma.payment.create({
@@ -17,13 +17,13 @@ router.post("/api/v1/payment", async (req, res) => {
 });
 
 // Get All Payments
-router.get("/api/v1/payment", async (req, res) => {
+router.get("/payment", async (req, res) => {
   const payments = await prisma.payment.findMany({ include: { lease: true } });
   res.json(payments);
 });
 
 // Get Payment by ID
-router.get("/api/v1/payment/:id", async (req, res) => {
+router.get("/payment/:id", async (req, res) => {
   const payment = await prisma.payment.findUnique({
     where: { id: req.params.id },
     include: { lease: true },
@@ -34,11 +34,11 @@ router.get("/api/v1/payment/:id", async (req, res) => {
 });
 
 // Update Payment
-router.put("/api/v1/payment/:id", async (req, res) => {
+router.put("/payment/:id", async (req, res) => {
   const { leaseId, paymentAmount, paymentMethod, isLatePayment } = req.body;
   try {
     const updated = await prisma.payment.update({
-      where: { id: req.params.id },
+      where: { id: Number(req.params.id) },
       data: { leaseId, paymentAmount, paymentMethod, isLatePayment },
     });
     res.json(updated);
@@ -48,7 +48,7 @@ router.put("/api/v1/payment/:id", async (req, res) => {
 });
 
 // Delete Payment
-router.delete("/api/v1/payment/:id", async (req, res) => {
+router.delete("/payment/:id", async (req, res) => {
   try {
     await prisma.payment.delete({ where: { id: req.params.id } });
     res.json({ message: "Payment deleted" });

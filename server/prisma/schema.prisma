@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  // User model
 }
 
 datasource db {
@@ -13,12 +14,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// User model
 model User {
-  id        String  @id @default(uuid())
+  id        String @id @default(uuid())
   firstName String
   lastName  String
-  email     String  @unique
+  email     String @unique
   username  String
   password  String
   role      Role
@@ -32,19 +32,20 @@ enum Role {
 
 // ApartmentComplex model
 model ApartmentComplex {
-  id       String @id @default(uuid())
-  name     String @unique
-  street   String
-  city     String
-  state    String
-  zipcode  String
-  buildings Building[]
+  id         String      @id @default(uuid())
+  name       String      @unique
+  street     String
+  city       String
+  state      String
+  zipcode    String
+  buildings  Building[]
+  apartments Apartment[] // ✅ Back-relation to Apartment
 }
 
 // Building model
 model Building {
-  id             String @id @default(uuid())
-  complexId      String @unique
+  id             String           @id @default(uuid())
+  complexId      String           @unique
   complex        ApartmentComplex @relation(fields: [complexId], references: [id])
   buildingNumber Int
   apartments     Apartment[]
@@ -52,50 +53,55 @@ model Building {
 
 // Apartment model
 model Apartment {
-  id            String @id @default(uuid())
+  id            String           @id @default(uuid())
   buildingId    String
-  building      Building @relation(fields: [buildingId], references: [id])
-  complex        ApartmentComplex @relation(fields: [complexId], references: [id])
+  complexId     String
+  building      Building         @relation(fields: [buildingId], references: [id])
+  complex       ApartmentComplex @relation(fields: [complexId], references: [id])
   unitNumber    String
   rentAmount    Decimal
   numBedrooms   Int
   squareFootage Int
-  isAvailable   Boolean @default(true)
+  isAvailable   Boolean          @default(true)
+  leases        Lease[] // ✅ Back-relation to Lease
 }
 
 // Tenant model
 model Tenant {
-  id          String @id @default(uuid())
-  firstName   String
-  lastName    String
-  email       String @unique
-  phoneNumber String
-  dateOfBirth DateTime
+  id                  String               @id @default(uuid())
+  firstName           String
+  lastName            String
+  email               String               @unique
+  phoneNumber         String
+  dateOfBirth         DateTime
+  leases              Lease[] // ✅ Back-relation to Lease
+  maintenanceRequests MaintenanceRequest[] // ✅ Back-relation
 }
 
 // Lease model
 model Lease {
-  id             String @id @default(uuid())
-  apartmentId    String @unique
-  apartment      Apartment @relation(fields: [apartmentId], references: [id])
-  tenantId       String
-  tenant         Tenant @relation(fields: [tenantId], references: [id])
-  startDate      DateTime
-  endDate        DateTime
-  monthlyRent    Decimal
+  id              String    @id @default(uuid())
+  apartmentId     String    @unique
+  apartment       Apartment @relation(fields: [apartmentId], references: [id])
+  tenantId        String
+  tenant          Tenant    @relation(fields: [tenantId], references: [id])
+  startDate       DateTime
+  endDate         DateTime
+  monthlyRent     Decimal
   securityDeposit Decimal
-  isActive       Boolean @default(true)
+  isActive        Boolean   @default(true)
+  payments        Payment[] // ✅ Back-relation to Payment
 }
 
 // Payment model
 model Payment {
-  id             String @id @default(uuid())
-  leaseId        String
-  lease          Lease @relation(fields: [leaseId], references: [id])
-  paymentAmount  Decimal
-  paymentDate    DateTime @default(now())
-  paymentMethod  PaymentMethod
-  isLatePayment  Boolean @default(false)
+  id            String        @id @default(uuid())
+  leaseId       String
+  lease         Lease         @relation(fields: [leaseId], references: [id])
+  paymentAmount Decimal
+  paymentDate   DateTime      @default(now())
+  paymentMethod PaymentMethod
+  isLatePayment Boolean       @default(false)
 }
 
 enum PaymentMethod {
@@ -105,12 +111,12 @@ enum PaymentMethod {
 
 // MaintenanceRequest model
 model MaintenanceRequest {
-  id           String @id @default(uuid())
-  tenantId     String
-  tenant       Tenant @relation(fields: [tenantId], references: [id])
-  description  String
-  requestDate  DateTime @default(now())
-  status       RequestStatus @default(PENDING)
+  id          String        @id @default(uuid())
+  tenantId    String
+  tenant      Tenant        @relation(fields: [tenantId], references: [id])
+  description String
+  requestDate DateTime      @default(now())
+  status      RequestStatus @default(PENDING)
 }
 
 enum RequestStatus {
@@ -121,19 +127,20 @@ enum RequestStatus {
 
 // Employee model
 model Employee {
-  id            String  @id @default(uuid())
-  firstName     String
-  lastName      String
-  email         String  @unique
-  phone         String
-  employeeType  EmployeeType
-  salary        Decimal
-  hourlyRate    Decimal?
-  startDate     DateTime
-  street        String
-  city          String
-  state         String
-  zipcode       String
+  id           String       @id @default(uuid())
+  firstName    String
+  lastName     String
+  email        String       @unique
+  phone        String
+  employeeType EmployeeType
+  salary       Decimal
+  hourlyRate   Decimal?
+  startDate    DateTime
+  street       String
+  city         String
+  state        String
+  zipcode      String
+  payrolls     Payroll[] // ✅ Back-relation to Payroll
 }
 
 enum EmployeeType {
@@ -144,29 +151,27 @@ enum EmployeeType {
 
 // Payroll model
 model Payroll {
-  id             String  @id @default(uuid())
+  id             String    @id @default(uuid())
   employeeId     String
-  employee       Employee @relation(fields: [employeeId], references: [id])
+  employee       Employee  @relation(fields: [employeeId], references: [id])
   payPeriodStart DateTime
   payPeriodEnd   DateTime
   grossPay       Decimal
-  stateTaxRate   Decimal @default(0.05)
-  federalTaxRate Decimal @default(0.10)
-  deductions     Decimal @default(0.00)
+  stateTaxRate   Decimal   @default(0.05)
+  federalTaxRate Decimal   @default(0.10)
+  deductions     Decimal   @default(0.00)
   netPay         Decimal
-  isPaid         Boolean @default(false)
+  isPaid         Boolean   @default(false)
   paidOn         DateTime?
 }
 
-
-
 // Document model
 model Document {
-  id           String  @id @default(uuid())
+  id           String       @id @default(uuid())
   name         String
   documentType DocumentType
   uploadedFile String
-  uploadedAt   DateTime @default(now())
+  uploadedAt   DateTime     @default(now())
 }
 
 enum DocumentType {

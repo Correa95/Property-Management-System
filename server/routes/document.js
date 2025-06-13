@@ -4,7 +4,7 @@ const { PrismaClient, DocumentType } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create Document
-router.post("/api/v1/document", async (req, res) => {
+router.post("/document", async (req, res) => {
   const { name, documentType, uploadedFile } = req.body;
   try {
     const document = await prisma.document.create({
@@ -17,13 +17,13 @@ router.post("/api/v1/document", async (req, res) => {
 });
 
 // Get All Documents
-router.get("/api/v1/document", async (req, res) => {
+router.get("/document", async (req, res) => {
   const documents = await prisma.document.findMany();
   res.json(documents);
 });
 
 // Get Document by ID
-router.get("/api/v1/document/:id", async (req, res) => {
+router.get("/document/:id", async (req, res) => {
   const document = await prisma.document.findUnique({
     where: { id: req.params.id },
   });
@@ -33,11 +33,11 @@ router.get("/api/v1/document/:id", async (req, res) => {
 });
 
 // Update Document
-router.put("/api/v1/document/:id", async (req, res) => {
+router.put("/document/:id", async (req, res) => {
   const { name, documentType, uploadedFile } = req.body;
   try {
     const updated = await prisma.document.update({
-      where: { id: req.params.id },
+      where: { id: Number(req.params.id) },
       data: { name, documentType, uploadedFile },
     });
     res.json(updated);
@@ -47,7 +47,7 @@ router.put("/api/v1/document/:id", async (req, res) => {
 });
 
 // Delete Document
-router.delete("/api/v1/document/:id", async (req, res) => {
+router.delete("/document/:id", async (req, res) => {
   try {
     await prisma.document.delete({ where: { id: req.params.id } });
     res.json({ message: "Document deleted" });

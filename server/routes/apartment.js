@@ -4,7 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create
-router.post("/api/v1/apartment", async (req, res) => {
+router.post("/apartment", async (req, res) => {
   const {
     buildingId,
     complexId,
@@ -33,13 +33,13 @@ router.post("/api/v1/apartment", async (req, res) => {
 });
 
 // Read All
-router.get("/api/v1/apartment", async (req, res) => {
+router.get("/apartment", async (req, res) => {
   const apartments = await prisma.apartment.findMany();
   res.json(apartments);
 });
 
 // Read One
-router.get("/api/v1/apartment/:id", async (req, res) => {
+router.get("/apartment/:id", async (req, res) => {
   const apartment = await prisma.apartment.findUnique({
     where: { id: req.params.id },
   });
@@ -49,7 +49,7 @@ router.get("/api/v1/apartment/:id", async (req, res) => {
 });
 
 // Update
-router.put("/api/v1/apartment/:id", async (req, res) => {
+router.put("/apartment/:id", async (req, res) => {
   const {
     buildingId,
     complexId,
@@ -61,7 +61,7 @@ router.put("/api/v1/apartment/:id", async (req, res) => {
   } = req.body;
   try {
     const updated = await prisma.apartment.update({
-      where: { id: req.params.id },
+      where: { id: Number(req.params.id) },
       data: {
         buildingId,
         complexId,
@@ -79,7 +79,7 @@ router.put("/api/v1/apartment/:id", async (req, res) => {
 });
 
 // Delete
-router.delete("/api/v1/apartments/:id", async (req, res) => {
+router.delete("/apartments/:id", async (req, res) => {
   try {
     await prisma.apartment.delete({ where: { id: req.params.id } });
     res.json({ message: "Apartment deleted" });

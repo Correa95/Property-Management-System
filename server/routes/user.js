@@ -4,7 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create
-router.post("/api/v1/user", async (req, res) => {
+router.post("/user", async (req, res) => {
   const { firstName, lastName, email, username, password, role } = req.body;
   try {
     const user = await prisma.user.create({
@@ -17,23 +17,23 @@ router.post("/api/v1/user", async (req, res) => {
 });
 
 // Read All
-router.get("/api/v1/user", async (req, res) => {
+router.get("/user", async (req, res) => {
   const users = await prisma.user.findMany();
   res.json(users);
 });
 
 // Read One
-router.get("/api/v1/user/:id", async (req, res) => {
+router.get("/user/:id", async (req, res) => {
   const user = await prisma.user.findUnique({ where: { id: req.params.id } });
   user ? res.json(user) : res.status(404).json({ error: "User not found" });
 });
 
 // Update
-router.put("/api/v1/user/:id", async (req, res) => {
+router.put("/user/:id", async (req, res) => {
   const { firstName, lastName, email, username, password, role } = req.body;
   try {
     const updated = await prisma.user.update({
-      where: { id: req.params.id },
+      where: { id: Number(req.params.id) },
       data: { firstName, lastName, email, username, password, role },
     });
     res.json(updated);
@@ -43,7 +43,7 @@ router.put("/api/v1/user/:id", async (req, res) => {
 });
 
 // Delete
-router.delete("/api/v1/user/:id", async (req, res) => {
+router.delete("/user/:id", async (req, res) => {
   try {
     await prisma.user.delete({ where: { id: req.params.id } });
     res.json({ message: "User deleted" });
