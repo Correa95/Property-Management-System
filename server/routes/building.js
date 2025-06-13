@@ -4,7 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create
-router.post("/building/", async (req, res) => {
+router.post("/building", async (req, res) => {
   const { complexId, buildingNumber } = req.body;
   try {
     const building = await prisma.building.create({
@@ -17,7 +17,7 @@ router.post("/building/", async (req, res) => {
 });
 
 // Read All
-router.get("/building/", async (req, res) => {
+router.get("/building", async (req, res) => {
   const buildings = await prisma.building.findMany({
     include: { apartments: true },
   });
@@ -40,7 +40,7 @@ router.put("/building/:id", async (req, res) => {
   const { complexId, buildingNumber } = req.body;
   try {
     const updated = await prisma.building.update({
-      where: { id: Number(req.params.id) },
+      where: { id: req.params.id },
       data: { complexId, buildingNumber },
     });
     res.json(updated);

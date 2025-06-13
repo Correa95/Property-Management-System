@@ -52,7 +52,7 @@ router.get("/employee", async (req, res) => {
 // Get Employee by ID
 router.get("/employee/:id", async (req, res) => {
   const employee = await prisma.employee.findUnique({
-    where: { id: Number(req.params.id) },
+    where: { id: req.params.id },
   });
   employee
     ? res.json(employee)

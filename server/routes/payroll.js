@@ -50,7 +50,7 @@ router.get("/payroll", async (req, res) => {
 // Get Payroll by ID
 router.get("/payroll/:id", async (req, res) => {
   const payroll = await prisma.payroll.findUnique({
-    where: { id: Number(req.params.id) },
+    where: { id: req.params.id },
     include: { employee: true },
   });
   payroll

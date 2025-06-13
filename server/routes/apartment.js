@@ -61,7 +61,7 @@ router.put("/apartment/:id", async (req, res) => {
   } = req.body;
   try {
     const updated = await prisma.apartment.update({
-      where: { id: Number(req.params.id) },
+      where: { id: req.params.id },
       data: {
         buildingId,
         complexId,

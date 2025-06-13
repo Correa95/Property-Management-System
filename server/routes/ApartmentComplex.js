@@ -27,7 +27,7 @@ router.get("/apartmentComplex", async (req, res) => {
 // Read One
 router.get("/apartmentComplex/:id", async (req, res) => {
   const complex = await prisma.apartmentComplex.findUnique({
-    where: { id: Number(req.params.id) },
+    where: { id: req.params.id },
     include: { buildings: true },
   });
   complex

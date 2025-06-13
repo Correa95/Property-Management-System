@@ -43,7 +43,7 @@ router.get("/lease", async (req, res) => {
 // Get Lease by ID
 router.get("/lease/:id", async (req, res) => {
   const lease = await prisma.lease.findUnique({
-    where: { id: Number(req.params.id) },
+    where: { id: req.params.id },
     include: { tenant: true, apartment: true },
   });
   lease ? res.json(lease) : res.status(404).json({ error: "Lease not found" });

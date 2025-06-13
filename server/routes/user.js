@@ -33,7 +33,7 @@ router.put("/user/:id", async (req, res) => {
   const { firstName, lastName, email, username, password, role } = req.body;
   try {
     const updated = await prisma.user.update({
-      where: { id: Number(req.params.id) },
+      where: { id: req.params.id },
       data: { firstName, lastName, email, username, password, role },
     });
     res.json(updated);

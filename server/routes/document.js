@@ -37,7 +37,7 @@ router.put("/document/:id", async (req, res) => {
   const { name, documentType, uploadedFile } = req.body;
   try {
     const updated = await prisma.document.update({
-      where: { id: Number(req.params.id) },
+      where: { id: req.params.id },
       data: { name, documentType, uploadedFile },
     });
     res.json(updated);

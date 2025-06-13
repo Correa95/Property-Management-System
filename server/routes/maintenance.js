@@ -25,9 +25,9 @@ router.get("/maintenance", async (req, res) => {
 });
 
 // Get Request by ID
-router.get("/:id", async (req, res) => {
+router.get("/maintenance/:id", async (req, res) => {
   const request = await prisma.maintenanceRequest.findUnique({
-    where: { id: Number(req.params.id) },
+    where: { id: req.params.id },
     include: { tenant: true },
   });
   request

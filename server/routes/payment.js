@@ -38,7 +38,7 @@ router.put("/payment/:id", async (req, res) => {
   const { leaseId, paymentAmount, paymentMethod, isLatePayment } = req.body;
   try {
     const updated = await prisma.payment.update({
-      where: { id: Number(req.params.id) },
+      where: { id: req.params.id },
       data: { leaseId, paymentAmount, paymentMethod, isLatePayment },
     });
     res.json(updated);
