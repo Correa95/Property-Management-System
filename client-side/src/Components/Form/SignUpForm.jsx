@@ -14,14 +14,6 @@ function SignUpForm() {
   const [success, setSuccess] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getCookie = (name) => {
-    const cookieValue = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith(name + "="))
-      ?.split("=")[1];
-    return cookieValue;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -35,26 +27,11 @@ function SignUpForm() {
     setIsLoading(true);
 
     try {
-      console.log("🚀 Fetching CSRF token...");
-      await fetch("http://localhost:8000/api/v1/csrf/", {
-        method: "GET",
-        credentials: "include",
-      });
-
-      const csrftoken = getCookie("csrftoken");
-      console.log("🔑 CSRF Token:", csrftoken);
-      if (!csrftoken) {
-        setError("CSRF token not found. Make sure the server sets it.");
-        setIsLoading(false);
-        return;
-      }
-      console.log("📡 Sending POST request...");
-
-      const response = await fetch("http://localhost:8000/api/v1/createUser", {
+      const response = await fetch("http://localhost:3000/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRFToken": csrftoken,
+          // "X-CSRFToken": csrftoken,
         },
         credentials: "include",
         body: JSON.stringify({
