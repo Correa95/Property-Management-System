@@ -4,8 +4,26 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create
-router.post("/user", async (req, res) => {
+router.post("/", async (req, res) => {
   const { firstName, lastName, email, username, password, role } = req.body;
+
+  // Validation
+  if (!email || !email.includes("@")) {
+    return res.status(400).json({ error: "Invalid email format" });
+  }
+  if (!firstName || !lastName) {
+    return res.status(400).json({ error: "First and last name are required" });
+  }
+  if (!username || username.length < 3) {
+    return res
+      .status(400)
+      .json({ error: "Username must be at least 3 characters" });
+  }
+  if (!password || password.length < 6) {
+    return res
+      .status(400)
+      .json({ error: "Password must be at least 6 characters" });
+  }
   try {
     const user = await prisma.user.create({
       data: { firstName, lastName, email, username, password, role },
@@ -17,20 +35,38 @@ router.post("/user", async (req, res) => {
 });
 
 // Read All
-router.get("/user", async (req, res) => {
+router.get("/", async (req, res) => {
   const users = await prisma.user.findMany();
   res.json(users);
 });
 
 // Read One
-router.get("/user/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const user = await prisma.user.findUnique({ where: { id: req.params.id } });
   user ? res.json(user) : res.status(404).json({ error: "User not found" });
 });
 
 // Update
-router.put("/user/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { firstName, lastName, email, username, password, role } = req.body;
+
+  // Validation
+  if (!email || !email.includes("@")) {
+    return res.status(400).json({ error: "Invalid email format" });
+  }
+  if (!firstName || !lastName) {
+    return res.status(400).json({ error: "First and last name are required" });
+  }
+  if (!username || username.length < 3) {
+    return res
+      .status(400)
+      .json({ error: "Username must be at least 3 characters" });
+  }
+  if (!password || password.length < 6) {
+    return res
+      .status(400)
+      .json({ error: "Password must be at least 6 characters" });
+  }
   try {
     const updated = await prisma.user.update({
       where: { id: req.params.id },
@@ -43,7 +79,7 @@ router.put("/user/:id", async (req, res) => {
 });
 
 // Delete
-router.delete("/user/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await prisma.user.delete({ where: { id: req.params.id } });
     res.json({ message: "User deleted" });

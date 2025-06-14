@@ -4,8 +4,19 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create Tenant
-router.post("/tenant", async (req, res) => {
+router.post("/", async (req, res) => {
   const { firstName, lastName, email, phoneNumber, dateOfBirth } = req.body;
+  // ✅ Input validation
+  if (!email || !email.includes("@")) {
+    return res.status(400).json({ error: "Invalid email format" });
+  }
+  if (!firstName || !lastName) {
+    return res.status(400).json({ error: "First and last name are required" });
+  }
+  const date = new Date(dateOfBirth);
+  if (isNaN(date.getTime())) {
+    return res.status(400).json({ error: "Invalid date format" });
+  }
   try {
     const tenant = await prisma.tenant.create({
       data: { firstName, lastName, email, phoneNumber, dateOfBirth },
@@ -17,13 +28,13 @@ router.post("/tenant", async (req, res) => {
 });
 
 // Get All Tenants
-router.get("/tenant", async (req, res) => {
+router.get("/", async (req, res) => {
   const tenants = await prisma.tenant.findMany();
   res.json(tenants);
 });
 
 // Get Tenant by ID
-router.get("/tenant/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const tenant = await prisma.tenant.findUnique({
     where: { id: req.params.id },
   });
@@ -33,8 +44,20 @@ router.get("/tenant/:id", async (req, res) => {
 });
 
 // Update Tenant
-router.put("/tenant/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { firstName, lastName, email, phoneNumber, dateOfBirth } = req.body;
+
+  // ✅ Input validation
+  if (!email || !email.includes("@")) {
+    return res.status(400).json({ error: "Invalid email format" });
+  }
+  if (!firstName || !lastName) {
+    return res.status(400).json({ error: "First and last name are required" });
+  }
+  const date = new Date(dateOfBirth);
+  if (isNaN(date.getTime())) {
+    return res.status(400).json({ error: "Invalid date format" });
+  }
   try {
     const updated = await prisma.tenant.update({
       where: { id: req.params.id },
@@ -47,7 +70,7 @@ router.put("/tenant/:id", async (req, res) => {
 });
 
 // Delete Tenant
-router.delete("/tenant/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await prisma.tenant.delete({ where: { id: req.params.id } });
     res.json({ message: "Tenant deleted" });

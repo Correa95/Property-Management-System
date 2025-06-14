@@ -4,7 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create Lease
-router.post("/lease", async (req, res) => {
+router.post("/", async (req, res) => {
   const {
     apartmentId,
     tenantId,
@@ -33,7 +33,7 @@ router.post("/lease", async (req, res) => {
 });
 
 // Get All Leases
-router.get("/lease", async (req, res) => {
+router.get("/", async (req, res) => {
   const leases = await prisma.lease.findMany({
     include: { tenant: true, apartment: true },
   });
@@ -41,7 +41,7 @@ router.get("/lease", async (req, res) => {
 });
 
 // Get Lease by ID
-router.get("/lease/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const lease = await prisma.lease.findUnique({
     where: { id: req.params.id },
     include: { tenant: true, apartment: true },
@@ -80,7 +80,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete Lease
-router.delete("/lease/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await prisma.lease.delete({ where: { id: req.params.id } });
     res.json({ message: "Lease deleted" });

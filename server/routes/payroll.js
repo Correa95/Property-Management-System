@@ -4,7 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create Payroll
-router.post("/payroll", async (req, res) => {
+router.post("/", async (req, res) => {
   const {
     employeeId,
     payPeriodStart,
@@ -17,6 +17,30 @@ router.post("/payroll", async (req, res) => {
     isPaid,
     paidOn,
   } = req.body;
+  // Validate rates
+  if (
+    stateTaxRate < 0 ||
+    stateTaxRate > 1 ||
+    federalTaxRate < 0 ||
+    federalTaxRate > 1
+  ) {
+    return res.status(400).json({ error: "Tax rates must be between 0 and 1" });
+  }
+  // Validate grossPay, netPay, deductions
+  if (grossPay < 0 || netPay < 0 || deductions < 0) {
+    return res.status(400).json({ error: "Pay values cannot be negative" });
+  }
+  // const totalTax = grossPay * (stateTaxRate + federalTaxRate);
+  // const calculatedNetPay = grossPay - totalTax;
+  //   if (
+  //   typeof grossPay !== "number" || grossPay < 0 ||
+  //   typeof deductions !== "number" || deductions < 0 ||
+  //   typeof netPay !== "number" || netPay < 0 ||
+  //   stateTaxRate < 0 || stateTaxRate > 1 ||
+  //   federalTaxRate < 0 || federalTaxRate > 1
+  // ) {
+  //   return res.status(400).json({ error: "Invalid payroll input values" });
+  // }
 
   try {
     const payroll = await prisma.payroll.create({
@@ -40,7 +64,7 @@ router.post("/payroll", async (req, res) => {
 });
 
 // Get All Payrolls
-router.get("/payroll", async (req, res) => {
+router.get("/", async (req, res) => {
   const payrolls = await prisma.payroll.findMany({
     include: { employee: true },
   });
@@ -48,7 +72,7 @@ router.get("/payroll", async (req, res) => {
 });
 
 // Get Payroll by ID
-router.get("/payroll/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const payroll = await prisma.payroll.findUnique({
     where: { id: req.params.id },
     include: { employee: true },
@@ -59,7 +83,7 @@ router.get("/payroll/:id", async (req, res) => {
 });
 
 // Update Payroll
-router.put("/payroll/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const {
     employeeId,
     payPeriodStart,
@@ -72,6 +96,19 @@ router.put("/payroll/:id", async (req, res) => {
     isPaid,
     paidOn,
   } = req.body;
+  // Validate rates
+  if (
+    stateTaxRate < 0 ||
+    stateTaxRate > 1 ||
+    federalTaxRate < 0 ||
+    federalTaxRate > 1
+  ) {
+    return res.status(400).json({ error: "Tax rates must be between 0 and 1" });
+  }
+  // Validate grossPay, netPay, deductions
+  if (grossPay < 0 || netPay < 0 || deductions < 0) {
+    return res.status(400).json({ error: "Pay values cannot be negative" });
+  }
 
   try {
     const updated = await prisma.payroll.update({
@@ -96,7 +133,7 @@ router.put("/payroll/:id", async (req, res) => {
 });
 
 // Delete Payroll
-router.delete("/payroll/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await prisma.payroll.delete({ where: { id: req.params.id } });
     res.json({ message: "Payroll deleted" });

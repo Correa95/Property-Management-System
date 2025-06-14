@@ -4,8 +4,12 @@ const { PrismaClient, DocumentType } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create Document
-router.post("/document", async (req, res) => {
+router.post("/", async (req, res) => {
   const { name, documentType, uploadedFile } = req.body;
+
+  if (!Object.values(DocumentType).includes(documentType)) {
+    return res.status(400).json({ error: "Invalid document type" });
+  }
   try {
     const document = await prisma.document.create({
       data: { name, documentType, uploadedFile },
@@ -17,13 +21,13 @@ router.post("/document", async (req, res) => {
 });
 
 // Get All Documents
-router.get("/document", async (req, res) => {
+router.get("/", async (req, res) => {
   const documents = await prisma.document.findMany();
   res.json(documents);
 });
 
 // Get Document by ID
-router.get("/document/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const document = await prisma.document.findUnique({
     where: { id: req.params.id },
   });
@@ -33,8 +37,12 @@ router.get("/document/:id", async (req, res) => {
 });
 
 // Update Document
-router.put("/document/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { name, documentType, uploadedFile } = req.body;
+  if (!Object.values(DocumentType).includes(documentType)) {
+    return res.status(400).json({ error: "Invalid document type" });
+  }
+
   try {
     const updated = await prisma.document.update({
       where: { id: req.params.id },
@@ -47,7 +55,7 @@ router.put("/document/:id", async (req, res) => {
 });
 
 // Delete Document
-router.delete("/document/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await prisma.document.delete({ where: { id: req.params.id } });
     res.json({ message: "Document deleted" });

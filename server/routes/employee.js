@@ -4,7 +4,7 @@ const { PrismaClient, EmployeeType } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create Employee
-router.post("/employee", async (req, res) => {
+router.post("/", async (req, res) => {
   const {
     firstName,
     lastName,
@@ -19,6 +19,9 @@ router.post("/employee", async (req, res) => {
     state,
     zipcode,
   } = req.body;
+  if (!Object.values(EmployeeType).includes(employeeType)) {
+    return res.status(400).json({ error: "Invalid employee type" });
+  }
 
   try {
     const employee = await prisma.employee.create({
@@ -44,13 +47,13 @@ router.post("/employee", async (req, res) => {
 });
 
 // Get All Employees
-router.get("/employee", async (req, res) => {
+router.get("/", async (req, res) => {
   const employees = await prisma.employee.findMany();
   res.json(employees);
 });
 
 // Get Employee by ID
-router.get("/employee/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const employee = await prisma.employee.findUnique({
     where: { id: req.params.id },
   });
@@ -60,7 +63,7 @@ router.get("/employee/:id", async (req, res) => {
 });
 
 // Update Employee
-router.put("/employee/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const {
     firstName,
     lastName,
@@ -75,6 +78,9 @@ router.put("/employee/:id", async (req, res) => {
     state,
     zipcode,
   } = req.body;
+  if (!Object.values(EmployeeType).includes(employeeType)) {
+    return res.status(400).json({ error: "Invalid employee type" });
+  }
 
   try {
     const updated = await prisma.employee.update({
@@ -101,7 +107,7 @@ router.put("/employee/:id", async (req, res) => {
 });
 
 // Delete Employee
-router.delete("/employee/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await prisma.employee.delete({ where: { id: req.params.id } });
     res.json({ message: "Employee deleted" });
