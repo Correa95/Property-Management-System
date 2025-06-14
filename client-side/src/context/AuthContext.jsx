@@ -11,12 +11,12 @@ export function AuthProvider({ children }) {
   const [errorMessage, setErrorMessage] = useState(null);
 
   // Login user
-  async function login(username, password) {
+  async function login(userName, password) {
     try {
       const response = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ userName, password }),
       });
 
       if (!response.ok) {
