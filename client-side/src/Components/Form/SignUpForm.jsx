@@ -27,22 +27,25 @@ function SignUpForm() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // "X-CSRFToken": csrftoken,
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          username: userName,
-          email: email,
-          first_name: firstName,
-          last_name: lastName,
-          password: password,
-          role: role,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:3000/api/v1/auth/register",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            userName: userName,
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            password: password,
+            role: role,
+          }),
+        }
+      );
 
       console.log("📡 POST request sent!", response);
 

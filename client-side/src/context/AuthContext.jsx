@@ -1,140 +1,103 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+  const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userRole, setUserRole] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  // Login user
   async function login(username, password) {
     try {
-      const response = await fetch("http://localhost:8000/api/v1/auth/login", {
+      const response = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
 
       if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Login failed:", errorText);
-        setErrorMessage("Invalid credentials or server issue.");
-        throw new Error(errorText);
+        setErrorMessage("Invalid credentials.");
+        return false;
       }
 
       const data = await response.json();
-      const accessToken = data?.access;
-      const refreshToken = data?.refresh;
-      const role = data?.role;
+      const { token, role } = data;
 
-      if (!accessToken || !refreshToken) {
-        setErrorMessage("Authentication failed. Tokens not received.");
-        throw new Error("Tokens not received.");
+      if (!token || !role) {
+        setErrorMessage("Missing token or role.");
+        return false;
       }
 
-      sessionStorage.setItem("accessToken", accessToken);
-      sessionStorage.setItem("refreshToken", refreshToken);
-      sessionStorage.setItem("role", role);
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("userRole", role);
 
-      setIsAuthenticated(true);
-      setAccessToken(accessToken);
-      setUserRole(role);
-
-      return true;
-    } catch (err) {
-      console.error("Login Error:", err.message);
-      setIsAuthenticated(false);
-      return false;
-    }
-  }
-
-  async function refreshToken() {
-    try {
-      const storedRefreshToken = sessionStorage.getItem("refreshToken");
-      if (!storedRefreshToken) throw new Error("No refresh token found");
-
-      const response = await fetch(
-        "http://localhost:8000/api/v1/token/auth/refresh",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ refresh: storedRefreshToken }),
-        }
-      );
-
-      if (!response.ok) {
-        console.error("Token refresh failed, logging out...");
-        logout();
-        throw new Error("Failed to refresh token");
-      }
-
-      const data = await response.json();
-      const newAccessToken = data?.access;
-
-      if (!newAccessToken) throw new Error("Access token not received");
-
-      sessionStorage.setItem("accessToken", newAccessToken);
-      setAccessToken(newAccessToken);
-      return true;
-    } catch (err) {
-      console.error("Token Refresh Error:", err.message);
-      logout(); // Auto logout on failed refresh
-      return false;
-    }
-  }
-
-  useEffect(() => {
-    const token = sessionStorage.getItem("accessToken");
-    const role = sessionStorage.getItem("role");
-    if (token && role) {
-      setIsAuthenticated(true);
       setAccessToken(token);
       setUserRole(role);
-    }
-  }, []);
+      setIsAuthenticated(true);
+      setErrorMessage(null);
 
-  function logout() {
-    sessionStorage.removeItem("accessToken");
-    sessionStorage.removeItem("refreshToken");
-    sessionStorage.removeItem("role");
-    setIsAuthenticated(false);
-    setUserRole(null);
-    setAccessToken(null);
-    setErrorMessage(null);
+      return true;
+    } catch (err) {
+      setErrorMessage("Login failed.");
+      return false;
+    }
   }
 
-  function authFetch(url, options = {}) {
+  // Logout user
+  function logout() {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("userRole");
+    setAccessToken(null);
+    setUserRole(null);
+    setIsAuthenticated(false);
+    navigate("/login");
+  }
+
+  // Authenticated fetch
+  async function authFetch(url, options = {}) {
+    const token = localStorage.getItem("accessToken");
+
     const headers = {
-      Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
       ...options.headers,
     };
 
-    return fetch(url, { ...options, headers }).then(async (response) => {
-      if (response.status === 401) {
-        const refreshed = await refreshToken();
-        if (refreshed) {
-          headers["Authorization"] = `Bearer ${sessionStorage.getItem(
-            "accessToken"
-          )}`;
-          return fetch(url, { ...options, headers });
-        } else {
-          throw new Error("Session expired. Please log in again.");
-        }
-      }
-      return response;
-    });
+    const response = await fetch(url, { ...options, headers });
+
+    if (response.status === 401) {
+      logout();
+      throw new Error("Unauthorized. Logged out.");
+    }
+
+    return response;
   }
+
+  // Restore session on refresh
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    const role = localStorage.getItem("userRole");
+
+    if (token && role) {
+      setAccessToken(token);
+      setUserRole(role);
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
+        userRole,
+        accessToken,
         login,
         logout,
         authFetch,
-        userRole,
         errorMessage,
       }}
     >
