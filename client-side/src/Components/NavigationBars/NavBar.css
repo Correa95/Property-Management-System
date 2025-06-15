@@ -67,8 +67,19 @@
 .profileImage {
   width: 32px;
   height: 32px;
+  background-color: #007bff;
+  color: white;
   border-radius: 50%;
-  object-fit: cover;
-  margin-left: 15px;
-  border: 2px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 8px;
+  text-transform: uppercase;
+}
+
+.profileName {
+  font-weight: 500;
+  color: #333;
 }

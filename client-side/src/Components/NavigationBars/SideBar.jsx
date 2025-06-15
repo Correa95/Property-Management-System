@@ -10,11 +10,13 @@ import {
   MdPerson,
   MdAttachMoney,
 } from "react-icons/md";
+import { useAuth } from "../../context/AuthContext";
 import { FaBuilding, FaUserPlus, FaUserCheck } from "react-icons/fa";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import "./SideBar.css";
 
 function SideNavBar() {
+  const { logout } = useAuth();
   return (
     <nav className="sideBar">
       <header className="header">
@@ -42,9 +44,9 @@ function SideNavBar() {
             </Link>
           </li>
           <li>
-            <Link to="newTenant">
+            <Link to="tenants">
               <FaUserPlus className="icon" />
-              NEW TENANT
+              TENANTS
             </Link>
           </li>
           <li>
@@ -95,7 +97,7 @@ function SideNavBar() {
           <MdSettings className="icon" />
           Setting
         </button>
-        <button>
+        <button onClick={logout}>
           <MdLogout className="icon" />
           Sign Out
         </button>

@@ -1,7 +1,12 @@
 import { FiMessageSquare, FiBell, FiSearch } from "react-icons/fi";
+import { useAuth } from "../../context/AuthContext";
 import "./NavBar.css";
 
 function NavBar() {
+  const { user } = useAuth();
+  // Get first initial from first and last name
+  const firstInitial = user?.firstName?.[0]?.toUpperCase() || "U";
+  const lastInitial = user?.lastName?.[0]?.toUpperCase() || "";
   return (
     <nav className="navBarContainer">
       <div className="navBar">
@@ -18,7 +23,13 @@ function NavBar() {
             <FiBell size={20} />
           </button>
           <div className="profile">
-            <img src="Mathew" alt="User profile" className="profileImage" />
+            <div className="profileImage">
+              {firstInitial}
+              {lastInitial}
+            </div>
+            <span className="profileName">
+              {user?.firstName} {user?.lastName}
+            </span>
           </div>
         </div>
         {/* </div> */}

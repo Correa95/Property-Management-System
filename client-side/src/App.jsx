@@ -3,7 +3,7 @@ import { useAuth } from "./context/AuthContext";
 import AppLayout from "./AppLayout";
 import OverView from "./Components/PageLayouts/OverView";
 import Calender from "./Components/PageLayouts/Calender";
-import NewTenant from "./Components/PageLayouts/NewTenant";
+import Tenants from "./Components/PageLayouts/Tenants";
 import Maintenance from "./Components/PageLayouts/Maintenance";
 import TenantScreening from "./Components/PageLayouts/TenantScreening";
 import MonthlyStatement from "./Components/PageLayouts/MonthlyStatement";
@@ -50,8 +50,8 @@ function App() {
             element={isAdmin || isManager ? <Calender /> : <Navigate to="/" />}
           />
           <Route
-            path="newTenant"
-            element={isAdmin || isManager ? <NewTenant /> : <Navigate to="/" />}
+            path="tenants"
+            element={isAdmin || isManager ? <Tenants /> : <Navigate to="/" />}
           />
           <Route
             path="maintenance"

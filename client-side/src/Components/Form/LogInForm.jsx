@@ -12,15 +12,16 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const role = await login(username, password);
+    const trimmedUsername = username.trim();
+    const trimmedPassword = password.trim();
+    const role = await login(trimmedUsername, trimmedPassword);
     if (!role) {
       setError("Invalid credentials");
     } else {
       if (role === "client") {
-        navigate("/clientLayout");
+        navigate("/client");
       } else {
-        navigate("/manager");
+        navigate("/");
       }
     }
   };

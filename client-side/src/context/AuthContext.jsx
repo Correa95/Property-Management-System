@@ -8,6 +8,8 @@ export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
   const [userRole, setUserRole] = useState(null);
+  const [user, setUser] = useState(null);
+
   const [errorMessage, setErrorMessage] = useState(null);
 
   async function login(username, password) {
@@ -20,26 +22,31 @@ export function AuthProvider({ children }) {
 
       if (!response.ok) {
         setErrorMessage("Invalid credentials.");
-        return null; // return null on failure
+        return null;
       }
 
       const data = await response.json();
-      const { token, role } = data;
+      console.log("Login API response:", data);
 
-      if (!token || !role) {
+      const { token, user } = data;
+
+      if (!token || !user?.role) {
         setErrorMessage("Missing token or role.");
         return null;
       }
 
       localStorage.setItem("accessToken", token);
-      localStorage.setItem("userRole", role);
+      localStorage.setItem("userRole", user.role);
+      localStorage.setItem("firstName", user.firstName);
+      localStorage.setItem("lastName", user.lastName);
 
       setAccessToken(token);
-      setUserRole(role);
+      setUserRole(user.role);
+      setUser(user);
       setIsAuthenticated(true);
       setErrorMessage(null);
 
-      return role; // return role string on success
+      return user.role;
     } catch (errorMessage) {
       setErrorMessage(errorMessage, "Login failed.");
       return null;
@@ -77,10 +84,13 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const role = localStorage.getItem("userRole");
+    const firstName = localStorage.getItem("firstName");
+    const lastName = localStorage.getItem("lastName");
 
-    if (token && role) {
+    if (token && role && firstName && lastName) {
       setAccessToken(token);
       setUserRole(role);
+      setUser({ firstName, lastName });
       setIsAuthenticated(true);
     }
   }, []);
@@ -91,6 +101,7 @@ export function AuthProvider({ children }) {
         isAuthenticated,
         userRole,
         accessToken,
+        user,
         login,
         logout,
         authFetch,
