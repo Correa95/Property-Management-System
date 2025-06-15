@@ -15,14 +15,19 @@ import ClientLayout from "./ClientsRoutes/ClientLayout";
 import ClientDashBoard from "./ClientsRoutes/ClientDashBoard";
 import Payroll from "./Components/PageLayouts/Payroll";
 import Employees from "./Components/PageLayouts/Employees";
+
 function App() {
   const { isAuthenticated, userRole } = useAuth();
-  const isManager = userRole === "manager";
-  const isAdmin = userRole === "Admin";
-  const isClient = userRole === "Client";
+
+  const normalizedRole = userRole?.toLowerCase() || "";
+
+  const isManager = normalizedRole === "manager";
+  const isAdmin = normalizedRole === "admin";
+  const isClient = normalizedRole === "client";
 
   return (
     <Routes>
+      {/* Public routes */}
       <Route
         path="/login"
         element={!isAuthenticated ? <LoginForm /> : <Navigate to="/" />}
@@ -31,6 +36,8 @@ function App() {
         path="/signUp"
         element={!isAuthenticated ? <SignUpForm /> : <Navigate to="/" />}
       />
+
+      {/* Protected routes for Admin and Manager */}
       {isAuthenticated && !isClient && (
         <Route path="/" element={<AppLayout />}>
           <Route index element={<OverView />} />
@@ -78,16 +85,25 @@ function App() {
           />
         </Route>
       )}
+
+      {/* Protected routes for Client */}
       {isAuthenticated && isClient && (
-        <Route path="/" element={<ClientLayout />}>
+        <Route path="/client" element={<ClientLayout />}>
           <Route index element={<ClientDashBoard />} />
         </Route>
       )}
+
+      {/* Catch all - redirect */}
       <Route
         path="*"
-        element={<Navigate to={isAuthenticated ? "/" : "/login"} />}
+        element={
+          <Navigate
+            to={isAuthenticated ? (isClient ? "/client" : "/") : "/login"}
+          />
+        }
       />
     </Routes>
   );
 }
+
 export default App;

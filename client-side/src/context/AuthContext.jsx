@@ -10,18 +10,17 @@ export function AuthProvider({ children }) {
   const [userRole, setUserRole] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  // Login user
-  async function login(userName, password) {
+  async function login(username, password) {
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const response = await fetch("http://localhost:3000/api/v1/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userName, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       if (!response.ok) {
         setErrorMessage("Invalid credentials.");
-        return false;
+        return null; // return null on failure
       }
 
       const data = await response.json();
@@ -29,7 +28,7 @@ export function AuthProvider({ children }) {
 
       if (!token || !role) {
         setErrorMessage("Missing token or role.");
-        return false;
+        return null;
       }
 
       localStorage.setItem("accessToken", token);
@@ -40,14 +39,13 @@ export function AuthProvider({ children }) {
       setIsAuthenticated(true);
       setErrorMessage(null);
 
-      return true;
-    } catch (err) {
-      setErrorMessage("Login failed.");
-      return false;
+      return role; // return role string on success
+    } catch (errorMessage) {
+      setErrorMessage(errorMessage, "Login failed.");
+      return null;
     }
   }
 
-  // Logout user
   function logout() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("userRole");
@@ -57,7 +55,6 @@ export function AuthProvider({ children }) {
     navigate("/login");
   }
 
-  // Authenticated fetch
   async function authFetch(url, options = {}) {
     const token = localStorage.getItem("accessToken");
 
@@ -77,7 +74,6 @@ export function AuthProvider({ children }) {
     return response;
   }
 
-  // Restore session on refresh
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const role = localStorage.getItem("userRole");

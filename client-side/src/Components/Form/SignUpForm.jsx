@@ -6,7 +6,7 @@ function SignUpForm() {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ function SignUpForm() {
     setError(null);
     setSuccess(null);
 
-    if (!firstName || !lastName || !email || !role || !userName || !password) {
+    if (!firstName || !lastName || !email || !role || !username || !password) {
       setError("All fields including role are required");
       return;
     }
@@ -27,31 +27,37 @@ function SignUpForm() {
     setIsLoading(true);
 
     try {
+      console.log("🧾 Sending payload:", {
+        firstName,
+        lastName,
+        email,
+        username,
+        password,
+        role,
+      });
       const response = await fetch(
         "http://localhost:3000/api/v1/auth/register",
         {
           method: "POST",
-          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
 
           body: JSON.stringify({
-            userName: userName,
-            email: email,
             firstName: firstName,
             lastName: lastName,
-            password: password,
             role: role,
+            email: email,
+            username: username,
+            password: password,
           }),
         }
       );
-
-      console.log("📡 POST request sent!", response);
-
+      const data = await response.json();
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData?.detail || "Failed to create user");
+        console.error("❌ Server error:", data.error); // this will now show the exact message
+      } else {
+        console.log("✅ Success:", data);
       }
 
       setSuccess("User created successfully!");
@@ -107,8 +113,8 @@ function SignUpForm() {
             type="text"
             className="input"
             placeholder="Username"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <input
             type="password"

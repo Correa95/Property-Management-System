@@ -1,30 +1,30 @@
-// Components/Form/LoginForm.jsx
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginForm.css";
+
 function LoginForm() {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const signIn = await login(userName, password);
-    if (!signIn) {
+    const role = await login(username, password);
+    if (!role) {
       setError("Invalid credentials");
     } else {
-      const role = localStorage.getItem("role");
       if (role === "client") {
         navigate("/clientLayout");
       } else {
-        navigate("/");
+        navigate("/manager");
       }
     }
   };
+
   return (
     <div className="loginFormContainer">
       <form className="loginForm" onSubmit={handleSubmit}>
@@ -34,8 +34,8 @@ function LoginForm() {
           <input
             placeholder="Enter Your username"
             type="text"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </span>
         <span className="input-span">
@@ -54,7 +54,6 @@ function LoginForm() {
         </span>
         {error && <p className="error">{error}</p>}
       </form>
-      ;
     </div>
   );
 }
