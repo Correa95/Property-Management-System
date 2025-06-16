@@ -74,15 +74,15 @@ function SideNavBar() {
             </Link>
           </li>
           <li>
-            <Link to="employees">
+            <Link to="employee">
               <MdPerson className="icon" />
-              Employees
+              EMPLOYEES
             </Link>
           </li>
           <li>
             <Link to="payroll">
               <MdAttachMoney className="icon" />
-              Payroll
+              PAYROLL
             </Link>
           </li>
         </ul>

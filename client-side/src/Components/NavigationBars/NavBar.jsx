@@ -27,9 +27,9 @@ function NavBar() {
               {firstInitial}
               {lastInitial}
             </div>
-            <span className="profileName">
+            {/* <span className="profileName">
               {user?.firstName} {user?.lastName}
-            </span>
+            </span> */}
           </div>
         </div>
         {/* </div> */}

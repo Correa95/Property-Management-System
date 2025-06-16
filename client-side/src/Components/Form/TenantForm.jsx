@@ -1,5 +1,5 @@
-import "./TenantInfoForm.css";
-function TenantInfoForm() {
+import "./TenantForm.css";
+function TenantForm() {
   return (
     <div className="tenantInfoFormContainer">
       <form className="newTenantForm">
@@ -35,4 +35,4 @@ function TenantInfoForm() {
   );
 }
 
-export default TenantInfoForm;
+export default TenantForm;

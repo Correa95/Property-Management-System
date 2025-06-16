@@ -5,11 +5,11 @@ function Tenants() {
   const navigate = useNavigate();
   return (
     <div className="newTenantContainer">
-      <h2>Tenant List</h2>
+      <h2 className="tenantList">Tenant List</h2>
       <div className="createBtn">
         <button
           className="createTenantBtn"
-          onClick={() => navigate("/TenantInfoForm")}
+          onClick={() => navigate("/tenantForm")}
         >
           Create Tenant
         </button>

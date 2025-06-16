@@ -4,6 +4,7 @@ import AppLayout from "./AppLayout";
 import OverView from "./Components/PageLayouts/OverView";
 import Calender from "./Components/PageLayouts/Calender";
 import Tenants from "./Components/PageLayouts/Tenants";
+import TenantForm from "./Components/Form/TenantForm";
 import Maintenance from "./Components/PageLayouts/Maintenance";
 import TenantScreening from "./Components/PageLayouts/TenantScreening";
 import MonthlyStatement from "./Components/PageLayouts/MonthlyStatement";
@@ -52,6 +53,12 @@ function App() {
           <Route
             path="tenants"
             element={isAdmin || isManager ? <Tenants /> : <Navigate to="/" />}
+          />
+          <Route
+            path="tenantForm"
+            element={
+              isAdmin || isManager ? <TenantForm /> : <Navigate to="/" />
+            }
           />
           <Route
             path="maintenance"
