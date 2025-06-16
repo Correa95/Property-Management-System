@@ -6,56 +6,56 @@ const formatMonthYear = (dateString) => {
 };
 
 function Analysis() {
-  const [monthlyPayments, setMonthlyPayments] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // const [monthlyPayments, setMonthlyPayments] = useState({});
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchMonthlyPayments = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:8000/api/v1/getPayments"
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch Payments");
-        }
+  // useEffect(() => {
+  //   const fetchMonthlyPayments = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "http://localhost:8000/api/v1/getPayments"
+  //       );
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch Payments");
+  //       }
 
-        const payments = await response.json();
-        console.log(payments);
+  //       const payments = await response.json();
+  //       console.log(payments);
 
-        if (!Array.isArray(payments)) {
-          throw new Error("Unexpected data format");
-        }
+  //       if (!Array.isArray(payments)) {
+  //         throw new Error("Unexpected data format");
+  //       }
 
-        const paymentMonth = {};
-        payments.forEach((payment) => {
-          const month = formatMonthYear(payment.date);
-          const amount = Number(payment.amount);
-          if (!paymentMonth[month]) {
-            paymentMonth[month] = 0;
-          }
-          paymentMonth[month] += amount;
-        });
+  //       const paymentMonth = {};
+  //       payments.forEach((payment) => {
+  //         const month = formatMonthYear(payment.date);
+  //         const amount = Number(payment.amount);
+  //         if (!paymentMonth[month]) {
+  //           paymentMonth[month] = 0;
+  //         }
+  //         paymentMonth[month] += amount;
+  //       });
 
-        setMonthlyPayments(paymentMonth);
-      } catch (err) {
-        console.error(err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMonthlyPayments();
-  }, []);
+  //       setMonthlyPayments(paymentMonth);
+  //     } catch (err) {
+  //       console.error(err);
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchMonthlyPayments();
+  // }, []);
 
-  if (loading) return <p>Loading revenue...</p>;
-  if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
+  // if (loading) return <p>Loading revenue...</p>;
+  // if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
   return (
     <section className="statsContainer">
       <div className="stats">
         <h1 className="titleHeader">Rent Received</h1>
         <div className="figure">
-          <amount className="dollarAmount">${monthlyPayments}</amount>
+          <amount className="dollarAmount">month</amount>
           <small className="timeStamp">As of Last Month</small>
         </div>
       </div>

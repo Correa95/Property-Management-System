@@ -32,6 +32,12 @@ function SideNavBar() {
             </Link>
           </li>
           <li>
+            <Link to="apartmentComplex">
+              <FaBuilding className="icon" />
+              APARTMENT COMPLEX
+            </Link>
+          </li>
+          <li>
             <Link to="units">
               <FaBuilding className="icon" />
               UNITS
