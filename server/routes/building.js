@@ -4,15 +4,45 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Create
+
+// Create a new building linked to an apartment complex
 router.post("/", async (req, res) => {
-  const { complexId, buildingNumber } = req.body;
   try {
-    const building = await prisma.building.create({
-      data: { complexId, buildingNumber },
+    const { complexId, buildingNumber } = req.body;
+
+    // Basic validation
+    if (!complexId || typeof complexId !== "string") {
+      return res
+        .status(400)
+        .json({ error: "complexId is required and must be a string." });
+    }
+    if (!buildingNumber || typeof buildingNumber !== "number") {
+      return res
+        .status(400)
+        .json({ error: "buildingNumber is required and must be a number." });
+    }
+
+    // Check if apartment complex exists
+    const complexExists = await prisma.apartmentComplex.findUnique({
+      where: { id: complexId },
     });
+
+    if (!complexExists) {
+      return res.status(404).json({ error: "Apartment complex not found." });
+    }
+
+    // Create the building
+    const building = await prisma.building.create({
+      data: {
+        complexId,
+        buildingNumber,
+      },
+    });
+
     res.status(201).json(building);
-  } catch (err) {
-    res.status(500).json({ error: "Error creating building", details: err });
+  } catch (error) {
+    console.error("Error creating building:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 });
 

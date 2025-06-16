@@ -59,6 +59,8 @@ exports.login = async (req, res) => {
       user: {
         id: user.id,
         username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
         role: user.role,
       },
     });
@@ -66,8 +68,4 @@ exports.login = async (req, res) => {
     console.error("Login error:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
-  //   res.json({ message: "Login successful", token });
-  // } catch (error) {
-  //   res.status(500).json({ message: "Login failed" });
-  // }
 };

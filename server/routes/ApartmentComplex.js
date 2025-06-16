@@ -12,16 +12,24 @@ router.post("/", async (req, res) => {
     });
     res.status(201).json(complex);
   } catch (err) {
-    res.status(500).json({ error: "Error creating complex", details: err });
+    console.error("🔥 Prisma error:", err); // log exact issue
+    res
+      .status(500)
+      .json({ error: "Error creating complex", details: err.message });
   }
 });
 
 // Read All
 router.get("/", async (req, res) => {
-  const complexes = await prisma.apartmentComplex.findMany({
-    include: { buildings: true },
-  });
-  res.json(complexes);
+  try {
+    const complex = await prisma.apartmentComplex.findMany({
+      include: { buildings: true },
+    });
+    res.json(complex);
+  } catch (error) {
+    console.error("Failed to fetch apartment complex:", error);
+    res.status(500).json({ error: "Failed to fetch apartment complex" });
+  }
 });
 
 // Read One

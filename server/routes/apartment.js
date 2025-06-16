@@ -5,30 +5,45 @@ const prisma = new PrismaClient();
 
 // Create
 router.post("/", async (req, res) => {
-  const {
-    buildingId,
-    complexId,
-    unitNumber,
-    rentAmount,
-    numBedrooms,
-    squareFootage,
-    isAvailable,
-  } = req.body;
   try {
+    const {
+      complexId,
+      buildingId,
+      unitNumber,
+      rentAmount,
+      numBedrooms,
+      squareFootage,
+      isAvailable,
+    } = req.body;
+
+    // Basic validation
+    if (
+      !complexId ||
+      !buildingId ||
+      !unitNumber ||
+      rentAmount === undefined ||
+      numBedrooms === undefined ||
+      squareFootage === undefined
+    ) {
+      return res.status(400).json({ error: "All fields are required." });
+    }
+
     const apartment = await prisma.apartment.create({
       data: {
-        buildingId,
         complexId,
+        buildingId,
         unitNumber,
-        rentAmount,
-        numBedrooms,
-        squareFootage,
-        isAvailable,
+        rentAmount: Number(rentAmount),
+        numBedrooms: Number(numBedrooms),
+        squareFootage: Number(squareFootage),
+        isAvailable: isAvailable ?? true,
       },
     });
+
     res.status(201).json(apartment);
-  } catch (err) {
-    res.status(500).json({ error: "Error creating apartment", details: err });
+  } catch (error) {
+    console.error("Error creating apartment:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 });
 

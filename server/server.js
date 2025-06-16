@@ -6,6 +6,7 @@ const morgan = require("morgan");
 
 const app = express();
 const PORT = 3000;
+app.use(express.json()); // ✅ needed to parse JSON bodies
 const controller = require("./controller");
 
 // CORS configuration
