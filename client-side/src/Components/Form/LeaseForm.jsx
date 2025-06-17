@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "./LeaseForm.css";
-import { use } from "react";
 
 function Lease() {
   const [apartments, setApartments] = useState([]);
@@ -15,64 +14,64 @@ function Lease() {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  // const [formData, setFormData] = useState({
-  //   apartmentId: "",
-  //   tenantId: "",
-  //   startDate: "",
-  //   endDate: "",
-  //   rent: "",
-  //   deposit: "",
-  // });
 
   useEffect(() => {
-    // Fetch apartments
     fetch("http://localhost:3000/api/v1/apartment")
       .then((res) => res.json())
       .then(setApartments);
 
-    // Fetch tenants
     fetch("http://localhost:3000/api/v1/tenant")
       .then((res) => res.json())
       .then(setTenants);
   }, []);
 
-  // const handleChange = (e) => {
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     [e.target.name]: e.target.value,
-  //   }));
-  // };
-
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     setSuccess(null);
     setError(null);
 
-    const response = await fetch("http://localhost:3000/api/v1/lease", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        apartmentId: formData.apartmentId,
-        tenantId: formData.tenantId,
-        startDate: formData.startDate,
-        endDate: formData.endDate,
-        monthlyRent: parseFloat(rent),
-        securityDeposit: parseFloat(deposit),
-      }),
-    });
-
-    if (response.ok) {
-      setSuccess(success.message, "Lease created successfully!");
-      setApartmentsId("");
-      setDeposit("");
-      setTenantId("");
-      setStartDate("");
-      setEndDate("");
-      setRent("");
-    } else {
-      setError("Failed to create lease.", error.message);
+    if (
+      !apartmentId ||
+      !tenantId ||
+      !startDate ||
+      !endDate ||
+      !rent ||
+      !deposit
+    ) {
+      setError("All fields are required.");
+      return;
     }
-  };
+
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/lease", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          apartmentId,
+          tenantId,
+          startDate,
+          endDate,
+          monthlyRent: parseFloat(rent),
+          securityDeposit: parseFloat(deposit),
+        }),
+      });
+
+      if (response.ok) {
+        setSuccess("Lease created successfully!");
+        // Reset form
+        setApartmentsId("");
+        setTenantId("");
+        setStartDate("");
+        setEndDate("");
+        setRent("");
+        setDeposit("");
+      } else {
+        setError("Failed to create lease.");
+      }
+    } catch (err) {
+      setError("Something went wrong.");
+    }
+  }
 
   return (
     <div className="leaseFormContainer">
@@ -83,7 +82,7 @@ function Lease() {
             <select
               name="apartmentId"
               value={apartmentId}
-              onChange={(e) => e.target.value}
+              onChange={(e) => setApartmentsId(e.target.value)}
               required
             >
               <option value="">Select Apartment</option>
@@ -100,7 +99,8 @@ function Lease() {
             <select
               name="tenantId"
               value={tenantId}
-              onChange={(e) => e.target.value}
+              onChange={(e) => setTenantId(e.target.value)}
+              required
             >
               <option value="">Select Tenant</option>
               {tenants.map((tenant) => (
@@ -111,13 +111,15 @@ function Lease() {
             </select>
           </label>
         </div>
+
         <div className="dates">
           <label>
             Start Date
             <input
               type="date"
-              value={setStartDate}
-              onChange={(e) => e.target.value}
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              required
             />
           </label>
           <label>
@@ -125,17 +127,20 @@ function Lease() {
             <input
               type="date"
               value={endDate}
-              onChange={(e) => e.target.value}
+              onChange={(e) => setEndDate(e.target.value)}
+              required
             />
           </label>
         </div>
+
         <div className="amounts">
           <label>
             Monthly Rent
             <input
               type="number"
               value={rent}
-              onChange={(e) => e.target.value}
+              onChange={(e) => setRent(e.target.value)}
+              required
             />
           </label>
           <label>
@@ -143,15 +148,20 @@ function Lease() {
             <input
               type="number"
               value={deposit}
-              onChange={(e) => e.Target.value}
+              onChange={(e) => setDeposit(e.target.value)}
+              required
             />
           </label>
         </div>
+
         <div className="btnLease">
           <button type="submit" className="btnLeaseSubmit">
             Submit
           </button>
         </div>
+
+        {error && <p className="error">{error}</p>}
+        {success && <p className="success">{success}</p>}
       </form>
     </div>
   );
