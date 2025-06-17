@@ -56,8 +56,8 @@ function Lease() {
         tenantId: formData.tenantId,
         startDate: formData.startDate,
         endDate: formData.endDate,
-        monthlyRent: parseFloat(formData.rent),
-        securityDeposit: parseFloat(formData.deposit),
+        monthlyRent: parseFloat(rent),
+        securityDeposit: parseFloat(deposit),
       }),
     });
 
@@ -87,9 +87,10 @@ function Lease() {
               required
             >
               <option value="">Select Apartment</option>
-              {apartments.map((apt) => (
-                <option key={apt.id} value={apt.id}>
-                  {apt.unitNumber} - {apt.building?.name || "Building"}
+              {apartments.map((apartment) => (
+                <option key={apartment.id} value={apartment.id}>
+                  {apartment.unitNumber} -{" "}
+                  {apartment.building?.name || "Building"}
                 </option>
               ))}
             </select>
@@ -113,7 +114,11 @@ function Lease() {
         <div className="dates">
           <label>
             Start Date
-            <input type="date" onChange={(e) => e.target.value} />
+            <input
+              type="date"
+              value={setStartDate}
+              onChange={(e) => e.target.value}
+            />
           </label>
           <label>
             End Date
