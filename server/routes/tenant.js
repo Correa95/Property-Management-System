@@ -19,11 +19,20 @@ router.post("/", async (req, res) => {
   }
   try {
     const tenant = await prisma.tenant.create({
-      data: { firstName, lastName, email, phoneNumber, dateOfBirth },
+      data: {
+        firstName,
+        lastName,
+        email,
+        phoneNumber: String(phoneNumber),
+        dateOfBirth: date,
+      },
     });
     res.status(201).json(tenant);
   } catch (err) {
-    res.status(500).json({ error: "Error creating tenant", details: err });
+    console.error("❌ Prisma error:", err); // <-- this shows full error in terminal
+    res
+      .status(500)
+      .json({ error: "Error creating tenant", details: err.message });
   }
 });
 
