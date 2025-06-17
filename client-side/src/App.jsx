@@ -16,6 +16,7 @@ import ClientLayout from "./ClientsRoutes/ClientLayout";
 import ClientDashBoard from "./ClientsRoutes/ClientDashBoard";
 import Payroll from "./Components/PageLayouts/Payroll";
 import Employees from "./Components/PageLayouts/Employees";
+import Lease from "./Components/Form/LeaseForm";
 
 function App() {
   const { isAuthenticated, userRole } = useAuth();
@@ -50,6 +51,10 @@ function App() {
           <Route
             path="calender"
             element={isAdmin || isManager ? <Calender /> : <Navigate to="/" />}
+          />
+          <Route
+            path="lease"
+            element={isAdmin || isManager ? <Lease /> : <Navigate to="/" />}
           />
           <Route
             path="tenants"

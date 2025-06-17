@@ -39,6 +39,12 @@ function SideNavBar() {
             </Link>
           </li>
           <li>
+            <Link to="lease">
+              <FaBuilding className="icon" />
+              LEASE
+            </Link>
+          </li>
+          <li>
             <Link to="calender">
               <MdCalendarToday className="icon" />
               CALENDER
