@@ -27,14 +27,6 @@ function SignUpForm() {
     setIsLoading(true);
 
     try {
-      console.log("🧾 Sending payload:", {
-        firstName,
-        lastName,
-        email,
-        username,
-        password,
-        role,
-      });
       const response = await fetch(
         "http://localhost:3000/api/v1/auth/register",
         {

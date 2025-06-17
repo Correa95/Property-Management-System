@@ -31,12 +31,7 @@ function SideNavBar() {
               OVERVIEW
             </Link>
           </li>
-          <li>
-            <Link to="building">
-              <FaBuilding className="icon" />
-              BUILDING
-            </Link>
-          </li>
+
           <li>
             <Link to="units">
               <FaBuilding className="icon" />

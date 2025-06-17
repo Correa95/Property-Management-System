@@ -1,11 +1,55 @@
-// import NavigationButton from "../NavigationBars/NavigationButton";
+import { useEffect, useState } from "react";
 import "./Tenants.css";
 import { useNavigate } from "react-router-dom";
+
 function Tenants() {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const [tenants, setTenants] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const tenantsPerPage = 15;
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/v1/tenant")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch tenants");
+        return res.json();
+      })
+      .then((data) => setTenants(data))
+      .catch((err) => {
+        console.error("Fetch error:", error);
+        setError(err.message);
+      });
+  }, []);
+
+  const formatPhoneNumber = (number) => {
+    const cleaned = ("" + number).replace(/\D/g, "");
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    return match ? `(${match[1]}) ${match[2]}-${match[3]}` : number;
+  };
+
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toISOString().split("T")[0];
+  };
+
+  const indexOfLastTenant = currentPage * tenantsPerPage;
+  const indexOfFirstTenant = indexOfLastTenant - tenantsPerPage;
+  const currentTenants = tenants.slice(indexOfFirstTenant, indexOfLastTenant);
+  const totalPages = Math.ceil(tenants.length / tenantsPerPage);
+
+  const handleNext = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
   return (
     <div className="newTenantContainer">
       <h2 className="tenantList">Tenant List</h2>
+
       <div className="createBtn">
         <button
           className="createTenantBtn"
@@ -14,10 +58,11 @@ function Tenants() {
           Create Tenant
         </button>
       </div>
-      <table>
-        <thead>
+
+      <table className="tenantTable">
+        <thead className="tenantTableHeader">
           <tr>
-            <th>ID</th>
+            <th>#</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -26,32 +71,38 @@ function Tenants() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Maria</td>
-            <td>Lopez</td>
-            <td>maria.lopez@example.com</td>
-            <td>(555) 123-4567</td>
-            <td>1990-04-15</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>James</td>
-            <td>Nguyen</td>
-            <td>j.nguyen@example.com</td>
-            <td>(555) 987-6543</td>
-            <td>1985-09-28</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Asha</td>
-            <td>Patel</td>
-            <td>asha.patel@example.com</td>
-            <td>(555) 111-2222</td>
-            <td>1992-12-03</td>
-          </tr>
+          {tenants.length === 0 ? (
+            <tr>
+              <td colSpan="6">You have no tenants available.</td>
+            </tr>
+          ) : (
+            currentTenants.map((tenant, index) => (
+              <tr key={tenant.id}>
+                <td>{indexOfFirstTenant + index + 1}</td>
+                <td>{tenant.firstName}</td>
+                <td>{tenant.lastName}</td>
+                <td>{tenant.email}</td>
+                <td>{formatPhoneNumber(tenant.phoneNumber)}</td>
+                <td>{formatDate(tenant.dateOfBirth)}</td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
+
+      {tenants.length > 0 && (
+        <div className="pagination">
+          <button onClick={handlePrev} disabled={currentPage === 1}>
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button onClick={handleNext} disabled={currentPage === totalPages}>
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 }

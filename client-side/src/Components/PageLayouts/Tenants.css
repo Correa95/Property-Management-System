@@ -8,13 +8,11 @@
 }
 .tenantList {
   margin: 300px, 0px 18px 0px;
-  /* margin-bottom: 18px; */
   color: #333;
 }
 .createBtn {
   margin-left: 850px;
   margin-bottom: 5px;
-  /* border: 2px solid red; */
 }
 .createTenantBtn {
   background-color: #2c3e50;
@@ -31,8 +29,8 @@
   background-color: #115293;
 }
 
-table {
-  width: 100%;
+.tenantTable {
+  width: 70%;
   border-collapse: collapse;
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -40,14 +38,14 @@ table {
   overflow: hidden;
 }
 
-thead {
+.tenantTableHeader {
   background-color: #2c3e50;
   color: white;
 }
 
 th,
 td {
-  padding: 1rem;
+  padding: 18px;
   text-align: left;
   border-bottom: 1px solid #e0e0e0;
 }
@@ -62,4 +60,26 @@ td {
 
 .highlight {
   font-weight: bold;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
 }

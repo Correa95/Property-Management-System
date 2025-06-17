@@ -9,7 +9,6 @@ function Building() {
   const [success, setSuccess] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch apartment complexes
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/apartmentComplex")
       .then((res) => res.json())
@@ -25,10 +24,10 @@ function Building() {
     setSuccess(null);
     setIsLoading(true);
 
-    const complexId = apartmentComplexId; // ✅ Leave as string
-    const trimmedBuildingNumber = buildingNumber.trim();
+    const complexId = apartmentComplexId;
+    // const trimmedBuildingNumber = buildingNumber.trim();
 
-    if (!complexId || !trimmedBuildingNumber) {
+    if (!complexId || !buildingNumber) {
       setError("All fields are required.");
       setIsLoading(false);
       return;
@@ -40,7 +39,7 @@ function Building() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           complexId,
-          buildingNumber: trimmedBuildingNumber,
+          buildingNumber: buildingNumber,
         }),
       });
 
@@ -87,12 +86,12 @@ function Building() {
           <input
             type="text"
             value={buildingNumber}
-            onChange={(e) => setBuildingNumber(e.target.value)}
+            onChange={(e) => setBuildingNumber(Number(e.target.value))}
           />
         </label>
 
         <button type="submit" disabled={isLoading}>
-          {isLoading ? "Submitting..." : "Create Building"}
+          {isLoading ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>

@@ -14,14 +14,13 @@
   text-align: center;
 }
 
-.unitsTable {
+.unitsTableContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* overflow-x: auto; */
 }
 
-table {
+.unitsTable {
   width: 100%;
   max-width: 1000px;
   border-collapse: collapse;
@@ -31,11 +30,11 @@ table {
   overflow: hidden;
 }
 
-table thead {
+thead {
   background-color: #f0f0f0;
 }
 
-table thead tr th {
+thead tr th {
   padding: 15px;
   text-align: left;
   font-weight: 600;
@@ -44,24 +43,12 @@ table thead tr th {
   border-bottom: 2px solid #ddd;
 }
 
-table tbody tr td {
+tbody tr td {
   padding: 12px 15px;
   color: #555;
   border-bottom: 1px solid #eee;
 }
 
-table tbody tr:last-child td {
+tbody tr:last-child td {
   border-bottom: none;
-}
-
-@media (max-width: 768px) {
-  .unitsHeader {
-    font-size: 28px;
-  }
-
-  table thead tr th,
-  table tbody tr td {
-    padding: 10px;
-    font-size: 14px;
-  }
 }
