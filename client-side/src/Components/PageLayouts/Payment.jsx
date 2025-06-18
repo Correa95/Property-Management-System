@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 function Payment() {
   const [leases, setLeases] = useState([]);
   const [selectedLeaseId, setSelectedLeaseId] = useState("");
-  const [paymentDate, setPaymentDate] = useState("");
-  const [amount, setAmount] = useState("");
+  const [paymentAmount, setPaymentAmount] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("CASH");
+  const [isLatePayment, setIsLatePayment] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
@@ -21,18 +22,19 @@ function Payment() {
       });
   }, []);
 
-  async function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setError(null);
     setSuccess(null);
 
     const paymentData = {
       leaseId: selectedLeaseId,
-      amount: parseFloat(amount),
-      paymentDate,
+      paymentAmount: parseFloat(paymentAmount),
+      paymentMethod,
+      isLatePayment,
     };
 
-    await fetch("http://localhost:3000/api/v1/payment", {
+    fetch("http://localhost:3000/api/v1/payment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,23 +42,23 @@ function Payment() {
       body: JSON.stringify(paymentData),
     })
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to submit payment");
-        }
+        if (!res.ok) throw new Error("Failed to submit payment");
         return res.json();
       })
       .then((data) => {
         setSuccess("Payment recorded successfully!");
         console.log("Response:", data);
+        // Reset form
         setSelectedLeaseId("");
-        setAmount("");
-        setPaymentDate("");
+        setPaymentAmount("");
+        setPaymentMethod("CASH");
+        setIsLatePayment(false);
       })
       .catch((err) => {
         console.error("Payment error:", err);
         setError("Failed to submit payment");
       });
-  }
+  };
 
   return (
     <div>
@@ -85,8 +87,8 @@ function Payment() {
           Amount:
           <input
             type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            value={paymentAmount}
+            onChange={(e) => setPaymentAmount(e.target.value)}
             required
           />
         </label>
@@ -94,12 +96,26 @@ function Payment() {
         <br />
 
         <label>
-          Payment Date:
-          <input
-            type="date"
-            value={paymentDate}
-            onChange={(e) => setPaymentDate(e.target.value)}
+          Payment Method:
+          <select
+            value={paymentMethod}
+            onChange={(e) => setPaymentMethod(e.target.value)}
             required
+          >
+            <option value="CASH">Cash</option>
+            <option value="CARD">Card</option>
+            <option value="BANK_TRANSFER">Bank Transfer</option>
+          </select>
+        </label>
+
+        <br />
+
+        <label>
+          Late Payment?
+          <input
+            type="checkbox"
+            checked={isLatePayment}
+            onChange={(e) => setIsLatePayment(e.target.checked)}
           />
         </label>
 
