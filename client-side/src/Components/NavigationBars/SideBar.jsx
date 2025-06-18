@@ -39,9 +39,9 @@ function SideNavBar() {
             </Link>
           </li>
           <li>
-            <Link to="lease">
+            <Link to="payment">
               <FaBuilding className="icon" />
-              LEASE
+              PAYMENT
             </Link>
           </li>
           <li>

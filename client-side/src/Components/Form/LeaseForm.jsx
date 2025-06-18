@@ -5,7 +5,7 @@ function Lease() {
   const [apartments, setApartments] = useState([]);
   const [tenants, setTenants] = useState([]);
 
-  const [apartmentId, setApartmentsId] = useState("");
+  const [apartmentId, setApartmentId] = useState("");
   const [tenantId, setTenantId] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -14,21 +14,34 @@ function Lease() {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/apartment")
-      .then((res) => res.json())
-      .then(setApartments);
+    async function fetchData() {
+      try {
+        const apartmentResult = await fetch(
+          "http://localhost:3000/api/v1/apartment"
+        );
+        const tenantResult = await fetch("http://localhost:3000/api/v1/tenant");
 
-    fetch("http://localhost:3000/api/v1/tenant")
-      .then((res) => res.json())
-      .then(setTenants);
+        setApartments(await apartmentResult.json());
+        setTenants(await tenantResult.json());
+      } catch (error) {
+        setError("Failed to load apartments or tenants.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
   }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setSuccess(null);
     setError(null);
+    setSuccess(null);
+    setSubmitting(true);
 
     if (
       !apartmentId ||
@@ -39,6 +52,7 @@ function Lease() {
       !deposit
     ) {
       setError("All fields are required.");
+      setSubmitting(false);
       return;
     }
 
@@ -58,20 +72,24 @@ function Lease() {
 
       if (response.ok) {
         setSuccess("Lease created successfully!");
-        // Reset form
-        setApartmentsId("");
+        setApartmentId("");
         setTenantId("");
         setStartDate("");
         setEndDate("");
         setRent("");
         setDeposit("");
       } else {
-        setError("Failed to create lease.");
+        const result = await response.json();
+        setError(result.error || "Failed to create lease.");
       }
     } catch (err) {
-      setError("Something went wrong.");
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
     }
   }
+
+  if (loading) return <p>Loading lease form...</p>;
 
   return (
     <div className="leaseFormContainer">
@@ -80,9 +98,8 @@ function Lease() {
           <label>
             Apartment:
             <select
-              name="apartmentId"
               value={apartmentId}
-              onChange={(e) => setApartmentsId(e.target.value)}
+              onChange={(e) => setApartmentId(e.target.value)}
               required
             >
               <option value="">Select Apartment</option>
@@ -94,10 +111,10 @@ function Lease() {
               ))}
             </select>
           </label>
+
           <label>
             Tenant:
             <select
-              name="tenantId"
               value={tenantId}
               onChange={(e) => setTenantId(e.target.value)}
               required
@@ -155,8 +172,12 @@ function Lease() {
         </div>
 
         <div className="btnLease">
-          <button type="submit" className="btnLeaseSubmit">
-            Submit
+          <button
+            type="submit"
+            className="btnLeaseSubmit"
+            disabled={submitting}
+          >
+            {submitting ? "Submitting..." : "Submit"}
           </button>
         </div>
 

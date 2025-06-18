@@ -6,9 +6,16 @@ const formatMonthYear = (dateString) => {
 };
 
 function Analysis() {
+  const [tenants, setTenants] = useState([]);
   // const [monthlyPayments, setMonthlyPayments] = useState({});
   // const [loading, setLoading] = useState(true);
   // const [error, setError] = useState(null);
+  useEffect(() => {
+    fetch("http://localhost:3000/api/v1/tenant")
+      .then((res) => res.json())
+      .then((data) => setTenants(data))
+      .catch((error) => console.error("Error fetching tenants:", error));
+  }, []);
 
   // useEffect(() => {
   //   const fetchMonthlyPayments = async () => {
@@ -63,12 +70,12 @@ function Analysis() {
       <div className="stats">
         <h1 className="titleHeader">Total Tenants</h1>
         <div className="figure">
-          <amount className="dollarAmount">Mario</amount>
+          <amount className="dollarAmount">{tenants.length}</amount>
           <small className="timeStamp">As of Last Month</small>
         </div>
       </div>
 
-      <div className="stats">
+      {/* <div className="stats">
         <h1 className="titleHeader">Rent Overdue</h1>
         <div className="figure">
           <amount className="dollarAmount">$250000</amount>
@@ -82,7 +89,7 @@ function Analysis() {
           <amount className="dollarAmount">$250000</amount>
           <small className="timeStamp">As of Last Month</small>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
