@@ -42,14 +42,7 @@ model ApartmentComplex {
   apartments Apartment[] // ✅ Back-relation to Apartment
 }
 
-// Building model
-// model Building {
-//   id             String           @id @default(uuid())
-//   complexId      String
-//   complex        ApartmentComplex @relation(fields: [complexId], references: [id])
-//   buildingNumber Int
-//   apartments     Apartment[]
-// }
+
 
 model Building {
   id             String           @id @default(uuid())
@@ -58,7 +51,7 @@ model Building {
   buildingNumber Int
   apartments     Apartment[]
 
-  @@unique([complexId, buildingNumber])  // ensures building numbers are unique within a complex
+  @@unique([complexId, buildingNumber])  
 }
 
 

@@ -3,7 +3,6 @@ const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-// Create Lease
 router.post("/", async (req, res) => {
   const {
     apartmentId,
@@ -12,23 +11,39 @@ router.post("/", async (req, res) => {
     endDate,
     monthlyRent,
     securityDeposit,
-    isActive,
+    isActive, // optional
   } = req.body;
+
+  // Validate required fields
+  if (
+    !apartmentId ||
+    !tenantId ||
+    !startDate ||
+    !endDate ||
+    !monthlyRent ||
+    !securityDeposit
+  ) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
   try {
     const lease = await prisma.lease.create({
       data: {
         apartmentId,
         tenantId,
-        startDate,
-        endDate,
-        monthlyRent,
-        securityDeposit,
-        isActive,
+        startDate: new Date(startDate),
+        endDate: new Date(endDate),
+        monthlyRent: parseFloat(monthlyRent),
+        securityDeposit: parseFloat(securityDeposit),
+        isActive: isActive ?? true,
       },
     });
     res.status(201).json(lease);
   } catch (err) {
-    res.status(500).json({ error: "Error creating lease", details: err });
+    console.error("Lease creation failed:", err);
+    res
+      .status(500)
+      .json({ error: "Error creating lease", details: err.message });
   }
 });
 
