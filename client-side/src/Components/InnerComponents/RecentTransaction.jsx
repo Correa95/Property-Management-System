@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import "./RecentTransaction.css";
+import { useNavigate } from "react-router-dom";
 
 function RecentTransac() {
+  const navigate = useNavigate();
   const [payments, setPayments] = useState([]);
   const [error, setError] = useState(null);
 
@@ -24,15 +26,17 @@ function RecentTransac() {
     <div className="transactionContainer">
       {error && <p>{error}</p>}
       <ul className="recentTransactionList">
-        {payments.slice(0, 3).map((payment) => (
+        {payments.slice(0, 8).map((payment) => (
           <li key={payment.id} className="transactionItem">
-            <span>${payment.paymentAmount}</span>
-            <span>{new Date(payment.paymentDate).toLocaleDateString()}</span>
-            <span>{payment.paymentMethod}</span>
-            <span>{payment.paymentStatus}</span>
+            <li>${payment.paymentAmount}</li>
+            <li>{new Date(payment.paymentDate).toLocaleDateString()}</li>
+            <li>{payment.paymentMethod}</li>
+            <li>{payment.paymentStatus}</li>
+            <li>{payment.isLatePayment}</li>
           </li>
         ))}
       </ul>
+      {/* <button className="btnMore" onClick={navigate(/>)} >See More</button> */}
     </div>
   );
 }

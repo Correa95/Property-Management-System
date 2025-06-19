@@ -16,7 +16,7 @@ import ClientLayout from "./ClientsRoutes/ClientLayout";
 import ClientDashBoard from "./ClientsRoutes/ClientDashBoard";
 import Payroll from "./Components/PageLayouts/Payroll";
 import Employees from "./Components/PageLayouts/Employees";
-
+import RecentTransactions from "./Components/PageLayouts/RecentTransactions";
 import Payment from "./Components/PageLayouts/Payment";
 
 function App() {
@@ -56,6 +56,16 @@ function App() {
           <Route
             path="payment"
             element={isAdmin || isManager ? <Payment /> : <Navigate to="/" />}
+          />
+          <Route
+            path="recentTransactions"
+            element={
+              isAdmin || isManager ? (
+                <RecentTransactions />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
           <Route
             path="tenants"
