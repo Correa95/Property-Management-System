@@ -4,73 +4,83 @@ function Payment() {
   const [leases, setLeases] = useState([]);
   const [selectedLeaseId, setSelectedLeaseId] = useState("");
   const [paymentAmount, setPaymentAmount] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("CASH");
+  const [paymentStatus, setPaymentStatus] = useState("PENDING");
+  const [paymentMethod, setPaymentMethod] = useState("CREDIT_CARD"); // no leading space
   const [isLatePayment, setIsLatePayment] = useState(false);
+  const [paymentDate, setPaymentDate] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/lease")
       .then((res) => res.json())
-      .then((data) => {
-        setLeases(data);
-        console.log("Lease data:", data);
-      })
-      .catch((error) => {
-        console.error("Fetch error:", error);
-        setError(error.message);
-      });
+      .then((data) => setLeases(data))
+      .catch((error) => setError(error.message));
   }, []);
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     setError(null);
     setSuccess(null);
 
+    if (!selectedLeaseId) {
+      setError("Please select a lease.");
+      return;
+    }
+
+    if (!paymentAmount || isNaN(parseFloat(paymentAmount))) {
+      setError("Please enter a valid payment amount.");
+      return;
+    }
+
+    if (paymentDate && isNaN(new Date(paymentDate).getTime())) {
+      setError("Invalid payment date.");
+      return;
+    }
+
     const paymentData = {
       leaseId: selectedLeaseId,
       paymentAmount: parseFloat(paymentAmount),
-      paymentMethod,
+      paymentMethod: paymentMethod.trim(), // trim just in case
       isLatePayment,
+      paymentDate: paymentDate || undefined, // send string as-is or undefined
+      paymentStatus,
     };
 
-    fetch("http://localhost:3000/api/v1/payment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(paymentData),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to submit payment");
-        return res.json();
-      })
-      .then((data) => {
-        setSuccess("Payment recorded successfully!");
-        console.log("Response:", data);
-        // Reset form
-        setSelectedLeaseId("");
-        setPaymentAmount("");
-        setPaymentMethod("CASH");
-        setIsLatePayment(false);
-      })
-      .catch((err) => {
-        console.error("Payment error:", err);
-        setError("Failed to submit payment");
+    try {
+      const res = await fetch("http://localhost:3000/api/v1/payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(paymentData),
       });
-  };
+
+      if (!res.ok) throw new Error("Failed to submit payment");
+
+      const data = await res.json();
+
+      console.log("Payment response:", data);
+      setSuccess("Payment recorded successfully!");
+      setSelectedLeaseId("");
+      setPaymentAmount("");
+      setPaymentMethod("CREDIT_CARD");
+      setIsLatePayment(false);
+      setPaymentDate("");
+    } catch (err) {
+      setError(err.message || "Failed to submit payment");
+    }
+  }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {success && <p>{success}</p>}
+        {success && <p style={{ color: "green" }}>{success}</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
         <label>
           Select Lease:
           <select
             value={selectedLeaseId}
             onChange={(e) => setSelectedLeaseId(e.target.value)}
-            required
           >
             <option value="">-- Choose Lease --</option>
             {leases.map((lease) => (
@@ -81,34 +91,48 @@ function Payment() {
           </select>
         </label>
 
-        <br />
-
         <label>
           Amount:
           <input
             type="number"
             value={paymentAmount}
             onChange={(e) => setPaymentAmount(e.target.value)}
-            required
           />
         </label>
-
-        <br />
 
         <label>
           Payment Method:
           <select
             value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
-            required
           >
-            <option value="CASH">Cash</option>
-            <option value="CARD">Card</option>
+            <option value="CREDIT_CARD">Credit Card</option>
             <option value="BANK_TRANSFER">Bank Transfer</option>
           </select>
         </label>
 
         <br />
+
+        <label>
+          Payment Date:
+          <input
+            type="date"
+            value={paymentDate}
+            onChange={(e) => setPaymentDate(e.target.value)}
+          />
+        </label>
+
+        <label>
+          Payment Status:
+          <select
+            value={paymentStatus}
+            onChange={(e) => setPaymentStatus(e.target.value)}
+          >
+            <option value="PENDING">Pending</option>
+            <option value="COMPLETED">Completed</option>
+            <option value="FAILED">Failed</option>
+          </select>
+        </label>
 
         <label>
           Late Payment?
@@ -119,12 +143,8 @@ function Payment() {
           />
         </label>
 
-        <br />
-
         <button type="submit">Submit Payment</button>
       </form>
-
-      {error && <p>{error}</p>}
     </div>
   );
 }

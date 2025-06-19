@@ -40,9 +40,9 @@
 }
 
 .box {
-  border: 2px solid red;
+  border: 2px solid #212121;
   background-color: #f0f0f0;
-  padding: 2rem;
+  padding: 18px;
   text-align: center;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
