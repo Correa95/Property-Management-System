@@ -1,0 +1,13 @@
+ {
+  /* {payments.map((payments) => {
+              <tr key={payments.id}>
+                <td>12345</td>
+                <td>{payments.paymentAmount}</td>
+                <td>{payments.paymentDate}</td>
+                <td>{payments.paymentStatus}</td>
+                <td>Rent</td>
+                <td>{payments.isLatePayment}</td>
+                <td>$1,200</td>
+              </tr>;
+            })} */
+}

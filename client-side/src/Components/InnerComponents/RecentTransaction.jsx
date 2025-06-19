@@ -36,7 +36,12 @@ function RecentTransac() {
           </li>
         ))}
       </ul>
-      {/* <button className="btnMore" onClick={navigate(/>)} >See More</button> */}
+      <button
+        className="btnMore"
+        onClick={() => navigate("/recentTransactions")}
+      >
+        See More
+      </button>
     </div>
   );
 }

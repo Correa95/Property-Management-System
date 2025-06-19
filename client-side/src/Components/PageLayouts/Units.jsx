@@ -41,7 +41,7 @@ function Units() {
         <table className="unitsTable">
           <thead>
             <tr>
-              <th>Building Number</th>
+              {/* <th>Building Number</th> */}
               <th>Unit Number</th>
               <th>Bedrooms</th>
               <th>Sq Ft</th>
@@ -57,7 +57,7 @@ function Units() {
             ) : (
               currentUnits.map((unit) => (
                 <tr key={unit.id}>
-                  <td>{unit.buildingNumber}</td>
+                  {/* <td>{unit.buildingNumber}</td> */}
                   <td>{unit.unitNumber}</td>
                   <td>{unit.numBedrooms}</td>
                   <td>{unit.squareFootage}</td>
