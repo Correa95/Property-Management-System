@@ -57,14 +57,14 @@ function MonthlyTransaction() {
             </span>
           </h2>
         </div>
-        <div className="btnActions">
+        {/* <div className="btnActions">
           <button className="btnDownLoad" onClick={handleDownload}>
             <FiDownload /> Download
           </button>
           <button className="btnPrint" onClick={handlePrint}>
             <FiPrinter /> Print
           </button>
-        </div>
+        </div> */}
 
         <div
           className={`statementContent ${isOpen ? "show" : ""}`}
@@ -74,14 +74,14 @@ function MonthlyTransaction() {
             Property Management Transaction Statement
           </h1>
 
-          {/* <div className="btnActions">
+          <div className="btnActions">
             <button className="btnDownLoad" onClick={handleDownload}>
               <FiDownload /> Download
             </button>
             <button className="btnPrint" onClick={handlePrint}>
               <FiPrinter /> Print
             </button>
-          </div> */}
+          </div>
           <div className="statement">
             <div className="sectionInfo">
               <h2>Statement Details</h2>
