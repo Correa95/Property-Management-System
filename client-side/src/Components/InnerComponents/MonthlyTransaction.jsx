@@ -98,19 +98,24 @@ function MonthlyTransaction() {
             </div>
 
             <div className="sectionInfo">
-              <h2>Property Information</h2>
-              <p>
-                <strong>Address:</strong> Code Breakthrough Mentorship Program
-              </p>
-              <p>
-                <strong>Tenant:</strong> Mathew M Correa
-              </p>
-              <p>
-                <strong>Lease:</strong> March 28 – Dec 31, 2025
-              </p>
-              <p>
-                <strong>Rent:</strong> $3000
-              </p>
+              {apartmentComplex.map((apartment) => {
+                <>
+                  <h2>Property Information</h2>
+                  <p>
+                    <strong>Address:</strong>
+                    {apartment.address}
+                  </p>
+                  <p>
+                    <strong>Tenant:</strong> Mathew M Correa
+                  </p>
+                  <p>
+                    <strong>Lease:</strong> March 28 – Dec 31, 2025
+                  </p>
+                  <p>
+                    <strong>Rent:</strong> $3000
+                  </p>
+                </>;
+              })}
             </div>
           </div>
 
