@@ -47,7 +47,7 @@ function SignUpForm() {
       );
       const data = await response.json();
       if (!response.ok) {
-        console.error("❌ Server error:", data.error); // this will now show the exact message
+        console.error("❌ Server error:", data.error);
       } else {
         console.log("✅ Success:", data);
       }
@@ -66,7 +66,7 @@ function SignUpForm() {
   return (
     <div className="signUpForm">
       <form className="form" onSubmit={handleSubmit}>
-        {success && <p className="success">{success}</p>}
+        {success && <p className="successMessage">{success}</p>}
         <span className="title">Sign up</span>
         <span className="subtitle">Create a free account with your email.</span>
         <div className="form-container">
@@ -116,7 +116,7 @@ function SignUpForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        {error && <p className="error">{error}</p>}
+        {error && <p className="errorMessage">{error}</p>}
         <button type="submit" disabled={isLoading}>
           {isLoading ? "Signing up..." : "Sign up"}
         </button>

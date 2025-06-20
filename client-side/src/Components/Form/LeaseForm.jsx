@@ -82,7 +82,7 @@ function Lease() {
         const result = await response.json();
         setError(result.error || "Failed to create lease.");
       }
-    } catch (err) {
+    } catch (error) {
       setError("Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
@@ -94,13 +94,13 @@ function Lease() {
   return (
     <div className="leaseFormContainer">
       <form className="leaseForm" onSubmit={handleSubmit}>
+        {success && <p className="successMessage">{success}</p>}
         <div className="apartmentInfo">
           <label>
             Apartment:
             <select
               value={apartmentId}
               onChange={(e) => setApartmentId(e.target.value)}
-              required
             >
               <option value="">Select Apartment</option>
               {apartments.map((apartment) => (
@@ -117,7 +117,6 @@ function Lease() {
             <select
               value={tenantId}
               onChange={(e) => setTenantId(e.target.value)}
-              required
             >
               <option value="">Select Tenant</option>
               {tenants.map((tenant) => (
@@ -136,7 +135,6 @@ function Lease() {
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              required
             />
           </label>
           <label>
@@ -145,7 +143,6 @@ function Lease() {
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              required
             />
           </label>
         </div>
@@ -157,7 +154,6 @@ function Lease() {
               type="number"
               value={rent}
               onChange={(e) => setRent(e.target.value)}
-              required
             />
           </label>
           <label>
@@ -166,7 +162,6 @@ function Lease() {
               type="number"
               value={deposit}
               onChange={(e) => setDeposit(e.target.value)}
-              required
             />
           </label>
         </div>
@@ -181,8 +176,7 @@ function Lease() {
           </button>
         </div>
 
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
+        {error && <p className="errorMessage">{error}</p>}
       </form>
     </div>
   );

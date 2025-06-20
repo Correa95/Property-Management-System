@@ -53,7 +53,7 @@ function LoginForm() {
         <span className="span">
           Don't have an account? <Link to="/signUp">Sign up</Link>
         </span>
-        {error && <p className="error">{error}</p>}
+        {error && <p className="errorMessage">{error}</p>}
       </form>
     </div>
   );

@@ -7,7 +7,7 @@
 :root {
   --primary-color: #2c3e50;
   --secondary-color: #1bfd9c;
-  /* --error-color: #d72631; */
+  --error-color: #d72631;
   --success-color: #1b998b;
 }
 
@@ -33,4 +33,10 @@
   color: #888;
   padding-top: 10px;
   border-top: 1px solid #ccc;
+}
+.errorMessage {
+  color: var(--error-color);
+}
+.successMessage {
+  color: var(--secondary-color);
 }

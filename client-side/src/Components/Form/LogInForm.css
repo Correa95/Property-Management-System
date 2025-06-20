@@ -10,7 +10,7 @@
 .loginForm {
   background-color: #fff;
   padding: 35px 32px;
-  border-radius: 1rem;
+  border-radius: 16px;
   width: 100%;
   max-width: 400px;
   display: flex;
@@ -22,7 +22,7 @@
 .loginForm h1 {
   text-align: center;
   color: #2c3e50;
-  font-size: 2rem;
+  font-size: 32px;
 }
 
 .input-span {
@@ -79,11 +79,4 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-.error {
-  color: var(--error-color);
-  font-size: 16px;
-  text-align: center;
-  margin: 0;
 }

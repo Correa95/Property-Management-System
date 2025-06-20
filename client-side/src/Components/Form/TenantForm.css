@@ -1,17 +1,24 @@
 .tenantInfoFormContainer {
-  width: 100%;
-  height: 100%;
+  margin-top: 100px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 15px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .newTenantForm {
+  width: 50%;
+  height: 50%;
   align-items: center;
   border-radius: 15px;
   padding: 80px;
+  border: 2px solid #ccc;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-
+.tenantTitle {
+  font-size: 23px;
+  color: #212121;
+  margin-left: 170px;
+}
 .names,
 .contacts,
 .unitInfo {
@@ -37,7 +44,7 @@ input {
 }
 
 input:focus {
-  border-color: #1bfd9c;
+  border-color: var(--secondary-color);
   outline: none;
 }
 
@@ -47,12 +54,12 @@ input:focus {
   padding: 12px;
   border: none;
   border-radius: 8px;
-  background-color: #1bfd9c;
+  background-color: var(--secondary-color);
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .btnSubmit:hover {
-  background-color: #1bfd9c;
+  background-color: var(--secondary-color);
 }

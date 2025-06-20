@@ -72,8 +72,8 @@ function TenantForm() {
   return (
     <div className="tenantInfoFormContainer">
       <form className="newTenantForm" onSubmit={handleSubmit}>
-        <h1>Enter Tenant Information</h1>
-        {success && <p className="success">{success}</p>}
+        <h1 className="tenantTitle">Tenant Information</h1>
+        {success && <p className="successMessage">{success}</p>}
         <div className="names">
           <label>
             First Name:
@@ -125,7 +125,7 @@ function TenantForm() {
               onChange={(e) => setDateOfBirth(e.target.value)}
             />
           </label>
-          {error && <p className="error">{error}</p>}
+          {error && <p className="errorMessage">{error}</p>}
           <button type="submit" disabled={isLoading}>
             {isLoading ? "Signing up..." : "Sign up"}
           </button>

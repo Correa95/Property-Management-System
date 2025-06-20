@@ -1,9 +1,22 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FiDownload, FiPrinter } from "react-icons/fi";
 import "./MonthlyTransaction.css";
 
 function MonthlyTransaction() {
   const [isOpen, setIsOpen] = useState(false);
+  const [apartmentComplex, setApartmentComplex] = useState([]);
+  const [payment, setPayment] = useState([]);
+  useEffect(() => {
+    fetch("http//localhost:3000/api/v1/payment")
+      .then((res) => res.json())
+      .then((data) => setPayment(data))
+      .catch((error) => console.log(error));
+
+    fetch("http//localhost:3000/api/v1/apartmentComplex")
+      .then((res) => res.json())
+      .then((data) => setApartmentComplex(data))
+      .catch((error) => console.log(error));
+  }, []);
   const contentRef = useRef(null);
   const handleToggle = () => setIsOpen(!isOpen);
 

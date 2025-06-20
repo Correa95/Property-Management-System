@@ -84,6 +84,10 @@ function App() {
             }
           />
           <Route
+            path="payment"
+            element={isAdmin || isManager ? <Payment /> : <Navigate to="/" />}
+          />
+          <Route
             path="tenantScreening"
             element={
               isAdmin || isManager ? <TenantScreening /> : <Navigate to="/" />

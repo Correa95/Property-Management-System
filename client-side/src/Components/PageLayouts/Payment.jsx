@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import "./Payment.css";
 function Payment() {
   const [leases, setLeases] = useState([]);
   const [selectedLeaseId, setSelectedLeaseId] = useState("");
@@ -71,79 +71,81 @@ function Payment() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        {success && <p style={{ color: "green" }}>{success}</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="paymentContainer">
+      <form onSubmit={handleSubmit} className="paymentForm">
+        <h2 className="paymentTitle">Payment Form</h2>
+        {success && <p className="errorMessage">{success}</p>}
+        <div className="leaseSelect">
+          <label>
+            Select Lease:
+            <select
+              value={selectedLeaseId}
+              onChange={(e) => setSelectedLeaseId(e.target.value)}
+            >
+              <option value="">-- Choose Lease --</option>
+              {leases.map((lease) => (
+                <option key={lease.id} value={lease.id}>
+                  {`Tenant: ${lease.tenant?.firstName} ${lease.tenant?.lastName} | Unit: ${lease.apartment?.unitNumber}`}
+                </option>
+              ))}
+            </select>
+          </label>
 
-        <label>
-          Select Lease:
-          <select
-            value={selectedLeaseId}
-            onChange={(e) => setSelectedLeaseId(e.target.value)}
-          >
-            <option value="">-- Choose Lease --</option>
-            {leases.map((lease) => (
-              <option key={lease.id} value={lease.id}>
-                {`Tenant: ${lease.tenant?.firstName} ${lease.tenant?.lastName} | Unit: ${lease.apartment?.unitNumber}`}
-              </option>
-            ))}
-          </select>
-        </label>
+          <label>
+            Amount:
+            <input
+              type="number"
+              value={paymentAmount}
+              onChange={(e) => setPaymentAmount(e.target.value)}
+            />
+          </label>
+        </div>
+        <div className="leaseSelect">
+          <label>
+            Payment Method:
+            <select
+              value={paymentMethod}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            >
+              <option value="CREDIT_CARD">Credit Card</option>
+              <option value="BANK_TRANSFER">Bank Transfer</option>
+            </select>
+          </label>
 
-        <label>
-          Amount:
-          <input
-            type="number"
-            value={paymentAmount}
-            onChange={(e) => setPaymentAmount(e.target.value)}
-          />
-        </label>
+          <label>
+            Payment Date:
+            <input
+              type="date"
+              value={paymentDate}
+              onChange={(e) => setPaymentDate(e.target.value)}
+            />
+          </label>
+        </div>
+        <div className="leaseSelect">
+          <label>
+            Payment Status:
+            <select
+              value={paymentStatus}
+              onChange={(e) => setPaymentStatus(e.target.value)}
+            >
+              <option value="PENDING">Pending</option>
+              <option value="COMPLETED">Completed</option>
+              <option value="FAILED">Failed</option>
+            </select>
+          </label>
 
-        <label>
-          Payment Method:
-          <select
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          >
-            <option value="CREDIT_CARD">Credit Card</option>
-            <option value="BANK_TRANSFER">Bank Transfer</option>
-          </select>
-        </label>
-
-        <br />
-
-        <label>
-          Payment Date:
-          <input
-            type="date"
-            value={paymentDate}
-            onChange={(e) => setPaymentDate(e.target.value)}
-          />
-        </label>
-
-        <label>
-          Payment Status:
-          <select
-            value={paymentStatus}
-            onChange={(e) => setPaymentStatus(e.target.value)}
-          >
-            <option value="PENDING">Pending</option>
-            <option value="COMPLETED">Completed</option>
-            <option value="FAILED">Failed</option>
-          </select>
-        </label>
-
-        <label>
-          Late Payment?
-          <input
-            type="checkbox"
-            checked={isLatePayment}
-            onChange={(e) => setIsLatePayment(e.target.checked)}
-          />
-        </label>
+          <label>
+            Late Payment?
+            <input
+              type="checkbox"
+              checked={isLatePayment}
+              onChange={(e) => setIsLatePayment(e.target.checked)}
+            />
+          </label>
+        </div>
 
         <button type="submit">Submit Payment</button>
+        {error && <p className="errorMessage">{error}</p>}
       </form>
     </div>
   );

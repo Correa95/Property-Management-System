@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import "./RecentTransactions.css";
 import { FaPlus, FaFileExport } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import "./RecentTransactions.css";
 
 function RecentTransaction() {
+  const navigate = useNavigate();
   const [payments, setPayments] = useState([]);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,8 +36,8 @@ function RecentTransaction() {
       <div className="recentTransaction">
         <h1>Recent Transactions</h1>
         <div className="recentTransactionBtn">
-          <button>
-            <FaPlus className="icon" /> Record Bill
+          <button onClick={() => navigate("/payment")}>
+            <FaPlus className="icon" /> Record Payment
           </button>
           <button>
             <FaFileExport className="icon" /> Export
