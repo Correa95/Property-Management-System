@@ -3,22 +3,20 @@ import { FiDownload, FiPrinter } from "react-icons/fi";
 import "./MonthlyTransaction.css";
 
 function MonthlyTransaction() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [apartmentComplex, setApartmentComplex] = useState([]);
+  const [isOpen, setIsOpen] = useState(true);
   const [payment, setPayment] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState(4); // May (0-based)
+  const [selectedYear, setSelectedYear] = useState(2025);
+  const contentRef = useRef(null);
+
+  const handleToggle = () => setIsOpen(!isOpen);
+
   useEffect(() => {
-    fetch("http//localhost:3000/api/v1/payment")
+    fetch("http://localhost:3000/api/v1/payment")
       .then((res) => res.json())
       .then((data) => setPayment(data))
       .catch((error) => console.log(error));
-
-    fetch("http//localhost:3000/api/v1/apartmentComplex")
-      .then((res) => res.json())
-      .then((data) => setApartmentComplex(data))
-      .catch((error) => console.log(error));
   }, []);
-  const contentRef = useRef(null);
-  const handleToggle = () => setIsOpen(!isOpen);
 
   function handlePrint() {
     if (contentRef.current) {
@@ -34,6 +32,7 @@ function MonthlyTransaction() {
       newWindow.print();
     }
   }
+
   function handleDownload() {
     if (contentRef.current) {
       const element = document.createElement("a");
@@ -41,141 +40,173 @@ function MonthlyTransaction() {
         type: "text/plain",
       });
       element.href = URL.createObjectURL(file);
-      element.download = "Monthly_Transaction_Statement.txt";
+      element.download = `Monthly_Transaction_Statement_${
+        selectedMonth + 1
+      }_${selectedYear}.txt`;
       document.body.appendChild(element);
       element.click();
     }
   }
+
+  const filteredPayments = payment.filter((p) => {
+    const date = new Date(p.paymentDate);
+    return (
+      date.getMonth() === selectedMonth && date.getFullYear() === selectedYear
+    );
+  });
+
+  let balance = 0;
+  let totalIncome = 0;
+  let totalExpense = 0;
+
+  const rows = filteredPayments.map((p, index) => {
+    const dateStr = new Date(p.paymentDate).toLocaleDateString("en-US");
+    const amount = Number(p.paymentAmount) || 0;
+    const isIncome = amount > 0;
+    const income = isIncome ? amount : 0;
+    const expense = isIncome ? 0 : Math.abs(amount);
+
+    totalIncome += income;
+    totalExpense += expense;
+    balance += income - expense;
+
+    return (
+      <tr key={index}>
+        <td>{dateStr}</td>
+        <td>{p.description || (isIncome ? "Rent Received" : "Expense")}</td>
+        <td>{isIncome ? income.toFixed(2) : ""}</td>
+        <td>{!isIncome ? expense.toFixed(2) : ""}</td>
+        <td>{balance.toFixed(2)}</td>
+      </tr>
+    );
+  });
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   return (
     <section className="monthlyStatementContainer">
       <div className="monthlyStatement">
         <div className="statementHeader" onClick={handleToggle}>
           <h2 className="statementMonth">
-            January
+            {monthNames[selectedMonth]} {selectedYear}
             <span className={`icon ${isOpen ? "open" : ""}`}>
               {isOpen ? "−" : "+"}
             </span>
           </h2>
         </div>
-        {/* <div className="btnActions">
-          <button className="btnDownLoad" onClick={handleDownload}>
-            <FiDownload /> Download
-          </button>
-          <button className="btnPrint" onClick={handlePrint}>
-            <FiPrinter /> Print
-          </button>
-        </div> */}
 
-        <div
-          className={`statementContent ${isOpen ? "show" : ""}`}
-          ref={contentRef}
-        >
-          <h1 className="statementTitle">
-            Property Management Transaction Statement
-          </h1>
-
-          <div className="btnActions">
-            <button className="btnDownLoad" onClick={handleDownload}>
-              <FiDownload /> Download
-            </button>
-            <button className="btnPrint" onClick={handlePrint}>
-              <FiPrinter /> Print
-            </button>
-          </div>
-          <div className="statement">
-            <div className="sectionInfo">
-              <h2>Statement Details</h2>
-              <p>
-                <strong>Period:</strong> May 1 – May 30, 2025
-              </p>
-              <p>
-                <strong>Prepared For:</strong>Software Developer Job, 123
-                Corporate America
-              </p>
-              <p>
-                <strong>Managed By:</strong> Caleb Curry
-              </p>
+        {isOpen && (
+          <div className="statementContent show" ref={contentRef}>
+            <div className="filterControls">
+              <label>
+                Month:
+                <select
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(Number(e.target.value))}
+                >
+                  {monthNames.map((name, i) => (
+                    <option key={i} value={i}>
+                      {name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Year:
+                <select
+                  value={selectedYear}
+                  onChange={(e) => setSelectedYear(Number(e.target.value))}
+                >
+                  {[2024, 2025, 2026].map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
 
-            <div className="sectionInfo">
-              {apartmentComplex.map((apartment) => {
-                <>
-                  <h2>Property Information</h2>
-                  <p>
-                    <strong>Address:</strong>
-                    {apartment.address}
-                  </p>
-                  <p>
-                    <strong>Tenant:</strong> Mathew M Correa
-                  </p>
-                  <p>
-                    <strong>Lease:</strong> March 28 – Dec 31, 2025
-                  </p>
-                  <p>
-                    <strong>Rent:</strong> $3000
-                  </p>
-                </>;
-              })}
-            </div>
-          </div>
+            <h1 className="statementTitle">
+              Property Management Transaction Statement
+            </h1>
 
-          <table className="statementTable">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Income ($)</th>
-                <th>Expense ($)</th>
-                <th>Balance ($)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>04/01/2025</td>
-                <td>Rent Received</td>
-                <td>1,200</td>
-                <td></td>
-                <td>1,200</td>
-              </tr>
-              <tr>
-                <td>04/03/2025</td>
-                <td>Management Fee</td>
-                <td></td>
-                <td>120</td>
-                <td>1,080</td>
-              </tr>
-              <tr>
-                <td>04/10/2025</td>
-                <td>Plumbing Repair</td>
-                <td></td>
-                <td>150</td>
-                <td>930</td>
-              </tr>
-              <tr>
-                <td>04/20/2025</td>
-                <td>Lawn Maintenance</td>
-                <td></td>
-                <td>75</td>
-                <td>855</td>
-              </tr>
-              <tr>
-                <td>04/30/2025</td>
-                <td>Owner Disbursement</td>
-                <td></td>
-                <td>855</td>
-                <td>0</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colSpan="2">Monthly Totals</td>
-                <td>1,200</td>
-                <td>1,200</td>
-                <td>0</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
+            <div className="btnActions">
+              <button className="btnDownLoad" onClick={handleDownload}>
+                <FiDownload /> Download
+              </button>
+              <button className="btnPrint" onClick={handlePrint}>
+                <FiPrinter /> Print
+              </button>
+            </div>
+
+            <div className="statement">
+              <div className="sectionInfo">
+                <h2>Statement Details</h2>
+                <p>
+                  <strong>Period:</strong> {monthNames[selectedMonth]} 1 –{" "}
+                  {monthNames[selectedMonth]} 30, {selectedYear}
+                </p>
+                <p>
+                  <strong>Prepared For:</strong> Software Developer Job, 123
+                  Corporate America
+                </p>
+                <p>
+                  <strong>Managed By:</strong> Caleb Curry
+                </p>
+              </div>
+
+              <div className="sectionInfo">
+                <h2>Property Information</h2>
+                <p>
+                  <strong>Address:</strong> Code Breakthrough Mentorship Program
+                </p>
+                <p>
+                  <strong>Tenant:</strong> Mathew M Correa
+                </p>
+                <p>
+                  <strong>Lease:</strong> March 28 – Dec 31, 2025
+                </p>
+                <p>
+                  <strong>Rent:</strong> $3000
+                </p>
+              </div>
+            </div>
+
+            <table className="statementTable">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Income ($)</th>
+                  <th>Expense ($)</th>
+                  <th>Balance ($)</th>
+                </tr>
+              </thead>
+              <tbody>{rows}</tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan="2">Monthly Totals</td>
+                  <td>{totalIncome.toFixed(2)}</td>
+                  <td>{totalExpense.toFixed(2)}</td>
+                  <td>{(totalIncome - totalExpense).toFixed(2)}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        )}
       </div>
     </section>
   );
