@@ -5,7 +5,7 @@ import "./MonthlyTransaction.css";
 function MonthlyTransaction() {
   const [isOpen, setIsOpen] = useState(true);
   const [payment, setPayment] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState(4); // May (0-based)
+  const [selectedMonth, setSelectedMonth] = useState(4);
   const [selectedYear, setSelectedYear] = useState(2025);
   const contentRef = useRef(null);
 
@@ -48,8 +48,8 @@ function MonthlyTransaction() {
     }
   }
 
-  const filteredPayments = payment.filter((p) => {
-    const date = new Date(p.paymentDate);
+  const filteredPayments = payment.filter((payment) => {
+    const date = new Date(payment.paymentDate);
     return (
       date.getMonth() === selectedMonth && date.getFullYear() === selectedYear
     );
@@ -59,9 +59,9 @@ function MonthlyTransaction() {
   let totalIncome = 0;
   let totalExpense = 0;
 
-  const rows = filteredPayments.map((p, index) => {
-    const dateStr = new Date(p.paymentDate).toLocaleDateString("en-US");
-    const amount = Number(p.paymentAmount) || 0;
+  const rows = filteredPayments.map((payment, index) => {
+    const date = new Date(payment.paymentDate).toLocaleDateString("en-US");
+    const amount = Number(payment.paymentAmount) || 0;
     const isIncome = amount > 0;
     const income = isIncome ? amount : 0;
     const expense = isIncome ? 0 : Math.abs(amount);
@@ -72,8 +72,10 @@ function MonthlyTransaction() {
 
     return (
       <tr key={index}>
-        <td>{dateStr}</td>
-        <td>{p.description || (isIncome ? "Rent Received" : "Expense")}</td>
+        <td>{date}</td>
+        <td>
+          {payment.description || (isIncome ? "Rent Received" : "Expense")}
+        </td>
         <td>{isIncome ? income.toFixed(2) : ""}</td>
         <td>{!isIncome ? expense.toFixed(2) : ""}</td>
         <td>{balance.toFixed(2)}</td>
@@ -156,7 +158,7 @@ function MonthlyTransaction() {
               <div className="sectionInfo">
                 <h2>Statement Details</h2>
                 <p>
-                  <strong>Period:</strong> {monthNames[selectedMonth]} 1 –{" "}
+                  <strong>Period:</strong> {monthNames[selectedMonth]} 1 –
                   {monthNames[selectedMonth]} 30, {selectedYear}
                 </p>
                 <p>
