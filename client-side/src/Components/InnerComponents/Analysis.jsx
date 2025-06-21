@@ -1,95 +1,94 @@
 import { useState, useEffect } from "react";
 import "./Analysis.css";
-const formatMonthYear = (dateString) => {
-  const date = new Date(dateString);
-  return date.toLocaleString("default", { month: "long", year: "numeric" });
-};
 
 function Analysis() {
-  const [tenants, setTenants] = useState([]);
-  // const [monthlyPayments, setMonthlyPayments] = useState({});
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
+  const [apartments, setApartments] = useState([]);
+  const [payments, setPayments] = useState([]);
+  const [leases, setLeases] = useState([]);
+
+  const formatMonthYear = (dateString) => {
+    const date = new Date(dateString);
+    return isNaN(date)
+      ? "Invalid date"
+      : date.toLocaleString("default", { month: "long", year: "numeric" });
+  };
+
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/tenant")
+    fetch("http://localhost:3000/api/v1/apartment")
       .then((res) => res.json())
-      .then((data) => setTenants(data))
+      .then((data) => setApartments(data))
       .catch((error) => console.error("Error fetching tenants:", error));
+
+    fetch("http://localhost:3000/api/v1/payment")
+      .then((res) => res.json())
+      .then((data) => setPayments(data))
+      .catch((error) => console.error("Error fetching payments:", error));
+
+    fetch("http://localhost:3000/api/v1/lease")
+      .then((res) => res.json())
+      .then((data) => setLeases(data))
+      .catch((error) => console.error("Error fetching leases:", error));
   }, []);
 
-  // useEffect(() => {
-  //   const fetchMonthlyPayments = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         "http://localhost:8000/api/v1/getPayments"
-  //       );
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch Payments");
-  //       }
+  // Calculate monthly rent received
+  const paymentByMonth = {};
+  payments.forEach((payment) => {
+    const rawDate = payment.paymentDate;
+    const rawAmount = payment.paymentAmount;
 
-  //       const payments = await response.json();
-  //       console.log(payments);
+    if (!rawDate || isNaN(new Date(rawDate))) return;
 
-  //       if (!Array.isArray(payments)) {
-  //         throw new Error("Unexpected data format");
-  //       }
+    const month = formatMonthYear(rawDate);
+    const amount = Number(rawAmount);
 
-  //       const paymentMonth = {};
-  //       payments.forEach((payment) => {
-  //         const month = formatMonthYear(payment.date);
-  //         const amount = Number(payment.amount);
-  //         if (!paymentMonth[month]) {
-  //           paymentMonth[month] = 0;
-  //         }
-  //         paymentMonth[month] += amount;
-  //       });
+    if (!isNaN(amount)) {
+      if (!paymentByMonth[month]) {
+        paymentByMonth[month] = 0;
+      }
+      paymentByMonth[month] += amount;
+    }
+  });
 
-  //       setMonthlyPayments(paymentMonth);
-  //     } catch (err) {
-  //       console.error(err);
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchMonthlyPayments();
-  // }, []);
+  // Get most recent month (if any payments exist)
+  const months = Object.keys(paymentByMonth);
+  const lastMonth = months[months.length - 1];
+  const lastMonthTotal = lastMonth ? paymentByMonth[lastMonth] : 0;
 
-  // if (loading) return <p>Loading revenue...</p>;
-  // if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
+  const now = new Date();
+
+  const activeLeases = leases.filter((lease) => {
+    const start = new Date(lease.startDate);
+    const end = new Date(lease.endDate);
+    return start <= now && end >= now;
+  });
+
+  const totalUnits = apartments.length;
+  const occupiedUnits = activeLeases.length;
+  const occupancyRate = totalUnits > 0 ? (occupiedUnits / totalUnits) * 100 : 0;
+
   return (
     <section className="statsContainer">
       <div className="stats">
         <h1 className="titleHeader">Rent Received</h1>
         <div className="figure">
-          <amount className="dollarAmount">month</amount>
-          <small className="timeStamp">As of Last Month</small>
+          <span className="dollarAmount">
+            ${!isNaN(lastMonthTotal) ? lastMonthTotal.toFixed(2) : "0.00"}
+          </span>
+          <small className="timeStamp">
+            {lastMonth ? `As of ${lastMonth}` : "No Data"}
+          </small>
         </div>
       </div>
 
       <div className="stats">
-        <h1 className="titleHeader">Total Tenants</h1>
+        <h1 className="titleHeader">Occupancy Rate</h1>
         <div className="figure">
-          <amount className="dollarAmount">{tenants.length}</amount>
-          <small className="timeStamp">As of Last Month</small>
+          <span className="dollarAmount">{occupancyRate.toFixed(1)}%</span>
+          <small className="timeStamp">
+            {`Based on ${occupiedUnits} of ${totalUnits} units`}
+          </small>
         </div>
       </div>
-
-      {/* <div className="stats">
-        <h1 className="titleHeader">Rent Overdue</h1>
-        <div className="figure">
-          <amount className="dollarAmount">$250000</amount>
-          <small className="timeStamp">As of Last Month</small>
-        </div>
-      </div>
-
-      <div className="stats">
-        <h1 className="titleHeader">Total Expenses</h1>
-        <div className="figure">
-          <amount className="dollarAmount">$250000</amount>
-          <small className="timeStamp">As of Last Month</small>
-        </div>
-      </div> */}
     </section>
   );
 }

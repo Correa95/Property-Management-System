@@ -4,32 +4,34 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  background-color: #f8f8ff;
-  box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px;
+  /* background-color: #f8f8ff; */
+  /* box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px; */
 }
 .stats {
   width: 50%;
-  height: 40%;
-  color: #212121;
-  /* border: 2px solid #212121; */
-  text-align: center;
+  height: 70%;
+  color: var(--success-color);
+  border: 2px solid var(--secondary-color);
   border-radius: 15px;
+  padding: 20px;
   margin: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .figure {
-  margin-top: 20px;
+  font-size: 24px;
+  font-style: italic;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 20px;
+  color: var(--success-color);
 }
 /* .titleHeader {
   margin-top: 60px;
 } */
 /* .dollarAmount {
   margin-top: 10px 0px 20px 0px;
-  font-size: 16px;
+  font-size: 30px;
 } */
 /* .timeStamp {
   margin-top: 100px;

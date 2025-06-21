@@ -1,5 +1,5 @@
 import Analysis from "../InnerComponents/Analysis";
-// import Charts from "../InnerComponents/Charts";
+import Charts from "../InnerComponents/Charts";
 import RecentTransaction from "../InnerComponents/RecentTransaction";
 import NavBar from "../NavigationBars/NavBar";
 import "./OverView.css";
@@ -15,7 +15,9 @@ function OverView() {
           <Analysis />
         </div>
 
-        <div className="box">{/* <Charts /> */}</div>
+        <div className="box">
+          <Charts />
+        </div>
         <div className="box">
           <RecentTransaction />
         </div>

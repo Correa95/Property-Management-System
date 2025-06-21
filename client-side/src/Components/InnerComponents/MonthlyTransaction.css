@@ -150,14 +150,19 @@
   font-weight: bold;
   background-color: #f0f0f0;
 }
-.filterControls {
+.actionContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.filterByDate {
   display: flex;
   gap: 18px;
   margin: 18px 0;
 }
 
-.filterControls label {
+.filterByDate label {
   display: flex;
   flex-direction: column;
-  font-weight: bol18px;
+  /* font-weight: bol18px; */
 }

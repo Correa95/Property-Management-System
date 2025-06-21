@@ -110,47 +110,47 @@ function MonthlyTransaction() {
 
         {isOpen && (
           <div className="statementContent show" ref={contentRef}>
-            <div className="filterControls">
-              <label>
-                Month:
-                <select
-                  value={selectedMonth}
-                  onChange={(e) => setSelectedMonth(Number(e.target.value))}
-                >
-                  {monthNames.map((name, i) => (
-                    <option key={i} value={i}>
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label>
-                Year:
-                <select
-                  value={selectedYear}
-                  onChange={(e) => setSelectedYear(Number(e.target.value))}
-                >
-                  {[2024, 2025, 2026].map((year) => (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  ))}
-                </select>
-              </label>
+            <div className="actionContainer">
+              <div className="filterByDate">
+                <label>
+                  Month:
+                  <select
+                    value={selectedMonth}
+                    onChange={(e) => setSelectedMonth(Number(e.target.value))}
+                  >
+                    {monthNames.map((name, index) => (
+                      <option key={index} value={index}>
+                        {name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  Year:
+                  <select
+                    value={selectedYear}
+                    onChange={(e) => setSelectedYear(Number(e.target.value))}
+                  >
+                    {[2024, 2025, 2026].map((year) => (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              <div className="btnActions">
+                <button className="btnDownLoad" onClick={handleDownload}>
+                  <FiDownload /> Download
+                </button>
+                <button className="btnPrint" onClick={handlePrint}>
+                  <FiPrinter /> Print
+                </button>
+              </div>
             </div>
-
             <h1 className="statementTitle">
               Property Management Transaction Statement
             </h1>
-
-            <div className="btnActions">
-              <button className="btnDownLoad" onClick={handleDownload}>
-                <FiDownload /> Download
-              </button>
-              <button className="btnPrint" onClick={handlePrint}>
-                <FiPrinter /> Print
-              </button>
-            </div>
 
             <div className="statement">
               <div className="sectionInfo">
