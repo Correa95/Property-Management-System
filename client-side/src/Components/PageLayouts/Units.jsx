@@ -9,13 +9,10 @@ function Units() {
 
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/apartment")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch units");
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => setUnits(data))
       .catch((error) => {
-        console.error("Fetch error:", error);
+        console.error("Failed to fetch units:", error);
         setError(error.message);
       });
   }, []);
@@ -36,7 +33,7 @@ function Units() {
   return (
     <div className="unitsContainer">
       <h1 className="unitsHeader">All Units</h1>
-      {error && <p className="error">{error}</p>}
+      {error && <p className="errorMessage">{error}</p>}
       <div className="unitsTableContainer">
         <table className="unitsTable">
           <thead>

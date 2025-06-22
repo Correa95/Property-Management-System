@@ -11,13 +11,10 @@ function Tenants() {
 
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/tenant")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch tenants");
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => setTenants(data))
       .catch((err) => {
-        console.error("Fetch error:", error);
+        console.error("Failed to fetch tenants", error);
         setError(err.message);
       });
   }, []);
@@ -48,7 +45,7 @@ function Tenants() {
 
   return (
     <div className="newTenantContainer">
-      <h2 className="tenantList">Tenant List</h2>
+      <h2 className="tenantHeader">Tenant List</h2>
 
       <div className="createBtn">
         <button

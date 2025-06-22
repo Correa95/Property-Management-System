@@ -38,12 +38,7 @@ function SideNavBar() {
               UNITS
             </Link>
           </li>
-          {/* <li>
-            <Link to="payment">
-              <FaBuilding className="icon" />
-              PAYMENT
-            </Link>
-          </li> */}
+
           <li>
             <Link to="calender">
               <MdCalendarToday className="icon" />
@@ -62,12 +57,12 @@ function SideNavBar() {
               MAINTENANCE
             </Link>
           </li>
-          {/* <li>
+          <li>
             <Link to="tenantScreening">
               <FaUserCheck className="icon" />
               TENANT SCREENING
             </Link>
-          </li> */}
+          </li>
           <li>
             <Link to="monthlyStatement">
               <HiOutlineDocumentReport className="icon" />

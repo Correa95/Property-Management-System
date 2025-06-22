@@ -1,5 +1,9 @@
 function TenantScreening() {
-  return <div>TenantScreening</div>;
+  return (
+    <div>
+      <h1>IN PROGRESS</h1>
+    </div>
+  );
 }
 
 export default TenantScreening;

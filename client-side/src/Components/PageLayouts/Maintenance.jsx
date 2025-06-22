@@ -1,5 +1,9 @@
 function Maintenance() {
-  return <div>Maintenance</div>;
+  return (
+    <div>
+      <h1>IN PROGRESS</h1>
+    </div>
+  );
 }
 
 export default Maintenance;
