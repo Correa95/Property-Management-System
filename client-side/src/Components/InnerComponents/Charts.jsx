@@ -38,7 +38,6 @@ function Charts() {
       .catch((err) => console.error("Payment fetch error:", err));
   }, []);
 
-  // 🔢 Occupancy Calculation
   const now = new Date();
   const activeLeases = leases.filter((lease) => {
     const start = new Date(lease.startDate);
@@ -55,7 +54,6 @@ function Charts() {
     { name: "Vacant", value: vacantUnits >= 0 ? vacantUnits : 0 },
   ];
 
-  // 💰 Revenue by Month
   const formatMonthYear = (dateString) => {
     const date = new Date(dateString);
     return isNaN(date)
