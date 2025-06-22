@@ -5,6 +5,7 @@ import "./MonthlyTransaction.css";
 function MonthlyTransaction() {
   const [isOpen, setIsOpen] = useState(true);
   const [payment, setPayment] = useState([]);
+  const [complexInfo, setComplexInfo] = useState("");
   const [selectedMonth, setSelectedMonth] = useState(4);
   const [selectedYear, setSelectedYear] = useState(2025);
   const contentRef = useRef(null);
@@ -15,6 +16,10 @@ function MonthlyTransaction() {
     fetch("http://localhost:3000/api/v1/payment")
       .then((res) => res.json())
       .then((data) => setPayment(data))
+      .catch((error) => console.log(error));
+    fetch("http://localhost:3000/api/v1/apartmentComplex")
+      .then((res) => res.json())
+      .then((data) => setComplexInfo(data))
       .catch((error) => console.log(error));
   }, []);
 
@@ -150,42 +155,50 @@ function MonthlyTransaction() {
                 </button>
               </div>
             </div>
-            <h1 className="statementTitle">
-              Property Management Transaction Statement
-            </h1>
+            {Array.isArray(complexInfo) &&
+              complexInfo.map((info) => {
+                return (
+                  <>
+                    <h1 className="statementTitle">
+                      {info.name} Monthly Transaction Statement
+                    </h1>
 
-            <div className="statement">
-              <div className="sectionInfo">
-                <h2>Statement Details</h2>
-                <p>
-                  <strong>Period:</strong> {monthNames[selectedMonth]} 1 –
-                  {monthNames[selectedMonth]} 30, {selectedYear}
-                </p>
-                <p>
-                  <strong>Prepared For:</strong> Software Developer Job, 123
-                  Corporate America
-                </p>
-                <p>
-                  <strong>Managed By:</strong> Caleb Curry
-                </p>
-              </div>
+                    <div className="statement">
+                      <div className="sectionInfo">
+                        <h2>Statement Details</h2>
+                        <p>
+                          <strong>Period:</strong> {monthNames[selectedMonth]} 1
+                          –{monthNames[selectedMonth]} 30, {selectedYear}
+                        </p>
+                        <p>
+                          <strong>Prepared For:</strong> Software Developer Job,
+                          123 Corporate America
+                        </p>
+                        <p>
+                          <strong>Managed By:</strong> Mathew M Correa
+                        </p>
+                      </div>
 
-              <div className="sectionInfo">
-                <h2>Property Information</h2>
-                <p>
-                  <strong>Address:</strong> Code Breakthrough Mentorship Program
-                </p>
-                <p>
-                  <strong>Tenant:</strong> Mathew M Correa
-                </p>
-                <p>
-                  <strong>Lease:</strong> March 28 – Dec 31, 2025
-                </p>
-                <p>
-                  <strong>Rent:</strong> $3000
-                </p>
-              </div>
-            </div>
+                      <div className="sectionInfo">
+                        <h2>{info.name} Address</h2>
+                        <p>
+                          <strong>Street:</strong> {info.street}
+                        </p>
+                        <p>
+                          <strong>City:</strong> {info.city}
+                        </p>
+                        <p>
+                          <strong>ZipCode:</strong> {info.zipcode}
+                        </p>
+                        <p>
+                          <strong>State:</strong>
+                          {info.state}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
 
             <table className="statementTable">
               <thead>
