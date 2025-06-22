@@ -6,15 +6,23 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-
   border-bottom: 2px solid #ccc;
 }
 li {
   font-size: 16px;
-  margin: 5px;
+  color: var(--success-color);
+  /* margin: 5px; */
 }
 .btnMore {
   width: 100px;
-  /* height: 20px; */
+  background-color: var(--primary-color);
+  color: #f0f0f0f0;
   padding: 10px;
+  margin-top: 10px;
+  border-radius: 15px;
+}
+.btnMore:hover {
+  background-color: var(--secondary-color);
+  color: #212121;
+  border: none;
 }

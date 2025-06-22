@@ -26,7 +26,7 @@ function RecentTransac() {
     <div className="transactionContainer">
       {error && <p>{error}</p>}
       <ul className="recentTransactionList">
-        {payments.slice(0, 8).map((payment) => (
+        {payments.slice(0, 10).map((payment) => (
           <li key={payment.id} className="transactionItem">
             <li>${payment.paymentAmount}</li>
             <li>{new Date(payment.paymentDate).toLocaleDateString()}</li>
