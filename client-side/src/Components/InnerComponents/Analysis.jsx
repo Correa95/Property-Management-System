@@ -49,7 +49,6 @@ function Analysis() {
     }
   });
 
-  // Get most recent month (if any payments exist)
   const months = Object.keys(paymentByMonth);
   const lastMonth = months[months.length - 1];
   const lastMonthTotal = lastMonth ? paymentByMonth[lastMonth] : 0;

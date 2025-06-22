@@ -2,7 +2,7 @@
   width: 75%;
   height: 80px;
   border-radius: 15px;
-  border: 2px solid red;
+  border: 2px solid var(--secondary-color);
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -47,6 +47,8 @@
 }
 
 .notification button {
+  width: 32px;
+  height: 32px;
   margin-left: 15px;
   padding: 10px;
   border: none;
@@ -57,6 +59,8 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s ease;
+  background-color: var(--primary-color);
+  color: white;
 }
 
 .notification button:hover {
@@ -67,7 +71,7 @@
 .profileImage {
   width: 32px;
   height: 32px;
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -75,11 +79,12 @@
   justify-content: center;
   font-weight: bold;
   font-size: 14px;
-  margin-right: 8px;
+  margin-right: 15px;
+  margin-left: 15px;
   text-transform: uppercase;
 }
 
-.profileName {
+/* .profileName {
   font-weight: 500;
   color: #333;
-}
+} */
