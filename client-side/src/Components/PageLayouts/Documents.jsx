@@ -2,7 +2,6 @@ import "./Documents.css";
 import { useState, useEffect } from "react";
 
 import { FiDownload, FiTrash2 } from "react-icons/fi";
-import Footer from "./Footer";
 
 function Documents() {
   const [documents, setDocuments] = useState([]);
@@ -161,7 +160,6 @@ function Documents() {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
