@@ -1,9 +1,9 @@
-// import { Outlet } from "react-router-dom";
-import ClientDashBoard from "./ClientDashBoard";
+import "./ClientLayout.css";
 import ClientNavBar from "./ClientNavBar";
+import ClientDashBoard from "./ClientDashBoard";
 function ClientLayout() {
   return (
-    <div>
+    <div className="layout">
       <h2>Client Portal</h2>
       <ClientNavBar />
       <ClientDashBoard />

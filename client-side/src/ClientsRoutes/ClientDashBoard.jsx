@@ -2,10 +2,10 @@ import "./ClientDashboard.css";
 function ClientDashBoard() {
   return (
     <div className="clientDashboardContainer">
-      <div className="box">Message</div>
-      <div className="box">Maintenance Request</div>
-      <div className="box">Rent Payment</div>
-      <div className="box">Payment History</div>
+      <div className="dashBoard">Message</div>
+      <div className="dashBoard">Maintenance Request</div>
+      <div className="dashBoard">Rent Payment</div>
+      <div className="dashBoard">Payment History</div>
     </div>
   );
 }

@@ -19,13 +19,11 @@
 
 .side {
   height: 100vh;
-  border: 2px solid red;
 }
 
 .mainContent {
   width: 100%;
   height: 100vh;
-  border: 2px solid red;
 }
 .footer {
   text-align: center;
@@ -38,5 +36,5 @@
   color: var(--error-color);
 }
 .successMessage {
-  color: var(--secondary-color);
+  color: var(--success-color);
 }
