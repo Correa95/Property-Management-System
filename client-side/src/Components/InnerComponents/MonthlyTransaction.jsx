@@ -116,110 +116,111 @@ function MonthlyTransaction() {
         </div>
 
         {isOpen && (
-          <div className="statementContent show" ref={contentRef}>
-            <div className="actionContainer">
-              <div className="filterByDate">
-                <label>
-                  Month:
-                  <select
-                    value={selectedMonth}
-                    onChange={(e) => setSelectedMonth(Number(e.target.value))}
-                  >
-                    {monthNames.map((name, index) => (
-                      <option key={index} value={index}>
-                        {name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label>
-                  Year:
-                  <select
-                    value={selectedYear}
-                    onChange={(e) => setSelectedYear(Number(e.target.value))}
-                  >
-                    {[2024, 2025, 2026].map((year) => (
-                      <option key={year} value={year}>
-                        {year}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+          <div className="tableWrapper">
+            <div className="statementContent show" ref={contentRef}>
+              <div className="actionContainer">
+                <div className="filterByDate">
+                  <label>
+                    Month:
+                    <select
+                      value={selectedMonth}
+                      onChange={(e) => setSelectedMonth(Number(e.target.value))}
+                    >
+                      {monthNames.map((name, index) => (
+                        <option key={index} value={index}>
+                          {name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label>
+                    Year:
+                    <select
+                      value={selectedYear}
+                      onChange={(e) => setSelectedYear(Number(e.target.value))}
+                    >
+                      {[2024, 2025, 2026].map((year) => (
+                        <option key={year} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+                <div className="btnActions">
+                  <button className="btnDownLoad" onClick={handleDownload}>
+                    <FiDownload /> Download
+                  </button>
+                  <button className="btnPrint" onClick={handlePrint}>
+                    <FiPrinter /> Print
+                  </button>
+                </div>
               </div>
-              <div className="btnActions">
-                <button className="btnDownLoad" onClick={handleDownload}>
-                  <FiDownload /> Download
-                </button>
-                <button className="btnPrint" onClick={handlePrint}>
-                  <FiPrinter /> Print
-                </button>
-              </div>
+              {Array.isArray(complexInfo) &&
+                complexInfo.map((info) => {
+                  return (
+                    <>
+                      <h1 className="statementTitle">
+                        {info.name} Monthly Transaction Statement
+                      </h1>
+
+                      <div className="statement">
+                        <div className="sectionInfo">
+                          <h2>Statement Details</h2>
+                          <p>
+                            <strong>Period:</strong> {monthNames[selectedMonth]}{" "}
+                            1 –{monthNames[selectedMonth]} 30, {selectedYear}
+                          </p>
+                          <p>
+                            <strong>Prepared For:</strong> Software Developer
+                            Job, 123 Corporate America
+                          </p>
+                          <p>
+                            <strong>Managed By:</strong> Mathew M Correa
+                          </p>
+                        </div>
+
+                        <div className="sectionInfo">
+                          <h2>{info.name} Address</h2>
+                          <p>
+                            <strong>Street:</strong> {info.street}
+                          </p>
+                          <p>
+                            <strong>City:</strong> {info.city}
+                          </p>
+                          <p>
+                            <strong>ZipCode:</strong> {info.zipcode}
+                          </p>
+                          <p>
+                            <strong>State:</strong>
+                            {info.state}
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  );
+                })}
+              <table className="statementTable">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Income ($)</th>
+                    <th>Expense ($)</th>
+                    <th>Balance ($)</th>
+                  </tr>
+                </thead>
+                <tbody>{rows}</tbody>
+                <tfoot>
+                  <tr>
+                    <td colSpan="2">Monthly Totals</td>
+                    <td>{totalIncome.toFixed(2)}</td>
+                    <td>{totalExpense.toFixed(2)}</td>
+                    <td>{(totalIncome - totalExpense).toFixed(2)}</td>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
-            {Array.isArray(complexInfo) &&
-              complexInfo.map((info) => {
-                return (
-                  <>
-                    <h1 className="statementTitle">
-                      {info.name} Monthly Transaction Statement
-                    </h1>
-
-                    <div className="statement">
-                      <div className="sectionInfo">
-                        <h2>Statement Details</h2>
-                        <p>
-                          <strong>Period:</strong> {monthNames[selectedMonth]} 1
-                          –{monthNames[selectedMonth]} 30, {selectedYear}
-                        </p>
-                        <p>
-                          <strong>Prepared For:</strong> Software Developer Job,
-                          123 Corporate America
-                        </p>
-                        <p>
-                          <strong>Managed By:</strong> Mathew M Correa
-                        </p>
-                      </div>
-
-                      <div className="sectionInfo">
-                        <h2>{info.name} Address</h2>
-                        <p>
-                          <strong>Street:</strong> {info.street}
-                        </p>
-                        <p>
-                          <strong>City:</strong> {info.city}
-                        </p>
-                        <p>
-                          <strong>ZipCode:</strong> {info.zipcode}
-                        </p>
-                        <p>
-                          <strong>State:</strong>
-                          {info.state}
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                );
-              })}
-
-            <table className="statementTable">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Description</th>
-                  <th>Income ($)</th>
-                  <th>Expense ($)</th>
-                  <th>Balance ($)</th>
-                </tr>
-              </thead>
-              <tbody>{rows}</tbody>
-              <tfoot>
-                <tr>
-                  <td colSpan="2">Monthly Totals</td>
-                  <td>{totalIncome.toFixed(2)}</td>
-                  <td>{totalExpense.toFixed(2)}</td>
-                  <td>{(totalIncome - totalExpense).toFixed(2)}</td>
-                </tr>
-              </tfoot>
-            </table>
           </div>
         )}
       </div>
