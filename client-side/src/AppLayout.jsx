@@ -10,10 +10,6 @@ export default function AppLayout() {
       </aside>
       <div className="mainContent">
         <Outlet />
-        <div className="footer">
-          © 2025 Code Breakthrough Mentorship Program – Property Management
-          Services
-        </div>
       </div>
     </div>
   );
