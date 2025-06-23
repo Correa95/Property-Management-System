@@ -25,7 +25,13 @@
   width: 100%;
   height: 100vh;
 }
-
+.footer {
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+}
 .errorMessage {
   color: var(--error-color);
 }
