@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-  // User model
+
 model User {
   id        String @id @default(uuid())
   firstName String
@@ -30,7 +30,7 @@ enum Role {
   client
 }
 
-// ApartmentComplex model
+
 model ApartmentComplex {
   id         String      @id @default(uuid())
   name       String      @unique
@@ -39,9 +39,8 @@ model ApartmentComplex {
   state      String
   zipcode    String
   buildings  Building[]
-  apartments Apartment[] // ✅ Back-relation to Apartment
+  apartments Apartment[] 
 }
-
 
 
 model Building {
@@ -55,22 +54,22 @@ model Building {
 }
 
 
-// Apartment model
+
 model Apartment {
   id            String           @id @default(uuid())
   buildingId    String
   complexId     String
-  building      Building         @relation(fields: [buildingId], references: [id])
-  complex       ApartmentComplex @relation(fields: [complexId], references: [id])
   unitNumber    String
   rentAmount    Decimal
   numBedrooms   Int
   squareFootage Int
   isAvailable   Boolean          @default(true)
-  leases        Lease[] // ✅ Back-relation to Lease
+  leases        Lease[] 
+  building      Building         @relation(fields: [buildingId], references: [id])
+  complex       ApartmentComplex @relation(fields: [complexId], references: [id])
 }
 
-// Tenant model
+
 model Tenant {
   id                  String               @id @default(uuid())
   firstName           String
@@ -78,35 +77,35 @@ model Tenant {
   email               String               @unique
   phoneNumber         String
   dateOfBirth         DateTime
-  leases              Lease[] // ✅ Back-relation to Lease
-  maintenanceRequests MaintenanceRequest[] // ✅ Back-relation
+  leases              Lease[] 
+  maintenanceRequests MaintenanceRequest[] 
 }
 
-// Lease model
+
 model Lease {
   id              String    @id @default(uuid())
   apartmentId     String    @unique
-  apartment       Apartment @relation(fields: [apartmentId], references: [id])
-  tenantId        String
-  tenant          Tenant    @relation(fields: [tenantId], references: [id])
   startDate       DateTime
   endDate         DateTime
   monthlyRent     Decimal
   securityDeposit Decimal
   isActive        Boolean   @default(true)
-  payments        Payment[] // ✅ Back-relation to Payment
+  payments        Payment[] 
+  apartment       Apartment @relation(fields: [apartmentId], references: [id])
+  tenantId        String
+  tenant          Tenant    @relation(fields: [tenantId], references: [id])
 }
 
-// Payment model
+
 model Payment {
   id            String        @id @default(uuid())
   leaseId       String
-  lease         Lease         @relation(fields: [leaseId], references: [id])
   paymentAmount Decimal
   paymentDate   DateTime      @default(now())
   paymentMethod PaymentMethod
   paymentStatus PaymentStatus @default(PENDING)
   isLatePayment Boolean       @default(false)
+  lease         Lease         @relation(fields: [leaseId], references: [id])
 }
 
 enum PaymentMethod {
@@ -122,7 +121,6 @@ enum PaymentStatus {
 
 
 
-// MaintenanceRequest model
 model MaintenanceRequest {
   id          String        @id @default(uuid())
   tenantId    String
@@ -138,7 +136,7 @@ enum RequestStatus {
   COMPLETED
 }
 
-// Employee model
+
 model Employee {
   id           String       @id @default(uuid())
   firstName    String
@@ -153,7 +151,7 @@ model Employee {
   city         String
   state        String
   zipcode      String
-  payrolls     Payroll[] // ✅ Back-relation to Payroll
+  payrolls     Payroll[] 
 }
 
 enum EmployeeType {
@@ -162,7 +160,7 @@ enum EmployeeType {
   CONTRACT
 }
 
-// Payroll model
+
 model Payroll {
   id             String    @id @default(uuid())
   employeeId     String
@@ -178,7 +176,6 @@ model Payroll {
   paidOn         DateTime?
 }
 
-// Document model
 model Document {
   id           String       @id @default(uuid())
   name         String
