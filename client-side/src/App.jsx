@@ -18,6 +18,7 @@ import Payroll from "./Components/PageLayouts/Payroll";
 import Employees from "./Components/PageLayouts/Employees";
 import RecentTransactions from "./Components/PageLayouts/RecentTransactions";
 import Payment from "./Components/PageLayouts/Payment";
+import ClientPaymentForm from "./ClientsRoutes/ClientPaymentForm";
 
 function App() {
   const { isAuthenticated, userRole } = useAuth();
@@ -118,6 +119,7 @@ function App() {
       {isAuthenticated && isClient && (
         <Route path="/client" element={<ClientLayout />}>
           <Route index element={<ClientDashBoard />} />
+          <Route path="clientPaymentForm" element={<ClientPaymentForm />} />
         </Route>
       )}
 
