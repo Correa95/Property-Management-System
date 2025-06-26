@@ -1,12 +1,13 @@
 import "./ClientLayout.css";
 import ClientNavBar from "./ClientNavBar";
-import ClientDashBoard from "./ClientDashBoard";
+import { Outlet } from "react-router-dom"; // ✅ import Outlet
+
 function ClientLayout() {
   return (
     <div className="layout">
       <h2>Client Portal</h2>
       <ClientNavBar />
-      <ClientDashBoard />
+      <Outlet /> {/* ✅ This renders whatever route is nested */}
     </div>
   );
 }

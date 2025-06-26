@@ -6,7 +6,10 @@ function ClientDashBoard() {
     <div className="clientDashboardContainer">
       <div className="dashBoard">Message</div>
       <div className="dashBoard">Maintenance Request</div>
-      <div className="dashBoard" onClick={navigate("/clientPaymentForm")}>
+      <div
+        className="dashBoard"
+        onClick={() => navigate("/client/clientPaymentForm")}
+      >
         Rent Payment
       </div>
       <div className="dashBoard">Payment History</div>
