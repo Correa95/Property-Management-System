@@ -117,14 +117,6 @@ function App() {
 
       {/* Protected routes for Client */}
       {isAuthenticated && isClient && (
-        // <Route path="/client" element={<ClientLayout />}>
-        //   <Route index element={<ClientDashBoard />} />
-        //   <Route
-        //     path="clientPaymentForm"
-        //     element={isClient ? <ClientPaymentForm /> : <Navigate to="/" />}
-        //   />
-        // </Route>
-
         <Route path="/client" element={<ClientLayout />}>
           <Route index element={<ClientDashBoard />} />
           <Route path="clientPaymentForm" element={<ClientPaymentForm />} />
