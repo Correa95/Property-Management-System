@@ -116,5 +116,83 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ error: "Error deleting payment", details: err });
   }
 });
+// Get active lease for a tenant
+router.get("/active-lease/:tenantId", async (req, res) => {
+  const { tenantId } = req.params;
+  const today = new Date();
+
+  try {
+    const activeLease = await prisma.lease.findFirst({
+      where: {
+        tenantId: tenantId,
+        startDate: {
+          lte: today,
+        },
+        endDate: {
+          gte: today,
+        },
+      },
+      include: {
+        apartment: true, // optional: include unit/apartment info
+      },
+    });
+
+    if (!activeLease) {
+      return res.status(404).json({ error: "No active lease found" });
+    }
+
+    res.json(activeLease);
+  } catch (err) {
+    console.error("Error fetching active lease:", err);
+    res.status(500).json({ error: "Error fetching active lease" });
+  }
+});
+
+// GET /api/leases/active/:tenantId
+router.get("/active/:tenantId", async (req, res) => {
+  const { tenantId } = req.params;
+  const today = new Date();
+
+  try {
+    const lease = await prisma.lease.findFirst({
+      where: {
+        tenantId,
+        startDate: { lte: today },
+        endDate: { gte: today },
+      },
+      include: {
+        tenant: true, // Optional for name
+        apartment: true, // Optional for address
+      },
+    });
+
+    if (!lease) return res.status(404).json({ error: "No active lease found" });
+
+    res.json(lease);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch active lease" });
+  }
+});
+// GET /api/payments/tenant/:tenantId
+router.get("/tenant/:tenantId", async (req, res) => {
+  const { tenantId } = req.params;
+
+  try {
+    const lease = await prisma.lease.findFirst({
+      where: { tenantId },
+      include: {
+        payments: {
+          orderBy: { paymentDate: "desc" },
+        },
+      },
+    });
+
+    if (!lease) return res.status(404).json({ error: "No lease found" });
+
+    res.json(lease.payments);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch payments" });
+  }
+});
 
 module.exports = router;
