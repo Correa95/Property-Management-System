@@ -1,24 +1,29 @@
 .statsContainer {
   width: 100%;
-  height: 200px;
+  min-height: 200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-color: #f8f8ff; */
+  flex-wrap: wrap;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
 }
+
 .stats {
-  width: 50%;
-  height: 70%;
+  flex: 1 1 45%;
   color: var(--success-color);
   border: 2px solid var(--secondary-color);
   border-radius: 15px;
   padding: 20px;
-  margin: 20px;
+  min-width: 250px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-sizing: border-box;
 }
+
 .figure {
-  font-size: 24px;
+  font-size: 1.2rem;
   font-style: italic;
   display: flex;
   justify-content: space-between;
@@ -26,15 +31,53 @@
   margin-top: 20px;
   color: var(--success-color);
 }
-/* .titleHeader {
-  margin-top: 60px;
-} */
-/* .dollarAmount {
-  margin-top: 10px 0px 20px 0px;
-  font-size: 30px;
-} */
-/* .timeStamp {
-  margin-top: 100px;
-  font: 14px;
+
+.titleHeader {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.dollarAmount {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.timeStamp {
+  font-size: 0.9rem;
   color: #212121;
-} */
+  margin-left: 10px;
+}
+
+/* ----------- Responsive Adjustments ----------- */
+
+@media (max-width: 768px) {
+  .statsContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .stats {
+    width: 100%;
+    margin: 0;
+  }
+
+  .figure {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .titleHeader {
+    font-size: 1.3rem;
+  }
+
+  .dollarAmount {
+    font-size: 1.5rem;
+  }
+
+  .timeStamp {
+    font-size: 0.85rem;
+  }
+}

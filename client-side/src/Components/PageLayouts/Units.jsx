@@ -54,12 +54,13 @@ function Units() {
             ) : (
               currentUnits.map((unit) => (
                 <tr key={unit.id}>
-                  {/* <td>{unit.buildingNumber}</td> */}
-                  <td>{unit.unitNumber}</td>
-                  <td>{unit.numBedrooms}</td>
-                  <td>{unit.squareFootage}</td>
-                  <td>${unit.rentAmount}</td>
-                  <td>{unit.isAvailable ? "Yes" : "No"}</td>
+                  <td data-label="Unit Number">{unit.unitNumber}</td>
+                  <td data-label="Bedrooms">{unit.numBedrooms}</td>
+                  <td data-label="Sq Ft">{unit.squareFootage}</td>
+                  <td data-label="Rent Amount">${unit.rentAmount}</td>
+                  <td data-label="Available">
+                    {unit.isAvailable ? "Yes" : "No"}
+                  </td>
                 </tr>
               ))
             )}
