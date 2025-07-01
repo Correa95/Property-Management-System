@@ -1,16 +1,16 @@
 const router = require("express").Router();
 
-router.use("/auth", require("./auth"));
-router.use("/user", require("./user"));
-router.use("/building", require("./building"));
-router.use("/apartment", require("./apartment"));
-router.use("/apartmentcomplex", require("./apartmentcomplex"));
-router.use("/tenant", require("./tenant"));
-router.use("/lease", require("./lease"));
-router.use("/payment", require("./payment"));
-router.use("/maintenance", require("./maintenance"));
-router.use("/document", require("./document"));
-router.use("/employee", require("./employee"));
-router.use("/payroll", require("./payroll"));
+router.use("/auth", require("../routes/auth"));
+router.use("/user", require("../routes/user"));
+router.use("/apartmentComplex", require("../routes/apartmentComplex"));
+router.use("/building", require("../routes/building"));
+router.use("/apartment", require("../routes/apartment"));
+router.use("/tenant", require("../routes/tenant"));
+router.use("/lease", require("../routes/lease"));
+router.use("/payment", require("../routes/payment"));
+router.use("/maintenance", require("../routes/maintenance"));
+router.use("/document", require("../routes/document"));
+router.use("/employee", require("../routes/employee"));
+router.use("/payroll", require("../routes/payroll"));
 
 module.exports = router;
