@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
     });
     res.status(201).json(complex);
   } catch (err) {
-    console.error("🔥 Prisma error:", err); // log exact issue
+    console.error("🔥 Prisma error:", err);
     res
       .status(500)
       .json({ error: "Error creating complex", details: err.message });
