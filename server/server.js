@@ -8,7 +8,7 @@ const app = express();
 const PORT = 3000;
 // const PORT = process.env.PORT || 8080;
 app.use(express.json()); // ✅ needed to parse JSON bodies
-const controller = require("./controller");
+const controller = require("./routes");
 
 // CORS configuration
 const corsOptions = {
