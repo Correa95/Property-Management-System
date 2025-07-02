@@ -1,5 +1,5 @@
 import { FiBell } from "react-icons/fi";
-import "./clientNavBar.css";
+import "./ClientNavBar.css";
 import { useAuth } from "./../context/AuthContext";
 import { MdLogout } from "react-icons/md";
 
