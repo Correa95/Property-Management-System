@@ -14,11 +14,14 @@ export function AuthProvider({ children }) {
 
   async function login(username, password) {
     try {
-      const response = await fetch(`${process.env.API_URL}api/v1/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}api/v1/auth/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        }
+      );
 
       if (!response.ok) {
         setErrorMessage("Invalid credentials.");
@@ -47,8 +50,8 @@ export function AuthProvider({ children }) {
       setErrorMessage(null);
 
       return user.role;
-    } catch (errorMessage) {
-      setErrorMessage(errorMessage, "Login failed.");
+    } catch (error) {
+      setErrorMessage(error.message || "Login failed.");
       return null;
     }
   }
@@ -56,8 +59,11 @@ export function AuthProvider({ children }) {
   function logout() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("userRole");
+    localStorage.removeItem("firstName");
+    localStorage.removeItem("lastName");
     setAccessToken(null);
     setUserRole(null);
+    setUser(null);
     setIsAuthenticated(false);
     navigate("/login");
   }

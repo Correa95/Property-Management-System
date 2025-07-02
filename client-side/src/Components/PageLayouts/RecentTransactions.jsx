@@ -11,7 +11,7 @@ function RecentTransaction() {
   const itemsPerPage = 15;
 
   useEffect(() => {
-    fetch(`${process.env.API_URL}3000/api/v1/payment`)
+    fetch(`${import.meta.env.VITE_API_URL}3000/api/v1/payment`)
       .then((res) => res.json())
       .then((data) => setPayments(data))
       .catch((error) => {

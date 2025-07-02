@@ -8,7 +8,7 @@ function Units() {
   const unitsPerPage = 15;
 
   useEffect(() => {
-    fetch(`${process.env.API_URL}/3000/api/v1/apartment`)
+    fetch(`${import.meta.env.VITE_API_URL}/3000/api/v1/apartment`)
       .then((res) => res.json())
       .then((data) => setUnits(data))
       .catch((error) => {

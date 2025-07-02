@@ -12,7 +12,7 @@ function Payment() {
   const [success, setSuccess] = useState(null);
 
   useEffect(() => {
-    fetch(`${process.env.API_URL}/api/v1/lease`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/lease`)
       .then((res) => res.json())
       .then((data) => setLeases(data))
       .catch((error) => setError(error.message));
