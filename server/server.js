@@ -5,8 +5,10 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const app = express();
-const PORT = 3000;
+// const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 // const PORT = process.env.PORT || 8080;
+
 app.use(express.json()); // ✅ needed to parse JSON bodies
 const controller = require("./routes");
 
