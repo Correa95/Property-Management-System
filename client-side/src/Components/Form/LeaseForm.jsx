@@ -21,14 +21,16 @@ function Lease() {
     async function fetchData() {
       try {
         const apartmentResult = await fetch(
-          "http://localhost:3000/api/v1/apartment"
+          "https://property-management-system-64a6.onrender.com/api/v1/apartment"
         );
-        const tenantResult = await fetch("http://localhost:3000/api/v1/tenant");
+        const tenantResult = await fetch(
+          "https://property-management-system-64a6.onrender.com/api/v1/tenant"
+        );
 
         setApartments(await apartmentResult.json());
         setTenants(await tenantResult.json());
       } catch (error) {
-        setError("Failed to load apartments or tenants.");
+        setError("Failed to load apartments or tenants.", error);
       } finally {
         setLoading(false);
       }

@@ -12,7 +12,7 @@ function Payment() {
   const [success, setSuccess] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/lease")
+    fetch(`${process.env.API_URL}/api/v1/lease`)
       .then((res) => res.json())
       .then((data) => setLeases(data))
       .catch((error) => setError(error.message));
@@ -41,14 +41,14 @@ function Payment() {
     const paymentData = {
       leaseId: selectedLeaseId,
       paymentAmount: parseFloat(paymentAmount),
-      paymentMethod: paymentMethod.trim(), // trim just in case
+      paymentMethod: paymentMethod.trim(),
       isLatePayment,
-      paymentDate: paymentDate || undefined, // send string as-is or undefined
+      paymentDate: paymentDate || undefined,
       paymentStatus,
     };
 
     try {
-      const res = await fetch("http://localhost:3000/api/v1/payment", {
+      const res = await fetch("${process.env.API_URL}/api/v1/payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(paymentData),

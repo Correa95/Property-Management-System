@@ -8,7 +8,7 @@ function Units() {
   const unitsPerPage = 15;
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/apartment")
+    fetch(`${process.env.API_URL}/3000/api/v1/apartment`)
       .then((res) => res.json())
       .then((data) => setUnits(data))
       .catch((error) => {

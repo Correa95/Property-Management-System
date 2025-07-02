@@ -10,7 +10,7 @@ function Building() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/apartmentComplex")
+    fetch(`${process.env.API_URL}/3000/api/v1/apartmentComplex`)
       .then((res) => res.json())
       .then((data) => setApartmentComplexes(data))
       .catch(() =>
@@ -34,14 +34,17 @@ function Building() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/building", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          complexId,
-          buildingNumber: buildingNumber,
-        }),
-      });
+      const response = await fetch(
+        "https://property-management-system-64a6.onrender.com/3000/api/v1/building",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            complexId,
+            buildingNumber: buildingNumber,
+          }),
+        }
+      );
 
       const data = await response.json();
 

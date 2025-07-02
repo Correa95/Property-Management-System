@@ -17,12 +17,12 @@ function Apartment() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/apartmentComplex")
+    fetch(`${process.env.API_URL}/api/v1/complex`)
       .then((res) => res.json())
       .then(setComplexes)
       .catch(() => setError("Failed to load apartment complexes"));
 
-    fetch("http://localhost:3000/api/v1/building")
+    fetch(`${process.env.API_URL}/api/v1/building`)
       .then((res) => res.json())
       .then(setBuildings)
       .catch(() => setError("Failed to load buildings"));
@@ -48,19 +48,22 @@ function Apartment() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/v1/apartment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          complexId,
-          buildingId,
-          unitNumber,
-          rentAmount: parseFloat(rentAmount),
-          numBedrooms: parseInt(numBedrooms),
-          squareFootage: parseInt(squareFootage),
-          isAvailable,
-        }),
-      });
+      const res = await fetch(
+        "https://property-management-system-64a6.onrender.com/api/v1/apartment",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            complexId,
+            buildingId,
+            unitNumber,
+            rentAmount: parseFloat(rentAmount),
+            numBedrooms: parseInt(numBedrooms),
+            squareFootage: parseInt(squareFootage),
+            isAvailable,
+          }),
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) {

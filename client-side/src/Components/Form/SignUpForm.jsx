@@ -28,7 +28,7 @@ function SignUpForm() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/v1/auth/register",
+        `${process.env.API_URL}/3000/api/v1/auth/register`,
         {
           method: "POST",
           headers: {

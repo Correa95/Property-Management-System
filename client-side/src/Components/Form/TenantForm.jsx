@@ -36,7 +36,7 @@ function TenantForm() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/tenant", {
+      const response = await fetch(`${process.env.API_URL}api/v1/tenant`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
