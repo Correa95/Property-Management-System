@@ -22,17 +22,17 @@ function Charts() {
   const [payments, setPayments] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/apartment")
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/apartment`)
       .then((res) => res.json())
       .then((data) => setApartments(data))
       .catch((err) => console.error("Apartment fetch error:", err));
 
-    fetch("http://localhost:3000/api/v1/lease")
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/lease`)
       .then((res) => res.json())
       .then((data) => setLeases(data))
       .catch((err) => console.error("Lease fetch error:", err));
 
-    fetch("http://localhost:3000/api/v1/payment")
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/payment`)
       .then((res) => res.json())
       .then((data) => setPayments(data))
       .catch((err) => console.error("Payment fetch error:", err));

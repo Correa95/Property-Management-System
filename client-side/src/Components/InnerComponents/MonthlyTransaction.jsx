@@ -13,11 +13,11 @@ function MonthlyTransaction() {
   const handleToggle = () => setIsOpen(!isOpen);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/payment")
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/payment`)
       .then((res) => res.json())
       .then((data) => setPayment(data))
       .catch((error) => console.log(error));
-    fetch("http://localhost:3000/api/v1/apartmentComplex")
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/apartmentComplex`)
       .then((res) => res.json())
       .then((data) => setComplexInfo(data))
       .catch((error) => console.log(error));

@@ -8,7 +8,7 @@ function RecentTransac() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/payment")
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/payment`)
       .then((res) => res.json())
       .then((data) => {
         const sortByDate = data.sort(

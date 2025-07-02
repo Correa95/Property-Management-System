@@ -14,23 +14,22 @@ function Analysis() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/apartment")
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/apartment`)
       .then((res) => res.json())
       .then((data) => setApartments(data))
       .catch((error) => console.error("Error fetching tenants:", error));
 
-    fetch("http://localhost:3000/api/v1/payment")
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/payment`)
       .then((res) => res.json())
       .then((data) => setPayments(data))
       .catch((error) => console.error("Error fetching payments:", error));
 
-    fetch("http://localhost:3000/api/v1/lease")
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/lease`)
       .then((res) => res.json())
       .then((data) => setLeases(data))
       .catch((error) => console.error("Error fetching leases:", error));
   }, []);
 
-  // Calculate monthly rent received
   const paymentByMonth = {};
   payments.forEach((payment) => {
     const rawDate = payment.paymentDate;
