@@ -10,7 +10,7 @@ function NavBar() {
   const firstInitial = user?.firstName?.[0]?.toUpperCase() || "";
   const lastInitial = user?.lastName?.[0]?.toUpperCase() || "";
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/tenant")
+    fetch(`${import.meta.env.VITE_API_URL}api/v1/tenant`)
       .then((res) => res.json())
       .then((data) => setTenants(data))
       .catch((error) => console.log("Fail to fetch Tenant", error));
@@ -60,9 +60,6 @@ function NavBar() {
               {firstInitial}
               {lastInitial}
             </div>
-            {/* <span className="profileName">
-              {user?.firstName} {user?.lastName}
-            </span> */}
           </div>
         </div>
         {/* </div> */}
