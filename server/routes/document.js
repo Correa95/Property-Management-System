@@ -3,7 +3,6 @@ const router = express.Router();
 const { PrismaClient, DocumentType } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-// Create Document
 router.post("/", async (req, res) => {
   const { name, documentType, uploadedFile } = req.body;
 
@@ -20,13 +19,11 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get All Documents
 router.get("/", async (req, res) => {
   const documents = await prisma.document.findMany();
   res.json(documents);
 });
 
-// Get Document by ID
 router.get("/:id", async (req, res) => {
   const document = await prisma.document.findUnique({
     where: { id: req.params.id },
@@ -36,7 +33,6 @@ router.get("/:id", async (req, res) => {
     : res.status(404).json({ error: "Document not found" });
 });
 
-// Update Document
 router.put("/:id", async (req, res) => {
   const { name, documentType, uploadedFile } = req.body;
   if (!Object.values(DocumentType).includes(documentType)) {
@@ -54,7 +50,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Delete Document
 router.delete("/:id", async (req, res) => {
   try {
     await prisma.document.delete({ where: { id: req.params.id } });

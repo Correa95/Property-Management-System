@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-// Create
+
 router.post("/", async (req, res) => {
   const { name, street, city, state, zipcode } = req.body;
   try {
@@ -11,14 +11,13 @@ router.post("/", async (req, res) => {
     });
     res.status(201).json(complex);
   } catch (err) {
-    console.error("🔥 Prisma error:", err);
+    console.error("Prisma error:", err);
     res
       .status(500)
       .json({ error: "Error creating complex", details: err.message });
   }
 });
 
-// Read All
 router.get("/", async (req, res) => {
   try {
     const complex = await prisma.apartmentComplex.findMany({
@@ -42,7 +41,6 @@ router.get("/:id", async (req, res) => {
     : res.status(404).json({ error: "Complex not found" });
 });
 
-// Update
 router.put("/:id", async (req, res) => {
   const { name, street, city, state, zipcode } = req.body;
   try {
@@ -56,7 +54,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Delete
 router.delete("/:id", async (req, res) => {
   try {
     await prisma.apartmentComplex.delete({ where: { id: req.params.id } });

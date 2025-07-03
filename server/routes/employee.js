@@ -3,7 +3,6 @@ const router = express.Router();
 const { PrismaClient, EmployeeType } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-// Create Employee
 router.post("/", async (req, res) => {
   const {
     firstName,
@@ -46,13 +45,11 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get All Employees
 router.get("/", async (req, res) => {
   const employees = await prisma.employee.findMany();
   res.json(employees);
 });
 
-// Get Employee by ID
 router.get("/:id", async (req, res) => {
   const employee = await prisma.employee.findUnique({
     where: { id: req.params.id },
@@ -62,7 +59,6 @@ router.get("/:id", async (req, res) => {
     : res.status(404).json({ error: "Employee not found" });
 });
 
-// Update Employee
 router.put("/:id", async (req, res) => {
   const {
     firstName,
@@ -106,7 +102,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Delete Employee
 router.delete("/:id", async (req, res) => {
   try {
     await prisma.employee.delete({ where: { id: req.params.id } });

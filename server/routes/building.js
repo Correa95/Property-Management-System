@@ -3,14 +3,10 @@ const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-// Create
-
-// Create a new building linked to an apartment complex
 router.post("/", async (req, res) => {
   try {
     const { complexId, buildingNumber } = req.body;
 
-    // Basic validation
     if (!complexId || typeof complexId !== "string") {
       return res
         .status(400)
@@ -22,7 +18,6 @@ router.post("/", async (req, res) => {
         .json({ error: "buildingNumber is required and must be a number." });
     }
 
-    // Check if apartment complex exists
     const complexExists = await prisma.apartmentComplex.findUnique({
       where: { id: complexId },
     });
@@ -31,7 +26,6 @@ router.post("/", async (req, res) => {
       return res.status(404).json({ error: "Apartment complex not found." });
     }
 
-    // Create the building
     const building = await prisma.building.create({
       data: {
         complexId,
@@ -46,7 +40,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Read All
 router.get("/", async (req, res) => {
   const buildings = await prisma.building.findMany({
     include: { apartments: true },
@@ -54,7 +47,6 @@ router.get("/", async (req, res) => {
   res.json(buildings);
 });
 
-// Read One
 router.get("/:id", async (req, res) => {
   const building = await prisma.building.findUnique({
     where: { id: req.params.id },
@@ -65,7 +57,6 @@ router.get("/:id", async (req, res) => {
     : res.status(404).json({ error: "Building not found" });
 });
 
-// Update
 router.put("/:id", async (req, res) => {
   const { complexId, buildingNumber } = req.body;
   try {
@@ -79,7 +70,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Delete
 router.delete("/:id", async (req, res) => {
   try {
     await prisma.building.delete({ where: { id: req.params.id } });

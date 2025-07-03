@@ -3,7 +3,6 @@ const router = express.Router();
 const { PrismaClient, PaymentMethod } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-// Create Payment
 router.post("/", async (req, res) => {
   const {
     leaseId,
@@ -14,13 +13,11 @@ router.post("/", async (req, res) => {
     paymentStatus,
   } = req.body;
 
-  // Validate paymentStatus if provided
   const validStatuses = ["PENDING", "COMPLETED", "FAILED"];
   if (paymentStatus && !validStatuses.includes(paymentStatus)) {
     return res.status(400).json({ error: "Invalid payment status" });
   }
 
-  // Trim and validate paymentMethod
   if (!paymentMethod || typeof paymentMethod !== "string") {
     return res
       .status(400)
@@ -31,19 +28,16 @@ router.post("/", async (req, res) => {
     return res.status(400).json({ error: "Invalid payment method" });
   }
 
-  // Validate leaseId presence
   if (!leaseId) {
     return res.status(400).json({ error: "Lease ID is required" });
   }
 
-  // Validate paymentAmount is a positive number
   if (typeof paymentAmount !== "number" || paymentAmount <= 0) {
     return res
       .status(400)
       .json({ error: "Payment amount must be a positive number" });
   }
 
-  // Parse and validate paymentDate if provided
   let parsedDate;
   if (paymentDate) {
     parsedDate = new Date(paymentDate);
@@ -73,13 +67,11 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get All Payments
 router.get("/", async (req, res) => {
   const payments = await prisma.payment.findMany({ include: { lease: true } });
   res.json(payments);
 });
 
-// Get Payment by ID
 router.get("/:id", async (req, res) => {
   const payment = await prisma.payment.findUnique({
     where: { id: req.params.id },
@@ -90,7 +82,6 @@ router.get("/:id", async (req, res) => {
     : res.status(404).json({ error: "Payment not found" });
 });
 
-// Update Payment
 router.put("/:id", async (req, res) => {
   const { leaseId, paymentAmount, paymentMethod, isLatePayment } = req.body;
   if (!Object.values(PaymentMethod).includes(paymentMethod)) {
@@ -107,7 +98,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Delete Payment
 router.delete("/:id", async (req, res) => {
   try {
     await prisma.payment.delete({ where: { id: req.params.id } });
@@ -116,7 +106,7 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ error: "Error deleting payment", details: err });
   }
 });
-// Get active lease for a tenant
+
 router.get("/active-lease/:tenantId", async (req, res) => {
   const { tenantId } = req.params;
   const today = new Date();
@@ -133,7 +123,7 @@ router.get("/active-lease/:tenantId", async (req, res) => {
         },
       },
       include: {
-        apartment: true, // optional: include unit/apartment info
+        apartment: true,
       },
     });
 
@@ -148,7 +138,6 @@ router.get("/active-lease/:tenantId", async (req, res) => {
   }
 });
 
-// GET /api/leases/active/:tenantId
 router.get("/active/:tenantId", async (req, res) => {
   const { tenantId } = req.params;
   const today = new Date();
@@ -161,8 +150,8 @@ router.get("/active/:tenantId", async (req, res) => {
         endDate: { gte: today },
       },
       include: {
-        tenant: true, // Optional for name
-        apartment: true, // Optional for address
+        tenant: true,
+        apartment: true,
       },
     });
 
@@ -173,7 +162,7 @@ router.get("/active/:tenantId", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch active lease" });
   }
 });
-// GET /api/payments/tenant/:tenantId
+
 router.get("/tenant/:tenantId", async (req, res) => {
   const { tenantId } = req.params;
 

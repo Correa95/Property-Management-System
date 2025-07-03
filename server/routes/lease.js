@@ -11,10 +11,9 @@ router.post("/", async (req, res) => {
     endDate,
     monthlyRent,
     securityDeposit,
-    isActive, // optional
+    isActive,
   } = req.body;
 
-  // Validate required fields
   if (
     !apartmentId ||
     !tenantId ||
@@ -47,7 +46,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get All Leases
 router.get("/", async (req, res) => {
   const leases = await prisma.lease.findMany({
     include: { tenant: true, apartment: true },
@@ -55,7 +53,6 @@ router.get("/", async (req, res) => {
   res.json(leases);
 });
 
-// Get Lease by ID
 router.get("/:id", async (req, res) => {
   const lease = await prisma.lease.findUnique({
     where: { id: req.params.id },
@@ -64,7 +61,6 @@ router.get("/:id", async (req, res) => {
   lease ? res.json(lease) : res.status(404).json({ error: "Lease not found" });
 });
 
-// Update Lease
 router.put("/:id", async (req, res) => {
   const {
     apartmentId,
@@ -94,7 +90,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Delete Lease
 router.delete("/:id", async (req, res) => {
   try {
     await prisma.lease.delete({ where: { id: req.params.id } });

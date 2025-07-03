@@ -3,7 +3,6 @@ const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-// Create
 router.post("/", async (req, res) => {
   try {
     const {
@@ -16,7 +15,6 @@ router.post("/", async (req, res) => {
       isAvailable,
     } = req.body;
 
-    // Basic validation
     if (
       !complexId ||
       !buildingId ||
@@ -47,13 +45,11 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Read All
 router.get("/", async (req, res) => {
   const apartments = await prisma.apartment.findMany();
   res.json(apartments);
 });
 
-// Read One
 router.get("/:id", async (req, res) => {
   const apartment = await prisma.apartment.findUnique({
     where: { id: req.params.id },
@@ -63,7 +59,6 @@ router.get("/:id", async (req, res) => {
     : res.status(404).json({ error: "Apartment not found" });
 });
 
-// Update
 router.put("/:id", async (req, res) => {
   const {
     buildingId,
@@ -93,7 +88,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Delete
 router.delete("/:id", async (req, res) => {
   try {
     await prisma.apartment.delete({ where: { id: req.params.id } });
