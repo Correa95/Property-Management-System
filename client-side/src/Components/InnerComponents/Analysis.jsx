@@ -14,17 +14,19 @@ function Analysis() {
   };
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/v1/apartment`)
+    fetch(
+      `https://property-management-system-64a6.onrender.com/api/v1/apartment`
+    )
       .then((res) => res.json())
       .then((data) => setApartments(data))
       .catch((error) => console.error("Error fetching tenants:", error));
 
-    fetch(`${import.meta.env.VITE_API_URL}/api/v1/payment`)
+    fetch(`https://property-management-system-64a6.onrender.com/api/v1/payment`)
       .then((res) => res.json())
       .then((data) => setPayments(data))
       .catch((error) => console.error("Error fetching payments:", error));
 
-    fetch(`${import.meta.env.VITE_API_URL}/api/v1/lease`)
+    fetch(`https://property-management-system-64a6.onrender.com/api/v1/lease`)
       .then((res) => res.json())
       .then((data) => setLeases(data))
       .catch((error) => console.error("Error fetching leases:", error));
