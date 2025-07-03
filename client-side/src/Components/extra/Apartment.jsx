@@ -17,12 +17,12 @@ function Apartment() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.API_URL}/api/v1/complex`)
+    fetch(`${import.meta.env.VITE_API_URL}api/v1/complex`)
       .then((res) => res.json())
       .then(setComplexes)
       .catch(() => setError("Failed to load apartment complexes"));
 
-    fetch(`${process.env.API_URL}/api/v1/building`)
+    fetch(`${import.meta.env.VITE_API_URL}api/v1/building`)
       .then((res) => res.json())
       .then(setBuildings)
       .catch(() => setError("Failed to load buildings"));
@@ -49,7 +49,7 @@ function Apartment() {
 
     try {
       const res = await fetch(
-        "https://property-management-system-64a6.onrender.com/api/v1/apartment",
+        `${import.meta.env.VITE_API_URL}api/v1/apartment`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -69,8 +69,8 @@ function Apartment() {
       if (!res.ok) {
         setError(data.error || "Failed to create apartment");
       } else {
-        setSuccess("✅ Apartment created successfully");
-        // Reset form
+        setSuccess("Apartment created successfully");
+
         setComplexId("");
         setBuildingId("");
         setUnitNumber("");

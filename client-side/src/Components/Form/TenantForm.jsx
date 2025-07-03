@@ -15,7 +15,6 @@ function TenantForm() {
     const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
 
     if (!match) return "";
-
     const [, area, prefix, line] = match;
 
     if (area && !prefix) return `(${area}`;
@@ -36,22 +35,25 @@ function TenantForm() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${process.env.API_URL}api/v1/tenant`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          phoneNumber,
-          dateOfBirth: new Date(dateOfBirth),
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}api/v1/tenant`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            dateOfBirth: new Date(dateOfBirth),
+          }),
+        }
+      );
 
       const data = await response.json();
 
       if (!response.ok) {
-        console.error("❌ Server error:", data.error);
+        console.error("Server error:", data.error);
         setError(data.error);
       } else {
         setSuccess("Tenant created successfully!");

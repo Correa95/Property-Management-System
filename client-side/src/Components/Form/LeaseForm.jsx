@@ -21,10 +21,10 @@ function Lease() {
     async function fetchData() {
       try {
         const apartmentResult = await fetch(
-          "https://property-management-system-64a6.onrender.com/api/v1/apartment"
+          `${import.meta.env.VITE_API_URL}api/v1/apartment`
         );
         const tenantResult = await fetch(
-          "https://property-management-system-64a6.onrender.com/api/v1/tenant"
+          `${import.meta.env.VITE_API_URL}api/v1/tenant`
         );
 
         setApartments(await apartmentResult.json());
@@ -59,18 +59,21 @@ function Lease() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/lease", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          apartmentId,
-          tenantId,
-          startDate,
-          endDate,
-          monthlyRent: parseFloat(rent),
-          securityDeposit: parseFloat(deposit),
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}api/v1/lease`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            apartmentId,
+            tenantId,
+            startDate,
+            endDate,
+            monthlyRent: parseFloat(rent),
+            securityDeposit: parseFloat(deposit),
+          }),
+        }
+      );
 
       if (response.ok) {
         setSuccess("Lease created successfully!");

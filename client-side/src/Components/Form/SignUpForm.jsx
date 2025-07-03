@@ -28,7 +28,7 @@ function SignUpForm() {
 
     try {
       const response = await fetch(
-        `${process.env.API_URL}/3000/api/v1/auth/register`,
+        `${import.meta.env.VITE_API_URL}api/v1/auth/register`,
         {
           method: "POST",
           headers: {
@@ -47,9 +47,9 @@ function SignUpForm() {
       );
       const data = await response.json();
       if (!response.ok) {
-        console.error("❌ Server error:", data.error);
+        console.error("Server error:", data.error);
       } else {
-        console.log("✅ Success:", data);
+        console.log("Success:", data);
       }
 
       setSuccess("User created successfully!");

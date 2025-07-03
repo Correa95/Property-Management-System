@@ -5,14 +5,14 @@ function Payment() {
   const [selectedLeaseId, setSelectedLeaseId] = useState("");
   const [paymentAmount, setPaymentAmount] = useState("");
   const [paymentStatus, setPaymentStatus] = useState("PENDING");
-  const [paymentMethod, setPaymentMethod] = useState("CREDIT_CARD"); // no leading space
+  const [paymentMethod, setPaymentMethod] = useState("CREDIT_CARD");
   const [isLatePayment, setIsLatePayment] = useState(false);
   const [paymentDate, setPaymentDate] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/v1/lease`)
+    fetch(`${import.meta.env.VITE_API_URL}api/v1/lease`)
       .then((res) => res.json())
       .then((data) => setLeases(data))
       .catch((error) => setError(error.message));
@@ -48,13 +48,15 @@ function Payment() {
     };
 
     try {
-      const res = await fetch("${process.env.API_URL}/api/v1/payment", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}api/v1/payment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(paymentData),
       });
 
-      if (!res.ok) throw new Error("Failed to submit payment");
+      if (!res.ok) {
+        throw new Error("Failed to submit payment");
+      }
 
       const data = await res.json();
 
@@ -66,6 +68,7 @@ function Payment() {
       setIsLatePayment(false);
       setPaymentDate("");
     } catch (err) {
+      console.error("Payment error:", err);
       setError(err.message || "Failed to submit payment");
     }
   }

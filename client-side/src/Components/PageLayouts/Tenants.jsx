@@ -10,7 +10,7 @@ function Tenants() {
   const tenantsPerPage = 15;
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/v1/tenant`)
+    fetch(`${import.meta.env.VITE_API_URL}api/v1/tenant`)
       .then((res) => res.json())
       .then((data) => setTenants(data))
       .catch((err) => {

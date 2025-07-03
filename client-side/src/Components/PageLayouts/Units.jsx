@@ -8,7 +8,7 @@ function Units() {
   const unitsPerPage = 15;
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/3000/api/v1/apartment`)
+    fetch(`${import.meta.env.VITE_API_URL}api/v1/apartment`)
       .then((res) => res.json())
       .then((data) => setUnits(data))
       .catch((error) => {
@@ -38,7 +38,6 @@ function Units() {
         <table className="unitsTable">
           <thead>
             <tr>
-              {/* <th>Building Number</th> */}
               <th>Unit Number</th>
               <th>Bedrooms</th>
               <th>Sq Ft</th>
