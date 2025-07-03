@@ -13,7 +13,7 @@ function ClientNavBar() {
     // <div className="clientNavBar">
     <div className="clientNav">
       <h1>
-        WelCome {first} Please can you check with the Manager or Admin am still
+        Welcome {first} Please can you check with the Manager or Admin am still
         working on the client side. Thank you
       </h1>
       <button className="btnIcon">
