@@ -17,9 +17,13 @@ function MonthlyTransaction() {
       .then((res) => res.json())
       .then((data) => setPayment(data))
       .catch((error) => console.log(error));
-    fetch(`${import.meta.env.VITE_API_URL}api/v1/apartmentComplex`)
+
+    fetch(`${import.meta.env.VITE_API_URL}api/v1/complex`)
       .then((res) => res.json())
-      .then((data) => setComplexInfo(data))
+      .then((data) => {
+        console.log("Apartment Complex Info:", data);
+        setComplexInfo(Array.isArray(data) ? data : [data]);
+      })
       .catch((error) => console.log(error));
   }, []);
 
@@ -60,9 +64,9 @@ function MonthlyTransaction() {
     );
   });
 
-  let balance = 0;
-  let totalIncome = 0;
-  let totalExpense = 0;
+  let balance = 0,
+    totalIncome = 0,
+    totalExpense = 0;
 
   const rows = filteredPayments.map((payment, index) => {
     const date = new Date(payment.paymentDate).toLocaleDateString("en-US");
@@ -156,50 +160,50 @@ function MonthlyTransaction() {
                   </button>
                 </div>
               </div>
-              {Array.isArray(complexInfo) &&
-                complexInfo.map((info) => {
-                  return (
-                    <>
-                      <h1 className="statementTitle">
-                        {info.name} Monthly Transaction Statement
-                      </h1>
 
-                      <div className="statement">
-                        <div className="sectionInfo">
-                          <h2>Statement Details</h2>
-                          <p>
-                            <strong>Period:</strong> {monthNames[selectedMonth]}{" "}
-                            1 –{monthNames[selectedMonth]} 30, {selectedYear}
-                          </p>
-                          <p>
-                            <strong>Prepared For:</strong> Software Developer
-                            Job, 123 Corporate America
-                          </p>
-                          <p>
-                            <strong>Managed By:</strong> Mathew M Correa
-                          </p>
-                        </div>
-
-                        <div className="sectionInfo">
-                          <h2>{info.name} Address</h2>
-                          <p>
-                            <strong>Street:</strong> {info.street}
-                          </p>
-                          <p>
-                            <strong>City:</strong> {info.city}
-                          </p>
-                          <p>
-                            <strong>ZipCode:</strong> {info.zipcode}
-                          </p>
-                          <p>
-                            <strong>State:</strong>
-                            {info.state}
-                          </p>
-                        </div>
+              {complexInfo.length > 0 ? (
+                complexInfo.map((info, idx) => (
+                  <div key={idx}>
+                    <h1 className="statementTitle">
+                      {info.name} Monthly Transaction Statement
+                    </h1>
+                    <div className="statement">
+                      <div className="sectionInfo">
+                        <h2>Statement Details</h2>
+                        <p>
+                          <strong>Period:</strong> {monthNames[selectedMonth]} 1
+                          – {monthNames[selectedMonth]} 30, {selectedYear}
+                        </p>
+                        <p>
+                          <strong>Prepared For:</strong> Software Developer Job,
+                          123 Corporate America
+                        </p>
+                        <p>
+                          <strong>Managed By:</strong> Mathew M Correa
+                        </p>
                       </div>
-                    </>
-                  );
-                })}
+                      <div className="sectionInfo">
+                        <h2>{info.name} Address</h2>
+                        <p>
+                          <strong>Street:</strong> {info.street}
+                        </p>
+                        <p>
+                          <strong>City:</strong> {info.city}
+                        </p>
+                        <p>
+                          <strong>ZipCode:</strong> {info.zipcode}
+                        </p>
+                        <p>
+                          <strong>State:</strong> {info.state}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No complex information available.</p>
+              )}
+
               <table className="statementTable">
                 <thead>
                   <tr>

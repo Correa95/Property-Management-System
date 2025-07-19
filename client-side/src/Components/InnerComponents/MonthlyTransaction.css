@@ -8,7 +8,7 @@
 
 .monthlyStatement {
   width: 90%;
-  background: #fff;
+  background: #f0f0f0;
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -17,7 +17,7 @@
 
 .statementHeader {
   background: #2c3e50;
-  color: white;
+  color: #f0f0f0;
   padding: 20px 30px;
   cursor: pointer;
   display: flex;
@@ -55,7 +55,7 @@
   transition: background-color 0.3s ease;
 }
 
-.btnDownLoad,
+.btnDownLoad:hover,
 .btnPrint:hover {
   background-color: #1a252f;
 }
@@ -80,11 +80,11 @@
   overflow: hidden;
   transition: max-height 0.5s ease, padding 0.3s ease;
   padding: 0 30px;
-  background-color: #fff;
+  background-color: #f0f0f0;
 }
 
 .statementContent.show {
-  max-height: 2000px;
+  max-height: none;
   padding: 30px;
 }
 
@@ -106,6 +106,7 @@
   width: 48%;
   margin-bottom: 20px;
 }
+
 .sectionInfo h2 {
   font-size: 18px;
   border-bottom: 2px solid #2c3e50;
@@ -126,14 +127,13 @@
   min-width: 120px;
   display: inline-block;
 }
+
 .tableWrapper {
   width: 100%;
-  max-height: 100vh;
-  overflow-y: auto;
   overflow-x: auto;
-  margin-bottom: 30px;
   border: 1px solid #ddd;
   border-radius: 6px;
+  margin-bottom: 30px;
 }
 
 .statementTable {
@@ -153,17 +153,22 @@
   background-color: #2c3e50;
   color: white;
   text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .statementTable tfoot td {
   font-weight: bold;
   background-color: #f0f0f0;
 }
+
 .actionContainer {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
+
 .filterByDate {
   display: flex;
   gap: 18px;
@@ -173,5 +178,66 @@
 .filterByDate label {
   display: flex;
   flex-direction: column;
-  /* font-weight: bol18px; */
+}
+
+@media (max-width: 768px) {
+  .monthlyStatementContainer {
+    padding: 20px 10px;
+  }
+
+  .monthlyStatement {
+    width: 100%;
+  }
+
+  .actionContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .filterByDate {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .btnActions {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .btnDownLoad,
+  .btnPrint {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .statement {
+    flex-direction: column;
+  }
+
+  .sectionInfo {
+    width: 100%;
+  }
+
+  .statementContent.show {
+    padding: 15px;
+  }
+
+  .statementTitle {
+    font-size: 20px;
+  }
+
+  .statementMonth {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statementTable th,
+  .statementTable td {
+    padding: 8px;
+    font-size: 12px;
+  }
 }
