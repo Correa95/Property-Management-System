@@ -25,7 +25,6 @@ function Building() {
     setIsLoading(true);
 
     const complexId = apartmentComplexId;
-    // const trimmedBuildingNumber = buildingNumber.trim();
 
     if (!complexId || !buildingNumber) {
       setError("All fields are required.");
@@ -51,12 +50,12 @@ function Building() {
       if (!response.ok) {
         setError(data.error || "Failed to create building");
       } else {
-        setSuccess("✅ Building created successfully");
+        setSuccess("Building created successfully");
         setBuildingNumber("");
         setApartmentComplexId("");
       }
     } catch (err) {
-      setError("Error: " + err.message);
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }
