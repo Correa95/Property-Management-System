@@ -29,7 +29,6 @@ export function AuthProvider({ children }) {
       }
 
       const data = await response.json();
-      console.log("Login API response:", data);
 
       const { token, user } = data;
 
