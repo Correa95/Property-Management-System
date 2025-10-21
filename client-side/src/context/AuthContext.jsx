@@ -68,25 +68,6 @@ export function AuthProvider({ children }) {
     navigate("/login");
   }
 
-  // async function authFetch(url, options = {}) {
-  //   const token = localStorage.getItem("accessToken");
-
-  //   const headers = {
-  //     Authorization: `Bearer ${token}`,
-  //     "Content-Type": "application/json",
-  //     ...options.headers,
-  //   };
-
-  //   const response = await fetch(url, { ...options, headers });
-
-  //   if (response.status === 401) {
-  //     logout();
-  //     throw new Error("Unauthorized. Logged out.");
-  //   }
-
-  //   return response;
-  // }
-
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const role = localStorage.getItem("userRole");
@@ -110,7 +91,6 @@ export function AuthProvider({ children }) {
         user,
         login,
         logout,
-        // authFetch,
         errorMessage,
       }}
     >
